@@ -3,7 +3,7 @@ dotfiles
 
 Mis archivos de configuración
 
-```bash
+```sh
 cd ~/dotfiles
 chmod +x makesymlinks.sh
 ./makesymlinks.sh
