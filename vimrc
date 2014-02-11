@@ -199,8 +199,7 @@ set scrolloff=3                 " Minimum lines to keep above and below cursor
 set list
 set listchars=tab:›\ ,trail:•,extends:#,nbsp:. " Highlight problematic whitespace
 
-
-" Formatting {
+" Formatting
 
 set nowrap                      " Do not wrap long lines
 set autoindent                  " Indent at the same level of the previous line
@@ -255,7 +254,15 @@ map <leader>fc /\v^[<\|=>]{7}( .*\|$)<CR>
 " Visual shifting (does not exit Visual mode)
 vnoremap < <gv
 vnoremap > >gv
-" Change Working Directory to that of the current file cmap cwd lcd %:p:h cmap cd. lcd %:p:h " Visual shifting (does not exit Visual mode) vnoremap < <gv vnoremap > >gv " Allow using the repeat operator with a visual selection (!) " http://stackoverflow.com/a/8064607/127816 vnoremap . :normal .<CR> " Fix home and end keybindings for screen, particularly on mac " - for some reason this fixes the arrow keys too. huh. map [F $ imap [F $ map [H g0 imap [H g0 " For when you forget to sudo.. Really Write the file. cmap w!! w !sudo tee % >/dev/null " Some helpers to edit mode " http://vimcasts.org/e/14 cnoremap %% <C-R>=expand('%:h').'/'<cr> map <leader>ew :e %% map <leader>es :sp %%
+" Change Working Directory to that of the current file cmap cwd lcd %:p:h cmap cd. lcd %:p:h 
+" Visual shifting (does not exit Visual mode) vnoremap < <gv vnoremap > >gv 
+" Allow using the repeat operator with a visual selection (!) 
+" http://stackoverflow.com/a/8064607/127816 vnoremap . :normal .<CR> 
+" Fix home and end keybindings for screen, particularly on mac 
+" - for some reason this fixes the arrow keys too. huh. map [F $ imap [F $ map [H g0 imap [H g0 
+" For when you forget to sudo.. Really Write the file. cmap w!! w !sudo tee % >/dev/null 
+" Some helpers to edit mode " http://vimcasts.org/e/14 cnoremap %% <C-R>=expand('%:h').'/'<cr> map <leader>ew :e %% map <leader>es :sp %%
+
 map <leader>ev :vsp %%
 map <leader>et :tabe %%
 
@@ -273,7 +280,6 @@ map zh zH
 " fullscreen mode for GVIM and Terminal, need 'wmctrl' in you PATH
 map <silent> <F11> :call system("wmctrl -ir " . v:windowid . " -b toggle,fullscreen")<CR>
 
-" }
 
 "Plugins
 let g:NERDShutUp=1
@@ -391,21 +397,19 @@ let g:neosnippet#enable_snipmate_compatibility = 1
 " Tell Neosnippet about the other snippets
 let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
 
-
 "YCM
 "Flechas arriba y abajo en lugar de <tab> para hacerlo compatible con snipmate
 "let g:BASH_Ctrl_j = 'off'
 "let g:ycm_key_list_select_completion = ['<Down>', '<Enter>']
 "let g:ycm_key_list_previous_completion = ['<Up>']
 
-
 "NerdTree
-        map <C-e> :NERDTreeToggle<CR>:NERDTreeMirror<CR>
-        map <leader>e :NERDTreeFind<CR>
-        nmap <leader>nt :NERDTreeFind<CR>
+map <C-e> :NERDTreeToggle<CR>:NERDTreeMirror<CR>
+map <leader>e :NERDTreeFind<CR>
+nmap <leader>nt :NERDTreeFind<CR>
 
-        let NERDTreeShowBookmarks=1
-        let NERDTreeIgnore=['\.pyc', '\~$', '\.swo$', '\.swp$', '\.hg', '\.svn', '\.bzr']
+let NERDTreeShowBookmarks=1
+let NERDTreeIgnore=['\.pyc', '\~$', '\.swo$', '\.swp$', '\.hg', '\.svn', '\.bzr']
 "If it is set to 0 then the CWD is never changed by the NERD tree.
 
 "If set to 1 then the CWD is changed when the NERD tree is first loaded to the
@@ -418,110 +422,102 @@ let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
 "the CWD is changed whenever the tree root is changed. For example, if the CWD
 "is /home/marty/foobar and you make the node for /home/marty/foobar/baz the new
 "root then the CWD will become /home/marty/foobar/baz.
-        let NERDTreeChDirMode=2
-        let NERDTreeQuitOnOpen=1
-        let NERDTreeMouseMode=2
-        let NERDTreeShowHidden=0
-        let NERDTreeKeepTreeInNewTab=1
-        let g:nerdtree_tabs_open_on_gui_startup=0
+let NERDTreeChDirMode=2
+let NERDTreeQuitOnOpen=1
+let NERDTreeMouseMode=2
+let NERDTreeShowHidden=0
+let NERDTreeKeepTreeInNewTab=1
+let g:nerdtree_tabs_open_on_gui_startup=0
 
 "JSON
 nmap <leader>jt <Esc>:%!python -m json.tool<CR><Esc>:set filetype=json<CR>
 
-" PyMode {
-        let g:pymode_lint_checker = "pyflakes"
-        let g:pymode_utils_whitespaces = 0
-        let g:pymode_options = 0
+" PyMode
+let g:pymode_lint_checker = "pyflakes"
+let g:pymode_utils_whitespaces = 0
+let g:pymode_options = 0
 
-" ctrlp {
-        let g:ctrlp_working_path_mode = 'ra'
-        nnoremap <silent> <D-t> :CtrlP<CR>
-        nnoremap <silent> <D-r> :CtrlPMRU<CR>
-        let g:ctrlp_custom_ignore = {
-            \ 'dir':  '\.git$\|\.hg$\|\.svn$',
-            \ 'file': '\.exe$\|\.so$\|\.dll$\|\.pyc$' }
+" ctrlp
+let g:ctrlp_working_path_mode = 'ra'
+nnoremap <silent> <D-t> :CtrlP<CR>
+nnoremap <silent> <D-r> :CtrlPMRU<CR>
+let g:ctrlp_custom_ignore = {
+    \ 'dir':  '\.git$\|\.hg$\|\.svn$',
+    \ 'file': '\.exe$\|\.so$\|\.dll$\|\.pyc$' }
 
-        " On Windows use "dir" as fallback command.
-        if has('win32') || has('win64')
-            let g:ctrlp_user_command = {
-                \ 'types': {
-                    \ 1: ['.git', 'cd %s && git ls-files . --cached --exclude-standard --others'],
-                    \ 2: ['.hg', 'hg --cwd %s locate -I .'],
-                \ },
-                \ 'fallback': 'dir %s /-n /b /s /a-d'
-            \ }
-        else
-            let g:ctrlp_user_command = {
-                \ 'types': {
-                    \ 1: ['.git', 'cd %s && git ls-files . --cached --exclude-standard --others'],
-                    \ 2: ['.hg', 'hg --cwd %s locate -I .'],
-                \ },
-                \ 'fallback': 'find %s -type f'
-            \ }
-        endif
+" On Windows use "dir" as fallback command.
+if has('win32') || has('win64')
+    let g:ctrlp_user_command = {
+        \ 'types': {
+            \ 1: ['.git', 'cd %s && git ls-files . --cached --exclude-standard --others'],
+            \ 2: ['.hg', 'hg --cwd %s locate -I .'],
+        \ },
+        \ 'fallback': 'dir %s /-n /b /s /a-d'
+    \ }
+else
+    let g:ctrlp_user_command = {
+        \ 'types': {
+            \ 1: ['.git', 'cd %s && git ls-files . --cached --exclude-standard --others'],
+            \ 2: ['.hg', 'hg --cwd %s locate -I .'],
+        \ },
+        \ 'fallback': 'find %s -type f'
+    \ }
+endif
 
-" PythonMode {
-        " Disable if python support not present
-        if !has('python')
-            let g:pymode = 1
-        endif
-    " }
+" PythonMode 
+" Disable if python support not present
+if !has('python')
+    let g:pymode = 1
+endif
 
-" Fugitive {
-        nnoremap <silent> <leader>gs :Gstatus<CR>
-        nnoremap <silent> <leader>gd :Gdiff<CR>
-        nnoremap <silent> <leader>gc :Gcommit<CR>
-        nnoremap <silent> <leader>gb :Gblame<CR>
-        nnoremap <silent> <leader>gl :Glog<CR>
-        nnoremap <silent> <leader>gp :Git push<CR>
-        nnoremap <silent> <leader>gr :Gread<CR>
-        nnoremap <silent> <leader>gw :Gwrite<CR>
-        nnoremap <silent> <leader>ge :Gedit<CR>
-        nnoremap <silent> <leader>gg :SignifyToggle<CR>
-    "}
+" Fugitive 
+nnoremap <silent> <leader>gs :Gstatus<CR>
+nnoremap <silent> <leader>gd :Gdiff<CR>
+nnoremap <silent> <leader>gc :Gcommit<CR>
+nnoremap <silent> <leader>gb :Gblame<CR>
+nnoremap <silent> <leader>gl :Glog<CR>
+nnoremap <silent> <leader>gp :Git push<CR>
+nnoremap <silent> <leader>gr :Gread<CR>
+nnoremap <silent> <leader>gw :Gwrite<CR>
+nnoremap <silent> <leader>ge :Gedit<CR>
+nnoremap <silent> <leader>gg :SignifyToggle<CR>
 
+" vim-airline 
+" Set configuration options for the statusline plugin vim-airline.
+" Use the powerline theme and optionally enable powerline symbols.
+" To use the symbols , , , , , , and .in the statusline
+let g:airline_powerline_fonts=0
+" If the previous symbols do not render for you then install a
+" powerline enabled font.
 
+"Establecer el tema de airline
+let g:airline_theme = 'base16'
+let g:airline_left_sep=''  " Slightly fancier than '>'
+let g:airline_right_sep='' " Slightly fancier than '<'
 
-" vim-airline {
-        " Set configuration options for the statusline plugin vim-airline.
-        " Use the powerline theme and optionally enable powerline symbols.
-        " To use the symbols , , , , , , and .in the statusline
-        let g:airline_powerline_fonts=0
-        " If the previous symbols do not render for you then install a
-        " powerline enabled font.
+if !exists('g:airline_powerline_fonts')
+    " Use the default set of separators with a few customizations
+    "let g:airline_left_sep='›'  " Slightly fancier than '>'
+    "let g:airline_right_sep='‹' " Slightly fancier than '<'
+endif
 
-        "Establecer el tema de airline
-        let g:airline_theme = 'base16'
-        let g:airline_left_sep=''  " Slightly fancier than '>'
-        let g:airline_right_sep='' " Slightly fancier than '<'
+"Correcion de los carac:ters extraños (espacios en blanco)
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+let g:airline_symbols.space = "\ua0"
 
-        if !exists('g:airline_powerline_fonts')
-            " Use the default set of separators with a few customizations
-            "let g:airline_left_sep='›'  " Slightly fancier than '>'
-            "let g:airline_right_sep='‹' " Slightly fancier than '<'
-        endif
+"Desactivar la deteccion de espacios en blanco
+let g:airline#extensions#whitespace#enabled = 0
 
-        "Correcion de los carac:ters extraños (espacios en blanco)
-        if !exists('g:airline_symbols')
-            let g:airline_symbols = {}
-        endif
-        let g:airline_symbols.space = "\ua0"
+"Activar tabline
+"let g:airline#extensions#tabline#enabled = 1
 
-        "Desactivar la deteccion de espacios en blanco
-        let g:airline#extensions#whitespace#enabled = 0
+"Desactivar bufferline dentro de airline
+let g:airline#extensions#bufferline#enabled = 0
 
-        "Activar tabline
-        "let g:airline#extensions#tabline#enabled = 1
-
-        "Desactivar bufferline dentro de airline
-        let g:airline#extensions#bufferline#enabled = 0
-
-        "Eliminar retardo al pasar de Insert a Normal
-        set timeoutlen=1000 ttimeoutlen=0
-
-    " }
-
-" }
+"Eliminar retardo al pasar de Insert a Normal
+set timeoutlen=1000 ttimeoutlen=0
 
 "No delay between Insert and Normal mode
 augroup FastEscape
@@ -530,44 +526,34 @@ augroup FastEscape
     au InsertLeave * set timeoutlen=1000
 augroup END
 
-" GUI Settings {
+" GUI Settings 
 
-    " GVIM- (here instead of .gvimrc)
-    if has('gui_running')
-        set guioptions-=T           " Remove the toolbar
-        set lines=40                " 40 lines of text instead of 24
+" GVIM- (here instead of .gvimrc)
+if has('gui_running')
+    set guioptions-=T           " Remove the toolbar
+    "set guioptions-=m           " Remove the menubar
+    "set lines=40                " 40 lines of text instead of 24
+    set lines=999 columns=999    " Start maximized
+    set guifont=Inconsolata\ Regular\ 14,Droid\ Sans\ Mono\ Regular\ 12,Andale\ Mono\ Regular\ 12,Menlo\ Regular\ 12,Consolas\ Regular\ 12,Courier\ New\ Regular\ 18
+    if has("gui_gtk2")
+        set lazyredraw
         set guifont=Inconsolata\ Regular\ 14,Droid\ Sans\ Mono\ Regular\ 12,Andale\ Mono\ Regular\ 12,Menlo\ Regular\ 12,Consolas\ Regular\ 12,Courier\ New\ Regular\ 18
-        if has("gui_gtk2")
-            set lazyredraw
-            set guifont=Inconsolata\ Regular\ 14,Droid\ Sans\ Mono\ Regular\ 12,Andale\ Mono\ Regular\ 12,Menlo\ Regular\ 12,Consolas\ Regular\ 12,Courier\ New\ Regular\ 18
-            colorscheme base16-default
-        elseif has("gui_mac")
-            set guifont=Andale\ Mono\ Regular:h16,Menlo\ Regular:h15,Consolas\ Regular:h16,Courier\ New\ Regular:h18
-        elseif has("gui_win32")
-            set guifont=Andale_Mono:h10,Menlo:h10,Consolas:h10,Courier_New:h10
-        endif
-        if has('gui_macvim')
-            set transparency=5      " Make the window slightly transparent
-        endif
-    else
-        if &term == 'xterm' || &term == 'screen'
-            set t_Co=256            " Enable 256 colors to stop the CSApprox warning and make xterm vim shine
-        endif
-        "set term=builtin_ansi       " Make arrow and other keys work
+        colorscheme base16-default
+    elseif has("gui_mac")
+        set guifont=Andale\ Mono\ Regular:h16,Menlo\ Regular:h15,Consolas\ Regular:h16,Courier\ New\ Regular:h18
+    elseif has("gui_win32")
+        set guifont=Andale_Mono:h10,Menlo:h10,Consolas:h10,Courier_New:h10
     endif
+    if has('gui_macvim')
+        set transparency=5      " Make the window slightly transparent
+    endif
+else
+    if &term == 'xterm' || &term == 'screen'
+        set t_Co=256            " Enable 256 colors to stop the CSApprox warning and make xterm vim shine
+    endif
+    "set term=builtin_ansi       " Make arrow and other keys work
+endif
 
-" }
-
-" Startify
-"let g:startify_custom_header = [
-"            \'    ooooo  oooo ooooo oooo     oooo    ooooooooooo           o88',
-"            \'     888    88   888   8888o   888     888    888          o8888  ',
-"            \'      888  88    888   88 888o8 88           888         o88 888  ',
-"            \'       88888     888   88  888  88          888    ooo o888oo888oo',
-"            \'        888     o888o o88o  8  o88o        888     888      o888o',
-"            \'',
-"            \'',
-"            \]
 
 let g:startify_custom_header = [
             \'            Yb    dP 88 8b    d8   888888P       dP88 ',
@@ -605,83 +591,76 @@ let g:startify_list_order = ['files', 'bookmarks', 'sessions']
 ":OperaReloadStop
 ":AllBrowserReloadStart
 
+" Initialize directories {
+function! InitializeDirectories()
+    let parent = $HOME
+    let prefix = 'vim'
+    let dir_list = {
+                \ 'backup': 'backupdir',
+                \ 'views': 'viewdir', }
 
-" Functions {
+    if has('persistent_undo')
+        let dir_list['undo'] = 'undodir'
+    endif
 
-    " Initialize directories {
-    function! InitializeDirectories()
-        let parent = $HOME
-        let prefix = 'vim'
-        let dir_list = {
-                    \ 'backup': 'backupdir',
-                    \ 'views': 'viewdir', }
+    " To specify a different directory in which to place the vimbackup,
+    " vimviews, vimundo, and vimswap files/directories, add the following to
+    " your .vimrc.before.local file:
+    "directory = $HOME . '/.vim/'
 
-        if has('persistent_undo')
-            let dir_list['undo'] = 'undodir'
-        endif
+    let common_dir = parent . '/.' . prefix
 
-        " To specify a different directory in which to place the vimbackup,
-        " vimviews, vimundo, and vimswap files/directories, add the following to
-        " your .vimrc.before.local file:
-        "directory = $HOME . '/.vim/'
-
-        let common_dir = parent . '/.' . prefix
-
-        for [dirname, settingname] in items(dir_list)
-            let directory = common_dir . dirname . '/'
-            if exists("*mkdir")
-                if !isdirectory(directory)
-                    call mkdir(directory)
-                endif
-            endif
+    for [dirname, settingname] in items(dir_list)
+        let directory = common_dir . dirname . '/'
+        if exists("*mkdir")
             if !isdirectory(directory)
-                echo "Warning: Unable to create backup directory: " . directory
-                echo "Try: mkdir -p " . directory
-            else
-                let directory = substitute(directory, " ", "\\\\ ", "g")
-                exec "set " . settingname . "=" . directory
+                call mkdir(directory)
             endif
-        endfor
-    endfunction
-    call InitializeDirectories()
-    " }
-
-     "Initialize NERDTree as needed {
-    function! NERDTreeInitAsNeeded()
-        redir => bufoutput
-        buffers!
-        redir END
-        let idx = stridx(bufoutput, "NERD_tree")
-        if idx > -1
-            NERDTreeMirror
-            NERDTreeFind
-            wincmd l
         endif
-    endfunction
-    "" }
+        if !isdirectory(directory)
+            echo "Warning: Unable to create backup directory: " . directory
+            echo "Try: mkdir -p " . directory
+        else
+            let directory = substitute(directory, " ", "\\\\ ", "g")
+            exec "set " . settingname . "=" . directory
+        endif
+    endfor
+endfunction
+call InitializeDirectories()
 
+ "Initialize NERDTree as needed {
+function! NERDTreeInitAsNeeded()
+    redir => bufoutput
+    buffers!
+    redir END
+    let idx = stridx(bufoutput, "NERD_tree")
+    if idx > -1
+        NERDTreeMirror
+        NERDTreeFind
+        wincmd l
+    endif
+endfunction
 
-    " Shell command {
-    function! s:RunShellCommand(cmdline)
-        botright new
+" Shell command {
+function! s:RunShellCommand(cmdline)
+    botright new
 
-        setlocal buftype=nofile
-        setlocal bufhidden=delete
-        setlocal nobuflisted
-        setlocal noswapfile
-        setlocal nowrap
-        setlocal filetype=shell
-        setlocal syntax=shell
+    setlocal buftype=nofile
+    setlocal bufhidden=delete
+    setlocal nobuflisted
+    setlocal noswapfile
+    setlocal nowrap
+    setlocal filetype=shell
+    setlocal syntax=shell
 
-        call setline(1, a:cmdline)
-        call setline(2, substitute(a:cmdline, '.', '=', 'g'))
-        execute 'silent $read !' . escape(a:cmdline, '%#')
-        setlocal nomodifiable
-        1
-    endfunction
+    call setline(1, a:cmdline)
+    call setline(2, substitute(a:cmdline, '.', '=', 'g'))
+    execute 'silent $read !' . escape(a:cmdline, '%#')
+    setlocal nomodifiable
+    1
+endfunction
 
-    command! -complete=file -nargs=+ Shell call s:RunShellCommand(<q-args>)
-    " e.g. Grep current file for <search_term>: Shell grep -Hn <search_term> %
-    " }
-
+command! -complete=file -nargs=+ Shell call s:RunShellCommand(<q-args>)
+" e.g. Grep current file for <search_term>: Shell grep -Hn <search_term> %
 " }
+

@@ -4,6 +4,7 @@ dotfiles
 Mis archivos de configuración
 
 ```sh
-cd ~/dotfiles
+git clone git@github.com:nbicalcarata/dotfiles.git
+cd /dotfiles
 chmod +x makesymlinks.sh
 ./makesymlinks.sh
