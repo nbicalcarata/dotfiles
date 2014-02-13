@@ -1,18 +1,7 @@
-
 " Entorno ---------------------------------
 
 set nocompatible              " be iMproved
-
 set modelines=0
-
-
-if !(has('win16') || has('win32') || has('win64'))
-    set shell=/bin/sh
-endif
-
-if has('win32') || has('win64')
-    set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
-endif
 
 filetype on
 filetype off
@@ -25,7 +14,6 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 
 " My bundles here: ----------------------------
-" original repos on GitHub
 " General
 Bundle 'MarcWeber/vim-addon-mw-utils'
 Bundle 'tomtom/tlib_vim'
@@ -33,24 +21,19 @@ Bundle 'scrooloose/nerdtree'
 Bundle 'flazz/vim-colorschemes'
 Bundle 'kien/ctrlp.vim'
 Bundle 'terryma/vim-multiple-cursors'
-Bundle 'vim-scripts/sessionman.vim'
 Bundle 'bling/vim-airline'
 Bundle 'bling/vim-bufferline'
-Bundle 'jistr/vim-nerdtree-tabs'
 Bundle 'daylerees/colour-schemes', { 'rtp': 'vim-themes/' }
 Bundle 'chriskempson/base16-vim'
 Bundle 'mhinz/vim-startify'
+"Bundle 'koron/minimap-vim'
 
 "Programacion
 Bundle 'scrooloose/syntastic'
 Bundle 'Shougo/neocomplete.vim.git'
-Bundle 'Shougo/neosnippet'
-Bundle 'Shougo/neosnippet-snippets'
 Bundle 'tpope/vim-fugitive'
 Bundle 'mattn/webapi-vim'
 Bundle 'mattn/gist-vim'
-Bundle 'scrooloose/nerdcommenter'
-Bundle 'godlygeek/tabular'
 
 "Snippets & AutoComplete"
 Bundle 'garbas/vim-snipmate'
@@ -71,7 +54,6 @@ Bundle 'briancollins/vim-jst'
 "HTML {
 Bundle 'hail2u/vim-css3-syntax'
 Bundle 'tpope/vim-haml'
-Bundle 'mattn/emmet-vim'
 Bundle 'lordm/vim-browser-reload-linux'
 
 " Ruby {
@@ -92,20 +74,11 @@ filetype plugin indent on     " required!
 " General ---------------------------------
 
 set background=dark         " Assume a dark background
-if !has('gui')
-    "set term=$TERM          " Make arrow and other keys work
-endif
-
 syntax on                   " Syntax highlighting
 set mouse=a                 " Automatically enable mouse usage
 set mousehide               " Hide the mouse cursor while typing
 scriptencoding utf-8
-
-if has ('x') && has ('gui') " On Linux use + register for copy-paste
-    set clipboard=unnamedplus
-elseif has ('gui')          " On mac and Windows, use * register for copy-paste
-    set clipboard=unnamed
-endif
+set clipboard=unnamedplus
 
 autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | lcd %:p:h | endif
 " Always switch to the current file directory
@@ -114,7 +87,7 @@ set shortmess+=filmnrxoOtT          " Abbrev. of messages (avoids 'hit enter')
 set viewoptions=folds,options,cursor,unix,slash " Better Unix / Windows compatibility
 set virtualedit=onemore             " Allow for cursor beyond last character
 set history=1000                    " Store a ton of history (default is 20)
-"set spell                           " Spell checking on
+set nospell                         " Spell checking off
 set hidden                          " Allow buffer switching without saving
 set nofoldenable                    "Disable folding
 
@@ -154,10 +127,7 @@ set relativenumber
 colorscheme darkburn
 set tabpagemax=15               " Only show 15 tabs
 set showmode                    " Display the current mode
-set nospell
-
 "set cursorline                  " Highlight current line
-
 highlight clear SignColumn      " SignColumn should match background
 highlight clear LineNr          " Current line number row will have same background color in relative mode
 "highlight clear CursorLineNr    " Remove highlight color from current line number
@@ -171,7 +141,6 @@ endif
 
 if has('statusline')
     set laststatus=2
-
     " Broken down into easily includeable segments
     set statusline=%<%f\                     " Filename
     set statusline+=%w%h%m%r                 " Options
@@ -213,8 +182,6 @@ set splitbelow                  " Puts new split windows to the bottom of the cu
 "set matchpairs+=<:>             " Match, to be used with %
 set pastetoggle=<F12>           " pastetoggle (sane indentation on pastes)
 "set comments=sl:/*,mb:*,elx:*/  " auto format comment blocks
-"autocmd FileType c,cpp,java,go,php,javascript,python,twig,xml,yml autocmd BufWritePre <buffer>
-"autocmd BufNewFile,BufRead *.html.twig set filetype=html.twig
 
 "Omnicompletion
 
@@ -280,14 +247,9 @@ map zh zH
 " fullscreen mode for GVIM and Terminal, need 'wmctrl' in you PATH
 map <silent> <F11> :call system("wmctrl -ir " . v:windowid . " -b toggle,fullscreen")<CR>
 
-
 "Plugins
 let g:NERDShutUp=1
 let b:match_ignorecase = 1
-"Emmet
-let g:user_emmet_expandabbr_key = '<C-Y>9'
-let g:user_emmet_install_global = 0
-autocmd FileType html,css EmmetInstall
 
 "Syntastic ================================
 let g:syntastic_javascript_checkers = ['jshint'] 
@@ -369,39 +331,6 @@ endif
 " For perlomni.vim setting.
 " https://github.com/c9s/perlomni.vim
 let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
-
-"Neosnippets ======================================
-" Plugin key-mappings.
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-k>     <Plug>(neosnippet_expand_target)
-
-" SuperTab like snippets behavior.
-imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)"
-\: pumvisible() ? "\<C-n>" : "\<TAB>"
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)"
-\: "\<TAB>"
-
-" For snippet_complete marker.
-if has('conceal')
-  set conceallevel=2 concealcursor=i
-endif
-
-" Enable snipMate compatibility feature.
-let g:neosnippet#enable_snipmate_compatibility = 1
-" Enable snipMate compatibility feature.
-let g:neosnippet#enable_snipmate_compatibility = 1
-
-" Tell Neosnippet about the other snippets
-let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
-
-"YCM
-"Flechas arriba y abajo en lugar de <tab> para hacerlo compatible con snipmate
-"let g:BASH_Ctrl_j = 'off'
-"let g:ycm_key_list_select_completion = ['<Down>', '<Enter>']
-"let g:ycm_key_list_previous_completion = ['<Up>']
 
 "NerdTree
 map <C-e> :NERDTreeToggle<CR>:NERDTreeMirror<CR>
@@ -516,7 +445,7 @@ let g:airline#extensions#whitespace#enabled = 0
 "Desactivar bufferline dentro de airline
 let g:airline#extensions#bufferline#enabled = 0
 
-"Eliminar retardo al pasar de Insert a Normal
+"Eliminar retardo al pasar de Insert a Normal ==================
 set timeoutlen=1000 ttimeoutlen=0
 
 "No delay between Insert and Normal mode
@@ -526,7 +455,7 @@ augroup FastEscape
     au InsertLeave * set timeoutlen=1000
 augroup END
 
-" GUI Settings 
+" GUI Settings  ====================================
 
 " GVIM- (here instead of .gvimrc)
 if has('gui_running')
@@ -539,21 +468,12 @@ if has('gui_running')
         set lazyredraw
         set guifont=Inconsolata\ Regular\ 14,Droid\ Sans\ Mono\ Regular\ 12,Andale\ Mono\ Regular\ 12,Menlo\ Regular\ 12,Consolas\ Regular\ 12,Courier\ New\ Regular\ 18
         colorscheme base16-default
-    elseif has("gui_mac")
-        set guifont=Andale\ Mono\ Regular:h16,Menlo\ Regular:h15,Consolas\ Regular:h16,Courier\ New\ Regular:h18
-    elseif has("gui_win32")
-        set guifont=Andale_Mono:h10,Menlo:h10,Consolas:h10,Courier_New:h10
     endif
-    if has('gui_macvim')
-        set transparency=5      " Make the window slightly transparent
-    endif
-else
     if &term == 'xterm' || &term == 'screen'
         set t_Co=256            " Enable 256 colors to stop the CSApprox warning and make xterm vim shine
     endif
     "set term=builtin_ansi       " Make arrow and other keys work
 endif
-
 
 let g:startify_custom_header = [
             \'            Yb    dP 88 8b    d8   888888P       dP88 ',
@@ -641,26 +561,4 @@ function! NERDTreeInitAsNeeded()
     endif
 endfunction
 
-" Shell command {
-function! s:RunShellCommand(cmdline)
-    botright new
-
-    setlocal buftype=nofile
-    setlocal bufhidden=delete
-    setlocal nobuflisted
-    setlocal noswapfile
-    setlocal nowrap
-    setlocal filetype=shell
-    setlocal syntax=shell
-
-    call setline(1, a:cmdline)
-    call setline(2, substitute(a:cmdline, '.', '=', 'g'))
-    execute 'silent $read !' . escape(a:cmdline, '%#')
-    setlocal nomodifiable
-    1
-endfunction
-
-command! -complete=file -nargs=+ Shell call s:RunShellCommand(<q-args>)
-" e.g. Grep current file for <search_term>: Shell grep -Hn <search_term> %
-" }
 
