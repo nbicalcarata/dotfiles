@@ -24,6 +24,7 @@ Bundle 'terryma/vim-multiple-cursors'
 Bundle 'bling/vim-airline'
 Bundle 'bling/vim-bufferline'
 Bundle 'daylerees/colour-schemes', { 'rtp': 'vim-themes/' }
+Bundle 'rodnaph/vim-color-schemes'
 Bundle 'chriskempson/base16-vim'
 Bundle 'mhinz/vim-startify'
 "Bundle 'koron/minimap-vim'
