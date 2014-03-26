@@ -27,7 +27,7 @@ Bundle 'daylerees/colour-schemes', { 'rtp': 'vim-themes/' }
 Bundle 'rodnaph/vim-color-schemes'
 Bundle 'chriskempson/base16-vim'
 Bundle 'mhinz/vim-startify'
-"Bundle 'koron/minimap-vim'
+Bundle 'mklabs/vim-fetch'
 
 "Programacion
 Bundle 'scrooloose/syntastic'
@@ -68,6 +68,8 @@ Bundle 'mjbrownie/vim-htmldjango_omnicomplete'
 "Misc
 Bundle 'tpope/vim-markdown'
 
+"Bootstrap 3 snippets
+Bundle 'chrisgillis/vim-bootstrap3-snippets'
 
 filetype plugin indent on     " required!
 
@@ -90,6 +92,20 @@ set history=1000                    " Store a ton of history (default is 20)
 set nospell                         " Spell checking off
 set hidden                          " Allow buffer switching without saving
 set nofoldenable                    "Disable folding
+set wildmenu " cmd line completion a-la zsh
+set wildmode=list:longest " matches mimic that of bash or zsh
+set wildignore+=node_modules " node_modules dir
+set wildignore+=.ropeproject " py rope cache dir
+set wildignore+=.hg,.git,.svn " Version control
+set wildignore+=*.aux,*.out,*.toc " LaTeX intermediate files
+set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg " binary images
+set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest " compiled object files
+set wildignore+=*.spl " compiled spelling word lists
+set wildignore+=*.sw? " Vim swap files
+set wildignore+=*.DS_Store " OSX bullshit
+set wildignore+=migrations " Django migrations
+set wildignore+=*.pyc " Python byte code
+
 
 au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
 
@@ -202,6 +218,7 @@ autocmd FileType htmldjango set omnifunc=htmldjangocomplete#CompleteDjango
 "Preview file on browser
 nnoremap <F12>f :exe ':silent !firefox %'<CR>
 nnoremap <F12>c :exe ':silent !chromium-browser %'<CR>
+nnoremap <F12>g :exe ':silent !google-chrome %'<CR>
 
 " Wrapped lines goes down/up to next row, rather than next line in file.
 noremap j gj
