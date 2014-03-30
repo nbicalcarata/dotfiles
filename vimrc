@@ -140,7 +140,9 @@ let mapleader = ","
 " Vim UI -------------------------------------
 set relativenumber
 "set number
-colorscheme darkburn
+colorscheme base16-default
+set t_Co=256            " Enable 256 colors to stop the CSApprox warning and make xterm vim shine
+set lazyredraw
 set tabpagemax=15               " Only show 15 tabs
 set showmode                    " Display the current mode
 "set cursorline                  " Highlight current line
@@ -360,7 +362,7 @@ let g:airline_powerline_fonts=0
 " powerline enabled font.
 
 "Establecer el tema de airline
-let g:airline_theme = 'base16'
+let g:airline_theme = 'ubaryd'
 let g:airline_left_sep=''  " Slightly fancier than '>'
 let g:airline_right_sep='' " Slightly fancier than '<'
 
