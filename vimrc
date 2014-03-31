@@ -140,15 +140,20 @@ let mapleader = ","
 " Vim UI -------------------------------------
 set relativenumber
 "set number
+set wrap
 colorscheme base16-default
+"Fix vertical split color
+highlight VertSplit ctermfg=Gray ctermbg=Gray
 set t_Co=256            " Enable 256 colors to stop the CSApprox warning and make xterm vim shine
 set lazyredraw
 set tabpagemax=15               " Only show 15 tabs
 set showmode                    " Display the current mode
-"set cursorline                  " Highlight current line
+set cursorline " Highlight current line
+highlight clear cursorline 
+highlight cursorline cterm=underline
 highlight clear SignColumn      " SignColumn should match background
 highlight clear LineNr          " Current line number row will have same background color in relative mode
-"highlight clear CursorLineNr    " Remove highlight color from current line number
+highlight clear CursorLineNr    " Remove highlight color from current line number
 
 if has('cmdline_info')
     set ruler                   " Show the ruler
@@ -173,12 +178,10 @@ set linespace=0                 " No extra spaces between rows
 "set nu                          " Line numbers on
 set showmatch                   " Show matching brackets/parenthesis
 set incsearch                   " Find as you type search
-set hlsearch                    " Highlight search terms
+"set hlsearch                    " Highlight search terms
 set winminheight=0              " Windows can be 0 line high
 set ignorecase                  " Case insensitive search
 set smartcase                   " Case sensitive when uc present
-set wildmenu                    " Show list instead of just completing
-set wildmode=list:longest,full  " Command <Tab> completion, list matches, then longest common part, then all.
 set whichwrap=b,s,h,l,<,>,[,]   " Backspace and cursor keys wrap too
 "set scrolljump=5                " Lines to scroll when cursor leaves screen
 set scrolloff=3                 " Minimum lines to keep above and below cursor
@@ -402,6 +405,7 @@ augroup END
 " GVIM- (here instead of .gvimrc)
 if has('gui_running')
     set guioptions-=T           " Remove the toolbar
+    set guioptions-=L           " Remove nerdtree scroll
     "set guioptions-=m           " Remove the menubar
     "set lines=40                " 40 lines of text instead of 24
     set lines=999 columns=999    " Start maximized
