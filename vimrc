@@ -141,6 +141,8 @@ let mapleader = ","
 set relativenumber
 "set number
 set wrap
+set linebreak
+set nolist
 colorscheme base16-default
 "Fix vertical split color
 highlight VertSplit ctermfg=Gray ctermbg=Gray
@@ -406,10 +408,12 @@ augroup END
 if has('gui_running')
     set guioptions-=T           " Remove the toolbar
     set guioptions-=L           " Remove nerdtree scroll
+    set wrap
     "set guioptions-=m           " Remove the menubar
     "set lines=40                " 40 lines of text instead of 24
     set lines=999 columns=999    " Start maximized
-    set guifont=Inconsolata\ Regular\ 14,Droid\ Sans\ Mono\ Regular\ 12,Andale\ Mono\ Regular\ 12,Menlo\ Regular\ 12,Consolas\ Regular\ 12,Courier\ New\ Regular\ 18
+    let g:airline_theme = 'powerlineish'
+    set guifont=Incjjonsolata\ Regular\ 14,Droid\ Sans\ Mono\ Regular\ 12,Andale\ Mono\ Regular\ 12,Menlo\ Regular\ 12,Consolas\ Regular\ 12,Courier\ New\ Regular\ 18
     if has("gui_gtk2")
         set lazyredraw
         set guifont=Inconsolata\ Regular\ 14,Droid\ Sans\ Mono\ Regular\ 12,Andale\ Mono\ Regular\ 12,Menlo\ Regular\ 12,Consolas\ Regular\ 12,Courier\ New\ Regular\ 18
