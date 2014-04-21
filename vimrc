@@ -18,14 +18,12 @@ Bundle 'gmarik/vundle'
 Bundle 'MarcWeber/vim-addon-mw-utils'
 Bundle 'tomtom/tlib_vim'
 Bundle 'scrooloose/nerdtree'
-Bundle 'flazz/vim-colorschemes'
 Bundle 'kien/ctrlp.vim'
 Bundle 'terryma/vim-multiple-cursors'
 Bundle 'bling/vim-airline'
 Bundle 'bling/vim-bufferline'
-Bundle 'daylerees/colour-schemes', { 'rtp': 'vim-themes/' }
-Bundle 'rodnaph/vim-color-schemes'
 Bundle 'chriskempson/base16-vim'
+Bundle 'nanotech/jellybeans.vim'
 Bundle 'mhinz/vim-startify'
 Bundle 'mklabs/vim-fetch'
 
@@ -138,24 +136,26 @@ let g:skipview_files = [
 let mapleader = ","
 
 " Vim UI -------------------------------------
-set relativenumber
-"set number
+"set relativenumber
+set number
 set wrap
 set linebreak
 set nolist
-colorscheme base16-default
+colorscheme jellybeans
 "Fix vertical split color
 highlight VertSplit ctermfg=Gray ctermbg=Gray
+"hi CursorLineNr guifg=DarkGrey
 set t_Co=256            " Enable 256 colors to stop the CSApprox warning and make xterm vim shine
 set lazyredraw
 set tabpagemax=15               " Only show 15 tabs
 set showmode                    " Display the current mode
 set cursorline " Highlight current line
-highlight clear cursorline 
-highlight cursorline cterm=underline
-highlight clear SignColumn      " SignColumn should match background
-highlight clear LineNr          " Current line number row will have same background color in relative mode
-highlight clear CursorLineNr    " Remove highlight color from current line number
+"highlight clear cursorline 
+"highlight cursorline cterm=underline
+"highlight clear SignColumn      " SignColumn should match background
+"highlight clear LineNr          " Current line number row will have same background color in relative mode
+"highlight clear CursorLineNr    " Remove highlight color from current line number
+highlight clear WildMenu
 
 if has('cmdline_info')
     set ruler                   " Show the ruler
@@ -193,7 +193,6 @@ set listchars=tab:›\ ,trail:•,extends:#,nbsp:. " Highlight problematic white
 
 " Formatting
 
-set nowrap                      " Do not wrap long lines
 set autoindent                  " Indent at the same level of the previous line
 set shiftwidth=4                " Use indents of 4 spaces
 set expandtab                   " Tabs are spaces, not tabs
@@ -407,18 +406,18 @@ augroup END
 " GVIM- (here instead of .gvimrc)
 if has('gui_running')
     set guioptions-=T           " Remove the toolbar
+    set guioptions-=m           " Remove the menubar
     set guioptions-=L           " Remove nerdtree scroll
     set wrap
-    "set guioptions-=m           " Remove the menubar
     "set lines=40                " 40 lines of text instead of 24
     set lines=999 columns=999    " Start maximized
-    let g:airline_theme = 'powerlineish'
-    set guifont=Incjjonsolata\ Regular\ 14,Droid\ Sans\ Mono\ Regular\ 12,Andale\ Mono\ Regular\ 12,Menlo\ Regular\ 12,Consolas\ Regular\ 12,Courier\ New\ Regular\ 18
-    if has("gui_gtk2")
-        set lazyredraw
-        set guifont=Inconsolata\ Regular\ 14,Droid\ Sans\ Mono\ Regular\ 12,Andale\ Mono\ Regular\ 12,Menlo\ Regular\ 12,Consolas\ Regular\ 12,Courier\ New\ Regular\ 18
-        colorscheme base16-default
-    endif
+    let g:airline_theme = 'jellybeans'
+    set lazyredraw
+    hi CursorLineNr guifg=DarkGrey
+    set guifont=Inconsolata\ Regular\ 15,Droid\ Sans\ Mono\ Regular\ 12,Andale\ Mono\ Regular\ 12,Menlo\ Regular\ 12,Consolas\ Regular\ 12,Courier\ New\ Regular\ 18
+    "let g:solarized_contrast="high"    "default value is normal
+    "let g:solarized_visibility="low"    "default value is normal
+    colorscheme jellybeans
     if &term == 'xterm' || &term == 'screen'
         set t_Co=256            " Enable 256 colors to stop the CSApprox warning and make xterm vim shine
     endif
