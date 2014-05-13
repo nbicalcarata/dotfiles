@@ -21,7 +21,6 @@ Bundle 'scrooloose/nerdtree'
 Bundle 'kien/ctrlp.vim'
 Bundle 'terryma/vim-multiple-cursors'
 Bundle 'bling/vim-airline'
-Bundle 'bling/vim-bufferline'
 Bundle 'chriskempson/base16-vim'
 Bundle 'nanotech/jellybeans.vim'
 Bundle 'mhinz/vim-startify'
@@ -34,7 +33,9 @@ Bundle 'mattn/webapi-vim'
 Bundle 'mattn/gist-vim'
 
 "Snippets & AutoComplete"
-Bundle 'garbas/vim-snipmate'
+Bundle 'Valloric/YouCompleteMe'
+Bundle 'SirVer/ultisnips'
+"Bundle 'garbas/vim-snipmate'
 Bundle 'honza/vim-snippets'
 
 "Python
@@ -43,18 +44,19 @@ Bundle 'python.vim'
 Bundle 'python_match.vim'
 Bundle 'pythoncomplete'
 
-"Javascript {
+"Javascript 
 Bundle 'elzr/vim-json'
 Bundle 'groenewege/vim-less'
 Bundle 'pangloss/vim-javascript'
 Bundle 'briancollins/vim-jst'
 
-"HTML {
+"HTML 
 Bundle 'hail2u/vim-css3-syntax'
 Bundle 'tpope/vim-haml'
 Bundle 'lordm/vim-browser-reload-linux'
+Bundle 'Valloric/MatchTagAlways'
 
-" Ruby {
+"Ruby 
 Bundle 'tpope/vim-rails'
 let g:rubycomplete_buffer_loading = 1
 "let g:rubycomplete_classes_in_global = 1
@@ -143,7 +145,7 @@ set linebreak
 set nolist
 colorscheme jellybeans
 "Fix vertical split color
-highlight VertSplit ctermfg=Gray ctermbg=Gray
+"highlight VertSplit ctermfg=Gray ctermbg=Gray
 "hi CursorLineNr guifg=DarkGrey
 set t_Co=256            " Enable 256 colors to stop the CSApprox warning and make xterm vim shine
 set lazyredraw
@@ -167,7 +169,7 @@ endif
 if has('statusline')
     set laststatus=2
     " Broken down into easily includeable segments
-    set statusline=%<%f\                     " Filename
+    set statusline=%<%f\                    "Filename
     set statusline+=%w%h%m%r                 " Options
     set statusline+=%{fugitive#statusline()} " Git Hotness
     set statusline+=\ [%{&ff}/%Y]            " Filetype
@@ -177,10 +179,8 @@ endif
 
 set backspace=indent,eol,start  " Backspace for dummies
 set linespace=0                 " No extra spaces between rows
-"set nu                          " Line numbers on
 set showmatch                   " Show matching brackets/parenthesis
 set incsearch                   " Find as you type search
-"set hlsearch                    " Highlight search terms
 set winminheight=0              " Windows can be 0 line high
 set ignorecase                  " Case insensitive search
 set smartcase                   " Case sensitive when uc present
@@ -188,7 +188,6 @@ set whichwrap=b,s,h,l,<,>,[,]   " Backspace and cursor keys wrap too
 "set scrolljump=5                " Lines to scroll when cursor leaves screen
 set scrolloff=3                 " Minimum lines to keep above and below cursor
 "set foldenable                  " Auto fold code
-set list
 set listchars=tab:›\ ,trail:•,extends:#,nbsp:. " Highlight problematic whitespace
 
 " Formatting
@@ -277,6 +276,7 @@ let b:match_ignorecase = 1
 "Syntastic ================================
 let g:syntastic_javascript_checkers = ['jshint'] 
 let g:syntastic_html_checkers = ['w3']
+""let g:EclimFileTypeValidate = 0
 
 "NerdTree
 map <C-e> :NERDTreeToggle<CR>:NERDTreeMirror<CR>
@@ -307,11 +307,6 @@ let g:nerdtree_tabs_open_on_gui_startup=0
 "JSON
 nmap <leader>jt <Esc>:%!python -m json.tool<CR><Esc>:set filetype=json<CR>
 
-" PyMode
-let g:pymode_lint_checker = "pyflakes"
-let g:pymode_utils_whitespaces = 0
-let g:pymode_options = 0
-
 " ctrlp
 let g:ctrlp_working_path_mode = 'ra'
 nnoremap <silent> <D-t> :CtrlP<CR>
@@ -339,11 +334,19 @@ else
     \ }
 endif
 
+
+"=======================================================================
 " PythonMode 
 " Disable if python support not present
 if !has('python')
     let g:pymode = 1
 endif
+"Turn off the run code script    *'g:pymode_run'*
+let g:pymode_run = 0
+let g:pymode_lint_checker = "pyflakes"
+let g:pymode_utils_whitespaces = 0
+let g:pymode_options = 0
+"=======================================================================
 
 " Fugitive 
 nnoremap <silent> <leader>gs :Gstatus<CR>
@@ -361,22 +364,14 @@ nnoremap <silent> <leader>gg :SignifyToggle<CR>
 " Set configuration options for the statusline plugin vim-airline.
 " Use the powerline theme and optionally enable powerline symbols.
 " To use the symbols , , , , , , and .in the statusline
-let g:airline_powerline_fonts=0
+let g:airline_powerline_fonts=1
 " If the previous symbols do not render for you then install a
 " powerline enabled font.
 
-"Establecer el tema de airline
-let g:airline_theme = 'ubaryd'
-let g:airline_left_sep=''  " Slightly fancier than '>'
-let g:airline_right_sep='' " Slightly fancier than '<'
+"Configure whether buffer numbers should be shown
+"let g:airline#extensions#tabline#buffer_nr_show = 1
 
-if !exists('g:airline_powerline_fonts')
-    " Use the default set of separators with a few customizations
-    "let g:airline_left_sep='›'  " Slightly fancier than '>'
-    "let g:airline_right_sep='‹' " Slightly fancier than '<'
-endif
-
-"Correcion de los carac:ters extraños (espacios en blanco)
+"Correcion de los caracters extraños (espacios en blanco)
 if !exists('g:airline_symbols')
     let g:airline_symbols = {}
 endif
@@ -386,10 +381,28 @@ let g:airline_symbols.space = "\ua0"
 let g:airline#extensions#whitespace#enabled = 0
 
 "Activar tabline
-"let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#enabled = 1
+
+"Enable syntastic integration
+let g:airline#extensions#syntastic#enabled = 1
+
+"Enable eclim integration
+let g:airline#extensions#eclim#enabled = 0
+
+"Desplegar solo el nombre de archivo en el tab
+let g:airline#extensions#tabline#fnamemod = ':t'
+
+"Full path and filename
+let g:airline_section_c = '%<%F'
 
 "Desactivar bufferline dentro de airline
-let g:airline#extensions#bufferline#enabled = 0
+"let g:airline#extensions#bufferline#enabled = 0
+
+"Buffer switching mappings
+"left/right arrows to switch buffers in normal mode
+map <right> :bn<cr>
+map <left> :bp<cr>
+
 
 "Eliminar retardo al pasar de Insert a Normal ==================
 set timeoutlen=1000 ttimeoutlen=0
@@ -413,7 +426,7 @@ if has('gui_running')
     set lines=999 columns=999    " Start maximized
     let g:airline_theme = 'jellybeans'
     set lazyredraw
-    hi CursorLineNr guifg=DarkGrey
+    "hi CursorLineNr guifg=DarkGrey
     set guifont=Inconsolata\ Regular\ 15,Droid\ Sans\ Mono\ Regular\ 12,Andale\ Mono\ Regular\ 12,Menlo\ Regular\ 12,Consolas\ Regular\ 12,Courier\ New\ Regular\ 18
     "let g:solarized_contrast="high"    "default value is normal
     "let g:solarized_visibility="low"    "default value is normal
@@ -435,6 +448,35 @@ let g:startify_custom_header = [
 
 let g:startify_files_number = 15
 let g:startify_list_order = ['files', 'bookmarks', 'sessions']
+
+" YouCompleteMe=======================================================
+
+"Cerrar la ventana de previsualizacion despues del completado semantico
+"de funciones
+let g:ycm_autoclose_preview_window_after_completion = 1
+
+"Cerrar la ventana de previsualizacion despues de salir del modo Insert
+"Default 0
+let g:ycm_autoclose_preview_window_after_insertion = 0
+
+"Compatibilidad con python mode (autocompletado correcto despues de .)
+let g:pymode_rope_complete_on_dot = 0
+
+"Youcompleteme eclim 
+"let g:EclimCompletionMethod = 'omnifunc'
+
+" UltiSnips===========================================================
+
+" Trigger configuration. Do not use <tab> if you use
+" https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<c-j>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+
+" If you want :UltiSnipsEdit to split your window.
+" let g:UltiSnipsEditSplit="vertical"
+
+"=====================================================================
 
 "vim-browser-reload-linux
 
