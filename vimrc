@@ -138,10 +138,11 @@ let g:skipview_files = [
 let mapleader = ","
 
 " Vim UI -------------------------------------
-"set relativenumber
+set lines=60 columns=175
 set number
 set wrap
 set linebreak
+set title
 set nolist
 colorscheme jellybeans
 "Fix vertical split color
@@ -393,7 +394,7 @@ let g:airline#extensions#eclim#enabled = 0
 let g:airline#extensions#tabline#fnamemod = ':t'
 
 "Full path and filename
-let g:airline_section_c = '%<%F'
+"let g:airline_section_c = '%<%F'
 
 "Desactivar bufferline dentro de airline
 "let g:airline#extensions#bufferline#enabled = 0
