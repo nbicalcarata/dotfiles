@@ -25,6 +25,10 @@ Bundle 'chriskempson/base16-vim'
 Bundle 'nanotech/jellybeans.vim'
 Bundle 'mhinz/vim-startify'
 Bundle 'mklabs/vim-fetch'
+Bundle 'justinmk/vim-gtfo'
+Bundle 'edkolev/promptline.vim'
+Bundle 'Yggdroot/indentLine'
+Bundle 'edkolev/tmuxline.vim'
 
 "Programacion
 Bundle 'scrooloose/syntastic'
@@ -139,6 +143,7 @@ let mapleader = ","
 
 " Vim UI -------------------------------------
 set lines=60 columns=175
+set colorcolumn=80
 set number
 set wrap
 set linebreak
@@ -193,6 +198,7 @@ set listchars=tab:›\ ,trail:•,extends:#,nbsp:. " Highlight problematic white
 
 " Formatting
 
+set list lcs=tab:\|\            " show indent lines
 set autoindent                  " Indent at the same level of the previous line
 set shiftwidth=4                " Use indents of 4 spaces
 set expandtab                   " Tabs are spaces, not tabs
@@ -277,6 +283,8 @@ let b:match_ignorecase = 1
 "Syntastic ================================
 let g:syntastic_javascript_checkers = ['jshint'] 
 let g:syntastic_html_checkers = ['w3']
+let g:syntastic_java_checkers = ['javac']
+let g:syntastic_java_javac_classpath = "./lib/*.jar\n./src"
 ""let g:EclimFileTypeValidate = 0
 
 "NerdTree
@@ -335,6 +343,11 @@ else
     \ }
 endif
 
+"Indentline ===========================================================
+let g:indentLine_color_term = 000
+let g:indentLine_char = '│'
+let g:indentLine_faster = 1
+
 
 "=======================================================================
 " PythonMode 
@@ -388,7 +401,7 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#syntastic#enabled = 1
 
 "Enable eclim integration
-let g:airline#extensions#eclim#enabled = 0
+"let g:airline#extensions#eclim#enabled = 0
 
 "Desplegar solo el nombre de archivo en el tab
 let g:airline#extensions#tabline#fnamemod = ':t'
@@ -403,6 +416,13 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 "left/right arrows to switch buffers in normal mode
 map <right> :bn<cr>
 map <left> :bp<cr>
+
+
+"Promptline =================================================================
+let g:promptline_preset = {
+      \'a'    : [ '\h' ],
+      \'b'    : [ '\u', promptline#slices#vcs_branch(), promptline#slices#python_virtualenv() ],
+      \'c'    : [ '\w \$' ]}
 
 
 "Eliminar retardo al pasar de Insert a Normal ==================
@@ -437,6 +457,14 @@ if has('gui_running')
     endif
     "set term=builtin_ansi       " Make arrow and other keys work
 endif
+
+"Startify ===================================================================
+
+"Disable cursor line on startify
+autocmd FileType startify setlocal colorcolumn=
+
+"Disable CtrlP and NerdTree open split in Startify
+autocmd FileType startify setlocal buftype=
 
 let g:startify_custom_header = [
             \'            Yb    dP 88 8b    d8   888888P       dP88 ',
