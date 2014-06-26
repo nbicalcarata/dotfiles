@@ -21,4 +21,8 @@ export NODE_PATH=:/home/adrian/npm/lib/node_modules
 
 source /etc/bash_completion.d/virtualenvwrapper
 
+source /usr/share/virtualenvwrapper/virtualenvwrapper.sh
+
 source ~/.shell_prompt.sh
+
+alias tmux="tmux -2"

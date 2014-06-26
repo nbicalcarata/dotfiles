@@ -7,7 +7,7 @@ filetype on
 filetype off
 
 set rtp+=~/.vim/bundle/vundle/
-call vundle#begin()
+call vundle#rc()
 
 " let Vundle manage Vundle
 " required!
@@ -15,60 +15,58 @@ Bundle 'gmarik/vundle'
 
 " My bundles here: ----------------------------
 " General
-Plugin 'MarcWeber/vim-addon-mw-utils'
-Plugin 'tomtom/tlib_vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'kien/ctrlp.vim'
-Plugin 'terryma/vim-multiple-cursors'
-Plugin 'terryma/vim-smooth-scroll'
-Plugin 'bling/vim-airline'
-Plugin 'chriskempson/base16-vim'
-Plugin 'nanotech/jellybeans.vim'
-Plugin 'mklabs/vim-fetch'
-Plugin 'justinmk/vim-gtfo'
-Plugin 'edkolev/promptline.vim'
-Plugin 'Yggdroot/indentLine'
-Plugin 'edkolev/tmuxline.vim'
+Bundle 'MarcWeber/vim-addon-mw-utils'
+Bundle 'tomtom/tlib_vim'
+Bundle 'scrooloose/nerdtree'
+Bundle 'kien/ctrlp.vim'
+Bundle 'terryma/vim-multiple-cursors'
+Bundle 'bling/vim-airline'
+Bundle 'chriskempson/base16-vim'
+Bundle 'nanotech/jellybeans.vim'
+Bundle 'mklabs/vim-fetch'
+Bundle 'justinmk/vim-gtfo'
+Bundle 'edkolev/promptline.vim'
+Bundle 'Yggdroot/indentLine'
+Bundle 'edkolev/tmuxline.vim'
 
 "Programacion
-Plugin 'scrooloose/syntastic'
-Plugin 'tpope/vim-fugitive'
-Plugin 'mattn/webapi-vim'
-Plugin 'mattn/gist-vim'
+Bundle 'scrooloose/syntastic'
+Bundle 'tpope/vim-fugitive'
+Bundle 'mattn/webapi-vim'
+Bundle 'mattn/gist-vim'
 
 "Snippets & AutoComplete"
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
+Bundle 'Valloric/YouCompleteMe'
+Bundle 'SirVer/ultisnips'
+Bundle 'honza/vim-snippets'
 
 "Python
-Plugin 'klen/python-mode'
-Plugin 'python.vim'
-Plugin 'python_match.vim'
-Plugin 'pythoncomplete'
+Bundle 'klen/python-mode'
+Bundle 'python.vim'
+Bundle 'python_match.vim'
+Bundle 'pythoncomplete'
 
 "Kivy
-Plugin 'ajford/vimkivy'
+Bundle 'ajford/vimkivy'
 
 "Javascript 
-Plugin 'elzr/vim-json'
-Plugin 'pangloss/vim-javascript'
+Bundle 'elzr/vim-json'
+Bundle 'pangloss/vim-javascript'
 
 "HTML 
-Plugin 'hail2u/vim-css3-syntax'
-Plugin 'lordm/vim-browser-reload-linux'
-Plugin 'Valloric/MatchTagAlways'
+Bundle 'hail2u/vim-css3-syntax'
+Bundle 'lordm/vim-browser-reload-linux'
+Bundle 'Valloric/MatchTagAlways'
 
 "Django
-Plugin 'mjbrownie/vim-htmldjango_omnicomplete'
+Bundle 'mjbrownie/vim-htmldjango_omnicomplete'
 
 "Misc
-Plugin 'tpope/vim-markdown'
+Bundle 'tpope/vim-markdown'
 
 "Bootstrap 3 snippets
-Plugin 'chrisgillis/vim-bootstrap3-snippets'
+Bundle 'chrisgillis/vim-bootstrap3-snippets'
 
-call vundle#end()            " required
 filetype plugin indent on     " required!
 
 " General ---------------------------------
@@ -136,7 +134,7 @@ let g:skipview_files = [
 let mapleader = ","
 
 " Vim UI -------------------------------------
-"set lines=999 columns=999    " Start maximized
+set lines=999 columns=999    " Start maximized
 set colorcolumn=81     " Highlight column at 80
 set number
 set wrap
@@ -149,9 +147,8 @@ set lazyredraw
 set tabpagemax=15               " Only show 15 tabs
 set showmode                    " Display the current mode
 "set cursorline                  " Highlight current line
+set highlight cursorline  term=underline  guibg=#555555  cterm=underline
 set hlsearch                    " Highlight search matches
-hi CursorLine ctermbg=8 ctermfg=15 "8 = dark gray, 15 = white
-hi Cursor ctermbg=15 ctermfg=8
 
 
 if has('cmdline_info')
@@ -174,14 +171,14 @@ endif
 
 set backspace=indent,eol,start  " Backspace for dummies
 set linespace=0                 " No extra spaces between rows
-set noshowmatch                 " Dont show matching brackets/parenthesis
+set showmatch                   " Show matching brackets/parenthesis
 set incsearch                   " Find as you type search
 set winminheight=0              " Windows can be 0 line high
 set ignorecase                  " Case insensitive search
 set smartcase                   " Case sensitive when uc present
 set whichwrap=b,s,h,l,<,>,[,]   " Backspace and cursor keys wrap too
 "set scrolljump=5                " Lines to scroll when cursor leaves screen
-"set scrolloff=3                 " Minimum lines to keep above and below cursor
+set scrolloff=3                 " Minimum lines to keep above and below cursor
 set listchars=tab:›\ ,trail:•,extends:#,nbsp:. " Highlight problematic whitespace
 
 " Formatting
@@ -194,9 +191,8 @@ set softtabstop=4               " Let backspace delete indent
 set nojoinspaces                " Prevents inserting two spaces after punctuation on a join (J)
 set splitright                  " Puts new vsplit windows to the right of the current
 set splitbelow                  " Puts new split windows to the bottom of the current
-let loaded_matchparen = 1
 "set matchpairs+=<:>             " Match, to be used with %
-"set pastetoggle=<F12>           " pastetoggle (sane indentation on pastes)
+set pastetoggle=<F12>           " pastetoggle (sane indentation on pastes)
 "set comments=sl:/*,mb:*,elx:*/  " auto format comment blocks
 
 "Omnicompletion
@@ -215,9 +211,6 @@ autocmd FileType htmldjango set omnifunc=htmldjangocomplete#CompleteDjango
 ""imap <C-V> <ESC><C-V>i
 "vmap <C-C> "+y
 
-nnoremap <F1> <nop>
-nnoremap Q <nop>
-nnoremap K <nop>
 
 "Preview file on browser
 nnoremap <F12>f :exe ':silent !firefox %'<CR>
@@ -420,16 +413,14 @@ augroup END
 
 " GVIM- (here instead of .gvimrc)
 if has('gui_running')
-"    set guioptions-=T           " Remove the toolbar
-"    set guioptions-=m           " Remove the menubar
+    set guioptions-=T           " Remove the toolbar
+    set guioptions-=m           " Remove the menubar
     set guioptions-=L           " Remove nerdtree scroll
-    set guioptions-=r           " Remove the scroll bar
     set wrap
     set lines=999 columns=999    " Start maximized
+    let g:airline_theme = 'jellybeans'
     set lazyredraw
-    colorscheme base16-bespin
-"   set guifont=Ubuntu\ Mono\ derivative\ Powerline\ 14
-    set guifont=Inconsolata\ for\ Powerline\ 14
+    colorscheme jellybeans
 endif
 
 " YouCompleteMe=======================================================
@@ -484,11 +475,6 @@ let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 ":FirefoxReloadStop
 ":OperaReloadStop
 ":AllBrowserReloadStart
-
-noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 0, 2)<CR>
-noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 0, 2)<CR>
-noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 0, 4)<CR>
-noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 4)<CR>
 
 " Initialize directories {
 function! InitializeDirectories()
