@@ -272,6 +272,7 @@ map <silent> <F11> :call system("wmctrl -ir " . v:windowid . " -b toggle,fullscr
 
 "Plugins
 let g:NERDShutUp=1
+
 let b:match_ignorecase = 1
 
 "Syntastic ================================
@@ -420,10 +421,13 @@ augroup END
 
 " GVIM- (here instead of .gvimrc)
 if has('gui_running')
-"    set guioptions-=T           " Remove the toolbar
-"    set guioptions-=m           " Remove the menubar
+    set guioptions-=T           " Remove the toolbar
+    set guioptions-=m           " Remove the menubar
     set guioptions-=L           " Remove nerdtree scroll
     set guioptions-=r           " Remove the scroll bar
+    nnoremap <C-F1> :if &go=~#'m'<Bar>set go-=m<Bar>else<Bar>set go+=m<Bar>endif<CR>
+    nnoremap <C-F2> :if &go=~#'T'<Bar>set go-=T<Bar>else<Bar>set go+=T<Bar>endif<CR>
+    nnoremap <C-F3> :if &go=~#'r'<Bar>set go-=r<Bar>else<Bar>set go+=r<Bar>endif<CR>
     set wrap
     set lines=999 columns=999    " Start maximized
     set lazyredraw
