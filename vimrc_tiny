@@ -7,7 +7,7 @@ filetype on
 filetype off
 
 set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+call vundle#begin()
 
 " let Vundle manage Vundle
 " required!
@@ -15,58 +15,55 @@ Bundle 'gmarik/vundle'
 
 " My bundles here: ----------------------------
 " General
-Bundle 'MarcWeber/vim-addon-mw-utils'
-Bundle 'tomtom/tlib_vim'
-Bundle 'scrooloose/nerdtree'
-Bundle 'kien/ctrlp.vim'
-Bundle 'terryma/vim-multiple-cursors'
-Bundle 'bling/vim-airline'
-Bundle 'chriskempson/base16-vim'
-Bundle 'nanotech/jellybeans.vim'
-Bundle 'mklabs/vim-fetch'
-Bundle 'justinmk/vim-gtfo'
-Bundle 'edkolev/promptline.vim'
-Bundle 'Yggdroot/indentLine'
-Bundle 'edkolev/tmuxline.vim'
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'tomtom/tlib_vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'kien/ctrlp.vim'
+Plugin 'nanotech/jellybeans.vim'
+Plugin 'mklabs/vim-fetch'
+Plugin 'justinmk/vim-gtfo'
+Plugin 'edkolev/promptline.vim'
+Plugin 'Yggdroot/indentLine'
 
 "Programacion
-Bundle 'scrooloose/syntastic'
-Bundle 'tpope/vim-fugitive'
-Bundle 'mattn/webapi-vim'
-Bundle 'mattn/gist-vim'
+Plugin 'scrooloose/syntastic'
+Plugin 'tpope/vim-fugitive'
+Plugin 'mattn/webapi-vim'
+Plugin 'mattn/gist-vim'
 
 "Snippets & AutoComplete"
-Bundle 'Valloric/YouCompleteMe'
-Bundle 'SirVer/ultisnips'
-Bundle 'honza/vim-snippets'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
 
 "Python
-Bundle 'klen/python-mode'
-Bundle 'python.vim'
-Bundle 'python_match.vim'
-Bundle 'pythoncomplete'
+Plugin 'klen/python-mode'
+Plugin 'python.vim'
+Plugin 'python_match.vim'
+Plugin 'pythoncomplete'
 
 "Kivy
-Bundle 'ajford/vimkivy'
+Plugin 'ajford/vimkivy'
 
 "Javascript 
-Bundle 'elzr/vim-json'
-Bundle 'pangloss/vim-javascript'
+Plugin 'elzr/vim-json'
+Plugin 'pangloss/vim-javascript'
 
 "HTML 
-Bundle 'hail2u/vim-css3-syntax'
-Bundle 'lordm/vim-browser-reload-linux'
-Bundle 'Valloric/MatchTagAlways'
+Plugin 'hail2u/vim-css3-syntax'
+Plugin 'lordm/vim-browser-reload-linux'
+Plugin 'Valloric/MatchTagAlways'
 
 "Django
-Bundle 'mjbrownie/vim-htmldjango_omnicomplete'
+Plugin 'mjbrownie/vim-htmldjango_omnicomplete'
 
 "Misc
-Bundle 'tpope/vim-markdown'
+Plugin 'tpope/vim-markdown'
 
 "Bootstrap 3 snippets
-Bundle 'chrisgillis/vim-bootstrap3-snippets'
+Plugin 'chrisgillis/vim-bootstrap3-snippets'
 
+call vundle#end()            " required
 filetype plugin indent on     " required!
 
 " General ---------------------------------
@@ -128,9 +125,6 @@ if has('persistent_undo')
    set undoreload=10000        " Maximum number lines to save for undo on a buffer reload
 endif
 
-let g:skipview_files = [
-                \ '\[example pattern\]'
-                \ ]
 let mapleader = ","
 
 " Vim UI -------------------------------------
@@ -146,17 +140,8 @@ set t_Co=256            " Enable 256 colors to stop the CSApprox warning and mak
 set lazyredraw
 set tabpagemax=15               " Only show 15 tabs
 set showmode                    " Display the current mode
-"set cursorline                  " Highlight current line
-set highlight cursorline  term=underline  guibg=#555555  cterm=underline
+set cursorline                  " Highlight current line
 set hlsearch                    " Highlight search matches
-
-
-if has('cmdline_info')
-    set ruler                   " Show the ruler
-    set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%) " A ruler on steroids
-    set showcmd                 " Show partial commands in status line and
-                                " Selected characters/lines in visual mode
-endif
 
 if has('statusline')
     set laststatus=2
@@ -171,14 +156,14 @@ endif
 
 set backspace=indent,eol,start  " Backspace for dummies
 set linespace=0                 " No extra spaces between rows
-set showmatch                   " Show matching brackets/parenthesis
+set showmatch                   " show matching brackets/parenthesis
 set incsearch                   " Find as you type search
 set winminheight=0              " Windows can be 0 line high
 set ignorecase                  " Case insensitive search
 set smartcase                   " Case sensitive when uc present
 set whichwrap=b,s,h,l,<,>,[,]   " Backspace and cursor keys wrap too
 "set scrolljump=5                " Lines to scroll when cursor leaves screen
-set scrolloff=3                 " Minimum lines to keep above and below cursor
+set scrolloff=5                 " Minimum lines to keep above and below cursor
 set listchars=tab:›\ ,trail:•,extends:#,nbsp:. " Highlight problematic whitespace
 
 " Formatting
@@ -191,8 +176,9 @@ set softtabstop=4               " Let backspace delete indent
 set nojoinspaces                " Prevents inserting two spaces after punctuation on a join (J)
 set splitright                  " Puts new vsplit windows to the right of the current
 set splitbelow                  " Puts new split windows to the bottom of the current
+let loaded_matchparen = 1
 "set matchpairs+=<:>             " Match, to be used with %
-set pastetoggle=<F12>           " pastetoggle (sane indentation on pastes)
+"set pastetoggle=<F12>           " pastetoggle (sane indentation on pastes)
 "set comments=sl:/*,mb:*,elx:*/  " auto format comment blocks
 
 "Omnicompletion
@@ -207,10 +193,13 @@ autocmd FileType htmldjango set omnifunc=htmldjangocomplete#CompleteDjango
 
 "Key remapping -------------------------------------
 "Ctr+C, Ctrl+V keys to copy paste
-"nmap <C-V> "+gP
-""imap <C-V> <ESC><C-V>i
-"vmap <C-C> "+y
+nmap <C-V> "+gP
+imap <C-V> <ESC><C-V>i
+vmap <C-C> "+y
 
+nnoremap <F1> <nop>
+nnoremap Q <nop>
+nnoremap K <nop>
 
 "Preview file on browser
 nnoremap <F12>f :exe ':silent !firefox %'<CR>
@@ -265,6 +254,7 @@ map <silent> <F11> :call system("wmctrl -ir " . v:windowid . " -b toggle,fullscr
 
 "Plugins
 let g:NERDShutUp=1
+
 let b:match_ignorecase = 1
 
 "Syntastic ================================
@@ -273,6 +263,7 @@ let g:syntastic_html_checkers = ['w3']
 let g:syntastic_java_checkers = ['javac']
 let g:syntastic_java_javac_classpath = "./lib/*.jar\n./src"
 ""let g:EclimFileTypeValidate = 0
+let g:syntastic_mode_map = {'mode': 'passive'}
 
 "NerdTree
 map <C-e> :NERDTreeToggle<CR>:NERDTreeMirror<CR>
@@ -300,8 +291,6 @@ let NERDTreeShowHidden=0
 let NERDTreeKeepTreeInNewTab=1
 let g:nerdtree_tabs_open_on_gui_startup=0
 
-"JSON
-nmap <leader>jt <Esc>:%!python -m json.tool<CR><Esc>:set filetype=json<CR>
 
 " ctrlp
 let g:ctrlp_working_path_mode = 'ra'
@@ -326,11 +315,12 @@ let g:indentLine_faster = 1
 if !has('python')
     let g:pymode = 1
 endif
-"Turn off the run code script    *'g:pymode_run'*
+"Turn off the run code script  
 let g:pymode_run = 0
 let g:pymode_lint_checker = "pyflakes"
 let g:pymode_utils_whitespaces = 0
 let g:pymode_options = 0
+let g:pymode_lint_on_write = 0
 "=======================================================================
 
 " Fugitive 
@@ -345,59 +335,10 @@ nnoremap <silent> <leader>gw :Gwrite<CR>
 nnoremap <silent> <leader>ge :Gedit<CR>
 nnoremap <silent> <leader>gg :SignifyToggle<CR>
 
-" vim-airline 
-" Set configuration options for the statusline plugin vim-airline.
-" Use the powerline theme and optionally enable powerline symbols.
-" To use the symbols , , , , , , and .in the statusline
-let g:airline_powerline_fonts=1
-" If the previous symbols do not render for you then install a
-" powerline enabled font.
-
-"Configure whether buffer numbers should be shown
-"let g:airline#extensions#tabline#buffer_nr_show = 1
-
-"Correcion de los caracters extraños (espacios en blanco)
-if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
-endif
-let g:airline_symbols.space = "\ua0"
-
-"Desactivar la deteccion de espacios en blanco
-let g:airline#extensions#whitespace#enabled = 0
-
-"Activar tabline
-let g:airline#extensions#tabline#enabled = 0
-
-"Enable syntastic integration
-let g:airline#extensions#syntastic#enabled = 1
-
-"Enable eclim integration
-"let g:airline#extensions#eclim#enabled = 0
-
-"Desplegar solo el nombre de archivo en el tab
-let g:airline#extensions#tabline#fnamemod = ':t'
-
-"Full path and filename
-"let g:airline_section_c = '%<%F'
-
-"Desactivar bufferline dentro de airline
-"let g:airline#extensions#bufferline#enabled = 0
-
-"Buffer switching mappings
 "left/right arrows to switch buffers in normal mode
 map <right> :bn<cr>
 map <left> :bp<cr>
 
-
-"=================================================================
-"let g:airline#extensions#tmuxline#enabled = 0
-
-" In vim:  :PromptlineSnapshot ~/.shell_prompt.sh airline 
-" In bash: source ~/.shell_prompt.sh
-
-"let g:promptline_preset = {
-"            \'a'    : [ promptline#slices#python_virtualenv() ],
-"            \'b'    : [ promptline#slices#vcs_branch(), '\w' ]}
 
 "Eliminar retardo al pasar de Insert a Normal ==================
 set timeoutlen=1000 ttimeoutlen=0
@@ -416,11 +357,16 @@ if has('gui_running')
     set guioptions-=T           " Remove the toolbar
     set guioptions-=m           " Remove the menubar
     set guioptions-=L           " Remove nerdtree scroll
+    set guioptions-=r           " Remove the scroll bar
+    nnoremap <C-F1> :if &go=~#'m'<Bar>set go-=m<Bar>else<Bar>set go+=m<Bar>endif<CR>
+    nnoremap <C-F2> :if &go=~#'T'<Bar>set go-=T<Bar>else<Bar>set go+=T<Bar>endif<CR>
+    nnoremap <C-F3> :if &go=~#'r'<Bar>set go-=r<Bar>else<Bar>set go+=r<Bar>endif<CR>
     set wrap
     set lines=999 columns=999    " Start maximized
-    let g:airline_theme = 'jellybeans'
     set lazyredraw
-    colorscheme jellybeans
+"    colorscheme base16-bespin
+"   set guifont=Ubuntu\ Mono\ derivative\ Powerline\ 14
+    set guifont=Inconsolata\ for\ Powerline\ 14
 endif
 
 " YouCompleteMe=======================================================
@@ -450,69 +396,6 @@ let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 " If you want :UltiSnipsEdit to split your window.
 " let g:UltiSnipsEditSplit="vertical"
 
-"=====================================================================
-
-"vim-browser-reload-linux
-
-"Depends on xdotool
-"browser reload:
-
-":ChromeReload <regex>      //reload Google Chrome with optional regex for window title
-":FirefoxReload     //reload Firefox
-":OperaReload       //reload Opera
-":AllBrowserReload  //reload all browser
-
-"start auto reload:
-
-":ChromeReloadStart
-":FirefoxReloadStart
-":OperaReloadStart
-":AllBrowserReloadStart
-
-"stop auto reload:
-
-":ChromeReloadStop
-":FirefoxReloadStop
-":OperaReloadStop
-":AllBrowserReloadStart
-
-" Initialize directories {
-function! InitializeDirectories()
-    let parent = $HOME
-    let prefix = 'vim'
-    let dir_list = {
-                \ 'backup': 'backupdir',
-                \ 'views': 'viewdir', }
-
-    if has('persistent_undo')
-        let dir_list['undo'] = 'undodir'
-    endif
-
-    " To specify a different directory in which to place the vimbackup,
-    " vimviews, vimundo, and vimswap files/directories, add the following to
-    " your .vimrc.before.local file:
-    "directory = $HOME . '/.vim/'
-
-    let common_dir = parent . '/.' . prefix
-
-    for [dirname, settingname] in items(dir_list)
-        let directory = common_dir . dirname . '/'
-        if exists("*mkdir")
-            if !isdirectory(directory)
-                call mkdir(directory)
-            endif
-        endif
-        if !isdirectory(directory)
-            echo "Warning: Unable to create backup directory: " . directory
-            echo "Try: mkdir -p " . directory
-        else
-            let directory = substitute(directory, " ", "\\\\ ", "g")
-            exec "set " . settingname . "=" . directory
-        endif
-    endfor
-endfunction
-call InitializeDirectories()
-
  "Initialize NERDTree as needed {
 function! NERDTreeInitAsNeeded()
     redir => bufoutput
@@ -525,5 +408,3 @@ function! NERDTreeInitAsNeeded()
         wincmd l
     endif
 endfunction
-
-

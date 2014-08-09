@@ -10,7 +10,7 @@ fi
 
 # User specific aliases and functions
 
-[ -e /usr/bin/tracker-control ] && [ -x /usr/bin/tracker-control ] && /usr/bin/tracker-control -r > /dev/null
+#[ -e /usr/bin/tracker-control ] && [ -x /usr/bin/tracker-control ] && /usr/bin/tracker-control -r > /dev/null
 export MOZILLA_FIVE_HOME=/usr/lib/mozilla
 
 # export TERM="gnome-terminal"
@@ -23,6 +23,8 @@ source /etc/bash_completion.d/virtualenvwrapper
 
 source /usr/share/virtualenvwrapper/virtualenvwrapper.sh
 
-source ~/.shell_prompt.sh
-
 alias tmux="tmux -2"
+
+export EDITOR='vim'
+
+source ~/.bin/tmuxinator.bash

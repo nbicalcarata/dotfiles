@@ -19,22 +19,26 @@ Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'kien/ctrlp.vim'
-Plugin 'terryma/vim-multiple-cursors'
 Plugin 'terryma/vim-smooth-scroll'
 Plugin 'bling/vim-airline'
-Plugin 'chriskempson/base16-vim'
 Plugin 'nanotech/jellybeans.vim'
 Plugin 'mklabs/vim-fetch'
+Plugin 'reedes/vim-colors-pencil'
+Plugin '29decibel/codeschool-vim-theme'
+Plugin 'twerth/ir_black'
 Plugin 'justinmk/vim-gtfo'
-Plugin 'edkolev/promptline.vim'
+Plugin 'jonathanfilip/vim-lucius'
+Plugin 'fmoralesc/vim-vitamins'
 Plugin 'Yggdroot/indentLine'
 Plugin 'edkolev/tmuxline.vim'
+Plugin 'jtai/vim-womprat'
 
 "Programacion
 Plugin 'scrooloose/syntastic'
 Plugin 'tpope/vim-fugitive'
 Plugin 'mattn/webapi-vim'
 Plugin 'mattn/gist-vim'
+Plugin 'Valloric/MatchTagAlways'
 
 "Snippets & AutoComplete"
 Plugin 'Valloric/YouCompleteMe'
@@ -45,24 +49,6 @@ Plugin 'honza/vim-snippets'
 Plugin 'klen/python-mode'
 Plugin 'python.vim'
 Plugin 'python_match.vim'
-Plugin 'pythoncomplete'
-
-"Kivy
-Plugin 'ajford/vimkivy'
-
-"Javascript 
-Plugin 'elzr/vim-json'
-Plugin 'pangloss/vim-javascript'
-
-"HTML 
-Plugin 'hail2u/vim-css3-syntax'
-Plugin 'lordm/vim-browser-reload-linux'
-Plugin 'Valloric/MatchTagAlways'
-
-"Django
-Plugin 'mjbrownie/vim-htmldjango_omnicomplete'
-
-"Misc
 Plugin 'tpope/vim-markdown'
 
 "Bootstrap 3 snippets
@@ -120,6 +106,10 @@ augroup resCur
     autocmd BufWinEnter * call ResCur()
 augroup END
 
+" Keep search matches in the middle of the window
+nnoremap n nzzzv
+nnoremap N Nzzzv
+
 " Setting up the directories ---------------------------------
 
 set noswapfile
@@ -130,36 +120,28 @@ if has('persistent_undo')
    set undoreload=10000        " Maximum number lines to save for undo on a buffer reload
 endif
 
-let g:skipview_files = [
-                \ '\[example pattern\]'
-                \ ]
 let mapleader = ","
 
 " Vim UI -------------------------------------
-"set lines=999 columns=999    " Start maximized
-set colorcolumn=81     " Highlight column at 80
+set lines=999 columns=999    " Start maximized
+"set colorcolumn=81     " Highlight column at 80
 set number
 set wrap
 set linebreak
 set title
 set nolist
-colorscheme jellybeans
 set t_Co=256            " Enable 256 colors to stop the CSApprox warning and make xterm vim shine
+colorscheme womprat
+
 set lazyredraw
 set tabpagemax=15               " Only show 15 tabs
 set showmode                    " Display the current mode
 "set cursorline                  " Highlight current line
 set hlsearch                    " Highlight search matches
-hi CursorLine ctermbg=8 ctermfg=15 "8 = dark gray, 15 = white
-hi Cursor ctermbg=15 ctermfg=8
+hi CursorLine ctermbg=234 ctermfg=15 " 8 = dark gray, 15 = white
+hi Cursor ctermbg=15 ctermfg=234
 
-
-if has('cmdline_info')
-    set ruler                   " Show the ruler
-    set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%) " A ruler on steroids
-    set showcmd                 " Show partial commands in status line and
-                                " Selected characters/lines in visual mode
-endif
+"hi Normal ctermbg=NONE
 
 if has('statusline')
     set laststatus=2
@@ -174,14 +156,14 @@ endif
 
 set backspace=indent,eol,start  " Backspace for dummies
 set linespace=0                 " No extra spaces between rows
-set noshowmatch                 " Dont show matching brackets/parenthesis
+set showmatch                   " show matching brackets/parenthesis
 set incsearch                   " Find as you type search
 set winminheight=0              " Windows can be 0 line high
 set ignorecase                  " Case insensitive search
 set smartcase                   " Case sensitive when uc present
 set whichwrap=b,s,h,l,<,>,[,]   " Backspace and cursor keys wrap too
 "set scrolljump=5                " Lines to scroll when cursor leaves screen
-"set scrolloff=3                 " Minimum lines to keep above and below cursor
+set scrolloff=5                 " Minimum lines to keep above and below cursor
 set listchars=tab:›\ ,trail:•,extends:#,nbsp:. " Highlight problematic whitespace
 
 " Formatting
@@ -211,9 +193,9 @@ autocmd FileType htmldjango set omnifunc=htmldjangocomplete#CompleteDjango
 
 "Key remapping -------------------------------------
 "Ctr+C, Ctrl+V keys to copy paste
-"nmap <C-V> "+gP
-""imap <C-V> <ESC><C-V>i
-"vmap <C-C> "+y
+nmap <C-V> "+gP
+imap <C-V> <ESC><C-V>i
+vmap <C-C> "+y
 
 nnoremap <F1> <nop>
 nnoremap Q <nop>
@@ -281,6 +263,7 @@ let g:syntastic_html_checkers = ['w3']
 let g:syntastic_java_checkers = ['javac']
 let g:syntastic_java_javac_classpath = "./lib/*.jar\n./src"
 ""let g:EclimFileTypeValidate = 0
+let g:syntastic_mode_map = {'mode': 'passive'}
 
 "NerdTree
 map <C-e> :NERDTreeToggle<CR>:NERDTreeMirror<CR>
@@ -334,11 +317,12 @@ let g:indentLine_faster = 1
 if !has('python')
     let g:pymode = 1
 endif
-"Turn off the run code script    *'g:pymode_run'*
+"Turn off the run code script  
 let g:pymode_run = 0
 let g:pymode_lint_checker = "pyflakes"
 let g:pymode_utils_whitespaces = 0
 let g:pymode_options = 0
+let g:pymode_lint_on_write = 0
 "=======================================================================
 
 " Fugitive 
@@ -357,6 +341,7 @@ nnoremap <silent> <leader>gg :SignifyToggle<CR>
 " Set configuration options for the statusline plugin vim-airline.
 " Use the powerline theme and optionally enable powerline symbols.
 " To use the symbols , , , , , , and .in the statusline
+let g:airline_theme = 'powerlineish'
 let g:airline_powerline_fonts=1
 " If the previous symbols do not render for you then install a
 " powerline enabled font.
@@ -374,7 +359,7 @@ let g:airline_symbols.space = "\ua0"
 let g:airline#extensions#whitespace#enabled = 0
 
 "Activar tabline
-let g:airline#extensions#tabline#enabled = 0
+let g:airline#extensions#tabline#enabled = 1
 
 "Enable syntastic integration
 let g:airline#extensions#syntastic#enabled = 1
@@ -386,7 +371,7 @@ let g:airline#extensions#syntastic#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 
 "Full path and filename
-"let g:airline_section_c = '%<%F'
+let g:airline_section_c = '%<%F'
 
 "Desactivar bufferline dentro de airline
 "let g:airline#extensions#bufferline#enabled = 0
@@ -396,16 +381,9 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 map <right> :bn<cr>
 map <left> :bp<cr>
 
-
 "=================================================================
-let g:airline#extensions#tmuxline#enabled = 0
-
-" In vim:  :PromptlineSnapshot ~/.shell_prompt.sh airline 
-" In bash: source ~/.shell_prompt.sh
-
-let g:promptline_preset = {
-            \'a'    : [ promptline#slices#python_virtualenv() ],
-            \'b'    : [ promptline#slices#vcs_branch(), '\w' ]}
+"let g:airline#extensions#tmuxline#enabled = 0
+let g:tmuxline_preset = 'tmux'
 
 "Eliminar retardo al pasar de Insert a Normal ==================
 set timeoutlen=1000 ttimeoutlen=0
@@ -431,7 +409,7 @@ if has('gui_running')
     set wrap
     set lines=999 columns=999    " Start maximized
     set lazyredraw
-    colorscheme base16-bespin
+    colorscheme jellybeans
 "   set guifont=Ubuntu\ Mono\ derivative\ Powerline\ 14
     set guifont=Inconsolata\ for\ Powerline\ 14
 endif
@@ -543,5 +521,3 @@ function! NERDTreeInitAsNeeded()
         wincmd l
     endif
 endfunction
-
-
