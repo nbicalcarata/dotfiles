@@ -27,13 +27,14 @@ Plugin 'terryma/vim-smooth-scroll'
 Plugin 'bling/vim-airline'
 Plugin 'mklabs/vim-fetch'
 Plugin 'justinmk/vim-gtfo'
-Plugin 'Yggdroot/indentLine'
 Plugin 'edkolev/tmuxline.vim'
 Plugin 'scrooloose/syntastic'
 Plugin 'severin-lemaignan/vim-minimap' 
+Plugin 'dhruvasagar/vim-vinegar'
 
 "" Color
-Plugin 'jtai/vim-womprat'
+"Plugin 'jtai/vim-womprat'
+Plugin 'nbicalcarata/vim-womprat'
 Plugin 'nanotech/jellybeans.vim'
 Plugin '29decibel/codeschool-vim-theme'
 Plugin 'reedes/vim-colors-pencil'
@@ -60,7 +61,8 @@ Plugin 'jiangmiao/auto-pairs'
 Plugin 'klen/python-mode'
 Plugin 'python.vim'
 Plugin 'python_match.vim'
-Plugin 'tpope/vim-markdown'
+Plugin 'jmcantrell/vim-virtualenv'
+
 
 call vundle#end()            " required
 filetype plugin indent on     " required!
@@ -107,7 +109,6 @@ set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg   " binary images
 set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest " compiled object files
 set wildignore+=*.spl                            " compiled spelling word lists
 set wildignore+=*.sw?                            " Vim swap files
-set wildignore+=*.DS_Store                       " OSX bullshit
 set wildignore+=migrations                       " Django migrations
 set wildignore+=*.pyc                            " Python byte code
 set wildignore+=*.class                          " Java byte code
@@ -151,7 +152,7 @@ autocmd FileType ruby set omnifunc=rubycomplete#Complete
 autocmd FileType htmldjango set omnifunc=htmldjangocomplete#CompleteDjango
 
 " NERDTree open with vim
-autocmd vimenter * NERDTree
+" autocmd vimenter * NERDTree
 
 "No delay between Insert and Normal mode
 augroup FastEscape
@@ -215,35 +216,57 @@ set pastetoggle=<F12>           " pastetoggle (sane indentation on pastes)
 "set comments=sl:/*,mb:*,elx:*/  " auto format comment blocks
 
 " Cursor line
-hi CursorLine ctermbg=234 ctermfg=15 " 8 = dark gray, 15 = white
-hi Cursor ctermbg=15 ctermfg=234
+hi CursorLine ctermbg=234 ctermfg=none
+
+"hi Cursor ctermbg=255 ctermfg=233
+set cursorline
+
+" Cursor Line number styling
+hi CursorLineNr   cterm=bold ctermfg=Grey gui=bold guifg=Grey
+
+"let g:jellybeans_background_color_256='NONE'
+
+" Colorcolumn
+"set colorcolumn=81
+
+" Styling vertical splits
+set fillchars=vert:│,diff:⎼,fold:⎼
+
 
 " Indentline 
-let g:indentLine_char = '│'
-let g:indentLine_faster = 1
+"let g:indentLine_char = '│'
+"let g:indentLine_char = '¦'
+"let g:indentLine_char = '︙'
+"let g:indentLine_char = '┆'
+"let g:indentLine_char = '┊' 
+"let g:indentLine_faster = 1
+"let g:indentLine_color_term = 241
+
+" Virtualenv
+let g:airline#extensions#virtualenv#enabled = 1
 
 " Tmux line
-"let g:airline#extensions#tmuxline#enabled = 0
 let g:tmuxline_preset = 'tmux'
 
 " vim-airline
 let g:airline_theme = 'sofi'
 let g:airline_powerline_fonts=1
 
+
 "Configure whether buffer numbers should be shown
 "let g:airline#extensions#tabline#buffer_nr_show = 1
 
-" Correcion de los caracters extraños (espacios en blanco)
+" Correccion de los caracters extraños (espacios en blanco)
 if !exists('g:airline_symbols')
     let g:airline_symbols = {}
 endif
 let g:airline_symbols.space = "\ua0"
 let g:airline#extensions#whitespace#enabled = 0  "Desactivar la deteccion
-let g:airline#extensions#tabline#enabled = 1     "Activar tabline
+"let g:airline#extensions#tabline#enabled = 1     "Activar tabline
 let g:airline#extensions#syntastic#enabled = 1   "Enable syntastic integration
 "let g:airline#extensions#eclim#enabled = 0      "Enable eclim integration
-let g:airline#extensions#tabline#fnamemod = ':t' "Desplegar solo el nombre
-let g:airline_section_c = '%<%F'                 "Full path and filename
+"let g:airline#extensions#tabline#fnamemod = ':t' "Desplegar solo el nombre
+"let g:airline_section_c = '%F'                 "Full path and filename
 "let g:airline#extensions#bufferline#enabled = 0 "Desactivar bufferline dentro 
 
 " GUI Settings
@@ -313,19 +336,16 @@ nnoremap <silent> <leader>gw :Gwrite<CR>
 nnoremap <silent> <leader>ge :Gedit<CR>
 nnoremap <silent> <leader>gg :SignifyToggle<CR>
 
-" Find merge conflict markers
-map <leader>fc /\v^[<\|=>]{7}( .*\|$)<CR>
-
 " Shortcuts
 " Visual shifting (does not exit Visual mode)
 vnoremap < <gv
 vnoremap > >gv
 
-map <leader>ev :vsp %%
-map <leader>et :tabe %%
-
 " Adjust viewports to the same size
 map <Leader>= <C-w>=
+
+" Find character under cursor with ,zx
+nnoremap <leader>z xhp/<C-R>-<CR>
 
 " Map <Leader>ff to display all lines with keyword under cursor
 " and ask which one to jump to
@@ -352,7 +372,7 @@ let g:syntastic_mode_map = {'mode': 'passive'}
 map <C-e> :NERDTreeToggle<CR>:NERDTreeMirror<CR>
 map <leader>e :NERDTreeFind<CR>
 nmap <leader>nt :NERDTreeFind<CR>
-let NERDTreeShowBookmarks=1
+let NERDTreeShowBookmarks=0
 let NERDTreeIgnore=['\.pyc', '\.class', '\~$', '\.swo$', '\.swp$', '\.hg', '\.svn', '\.bzr']
 let NERDTreeChDirMode=2
 let NERDTreeQuitOnOpen=1
@@ -360,6 +380,8 @@ let NERDTreeMouseMode=2
 let NERDTreeShowHidden=0
 let NERDTreeKeepTreeInNewTab=1
 let g:nerdtree_tabs_open_on_gui_startup=0
+let NERDTreeMinimalUI=1
+
 
 " Smooth scroll
 noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 0, 2)<CR>
@@ -375,6 +397,9 @@ let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/]\.(git|hg|svn)$',
   \ 'file': '\v\.(exe|so|dll|pyc|class)$',
   \ }
+let g:ctrlp_use_caching = 1
+let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
+let g:ctrlp_clear_cache_on_exit = 0
 
 " PythonMode 
 " Disable if python support not present
@@ -465,3 +490,15 @@ function! NERDTreeInitAsNeeded()
         wincmd l
     endif
 endfunction
+
+" Change status on tmux
+function! AddTmuxline()
+  if exists(':Tmuxline')
+    augroup airline_tmuxline
+      au!
+      au InsertEnter * Tmuxline airline_insert
+      au InsertLeave * Tmuxline airline
+    augroup END
+  endif
+endfunction
+au VimEnter * :call AddTmuxline()
