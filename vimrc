@@ -216,9 +216,8 @@ set pastetoggle=<F12>           " pastetoggle (sane indentation on pastes)
 "set comments=sl:/*,mb:*,elx:*/  " auto format comment blocks
 
 " Cursor line
-hi CursorLine ctermbg=234 ctermfg=none
+hi CursorLine ctermbg=237 ctermfg=none
 
-"hi Cursor ctermbg=255 ctermfg=233
 set cursorline
 
 " Cursor Line number styling
@@ -231,16 +230,6 @@ hi CursorLineNr   cterm=bold ctermfg=Grey gui=bold guifg=Grey
 
 " Styling vertical splits
 set fillchars=vert:│,diff:⎼,fold:⎼
-
-
-" Indentline 
-"let g:indentLine_char = '│'
-"let g:indentLine_char = '¦'
-"let g:indentLine_char = '︙'
-"let g:indentLine_char = '┆'
-"let g:indentLine_char = '┊' 
-"let g:indentLine_faster = 1
-"let g:indentLine_color_term = 241
 
 " Virtualenv
 let g:airline#extensions#virtualenv#enabled = 1
@@ -299,7 +288,21 @@ nnoremap <F1> <nop>
 nnoremap Q <nop>
 nnoremap K <nop>
 
-" Buffer switching mappings
+" Bind nohl
+" Removes highlight of your last search
+" ``<C>`` stands for ``CTRL`` and therefore ``<C-n>`` stands for ``CTRL+n``
+noremap <C-n> :nohl<CR>
+vnoremap <C-n> :nohl<CR>
+inoremap <C-n> :nohl<CR>
+
+" bind Ctrl+<movement> keys to move around the windows, instead of using Ctrl+w + <movement>
+" Every unnecessary keystroke that can be saved is good for your health :)
+map <c-j> <c-w>j
+map <c-k> <c-w>k
+map <c-l> <c-w>l
+map <c-h> <c-w>h
+
+" Buffer switching mappings 
 " left/right arrows to switch buffers in normal mode
 map <right> :bn<cr>
 map <left> :bp<cr>
@@ -375,7 +378,7 @@ nmap <leader>nt :NERDTreeFind<CR>
 let NERDTreeShowBookmarks=0
 let NERDTreeIgnore=['\.pyc', '\.class', '\~$', '\.swo$', '\.swp$', '\.hg', '\.svn', '\.bzr']
 let NERDTreeChDirMode=2
-let NERDTreeQuitOnOpen=1
+"let NERDTreeQuitOnOpen=1
 let NERDTreeMouseMode=2
 let NERDTreeShowHidden=0
 let NERDTreeKeepTreeInNewTab=1

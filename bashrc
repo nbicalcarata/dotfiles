@@ -5,6 +5,9 @@ if [ -f /etc/bashrc ]; then
 	. /etc/bashrc
 fi
 
+#PS1="\n\e[30;1m\u@\h ( \e[0m\e[33;1m\w\e[0m\e[30;1m )\e[0m\e[33;33m\n$ \e[0m"
+
+
 # Uncomment the following line if you don't like systemctl's auto-paging feature:
 # export SYSTEMD_PAGER=
 
@@ -28,3 +31,5 @@ alias tmux="tmux -2"
 export EDITOR='vim'
 
 source ~/.bin/tmuxinator.bash
+
+. ~/.bash_prompt
