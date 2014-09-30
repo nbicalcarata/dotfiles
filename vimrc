@@ -33,12 +33,9 @@ Plugin 'severin-lemaignan/vim-minimap'
 Plugin 'dhruvasagar/vim-vinegar'
 
 "" Color
-"Plugin 'jtai/vim-womprat'
 Plugin 'nbicalcarata/vim-womprat'
+Plugin 'nbicalcarata/vim-airline-womprat'
 Plugin 'nanotech/jellybeans.vim'
-Plugin '29decibel/codeschool-vim-theme'
-Plugin 'reedes/vim-colors-pencil'
-Plugin 'fmoralesc/vim-vitamins'
 Plugin 'jonathanfilip/vim-lucius'
 Plugin 'twerth/ir_black'
 
@@ -50,12 +47,13 @@ Plugin 'tpope/vim-fugitive'
 "" Html
 Plugin 'Valloric/MatchTagAlways'
 Plugin 'chrisgillis/vim-bootstrap3-snippets'
+Plugin 'mattn/emmet-vim'
 
 "" Snippets & AutoComplete"
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
-Plugin 'jiangmiao/auto-pairs'
+Plugin 'Raimondi/delimitMate'
 
 "" Python
 Plugin 'klen/python-mode'
@@ -238,7 +236,7 @@ let g:airline#extensions#virtualenv#enabled = 1
 let g:tmuxline_preset = 'tmux'
 
 " vim-airline
-let g:airline_theme = 'sofi'
+let g:airline_theme = 'womprat'
 let g:airline_powerline_fonts=1
 
 
@@ -312,9 +310,9 @@ nnoremap n nzzzv
 nnoremap N Nzzzv
 
 " Preview file on browser
-nnoremap <F2>f :exe ':silent !firefox %'<CR>
-nnoremap <F2>c :exe ':silent !chromium-browser %'<CR>
-nnoremap <F2>g :exe ':silent !google-chrome %'<CR>
+nnoremap <F2>f :!firefox %<CR>
+nnoremap <F2>c :!chromium-browser %<CR>
+nnoremap <F2>g :!google-chrome %<CR>
 
 " Wrapped lines goes down/up to next row, rather than next line in file.
 noremap j gj
