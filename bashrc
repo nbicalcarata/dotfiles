@@ -26,7 +26,9 @@ source /etc/bash_completion.d/virtualenvwrapper
 
 source /usr/share/virtualenvwrapper/virtualenvwrapper.sh
 
-alias tmux="tmux -2"
+alias tmux="env TERM=xterm-it tmux -2"
+
+alias vm="mux dev"
 
 export EDITOR='vim'
 
