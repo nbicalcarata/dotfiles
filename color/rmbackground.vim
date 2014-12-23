@@ -1,6 +1,6 @@
 "Remove background set by colorscheme
 hi Normal      ctermbg=NONE
-hi Comment     ctermbg=NONE
+hi Comment     ctermfg=246 ctermbg=NONE cterm=NONE term=NONE
 hi Constant    ctermbg=NONE
 hi Special     ctermbg=NONE
 hi SpecialKey  ctermbg=NONE
@@ -32,4 +32,9 @@ hi WarningMsg  ctermbg=NONE
 hi ErrorMsg    ctermbg=NONE
 hi SignColumn  ctermbg=NONE
 hi Ignore      ctermbg=NONE
-
+hi Folded      ctermbg=none
+hi clear       SignColumn
+highlight GitGutterAdd ctermbg=none 
+highlight GitGutterChange ctermbg=none
+highlight GitGutterDelete ctermbg=none
+highlight GitGutterChangeDelete ctermbg=none
