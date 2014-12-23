@@ -35,6 +35,8 @@ Plugin 'benmills/vimux'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'xolox/vim-misc'
 Plugin 'xolox/vim-notes'
+Plugin 'Lokaltog/vim-easymotion'
+Plugin 'ryanoasis/vim-webdevicons'
 
 "}}}
 " Colorschemes {{{
@@ -55,8 +57,15 @@ Plugin 'vim-scripts/The-Vim-Gardener'
 Plugin 'guns/jellyx.vim'
 Plugin 'Lokaltog/vim-distinguished'
 Plugin 'chriskempson/vim-tomorrow-theme'
-Plugin 'ChasingLogic/ChasingLogic-colorscheme-vim'
 Plugin 'chriskempson/base16-vim'
+Plugin 'ChasingLogic/ChasingLogic-colorscheme-vim'
+Plugin 'zeis/vim-kolor' 
+Plugin 'bitterjug/vim-colors-bitterjug'
+Plugin 'ggustafsson/Ninja-Color-Scheme'
+Plugin 'fabi1cazenave/kalahari.vim'
+Plugin 'crusoexia/vim-dracula'
+Plugin 'dsolstad/vim-wombat256i'
+Plugin 'veloce/vim-aldmeris' 
 
 " }}}
 " Git {{{
@@ -110,8 +119,8 @@ scriptencoding utf-8
 set clipboard=unnamedplus
 
 " Italics
-set t_ZH=[3m
-set t_ZR=[23m
+"set t_ZH=[3m
+"set t_ZR=[23m
 
 set shortmess+=filmnrxoOtT          " Abbrev. of messages (avoids 'hit enter')
 set viewoptions=folds,options,cursor,unix,slash " Unix / Windows compatibility
@@ -162,7 +171,7 @@ au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
 " }}}
 " Running code with ,r {{{
 
-autocmd FileType python map <leader>r :w<CR>:!python %<CR>
+autocmd FileType python map <leader>r :w<CR>:!python3 %<CR>
 autocmd FileType bash map <leader>r :w<CR>:!./%<CR>
 autocmd FileType java map <leader>c :w<CR>:!javac %<CR>
 autocmd FileType java map <leader>r :w<CR>:!java %:r<CR>
@@ -262,23 +271,24 @@ set pastetoggle=<F12>           " pastetoggle (sane indentation on pastes)
 " }}}
 " Colorschemes {{{
 
-" colorscheme jellybeans
-" colorscheme lilypink
-" colorscheme monokai
+let base16colorspace=256  " Access colors present in 256 colorspace
+"let g:kolor_bold=0
+"colorscheme lilypink
+"colorscheme kolor
+"colorscheme monokai
+"colorscheme aldmeris
 " colorscheme muon
-colorscheme womprat
-" colorscheme Tomorrow-Night-Bright
+"colorscheme womprat
+"colorscheme Tomorrow-Night-Bright
 " colorscheme railscasts
-" colorscheme base16-bespin
-" let base16colorspace=256  
+colorscheme base16-default
 source ~/dotfiles/color/rmbackground.vim
-highlight Comment cterm=italic
 
 " }}}
 " Cursor line {{{
 
-hi CursorLine ctermbg=237 ctermfg=none
 set cursorline
+"hi CursorLine ctermbg=234 ctermfg=none
 " Cursor Line number styling
 hi CursorLineNr   cterm=bold ctermfg=Grey gui=bold guifg=Grey
 
@@ -316,7 +326,7 @@ if has('gui_running')
     set lazyredraw
     colorscheme jellybeans
 "   set guifont=Ubuntu\ Mono\ derivative\ Powerline\ 14
-    set guifont=Inconsolata\ for\ Powerline\ 14
+    set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 10
 endif
 
 " }}}
@@ -498,16 +508,16 @@ endfunction
 " }}}
 " Change status on tmux {{{
 
-function! AddTmuxline()
-  if exists(':Tmuxline')
-    augroup airline_tmuxline
-      au!
-      au InsertEnter * Tmuxline airline_insert
-      au InsertLeave * Tmuxline airline
-    augroup END
-  endif
-endfunction
-au VimEnter * :call AddTmuxline()
+"function! AddTmuxline()
+"  if exists(':Tmuxline')
+""   augroup airline_tmuxline
+""      au!
+""      au InsertEnter * Tmuxline airline_insert
+""      au InsertLeave * Tmuxline airline
+""    augroup END
+""  endif
+"endfunction
+"au VimEnter * :call AddTmuxline()
 
 " }}}
 " Better folding style {{{
@@ -523,6 +533,30 @@ function! NeatFoldText()
   return foldtextstart . repeat(foldchar, winwidth(0)-foldtextlength) . foldtextend
 endfunction
 set foldtext=NeatFoldText()
+
+" }}}
+" NERDTress File highlighting {{{
+
+function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
+ exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
+ exec 'autocmd filetype nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
+endfunction
+
+call NERDTreeHighlightFile('jade', 'green', 'none', 'green', '#151515')
+call NERDTreeHighlightFile('ini', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('md', 'blue', 'none', 'blue', '#151515')
+call NERDTreeHighlightFile('yml', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('config', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('conf', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('json', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('html', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('styl', 'cyan', 'none', 'cyan', '#151515')
+call NERDTreeHighlightFile('css', 'cyan', 'none', 'cyan', '#151515')
+call NERDTreeHighlightFile('coffee', 'Red', 'none', 'red', '#151515')
+call NERDTreeHighlightFile('js', 'Red', 'none', '#ffa500', '#151515')
+call NERDTreeHighlightFile('php', 'Magenta', 'none', '#ff00ff', '#151515')
+call NERDTreeHighlightFile('py', 'green', 'none', 'green', '#151515')
+" source: https://github.com/scrooloose/nerdtree/issues/201#issuecomment-9954740"
 
 " }}}
 " *****************************************************************************
@@ -566,16 +600,16 @@ let g:airline#extensions#whitespace#enabled = 0      "Desactivar la deteccion
 let g:airline#extensions#tabline#enabled = 1         "Activar tabline
 let g:airline#extensions#tabline#show_tab_type = 0
 let g:airline#extensions#tabline#close_symbol = 'X'
-let g:airline#extensions#tabline#show_buffers = 0
+let g:airline#extensions#tabline#show_buffers = 1
 let g:airline#extensions#syntastic#enabled = 1       "Enable syntastic 
 let g:airline#extensions#tabline#show_tab_nr = 0
 "let g:airline#extensions#tabline#fnamemod = ':t'    "Desplegar solo el nombre
 "let g:airline_section_c = '%F'                      "Full path and filename
-"let g:airline#extensions#bufferline#enabled = 0     "Desactivar bufferline  
-let g:airline#extensions#tabline#tab_min_count = 2  
+"let g:airline#extensions#bufferline#enabled = 1     "Desactivar bufferline  
+"let g:airline#extensions#tabline#tab_min_count = 2  
 let g:airline#extensions#virtualenv#enabled = 1
 let g:tmuxline_preset = 'tmux'
-let g:airline_theme = 'womprat'
+let g:airline_theme = 'base16'
 let g:airline_powerline_fonts=1
 "Configure whether buffer numbers should be shown
 "let g:airline#extensions#tabline#buffer_nr_show = 1
