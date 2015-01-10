@@ -131,6 +131,7 @@ set nospell                         " Spell checking off
 set hidden                          " Allow buffer switching without saving
 set foldenable                    " Disable folding
 set timeoutlen=1000 ttimeoutlen=0   " Eliminar retardo de Insert a Normal 
+set iskeyword+=-
 
 " Setting up the directories {{{ 
 
@@ -559,6 +560,24 @@ call NERDTreeHighlightFile('php', 'Magenta', 'none', '#ff00ff', '#151515')
 call NERDTreeHighlightFile('py', 'green', 'none', 'green', '#151515')
 " source: https://github.com/scrooloose/nerdtree/issues/201#issuecomment-9954740"
 
+" }}}
+" Jump to CSS definition {{{
+function! JumpToCSS()
+  let id_pos = searchpos("id", "nb", line('.'))[1]
+  let class_pos = searchpos("class", "nb", line('.'))[1]
+
+  if class_pos > 0 || id_pos > 0
+    if class_pos < id_pos
+      execute ":vim '#".expand('<cword>')."' **/*.css"
+    elseif class_pos > id_pos
+      execute ":vim '.".expand('<cword>')."' **/*.css"
+    endif
+  endif
+endfunction
+
+nnoremap <F9> :call JumpToCSS()<CR>
+
+" source http://stackoverflow.com/a/12835224
 " }}}
 " *****************************************************************************
 " }}}
