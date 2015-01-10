@@ -78,9 +78,10 @@ Plugin 'airblade/vim-gitgutter'
 " }}}
 " Html {{{
 
-"Plugin 'Valloric/MatchTagAlways'
+Plugin 'Valloric/MatchTagAlways'
 Plugin 'chrisgillis/vim-bootstrap3-snippets'
 Plugin 'mattn/emmet-vim'
+Plugin 'hail2u/vim-css3-syntax'
 
 " }}}
 " Snippets & AutoComplete {{{
