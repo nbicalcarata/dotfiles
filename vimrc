@@ -227,6 +227,17 @@ augroup cline
 augroup END
 
 " }}}
+" highlight characters past column 80 {{{
+
+augroup highlight_past_column 
+    autocmd!
+    "autocmd FileType python highlight Excess ctermbg=DarkGrey guibg=Black
+    autocmd FileType python highlight Excess ctermfg=Yellow
+    autocmd FileType python match Excess /\%80v.*/
+    autocmd FileType python set nowrap
+augroup END"
+
+" }}}
 " *****************************************************************************
 " }}}
 " Visual settings {{{
