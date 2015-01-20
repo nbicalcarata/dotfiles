@@ -25,6 +25,7 @@ Plugin 'tomtom/tlib_vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'kien/ctrlp.vim'
 Plugin 'terryma/vim-smooth-scroll'
+Plugin 'majutsushi/tagbar'
 Plugin 'bling/vim-airline'
 Plugin 'mklabs/vim-fetch'
 Plugin 'justinmk/vim-gtfo'
@@ -749,6 +750,20 @@ map <Leader>vc :VimuxClearRunnerHistory<CR>
 nnoremap <F2>f :!firefox %<CR>
 nnoremap <F2>c :!chromium-browser %<CR>
 nnoremap <F2>g :!google-chrome %<CR>
+
+" }}}
+" Tagbar {{{
+
+nmap <Leader>tt :TagbarToggle<CR> 
+
+let g:tagbar_type_css = {
+            \ 'ctagstype' : 'Css',
+    \ 'kinds'     : [
+        \ 'c:classes',
+        \ 's:selectors',
+        \ 'i:identities'
+    \ ]
+    \ }
 
 " }}}
 " *****************************************************************************
