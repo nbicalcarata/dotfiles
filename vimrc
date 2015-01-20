@@ -720,6 +720,8 @@ let g:notes_directories = ['~/Documentos/Notas']
 
 nmap <leader>gj <Plug>GitGutterNextHunk
 nmap <leader>gk <Plug>GitGutterPrevHunk
+nmap <Leader>gs <Plug>GitGutterStageHunk
+nmap <Leader>gr <Plug>GitGutterRevertHunk
 
 " }}}
 " Smooth scroll {{{
