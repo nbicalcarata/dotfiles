@@ -677,7 +677,8 @@ let g:pymode_lint_checker = "pyflakes"
 let g:pymode_utils_whitespaces = 0
 let g:pymode_options = 0
 let g:pymode_lint_on_write = 0
-
+let g:pymode_rope_lookup_project = 0
+let g:pymode_rope = 0
 let g:pydoc_open_cmd = 'vsplit' 
 
 " }}}
