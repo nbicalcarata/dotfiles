@@ -413,6 +413,9 @@ map zh zH
 " fullscreen mode for GVIM and Terminal, need 'wmctrl' in you PATH
 map <silent> <F11> :call system("wmctrl -ir " . v:windowid . " -b toggle,fullscreen")<CR>
 
+"<leader>q to close buffer without closing the window
+map <leader>q :bp<bar>sp<bar>bn<bar>bd<CR>
+
 " Tmux + vim special keys compatibility {{{
 
 if &term =~ '^screen' && exists('$TMUX')
