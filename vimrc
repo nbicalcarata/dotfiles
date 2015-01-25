@@ -626,12 +626,24 @@ let g:airline#extensions#tabline#show_tab_nr = 0
 "let g:airline#extensions#bufferline#enabled = 1     "Desactivar bufferline  
 "let g:airline#extensions#tabline#tab_min_count = 2  
 let g:airline#extensions#virtualenv#enabled = 1
-let g:tmuxline_preset = 'tmux'
+let g:tmuxline_preset = 'full'
 let g:airline_theme = 'base16'
 let g:airline_powerline_fonts=1
 "Configure whether buffer numbers should be shown
 "let g:airline#extensions#tabline#buffer_nr_show = 1
-
+"let g:tmuxline_powerline_separators = 0
+let g:airline_left_sep = ''
+let g:airline_right_sep = ''
+let g:airline#extensions#tabline#left_sep = ''
+let g:airline#extensions#tabline#left_alt_sep = '│'
+let g:airline#extensions#tabline#right_sep = ''
+let g:airline#extensions#tabline#right_alt_sep = '│'
+let g:tmuxline_separators = {
+    \ 'left' : '',
+    \ 'left_alt': '',
+    \ 'right' : '',
+    \ 'right_alt' : '',
+    \ 'space' : ' '}
 " }}}
 " ctrlp {{{
 
