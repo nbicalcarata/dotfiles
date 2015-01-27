@@ -1,95 +1,95 @@
-" Bundle core {{{
+" Plug core {{{
 " *****************************************************************************
 
 set nocompatible              " be iMproved
 set modelines=0
 
-filetype on
-filetype off
+" Plug automatic installation
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !mkdir -p ~/.vim/autoload
+    silent !curl -fLo ~/.vim/autoload/plug.vim
+        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+      autocmd VimEnter * PlugInstall
+  endif
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#begin()
-
-" let Vundle manage Vundle
-" required!
-Bundle 'gmarik/vundle'
+call plug#begin('~/.vim/plugged')
 
 " *****************************************************************************
 " }}}
-" Bundle install packages {{{
+" Plug install packages {{{
 " *****************************************************************************
 " General {{{
 
-Plugin 'MarcWeber/vim-addon-mw-utils'
-Plugin 'tomtom/tlib_vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'kien/ctrlp.vim'
-Plugin 'terryma/vim-smooth-scroll'
-Plugin 'majutsushi/tagbar'
-Plugin 'bling/vim-airline'
-Plugin 'mklabs/vim-fetch'
-Plugin 'justinmk/vim-gtfo'
-Plugin 'edkolev/tmuxline.vim'
-Plugin 'scrooloose/syntastic'
-Plugin 'severin-lemaignan/vim-minimap' 
-Plugin 'benmills/vimux' 
-Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'xolox/vim-misc'
-Plugin 'xolox/vim-notes'
-Plugin 'Lokaltog/vim-easymotion'
-Plugin 'ryanoasis/vim-webdevicons'
+Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'tomtom/tlib_vim'
+Plug 'scrooloose/nerdtree'
+Plug 'kien/ctrlp.vim'
+Plug 'terryma/vim-smooth-scroll'
+Plug 'majutsushi/tagbar'
+Plug 'bling/vim-airline'
+Plug 'mklabs/vim-fetch'
+Plug 'justinmk/vim-gtfo'
+Plug 'edkolev/tmuxline.vim'
+Plug 'scrooloose/syntastic'
+Plug 'severin-lemaignan/vim-minimap' 
+Plug 'benmills/vimux' 
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'xolox/vim-misc'
+Plug 'xolox/vim-notes'
+Plug 'Lokaltog/vim-easymotion'
+Plug 'ryanoasis/vim-webdevicons'
 
 "}}}
 " Colorschemes {{{
 
-Plugin 'nbicalcarata/vim-womprat'
-Plugin 'nbicalcarata/vim-airline-womprat'
-Plugin 'nanotech/jellybeans.vim'
-Plugin 'sickill/vim-monokai'
-Plugin 'tomasr/molokai'
-Plugin 'nbicalcarata/Muon'
-Plugin 'vim-scripts/lilypink'
-Plugin 'chriskempson/base16-vim'
+Plug 'nbicalcarata/vim-womprat'
+Plug 'nbicalcarata/vim-airline-womprat'
+Plug 'nanotech/jellybeans.vim'
+Plug 'sickill/vim-monokai'
+Plug 'tomasr/molokai'
+Plug 'nbicalcarata/Muon'
+Plug 'vim-scripts/lilypink'
+Plug 'chriskempson/base16-vim'
 
 " }}}
 " Git {{{
 
-Plugin 'mattn/webapi-vim'
-Plugin 'mattn/gist-vim'
-Plugin 'tpope/vim-fugitive'
-Plugin 'airblade/vim-gitgutter'
+Plug 'mattn/webapi-vim'
+Plug 'mattn/gist-vim'
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
 
 " }}}
 " Html {{{
 
-Plugin 'Valloric/MatchTagAlways'
-Plugin 'chrisgillis/vim-bootstrap3-snippets'
-Plugin 'mattn/emmet-vim'
-Plugin 'hail2u/vim-css3-syntax'
+Plug 'Valloric/MatchTagAlways'
+Plug 'chrisgillis/vim-bootstrap3-snippets'
+Plug 'mattn/emmet-vim'
+Plug 'hail2u/vim-css3-syntax'
+Plug 'jaxbot/browserlink.vim'
 
 " }}}
 " Snippets & AutoComplete {{{
 
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
-Plugin 'Raimondi/delimitMate'
+Plug 'Valloric/YouCompleteMe', { 'do': './install.sh' }
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'Raimondi/delimitMate'
 
 " }}}
 " Python {{{
 
-Plugin 'klen/python-mode'
-Plugin 'python.vim'
-Plugin 'python_match.vim'
-Plugin 'jmcantrell/vim-virtualenv'
+Plug 'klen/python-mode'
+Plug 'python.vim'
+Plug 'python_match.vim'
+Plug 'jmcantrell/vim-virtualenv'
 
 " }}}
 " *****************************************************************************
 " }}}
-" Bundle end {{{
+" Plug end {{{
 " *****************************************************************************
-call vundle#end()           
-filetype plugin indent on   
+call plug#end()
 " *****************************************************************************
 " }}}
 
@@ -97,7 +97,6 @@ filetype plugin indent on
 " *****************************************************************************
 
 set background=dark         " Assume a dark background
-syntax on                   " Syntax highlighting
 set mouse=a                 " Automatically enable mouse usage
 set mousehide               " Hide the mouse cursor while typing
 scriptencoding utf-8
