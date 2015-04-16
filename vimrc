@@ -71,7 +71,7 @@ Plug 'jaxbot/browserlink.vim'
 " }}}
 " Snippets & AutoComplete {{{
 
-Plug 'Valloric/YouCompleteMe', { 'do': './install.sh' }
+Plug 'Valloric/YouCompleteMe'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'Raimondi/delimitMate'
