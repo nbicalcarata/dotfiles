@@ -157,7 +157,7 @@ au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
 " }}}
 " Running code with ,r {{{
 
-autocmd FileType python map <leader>r :w<CR>:!python3 %<CR>
+autocmd FileType python map <leader>r :w<CR>:!python %<CR>
 autocmd FileType bash map <leader>r :w<CR>:!./%<CR>
 autocmd FileType java map <leader>c :w<CR>:!javac %<CR>
 autocmd FileType java map <leader>r :w<CR>:!java %:r<CR>
