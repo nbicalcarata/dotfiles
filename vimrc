@@ -249,7 +249,8 @@ set t_Co=256                    " Enable 256 colors
 set lazyredraw
 set tabpagemax=15               " Only show 15 tabs
 set showmode                    " Display the current mode
-set hlsearch                    " Highlight search matches
+set showcmd                     " Shows the last command executed"
+"set hlsearch                    " Highlight search matches
 set backspace=indent,eol,start  " Backspace for dummies
 set linespace=0                 " No extra spaces between rows
 set showmatch                   " show matching brackets/parenthesis
