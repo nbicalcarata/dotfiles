@@ -352,9 +352,9 @@ nnoremap <leader>ev :vsplit ~/dotfiles/vimrc<cr>
 nnoremap <leader>sv :source ~/dotfiles/vimrc<cr>
 
 " Ctr+C, Ctrl+V keys to copy paste
-nmap <C-V> "+gP
-imap <C-V> <ESC><C-V>i
-vmap <C-C> "+y
+"nmap <C-V> "+gP
+"imap <C-V> <ESC><C-V>i
+"vmap <C-C> "+y
 
 nnoremap <F1> <nop>
 nnoremap Q <nop>
