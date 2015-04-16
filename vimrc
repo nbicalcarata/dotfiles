@@ -389,10 +389,6 @@ nnoremap <leader>s :%s//<left>
 " Select current line (no indentation)
 nnoremap vv ^vg_
 
-" Keep search matches in the middle of the window
-nnoremap n nzzzv
-nnoremap N Nzzzv
-
 " Wrapped lines goes down/up to next row, rather than next line in file.
 noremap j gj
 noremap k gk
