@@ -83,6 +83,7 @@ Plug 'klen/python-mode'
 Plug 'python.vim'
 Plug 'python_match.vim'
 Plug 'jmcantrell/vim-virtualenv'
+Plug 'alfredodeza/pytest.vim'
 
 " }}}
 " *****************************************************************************
@@ -764,6 +765,13 @@ let g:tagbar_type_css = {
         \ 'i:identities'
     \ ]
     \ }
+
+" }}}
+" Pytest {{{
+
+nmap <silent><Leader>tf <Esc>:Pytest file<CR>
+nmap <silent><Leader>tc <Esc>:Pytest class<CR>
+nmap <silent><Leader>tm <Esc>:Pytest method<CR>
 
 " }}}
 " *****************************************************************************
