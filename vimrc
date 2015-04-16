@@ -425,6 +425,10 @@ map <silent> <F11> :call system("wmctrl -ir " . v:windowid . " -b toggle,fullscr
 "<leader>q to close buffer without closing the window
 map <leader>q :bp<bar>sp<bar>bn<bar>bd<CR>
 
+" Toggle between absolute and relative line numbers
+
+nnoremap <Leader>n :call NumberToggle()<cr>
+
 " Tmux + vim special keys compatibility {{{
 
 if &term =~ '^screen' && exists('$TMUX')
@@ -585,6 +589,28 @@ endfunction
 nnoremap <F9> :call JumpToCSS()<CR>
 
 " source http://stackoverflow.com/a/12835224
+" }}}
+" Base16 helper {{{
+
+if filereadable(expand("~/.vimrc_background"))
+  let base16colorspace=256
+  source ~/.vimrc_background
+  source ~/dotfiles/color/rmbackground.vim
+  "hi CursorLine ctermbg=234 ctermfg=none
+endif
+
+"}}}
+" Toggle between relative and absolute line numbers {{{
+
+function! NumberToggle()
+    if(&relativenumber == 1)
+        set norelativenumber
+        set number!
+    else
+        set relativenumber
+    endif
+endfunc
+
 " }}}
 " *****************************************************************************
 " }}}
