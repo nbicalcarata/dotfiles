@@ -254,6 +254,7 @@ set showcmd                     " Shows the last command executed"
 set backspace=indent,eol,start  " Backspace for dummies
 set linespace=0                 " No extra spaces between rows
 set showmatch                   " show matching brackets/parenthesis
+set matchtime=2                 " show matching bracket for 0.2 seconds"
 set incsearch                   " Find as you type search
 set winminheight=0              " Windows can be 0 line high
 set ignorecase                  " Case insensitive search
