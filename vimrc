@@ -211,15 +211,26 @@ augroup cline
 augroup END
 
 " }}}
-" highlight characters past column 80 {{{
+" Open help files in right side {{{
 
-augroup highlight_past_column 
-    autocmd!
-    "autocmd FileType python highlight Excess ctermbg=DarkGrey guibg=Black
-    autocmd FileType python highlight Excess ctermfg=Yellow
-    autocmd FileType python match Excess /\%80v.*/
-    autocmd FileType python set nowrap
-augroup END"
+autocmd FileType help :wincmd L
+autocmd FileType help set bufhidden=unload
+
+" }}}
+" Detect django files {{{
+
+au BufNewFile,BufRead admin.py     setlocal filetype=python.django
+au BufNewFile,BufRead urls.py      setlocal filetype=python.django
+au BufNewFile,BufRead models.py    setlocal filetype=python.django
+au BufNewFile,BufRead views.py     setlocal filetype=python.django
+au BufNewFile,BufRead settings.py  setlocal filetype=python.django
+au BufNewFile,BufRead forms.py     setlocal filetype=python.django
+"au BufNewFile,BufRead *.html       setlocal filetype=htmldjango
+"
+" }}}
+" Enable minimap at start {{{
+
+"autocmd! VimEnter * Minimap
 
 " }}}
 " *****************************************************************************
