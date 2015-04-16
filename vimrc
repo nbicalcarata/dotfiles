@@ -244,6 +244,7 @@ set wrap
 set linebreak
 set title
 set nolist
+set noea
 set t_Co=256                    " Enable 256 colors
 set lazyredraw
 set tabpagemax=15               " Only show 15 tabs
