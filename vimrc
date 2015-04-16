@@ -299,7 +299,6 @@ source ~/dotfiles/color/rmbackground.vim
 " Cursor line {{{
 
 set cursorline
-"hi CursorLine ctermbg=234 ctermfg=none
 " Cursor Line number styling
 hi CursorLineNr   cterm=bold ctermfg=Grey gui=bold guifg=Grey
 
