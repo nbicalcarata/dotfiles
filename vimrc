@@ -37,8 +37,7 @@ Plug 'benmills/vimux'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-notes'
-Plug 'Lokaltog/vim-easymotion'
-Plug 'ryanoasis/vim-webdevicons'
+Plug 'dhruvasagar/vim-vinegar'
 
 "}}}
 " Colorschemes {{{
