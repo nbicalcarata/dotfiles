@@ -38,6 +38,7 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-notes'
 Plug 'dhruvasagar/vim-vinegar'
+Plug 'ryanoasis/vim-webdevicons'
 
 "}}}
 " Colorschemes {{{
@@ -102,18 +103,13 @@ set mouse=a                 " Automatically enable mouse usage
 set mousehide               " Hide the mouse cursor while typing
 scriptencoding utf-8
 set clipboard=unnamedplus
-
-" Italics
-"set t_ZH=[3m
-"set t_ZR=[23m
-
-set shortmess+=filmnrxoOtT          " Abbrev. of messages (avoids 'hit enter')
+set shortmess+=cfilmnrxoOtT          " Abbrev. of messages (avoids 'hit enter')
 set viewoptions=folds,options,cursor,unix,slash " Unix / Windows compatibility
 set virtualedit=onemore             " Allow for cursor beyond last character
 set history=1000                    " Store a ton of history (default is 20)
 set nospell                         " Spell checking off
 set hidden                          " Allow buffer switching without saving
-set foldenable                    " Disable folding
+set foldenable                    " Enable folding
 set timeoutlen=1000 ttimeoutlen=0   " Eliminar retardo de Insert a Normal 
 set iskeyword+=-
 
@@ -240,6 +236,7 @@ au BufNewFile,BufRead forms.py     setlocal filetype=python.django
 " General {{{
 
 set foldmethod=marker
+set number
 set wrap
 set linebreak
 set title
@@ -249,7 +246,7 @@ set t_Co=256                    " Enable 256 colors
 set lazyredraw
 set tabpagemax=15               " Only show 15 tabs
 set showmode                    " Display the current mode
-set showcmd                     " Shows the last command executed"
+"set showcmd                      Shows the last command executed"
 "set hlsearch                    " Highlight search matches
 set backspace=indent,eol,start  " Backspace for dummies
 set linespace=0                 " No extra spaces between rows
@@ -282,7 +279,7 @@ set pastetoggle=<F12>           " pastetoggle (sane indentation on pastes)
 " }}}
 " Colorschemes {{{
 
-let base16colorspace=256  " Access colors present in 256 colorspace
+"let base16colorspace=256  " Access colors present in 256 colorspace
 "let g:kolor_bold=0
 "colorscheme lilypink
 "colorscheme kolor
@@ -292,15 +289,13 @@ let base16colorspace=256  " Access colors present in 256 colorspace
 "colorscheme womprat
 "colorscheme Tomorrow-Night-Bright
 " colorscheme railscasts
-colorscheme base16-default
-source ~/dotfiles/color/rmbackground.vim
+"colorscheme base16-default
+"source ~/dotfiles/color/rmbackground.vim
 
 " }}}
 " Cursor line {{{
 
 set cursorline
-" Cursor Line number styling
-hi CursorLineNr   cterm=bold ctermfg=Grey gui=bold guifg=Grey
 
 " }}}
 " Statusline {{{
@@ -550,25 +545,25 @@ set foldtext=NeatFoldText()
 " }}}
 " NERDTress File highlighting {{{
 
-function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
- exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
- exec 'autocmd filetype nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
-endfunction
+"function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
+ "exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
+ "exec 'autocmd filetype nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
+"endfunction
 
-call NERDTreeHighlightFile('jade', 'green', 'none', 'green', '#151515')
-call NERDTreeHighlightFile('ini', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('md', 'blue', 'none', 'blue', '#151515')
-call NERDTreeHighlightFile('yml', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('config', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('conf', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('json', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('html', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('styl', 'cyan', 'none', 'cyan', '#151515')
-call NERDTreeHighlightFile('css', 'cyan', 'none', 'cyan', '#151515')
-call NERDTreeHighlightFile('coffee', 'Red', 'none', 'red', '#151515')
-call NERDTreeHighlightFile('js', 'Red', 'none', '#ffa500', '#151515')
-call NERDTreeHighlightFile('php', 'Magenta', 'none', '#ff00ff', '#151515')
-call NERDTreeHighlightFile('py', 'green', 'none', 'green', '#151515')
+"call NERDTreeHighlightFile('jade', 'green', 'none', 'green', '#151515')
+"call NERDTreeHighlightFile('ini', 'yellow', 'none', 'yellow', '#151515')
+"call NERDTreeHighlightFile('md', 'blue', 'none', 'blue', '#151515')
+"call NERDTreeHighlightFile('yml', 'yellow', 'none', 'yellow', '#151515')
+"call NERDTreeHighlightFile('config', 'yellow', 'none', 'yellow', '#151515')
+"call NERDTreeHighlightFile('conf', 'yellow', 'none', 'yellow', '#151515')
+"call NERDTreeHighlightFile('json', 'yellow', 'none', 'yellow', '#151515')
+"call NERDTreeHighlightFile('html', 'yellow', 'none', 'yellow', '#151515')
+"call NERDTreeHighlightFile('styl', 'cyan', 'none', 'cyan', '#151515')
+"call NERDTreeHighlightFile('css', 'cyan', 'none', 'cyan', '#151515')
+"call NERDTreeHighlightFile('coffee', 'Red', 'none', 'red', '#151515')
+"call NERDTreeHighlightFile('js', 'Red', 'none', '#ffa500', '#151515')
+"call NERDTreeHighlightFile('php', 'Magenta', 'none', '#ff00ff', '#151515')
+"call NERDTreeHighlightFile('py', 'green', 'none', 'green', '#151515')
 " source: https://github.com/scrooloose/nerdtree/issues/201#issuecomment-9954740"
 
 " }}}
@@ -596,8 +591,10 @@ if filereadable(expand("~/.vimrc_background"))
   let base16colorspace=256
   source ~/.vimrc_background
   source ~/dotfiles/color/rmbackground.vim
-  "hi CursorLine ctermbg=234 ctermfg=none
 endif
+
+hi Search cterm=NONE ctermfg=black 
+hi CursorLineNr   cterm=bold
 
 "}}}
 " Toggle between relative and absolute line numbers {{{
@@ -661,14 +658,15 @@ let g:airline#extensions#tabline#enabled = 1         "Activar tabline
 let g:airline#extensions#tabline#close_symbol = 'X'
 let g:airline#extensions#tabline#show_buffers = 0
 let g:airline#extensions#syntastic#enabled = 1       "Enable syntastic 
-let g:airline#extensions#tabline#show_tab_nr = 0
-let g:airline#extensions#tabline#fnamemod = ':t'    "Desplegar solo el nombre
+"let g:airline#extensions#tabline#show_tab_nr = 0   "Show tab number
+let g:airline#extensions#tabline#tab_nr_type = 1 " index number
+"let g:airline#extensions#tabline#fnamemod = ':t'    "Desplegar solo el nombre
 "let g:airline_section_c = '%F'                      "Full path and filename
-"let g:airline#extensions#bufferline#enabled = 1     "Desactivar bufferline  
+"let g:airline#extensions#bufferline#enabled = 1     "bufferline  
 let g:airline#extensions#tabline#tab_min_count = 2  
 let g:airline#extensions#virtualenv#enabled = 1
 let g:tmuxline_preset = 'full'
-let g:airline_theme = 'base16'
+let g:airline_theme = 'base16_solarized'
 let g:airline_powerline_fonts=1
 "Configure whether buffer numbers should be shown
 "let g:airline#extensions#tabline#buffer_nr_show = 1
@@ -679,16 +677,16 @@ let g:airline_powerline_fonts=1
 "exposed to allow you to select a buffer directly.  Up to 9 mappings will be
 "exposed.
 
-let g:airline#extensions#tabline#buffer_idx_mode = 1
-nmap <leader>1 <Plug>AirlineSelectTab1
-nmap <leader>2 <Plug>AirlineSelectTab2
-nmap <leader>3 <Plug>AirlineSelectTab3
-nmap <leader>4 <Plug>AirlineSelectTab4
-nmap <leader>5 <Plug>AirlineSelectTab5
-nmap <leader>6 <Plug>AirlineSelectTab6
-nmap <leader>7 <Plug>AirlineSelectTab7
-nmap <leader>8 <Plug>AirlineSelectTab8
-nmap <leader>9 <Plug>AirlineSelectTab9
+"let g:airline#extensions#tabline#buffer_idx_mode = 1
+"nmap <leader>1 <Plug>AirlineSelectTab1
+"nmap <leader>2 <Plug>AirlineSelectTab2
+"nmap <leader>3 <Plug>AirlineSelectTab3
+"nmap <leader>4 <Plug>AirlineSelectTab4
+"nmap <leader>5 <Plug>AirlineSelectTab5
+"nmap <leader>6 <Plug>AirlineSelectTab6
+"nmap <leader>7 <Plug>AirlineSelectTab7
+"nmap <leader>8 <Plug>AirlineSelectTab8
+"nmap <leader>9 <Plug>AirlineSelectTab9
 
 
 "Desactivar flechas
@@ -840,5 +838,11 @@ nmap <silent><Leader>tc <Esc>:Pytest class<CR>
 nmap <silent><Leader>tm <Esc>:Pytest method<CR>
 
 " }}}
+" Webdevicons {{{
+
+let g:webdevicons_conceal_nerdtree_brackets = 0
+let g:WebDevIconsUnicodeGlyphDoubleWidth = 1
+
+"}}}
 " *****************************************************************************
 " }}}
