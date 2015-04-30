@@ -38,6 +38,8 @@ Plug 'xolox/vim-misc'
 Plug 'xolox/vim-notes'
 Plug 'dhruvasagar/vim-vinegar'
 Plug 'ryanoasis/vim-webdevicons'
+Plug '907th/vim-auto-save'
+Plug 'mbbill/undotree'
 
 "}}}
 " Colorschemes {{{
@@ -842,6 +844,18 @@ nmap <silent><Leader>tm <Esc>:Pytest method<CR>
 let g:webdevicons_conceal_nerdtree_brackets = 0
 let g:WebDevIconsUnicodeGlyphDoubleWidth = 1
 
-"}}}
+" }}}
+" Autosave {{{
+
+let g:auto_save = 1                 " enable AutoSave on Vim startup
+let g:auto_save_no_updatetime = 1   " do not change the 'updatetime' option
+let g:auto_save_in_insert_mode = 0  " do not save while in insert mode
+
+" }}}
+" Undotree {{{
+
+let g:undotree_WindowLayout = 3
+
+" }}}
 " *****************************************************************************
 " }}}
