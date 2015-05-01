@@ -88,6 +88,11 @@ Plug 'jmcantrell/vim-virtualenv'
 Plug 'alfredodeza/pytest.vim'
 
 " }}}
+" PHP {{{
+
+Plug 'StanAngeloff/php.vim'
+
+" }}}
 " *****************************************************************************
 " }}}
 " Plug end {{{
@@ -155,6 +160,7 @@ au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
 " Running code with ,r {{{
 
 autocmd FileType python map <leader>r :w<CR>:!python %<CR>
+autocmd FileType php map <leader>r :w<CR>:!php %<CR>
 autocmd FileType bash map <leader>r :w<CR>:!./%<CR>
 autocmd FileType java map <leader>c :w<CR>:!javac %<CR>
 autocmd FileType java map <leader>r :w<CR>:!java %:r<CR>
@@ -183,6 +189,7 @@ autocmd FileType python set omnifunc=pythoncomplete#Complete
 autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
 autocmd FileType ruby set omnifunc=rubycomplete#Complete
 autocmd FileType htmldjango set omnifunc=htmldjangocomplete#CompleteDjango
+autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 
 " }}}
 " Close vim when the window left open is Nerdtree {{{
@@ -228,6 +235,19 @@ au BufNewFile,BufRead forms.py     setlocal filetype=python.django
 " Enable minimap at start {{{
 
 "autocmd! VimEnter * Minimap
+
+" }}}
+"  PHP Override Higlighting {{{
+
+function! PhpSyntaxOverride()
+  hi! def link phpDocTags  phpDefine
+  hi! def link phpDocParam phpType
+endfunction
+
+augroup phpSyntaxOverride
+  autocmd!
+  autocmd FileType php call PhpSyntaxOverride()
+augroup END
 
 " }}}
 " *****************************************************************************
