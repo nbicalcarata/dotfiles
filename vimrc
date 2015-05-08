@@ -40,6 +40,7 @@ Plug 'dhruvasagar/vim-vinegar'
 Plug 'ryanoasis/vim-webdevicons'
 Plug '907th/vim-auto-save'
 Plug 'mbbill/undotree'
+Plug 'FelikZ/ctrlp-py-matcher'
 
 "}}}
 " Colorschemes {{{
@@ -717,21 +718,38 @@ let g:airline_powerline_fonts=1
 "    \ 'right_alt' : '│',
 "    \ 'space' : ' '}
 " }}}
-" ctrlp {{{
+" CtrlP {{{
 
+let g:ctrlp_cmd = 'CtrlPMixed'
 let g:ctrlp_working_path_mode = 'ra'
-nnoremap <silent> <D-t> :CtrlP<CR>
-nnoremap <silent> <D-r> :CtrlPMRU<CR>
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-  \ 'file': '\v\.(exe|so|dll|pyc|class)$',
+  \ 'file': '\v\.(exe|so|dll|pyc|class|pdf)$',
   \ }
-let g:ctrlp_use_caching = 1
+let g:ctrlp_use_caching = 0
 let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
 let g:ctrlp_clear_cache_on_exit = 0
+let g:ctrlp_open_new_file = 'r'          " Open new file in current window
+let g:ctrlp_mruf_max = 250
+let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:20,results:20'
 
 " CtrlP mappings
-nnoremap <leader>f :CtrlPBuffer<CR>
+nnoremap <leader>b :CtrlPBuffer<CR>
+
+" Speed up search with ctrlp-py-matcher
+let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
+
+" Indexing with the_silver_searcher, install with: sudo dnf install the_silver_searcher
+if executable('ag')
+  " Use Ag over Grep
+  set grepprg=ag\ --nogroup\ --nocolor
+
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+  " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
+endif
 
 " }}}
 " PythonMode {{{
