@@ -814,6 +814,12 @@ nmap <leader>gp <Plug>GitGutterPrevHunk
 nmap <Leader>gs <Plug>GitGutterStageHunk
 nmap <Leader>gr <Plug>GitGutterRevertHunk
 
+"Box Drawings Heavy Vertical U+25e3
+let g:gitgutter_sign_added = '┃'
+let g:gitgutter_sign_modified = '┃'
+let g:gitgutter_sign_removed = '┃'
+let g:gitgutter_sign_modified_removed = '┃'
+
 " }}}
 " Vimux {{{
 
