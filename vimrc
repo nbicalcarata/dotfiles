@@ -223,6 +223,16 @@ autocmd FileType help :wincmd L
 autocmd FileType help set bufhidden=unload
 
 " }}}
+" Disable colorcolumn on html files {{{
+
+au BufNewFile,BufRead *.html setlocal colorcolumn=
+
+" }}}
+" Disable list on preview window {{{
+
+autocmd WinEnter * if &previewwindow | setlocal nolist | endif
+
+" }}}
 " Detect django files {{{
 
 au BufNewFile,BufRead admin.py     setlocal filetype=python.django
