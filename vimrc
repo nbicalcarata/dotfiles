@@ -70,6 +70,7 @@ Plug 'chrisgillis/vim-bootstrap3-snippets'
 Plug 'mattn/emmet-vim'
 Plug 'hail2u/vim-css3-syntax'
 Plug 'jaxbot/browserlink.vim'
+Plug 'alvan/vim-closetag'
 
 " }}}
 " Snippets & AutoComplete {{{
