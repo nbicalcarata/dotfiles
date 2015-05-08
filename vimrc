@@ -26,13 +26,13 @@ Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'majutsushi/tagbar'
-Plug 'chartoin/vim-airline'
+Plug 'bling/vim-airline'
 Plug 'mklabs/vim-fetch'
 Plug 'justinmk/vim-gtfo'
 Plug 'edkolev/tmuxline.vim'
 Plug 'scrooloose/syntastic'
-Plug 'severin-lemaignan/vim-minimap' 
-Plug 'benmills/vimux' 
+Plug 'severin-lemaignan/vim-minimap'
+Plug 'benmills/vimux'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-notes'
@@ -116,18 +116,18 @@ set history=1000                    " Store a ton of history (default is 20)
 set nospell                         " Spell checking off
 set hidden                          " Allow buffer switching without saving
 set foldenable                    " Enable folding
-set timeoutlen=1000 ttimeoutlen=0   " Eliminar retardo de Insert a Normal 
-set iskeyword+=-
+set timeoutlen=1000 ttimeoutlen=0   " Eliminar retardo de Insert a Normal
 
-" Setting up the directories {{{ 
+" Setting up the directories {{{
 
+cd ~/Codigo/                   " Default directory
 set noswapfile
 set backup                     " Backups are nice ...
 if has('persistent_undo')
    set undofile                " So is persistent undo ...
-   set undolevels=1000         " Maximum number of changes that can be undone
-   set undoreload=10000        " Maximum number lines to save for undo 
-endif 
+   set undolevels=10000        " Maximum number of changes that can be undone
+   set undoreload=10000        " Maximum number lines to save for undo
+endif
 
 " }}}
 " Wild menu options {{{
@@ -138,13 +138,14 @@ set wildignore+=node_modules                     " node_modules dir
 set wildignore+=.ropeproject                     " py rope cache dir
 set wildignore+=.hg,.git,.svn                    " Version control
 set wildignore+=*.aux,*.out,*.toc                " LaTeX intermediate files
-set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg   " binary images
+set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg,*.ico   " binary images
 set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest " compiled object files
 set wildignore+=*.spl                            " compiled spelling word lists
 set wildignore+=*.sw?                            " Vim swap files
 set wildignore+=migrations                       " Django migrations
 set wildignore+=*.pyc                            " Python byte code
 set wildignore+=*.class                          " Java byte code
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.rar   " MacOSX/Linux
 
 " }}}
 " *****************************************************************************
@@ -250,6 +251,12 @@ augroup phpSyntaxOverride
 augroup END
 
 " }}}
+" Nerdtree {{{
+
+autocmd FileType nerdtree setlocal nolist       " suppress whitespace highlighting
+autocmd FileType nerdtree setlocal nofoldenable " suppress folding
+
+" }}}
 " *****************************************************************************
 " }}}
 " Visual settings {{{
@@ -257,45 +264,38 @@ augroup END
 " General {{{
 
 set foldmethod=marker
+set colorcolumn=80
 set number
 set wrap
 set linebreak
 set title
-set nolist
+set list
 set noea
 set t_Co=256                    " Enable 256 colors
 set lazyredraw
-set tabpagemax=15               " Only show 15 tabs
 set showmode                    " Display the current mode
-"set showcmd                      Shows the last command executed"
 "set hlsearch                    " Highlight search matches
-set backspace=indent,eol,start  " Backspace for dummies
-set linespace=0                 " No extra spaces between rows
 set showmatch                   " show matching brackets/parenthesis
-set matchtime=2                 " show matching bracket for 0.2 seconds"
 set incsearch                   " Find as you type search
-set winminheight=0              " Windows can be 0 line high
 set ignorecase                  " Case insensitive search
 set smartcase                   " Case sensitive when uc present
-set whichwrap=b,s,h,l,<,>,[,]   " Backspace and cursor keys wrap too
 set scrolloff=5                 " Minimum lines to keep above and below cursor
-set listchars=tab:›\ ,trail:•,extends:#,nbsp:. " Highlight whitespace
+set listchars=tab:▸\ ,eol:¬,extends:»,precedes:«,trail:•
 
 " }}}
-" Formatting {{{ 
+" Formatting {{{
 
 set autoindent                  " Indent at the same level of the previous line
+filetype plugin indent on
 set shiftwidth=4                " Use indents of 4 spaces
 set expandtab                   " Tabs are spaces, not tabs
 set tabstop=4                   " An indentation every four columns
 set softtabstop=4               " Let backspace delete indent
-set nojoinspaces                " Prevents inserting two spaces after 
-set splitright                  " Puts new vsplit windows to the right 
+set nojoinspaces                " Prevents inserting two spaces after
+set splitright                  " Puts new vsplit windows to the right
 set splitbelow                  " Puts new split windows to the bottom
 let loaded_matchparen = 1
 set pastetoggle=<F12>           " pastetoggle (sane indentation on pastes)
-"set matchpairs+=<:>             " Match, to be used with %
-"set comments=sl:/*,mb:*,elx:*/  " auto format comment blocks
 
 " }}}
 " Colorschemes {{{
@@ -367,11 +367,6 @@ nnoremap <space> za
 nnoremap <leader>ev :vsplit ~/dotfiles/vimrc<cr>
 nnoremap <leader>sv :source ~/dotfiles/vimrc<cr>
 
-" Ctr+C, Ctrl+V keys to copy paste
-"nmap <C-V> "+gP
-"imap <C-V> <ESC><C-V>i
-"vmap <C-C> "+y
-
 nnoremap <F1> <nop>
 nnoremap Q <nop>
 nnoremap K <nop>
@@ -387,11 +382,6 @@ map <c-j> <c-w>j
 map <c-k> <c-w>k
 map <c-l> <c-w>l
 map <c-h> <c-w>h
-
-" Buffer switching mappings 
-" left/right arrows to switch buffers in normal mode
-"map <right> :bn<cr>
-"map <left> :bp<cr>
 
 " Resizing windows
 nnoremap <C-up> <C-W>-
@@ -423,9 +413,6 @@ vnoremap > >gv
 
 " Adjust viewports to the same size
 map <Leader>= <C-w>=
-
-" Find character under cursor with ,zxn
-noremap <leader>z xhp/<C-R>-<CR>
 
 " Map <Leader>ff to display all lines with keyword under cursor
 " and ask which one to jump to
@@ -498,7 +485,7 @@ function! InitializeDirectories()
     " vimviews, vimundo, and vimswap files/directories, add the following to
     " your .vimrc.before.local file:
     "directory = $HOME . '/.vim/'
-    
+
     let common_dir = parent . '/.' . prefix
 
     for [dirname, settingname] in items(dir_list)
@@ -551,7 +538,7 @@ endfunction
 " }}}
 " Better folding style {{{
 
-function! NeatFoldText() 
+function! NeatFoldText()
   let line = ' ' . substitute(getline(v:foldstart), '^\s*"\?\s*\|\s*"\?\s*{{' . '{\d*\s*', '', 'g') . ' '
   let lines_count = v:foldend - v:foldstart + 1
   let lines_count_text = '| ' . printf("%10s", lines_count . ' lines') . ' |'
@@ -614,7 +601,7 @@ if filereadable(expand("~/.vimrc_background"))
   source ~/dotfiles/color/rmbackground.vim
 endif
 
-hi Search cterm=NONE ctermfg=black 
+hi Search cterm=NONE ctermfg=black
 hi CursorLineNr   cterm=bold
 
 "}}}
@@ -636,18 +623,19 @@ endfunc
 " *****************************************************************************
 " Syntastic {{{
 
-let g:syntastic_javascript_checkers = ['jshint'] 
+let g:syntastic_javascript_checkers = ['jshint']
 let g:syntastic_html_checkers = ['w3']
 let g:syntastic_java_checkers = ['javac']
 let g:syntastic_java_javac_classpath = "./lib/*.jar\n./src"
 "let g:EclimFileTypeValidate = 0
-"let g:syntastic_mode_map = {'mode': 'passive'}
+let g:syntastic_mode_map = {'mode': 'passive'}
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 1
+let g:syntastic_check_on_wq = 0
 let g:syntastic_error_symbol = "✗"
 let g:syntastic_warning_symbol = "⚠"
+let g:syntastic_loc_list_= 5
 
 " }}}
 " NerdTree {{{
@@ -664,6 +652,8 @@ let NERDTreeShowHidden=0
 let NERDTreeKeepTreeInNewTab=1
 let g:nerdtree_tabs_open_on_gui_startup=0
 let NERDTreeMinimalUI=1
+let NERDTreeRespectWildIgnore=1
+let NERDTreeMapOpenVSplit='v'
 
 " }}}
 " Airline {{{
@@ -678,7 +668,7 @@ let g:airline#extensions#tabline#enabled = 1         "Activar tabline
 "let g:airline#extensions#tabline#show_tab_type = 0
 let g:airline#extensions#tabline#close_symbol = 'X'
 let g:airline#extensions#tabline#show_buffers = 0
-let g:airline#extensions#syntastic#enabled = 1       "Enable syntastic 
+let g:airline#extensions#syntastic#enabled = 1       "Enable syntastic
 "let g:airline#extensions#tabline#show_tab_nr = 0   "Show tab number
 let g:airline#extensions#tabline#tab_nr_type = 1 " index number
 "let g:airline#extensions#tabline#fnamemod = ':t'    "Desplegar solo el nombre
@@ -719,7 +709,7 @@ let g:airline_powerline_fonts=1
 "let g:airline#extensions#tabline#left_alt_sep = '│'
 "let g:airline#extensions#tabline#right_sep = ''
 "let g:airline#extensions#tabline#right_alt_sep = '│'
-"   
+"
 "let g:tmuxline_separators = {
 "    \ 'left' : '',
 "    \ 'left_alt': '',
@@ -754,7 +744,7 @@ endif
 " Automatic virtualenv detection
 let g:pymode_virtualenv = 1
 
-" Turn off the run code script  
+" Turn off the run code script
 let g:pymode_run = 0
 let g:pymode_lint_checker = "pyflakes"
 let g:pymode_utils_whitespaces = 0
@@ -762,7 +752,7 @@ let g:pymode_options = 0
 let g:pymode_lint_on_write = 0
 let g:pymode_rope_lookup_project = 0
 let g:pymode_rope = 0
-let g:pydoc_open_cmd = 'vsplit' 
+let g:pydoc_open_cmd = 'vsplit'
 
 " }}}
 " YouCompleteMe {{{
@@ -777,7 +767,7 @@ let g:ycm_autoclose_preview_window_after_insertion = 0
 " Compatibilidad con python mode (autocompletado correcto despues de .)
 let g:pymode_rope_complete_on_dot = 0
 
-" Youcompleteme eclim 
+" Youcompleteme eclim
 " let g:EclimCompletionMethod = 'omnifunc'
 
 " }}}
@@ -790,7 +780,7 @@ let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 " }}}
 " Matchtag always {{{
 
-" Custom MatchTag syntax group with a default highlight color 
+" Custom MatchTag syntax group with a default highlight color
 "let g:mta_use_matchparen_group = 0
 
 " }}}
@@ -832,7 +822,7 @@ nnoremap <F2>g :!google-chrome %<CR>
 " }}}
 " Tagbar {{{
 
-nmap <Leader>tt :TagbarToggle<CR> 
+nmap <Leader>tt :TagbarToggle<CR>
 
 let g:tagbar_type_css = {
             \ 'ctagstype' : 'Css',
