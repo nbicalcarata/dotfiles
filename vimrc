@@ -906,8 +906,9 @@ let g:auto_save_events = ["InsertLeave", "TextChanged"] " Default: [CursorHold,I
 " }}}
 " Undotree {{{
 
+nnoremap <Leader>u :UndotreeToggle<cr>
 let g:undotree_WindowLayout = 3
-
+let g:undotree_SetFocusWhenToggle = 1
 " }}}
 " *****************************************************************************
 " }}}
