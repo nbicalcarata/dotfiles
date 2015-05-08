@@ -78,7 +78,7 @@ Plug 'alvan/vim-closetag'
 Plug 'Valloric/YouCompleteMe'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
-Plug 'Raimondi/delimitMate'
+Plug 'jiangmiao/auto-pairs'
 
 " }}}
 " Python {{{
