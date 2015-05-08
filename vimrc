@@ -347,6 +347,16 @@ endif
 
 set fillchars=vert:│,diff:⎼,fold:⎼
 
+" No line
+"set fillchars+=vert:\ 
+
+" }}}
+" Column markers {{{
+" 80
+"let &colorcolumn=join(range(81,999),",")
+" 80 and 120
+let &colorcolumn="80,".join(range(120,999),",")
+
 " }}}
 " GUI Settings {{{
 
