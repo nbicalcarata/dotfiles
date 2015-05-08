@@ -450,8 +450,10 @@ map <silent> <F11> :call system("wmctrl -ir " . v:windowid . " -b toggle,fullscr
 map <leader>q :bp<bar>sp<bar>bn<bar>bd<CR>
 
 " Toggle between absolute and relative line numbers
-
 nnoremap <Leader>n :call NumberToggle()<cr>
+
+" Toggle between invisible chars
+nmap <leader>l :set list!<CR>
 
 " Tmux + vim special keys compatibility {{{
 
