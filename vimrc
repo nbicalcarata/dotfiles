@@ -6,11 +6,11 @@ set modelines=0
 
 " Plug automatic installation
 if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !mkdir -p ~/.vim/autoload
+    silent !mkdir -p ~/.vim/autoload
     silent !curl -fLo ~/.vim/autoload/plug.vim
         \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-      autocmd VimEnter * PlugInstall
-  endif
+    autocmd VimEnter * PlugInstall
+endif
 
 call plug#begin('~/.vim/plugged')
 
@@ -106,48 +106,49 @@ call plug#end()
 " Basic setup {{{
 " *****************************************************************************
 
-set background=dark         " Assume a dark background
-set mouse=a                 " Automatically enable mouse usage
-set mousehide               " Hide the mouse cursor while typing
+set background=dark                             " Assume a dark background
+set mouse=a                                     " Automatically enable mouse usage
+set mousehide                                   " Hide the mouse cursor while typing
 scriptencoding utf-8
 set clipboard=unnamedplus
-set shortmess+=cfilmnrxoOtT          " Abbrev. of messages (avoids 'hit enter')
+set shortmess+=cfilmnrxoOtT                     " Abbrev. of messages (avoids 'hit enter')
 set viewoptions=folds,options,cursor,unix,slash " Unix / Windows compatibility
-set virtualedit=onemore             " Allow for cursor beyond last character
-set history=1000                    " Store a ton of history (default is 20)
-set nospell                         " Spell checking off
-set hidden                          " Allow buffer switching without saving
-set foldenable                    " Enable folding
-set timeoutlen=1000 ttimeoutlen=0   " Eliminar retardo de Insert a Normal
+set virtualedit=onemore                         " Allow for cursor beyond last character
+set history=1000                                " Store a ton of history (default is 20)
+set nospell                                     " Spell checking off
+set hidden                                      " Allow buffer switching without saving
+set foldenable                                  " Enable folding
+set foldlevel=99                                " Folds open at start"
+set timeoutlen=1000 ttimeoutlen=0               " Eliminar retardo de Insert a Normal
 
 " Setting up the directories {{{
 
-cd ~/Codigo/                   " Default directory
+cd ~/Codigo/                                   " Default directory
 set noswapfile
-set backup                     " Backups are nice ...
+set backup                                     " Backups are nice ...
 if has('persistent_undo')
-   set undofile                " So is persistent undo ...
-   set undolevels=10000        " Maximum number of changes that can be undone
-   set undoreload=10000        " Maximum number lines to save for undo
+    set undofile                                " So is persistent undo ...
+    set undolevels=10000                        " Maximum number of changes that can be undone
+    set undoreload=10000                        " Maximum number lines to save for undo
 endif
 
 " }}}
 " Wild menu options {{{
 
-set wildmenu                                     " cmd line completion ala zsh
-set wildmode=list:longest                        " matches mimic bash or zsh
-set wildignore+=node_modules                     " node_modules dir
-set wildignore+=.ropeproject                     " py rope cache dir
-set wildignore+=.hg,.git,.svn                    " Version control
-set wildignore+=*.aux,*.out,*.toc                " LaTeX intermediate files
-set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg,*.ico   " binary images
-set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest " compiled object files
-set wildignore+=*.spl                            " compiled spelling word lists
-set wildignore+=*.sw?                            " Vim swap files
-set wildignore+=migrations                       " Django migrations
-set wildignore+=*.pyc                            " Python byte code
-set wildignore+=*.class                          " Java byte code
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.rar   " MacOSX/Linux
+set wildmenu                                             " cmd line completion ala zsh
+set wildmode=list:longest                                " matches mimic bash or zsh
+set wildignore+=node_modules                             " node_modules dir
+set wildignore+=.ropeproject                             " py rope cache dir
+set wildignore+=.hg,.git,.svn                            " Version control
+set wildignore+=*.aux,*.out,*.toc                        " LaTeX intermediate files
+set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg,*.ico     " binary images
+set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest         " compiled object files
+set wildignore+=*.spl                                    " compiled spelling word lists
+set wildignore+=*.sw?                                    " Vim swap files
+set wildignore+=migrations                               " Django migrations
+set wildignore+=*.pyc                                    " Python byte code
+set wildignore+=*.class                                  " Java byte code
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.rar           " MacOSX/Linux
 
 " }}}
 " *****************************************************************************
@@ -285,8 +286,8 @@ set list
 set noea
 set t_Co=256                    " Enable 256 colors
 set lazyredraw
-set showmode                    " Display the current mode
-"set hlsearch                    " Highlight search matches
+set noshowmode                  " Dont display the current mode
+"set hlsearch                   " Highlight search matches
 set showmatch                   " show matching brackets/parenthesis
 set incsearch                   " Find as you type search
 set ignorecase                  " Case insensitive search
@@ -348,9 +349,6 @@ endif
 
 set fillchars=vert:│,diff:⎼,fold:⎼
 
-" No line
-"set fillchars+=vert:\ 
-
 " }}}
 " Column markers {{{
 " 80
@@ -373,7 +371,7 @@ if has('gui_running')
     set lines=999 columns=999    " Start maximized
     set lazyredraw
     colorscheme jellybeans
-"   set guifont=Ubuntu\ Mono\ derivative\ Powerline\ 14
+    "set guifont=Ubuntu\ Mono\ derivative\ Powerline\ 14
     set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 10
 endif
 
@@ -563,14 +561,14 @@ endfunction
 " Better folding style {{{
 
 function! NeatFoldText()
-  let line = ' ' . substitute(getline(v:foldstart), '^\s*"\?\s*\|\s*"\?\s*{{' . '{\d*\s*', '', 'g') . ' '
-  let lines_count = v:foldend - v:foldstart + 1
-  let lines_count_text = '| ' . printf("%10s", lines_count . ' lines') . ' |'
-  let foldchar = matchstr(&fillchars, 'fold:\zs.')
-  let foldtextstart = strpart('+' . repeat(foldchar, v:foldlevel*2) . line, 0, (winwidth(0)*2)/3)
-  let foldtextend = lines_count_text . repeat(foldchar, 8)
-  let foldtextlength = strlen(substitute(foldtextstart . foldtextend, '.', 'x', 'g')) + &foldcolumn
-  return foldtextstart . repeat(foldchar, winwidth(0)-foldtextlength) . foldtextend
+    let line = ' ' . substitute(getline(v:foldstart), '^\s*"\?\s*\|\s*"\?\s*{{' . '{\d*\s*', '', 'g') . ' '
+    let lines_count = v:foldend - v:foldstart + 1
+    let lines_count_text = '| ' . printf("%10s", lines_count . ' lines') . ' |'
+    let foldchar = matchstr(&fillchars, 'fold:\zs.')
+    let foldtextstart = strpart('+' . repeat(foldchar, v:foldlevel*2) . line, 0, (winwidth(0)*2)/3)
+    let foldtextend = lines_count_text . repeat(foldchar, 8)
+    let foldtextlength = strlen(substitute(foldtextstart . foldtextend, '.', 'x', 'g')) + &foldcolumn
+    return foldtextstart . repeat(foldchar, winwidth(0)-foldtextlength) . foldtextend
 endfunction
 set foldtext=NeatFoldText()
 
@@ -578,8 +576,8 @@ set foldtext=NeatFoldText()
 " NERDTree File highlighting {{{
 " FileType <> filetype
 function! NERDTreeHighlightFile(extension, fg, bg)
- exec 'autocmd FileType nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
- exec 'autocmd FileType nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg 
+    exec 'autocmd FileType nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
+    exec 'autocmd FileType nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg
 endfunction
 
 call NERDTreeHighlightFile('jade', 'green', 'none')
@@ -898,10 +896,10 @@ let g:WebDevIconsUnicodeGlyphDoubleWidth = 1
 " }}}
 " Autosave {{{
 
-let g:auto_save = 1                 " Enable AutoSave on Vim startup
-let g:auto_save_no_updatetime = 1   " Do not change the 'updatetime' option
-let g:auto_save_in_insert_mode = 0  " Do not save while in insert mode
-let g:auto_save_silent = 0          " Do not display the auto-save notification
+let g:auto_save = 1                                     " Enable AutoSave on Vim startup
+let g:auto_save_no_updatetime = 1                       " Do not change the 'updatetime' option
+let g:auto_save_in_insert_mode = 0                      " Do not save while in insert mode
+let g:auto_save_silent = 0                              " Do not display the auto-save notification
 let g:auto_save_events = ["InsertLeave", "TextChanged"] " Default: [CursorHold,InsertLeave]
 
 " }}}
