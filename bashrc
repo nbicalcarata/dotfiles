@@ -26,12 +26,22 @@ source /etc/bash_completion.d/virtualenvwrapper
 
 source /usr/share/virtualenvwrapper/virtualenvwrapper.sh
 
+# Tmux with italics support
 alias tmux="env TERM=xterm-it tmux -2"
 
-alias vm="mux dev"
+alias v="mux dev"
 
 export EDITOR='vim'
 
 source ~/.bin/tmuxinator.bash
 
 . ~/.bash_prompt
+
+# Auto rename window title on ssh logins
+ssh() {
+  tmux rename-window "$*"
+  command ssh "$@"
+  echo "Counting to 60"
+  sleep 60 && exit
+  tmux rename-window "bash (exited ssh)"
+}

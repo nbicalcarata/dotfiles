@@ -6,9 +6,9 @@ export ZSH=$HOME/.oh-my-zsh
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
 #ZSH_THEME="robbyrussell"
-ZSH_THEME="gnzh"
+#ZSH_THEME="gnzh"
 #ZSH_THEME="bira"
-#ZSH_THEME="kennethreitz"
+ZSH_THEME="kennethreitz"
 
 
 # Uncomment the following line to use case-sensitive completion.
@@ -49,7 +49,7 @@ DISABLE_AUTO_TITLE="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git python)
+plugins=(git python tmux tmuxinator virtualenvwrapper)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -68,13 +68,19 @@ export LANG=es_MX.UTF-8
 #   export EDITOR='mvim'
 # fi
 
-#source /usr/share/virtualenvwrapper/virtualenvwrapper.sh
 
 export EDITOR='vim'
 
 export NODE_PATH=:/home/adrian/npm/lib/node_modules
 
+export PATH="$HOME/.linuxbrew/bin:$PATH"
+export MANPATH="$HOME/.linuxbrew/share/man:$MANPATH"
+export INFOPATH="$HOME/.linuxbrew/share/info:$INFOPATH"
+
+#El autocompletado esta roto!
 source ~/.bin/tmuxinator.zsh
+
+#export PROJECT_HOME=$HOME/Proyectos
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -91,11 +97,24 @@ source ~/.bin/tmuxinator.zsh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+alias mux=tmuxinator
 alias v="mux dev"
 
 # Base16 Shell
-BASE16_SHELL="$HOME/.config/base16-shell/base16-default.dark.sh"
-[[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
+#BASE16_SHELL="$HOME/.config/base16-shell/base16-default.dark.sh"
+#[[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
+
+
+# Base16 colorscheme switcher
+# http://johnmorales.com/blog/2015/01/09/base16-shell-tmux-vim-color-#switching-dead-simple/
+
+if [ -n "$PS1" ]; then # if statement guards adding these helpers #for non-interative shells
+  eval "$(~/.config/base16-switcher/base16-shell/profile_helper.sh)"
+fi
+
+# So as not to be disturbed by Ctrl-S ctrl-Q in terminals:
+stty -ixon
+
 
 #Colored man pages
 man() {
@@ -108,3 +127,5 @@ man() {
     LESS_TERMCAP_us=$'\E[04;38;5;146m' \
     man "$@"
 }
+
+

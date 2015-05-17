@@ -221,25 +221,25 @@ augroup FastEscape
 augroup END
 
 " }}}
-" Only show cursorline in the current window and in normal mode {{{
+" Only show cursorline in the current window {{{
 
-augroup cline
-    au!
-    au WinLeave,InsertEnter * set nocursorline
-    au WinEnter,InsertLeave * set cursorline
+augroup CursorLineOnlyInActiveWindow
+    autocmd!
+    autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+    autocmd WinLeave * setlocal nocursorline
 augroup END
 
 " }}}
 " Open help files in right side {{{
 
-augroup HelpFilesRightSide 
+augroup HelpFilesRightSide
     autocmd!
     autocmd FileType help :wincmd L
     autocmd FileType help set bufhidden=unload
 augroup END
 
 " }}}
-" Disable colorcolumn on html files {{{
+" Disable colorcolumn on specific files {{{
 
 augroup DisableColorcolumn
     autocmd!
@@ -304,13 +304,16 @@ augroup END
 " *****************************************************************************
 " General {{{
 
+set synmaxcol=120
+set ttyfast
 set foldmethod=marker
-set colorcolumn=80
+"set colorcolumn=80
 set number
-set wrap
+set nowrap
 set linebreak
 set title
-set list
+set visualbell t_vb=            " turn off error beep/flash
+set novisualbell                " turn off visual bell
 set noea
 set t_Co=256                    " Enable 256 colors
 set lazyredraw
@@ -364,7 +367,7 @@ set cursorline
 
 if has('statusline')
     set laststatus=2
-    set statusline=%<%f\                    "Filename
+    set statusline=%<%f\                     " Filename
     set statusline+=%w%h%m%r                 " Options
     set statusline+=%{fugitive#statusline()} " Git Hotness
     set statusline+=\ [%{&ff}/%Y]            " Filetype
@@ -610,7 +613,8 @@ endfunction
 
 call NERDTreeHighlightFile('jade', 'green', 'none')
 call NERDTreeHighlightFile('ini', 'yellow', 'none')
-call NERDTreeHighlightFile('md', 'blue', 'none')
+call NERDTreeHighlightFile('md', 'darkgrey', 'none')
+call NERDTreeHighlightFile('markdown', 'darkgrey', 'none')
 call NERDTreeHighlightFile('yml', 'yellow', 'none')
 call NERDTreeHighlightFile('config', 'yellow', 'none')
 call NERDTreeHighlightFile('conf', 'yellow', 'none')
@@ -622,6 +626,7 @@ call NERDTreeHighlightFile('coffee', 'Red', 'none')
 call NERDTreeHighlightFile('js', 'Red', 'none')
 call NERDTreeHighlightFile('php', 'Magenta', 'none')
 call NERDTreeHighlightFile('py', 'green', 'none')
+call NERDTreeHighlightFile('sh', 'grey', 'none')
 " source: https://github.com/scrooloose/nerdtree/issues/201#issuecomment-9954740"
 
 " }}}
@@ -708,66 +713,16 @@ let NERDTreeMapOpenVSplit='v'
 " }}}
 " Airline {{{
 
-" Correccion de los caracters extraños (espacios en blanco)
-if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
-endif
-let g:airline_symbols.space = "\ua0"
-let g:airline#extensions#whitespace#enabled = 0      "Desactivar la deteccion
-
-"Esta opcion descomentada deja caracteres extraños al salir de vim!
-let g:airline#extensions#tabline#enabled = 1         "Activar tabline
-"let g:airline#extensions#tabline#show_tab_type = 0
-let g:airline#extensions#tabline#close_symbol = 'X'
-let g:airline#extensions#tabline#show_buffers = 0
-let g:airline#extensions#syntastic#enabled = 1       "Enable syntastic
-"let g:airline#extensions#tabline#show_tab_nr = 0   "Show tab number
-let g:airline#extensions#tabline#tab_nr_type = 1 " index number
-"let g:airline#extensions#tabline#fnamemod = ':t'    "Desplegar solo el nombre
-"let g:airline_section_c = '%F'                      "Full path and filename
-"let g:airline#extensions#bufferline#enabled = 1     "bufferline
-let g:airline#extensions#tabline#tab_min_count = 2
-let g:airline#extensions#virtualenv#enabled = 1
+let g:airline_powerline_fonts = 1
 let g:tmuxline_preset = 'full'
 let g:airline_theme = 'base16'
-let g:airline_powerline_fonts=1
-"Configure whether buffer numbers should be shown
-"let g:airline#extensions#tabline#buffer_nr_show = 1
-"let g:tmuxline_powerline_separators = 0
 
-"enable/disable displaying index of the buffer.
-"When enabled, numbers will be displayed in the tabline and mappings will be
-"exposed to allow you to select a buffer directly.  Up to 9 mappings will be
-"exposed.
+let g:airline#extensions#tabline#enabled = 1            "Activar tabline
+let g:airline#extensions#tabline#show_buffers = 0       "No mostrar buffers
+let g:airline#extensions#tabline#tab_min_count = 2      "Activar solo cuando hay 2 tabs
+let g:airline#extensions#syntastic#enabled = 1          "Enable syntastic
+let g:airline#extensions#virtualenv#enabled = 1
 
-"let g:airline#extensions#tabline#buffer_idx_mode = 1
-"nmap <leader>1 <Plug>AirlineSelectTab1
-"nmap <leader>2 <Plug>AirlineSelectTab2
-"nmap <leader>3 <Plug>AirlineSelectTab3
-"nmap <leader>4 <Plug>AirlineSelectTab4
-"nmap <leader>5 <Plug>AirlineSelectTab5
-"nmap <leader>6 <Plug>AirlineSelectTab6
-"nmap <leader>7 <Plug>AirlineSelectTab7
-"nmap <leader>8 <Plug>AirlineSelectTab8
-"nmap <leader>9 <Plug>AirlineSelectTab9
-
-
-"Desactivar flechas
-"let g:airline_left_sep = ''
-"let g:airline_right_sep = ''
-"let g:airline_left_alt_sep = '│'
-"let g:airline_right_alt_sep = '│'
-"let g:airline#extensions#tabline#left_sep = ''
-"let g:airline#extensions#tabline#left_alt_sep = '│'
-"let g:airline#extensions#tabline#right_sep = ''
-"let g:airline#extensions#tabline#right_alt_sep = '│'
-"
-"let g:tmuxline_separators = {
-"    \ 'left' : '',
-"    \ 'left_alt': '',
-"    \ 'right' : '',
-"    \ 'right_alt' : '│',
-"    \ 'space' : ' '}
 " }}}
 " CtrlP {{{
 
@@ -900,11 +855,11 @@ nnoremap <F2>g :!google-chrome %<CR>
 nmap <Leader>tt :TagbarToggle<CR>
 
 let g:tagbar_type_css = {
-            \ 'ctagstype' : 'Css',
+    \ 'ctagstype' : 'Css',
     \ 'kinds'     : [
-        \ 'c:classes',
-        \ 's:selectors',
-        \ 'i:identities'
+    \ 'c:classes',
+    \ 's:selectors',
+    \ 'i:identities'
     \ ]
     \ }
 
@@ -918,8 +873,8 @@ nmap <silent><Leader>tm <Esc>:Pytest method<CR>
 " }}}
 " Webdevicons {{{
 
-let g:webdevicons_conceal_nerdtree_brackets = 0
-let g:WebDevIconsUnicodeGlyphDoubleWidth = 1
+"let g:webdevicons_conceal_nerdtree_brackets = 0
+let g:WebDevIconsUnicodeDecorateFolderNodes = 1
 
 " }}}
 " Autosave {{{
@@ -936,6 +891,7 @@ let g:auto_save_events = ["InsertLeave", "TextChanged"] " Default: [CursorHold,I
 nnoremap <Leader>u :UndotreeToggle<cr>
 let g:undotree_WindowLayout = 3
 let g:undotree_SetFocusWhenToggle = 1
+
 " }}}
 " *****************************************************************************
 " }}}

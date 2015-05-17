@@ -17,4 +17,3 @@ source "/usr/local/bin/virtualenvwrapper.sh"
 
 #Android sdk
 export PATH=${PATH}:/Android/sdk/tools
-
