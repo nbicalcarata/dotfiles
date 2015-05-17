@@ -157,17 +157,23 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.rar           " MacOSX/Linux
 " *****************************************************************************
 " Always switch to the current file directory {{{
 
-autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | lcd %:p:h | endif
-au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
+augroup SwitchCurrentFile
+    autocmd!
+    autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | lcd %:p:h | endif
+    autocmd FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
+augroup END
 
 " }}}
 " Running code with ,r {{{
 
-autocmd FileType python map <leader>r :w<CR>:!python %<CR>
-autocmd FileType php map <leader>r :w<CR>:!php %<CR>
-autocmd FileType bash map <leader>r :w<CR>:!./%<CR>
-autocmd FileType java map <leader>c :w<CR>:!javac %<CR>
-autocmd FileType java map <leader>r :w<CR>:!java %:r<CR>
+augroup RunningCode
+    autocmd!
+    autocmd FileType python map <leader>r :w<CR>:!python %<CR>
+    autocmd FileType php map <leader>r :w<CR>:!php %<CR>
+    autocmd FileType bash map <leader>r :w<CR>:!./%<CR>
+    autocmd FileType java map <leader>c :w<CR>:!javac %<CR>
+    autocmd FileType java map <leader>r :w<CR>:!java %:r<CR>
+augroup END
 
 " }}}
 " Restore cursor to file position in previous editing session {{{
@@ -186,19 +192,24 @@ augroup END
 " }}}
 "Omnicompletion {{{
 
-autocmd FileType css set omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown set omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python set omnifunc=pythoncomplete#Complete
-autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
-autocmd FileType ruby set omnifunc=rubycomplete#Complete
-autocmd FileType htmldjango set omnifunc=htmldjangocomplete#CompleteDjango
-autocmd FileType php set omnifunc=phpcomplete#CompletePHP
-
+augroup OmniCompletion
+    autocmd!
+    autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+    autocmd FileType html,markdown set omnifunc=htmlcomplete#CompleteTags
+    autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+    autocmd FileType python set omnifunc=pythoncomplete#Complete
+    autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
+    autocmd FileType ruby set omnifunc=rubycomplete#Complete
+    autocmd FileType htmldjango set omnifunc=htmldjangocomplete#CompleteDjango
+    autocmd FileType php set omnifunc=phpcomplete#CompletePHP
+augroup END
 " }}}
 " Close vim when the window left open is Nerdtree {{{
 
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+augroup CloseVimNerdtree
+    autocmd!
+    autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+augroup END
 
 " }}}
 "No delay between Insert and Normal mode {{{
@@ -221,30 +232,43 @@ augroup END
 " }}}
 " Open help files in right side {{{
 
-autocmd FileType help :wincmd L
-autocmd FileType help set bufhidden=unload
+augroup HelpFilesRightSide 
+    autocmd!
+    autocmd FileType help :wincmd L
+    autocmd FileType help set bufhidden=unload
+augroup END
 
 " }}}
 " Disable colorcolumn on html files {{{
 
-au BufNewFile,BufRead *.html setlocal colorcolumn=
+augroup DisableColorcolumn
+    autocmd!
+    au BufNewFile,BufRead *.html setlocal colorcolumn=
+    autocmd FileType vim-plug setl colorcolumn=
+augroup END
 
 " }}}
 " Disable list on preview window {{{
 
-autocmd WinEnter * if &previewwindow | setlocal nolist | endif
+augroup DisableListPreviewWindow
+    autocmd!
+    autocmd WinEnter * if &previewwindow | setlocal nolist | endif
+augroup END
 
 " }}}
 " Detect django files {{{
 
-au BufNewFile,BufRead admin.py     setlocal filetype=python.django
-au BufNewFile,BufRead urls.py      setlocal filetype=python.django
-au BufNewFile,BufRead models.py    setlocal filetype=python.django
-au BufNewFile,BufRead views.py     setlocal filetype=python.django
-au BufNewFile,BufRead settings.py  setlocal filetype=python.django
-au BufNewFile,BufRead forms.py     setlocal filetype=python.django
-"au BufNewFile,BufRead *.html       setlocal filetype=htmldjango
-"
+augroup DjangoFiles
+    autocmd!
+    au BufNewFile,BufRead admin.py     setlocal filetype=python.django
+    au BufNewFile,BufRead urls.py      setlocal filetype=python.django
+    au BufNewFile,BufRead models.py    setlocal filetype=python.django
+    au BufNewFile,BufRead views.py     setlocal filetype=python.django
+    au BufNewFile,BufRead settings.py  setlocal filetype=python.django
+    au BufNewFile,BufRead forms.py     setlocal filetype=python.django
+    "au BufNewFile,BufRead *.html       setlocal filetype=htmldjango
+augroup END
+
 " }}}
 " Enable minimap at start {{{
 
@@ -254,20 +278,24 @@ au BufNewFile,BufRead forms.py     setlocal filetype=python.django
 "  PHP Override Higlighting {{{
 
 function! PhpSyntaxOverride()
-  hi! def link phpDocTags  phpDefine
-  hi! def link phpDocParam phpType
+    hi! def link phpDocTags  phpDefine
+    hi! def link phpDocParam phpType
 endfunction
 
 augroup phpSyntaxOverride
-  autocmd!
-  autocmd FileType php call PhpSyntaxOverride()
+    autocmd!
+    autocmd FileType php call PhpSyntaxOverride()
 augroup END
 
 " }}}
 " Nerdtree {{{
 
-autocmd FileType nerdtree setlocal nolist       " suppress whitespace highlighting
-autocmd FileType nerdtree setlocal nofoldenable " suppress folding
+augroup NerdtreeRules
+    autocmd!
+    autocmd FileType nerdtree setlocal nolist       " suppress whitespace highlighting
+    autocmd FileType nerdtree setlocal nofoldenable " suppress folding
+    autocmd FileType nerdtree setlocal colorcolumn= " no colorcolumn
+augroup END
 
 " }}}
 " *****************************************************************************
