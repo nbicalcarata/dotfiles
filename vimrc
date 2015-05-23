@@ -1,5 +1,4 @@
 " Plug core {{{
-" *****************************************************************************
 
 set nocompatible              " be iMproved
 set modelines=0
@@ -14,10 +13,9 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
-" *****************************************************************************
 " }}}
 " Plug install packages {{{
-" *****************************************************************************
+
 " General {{{
 
 Plug 'MarcWeber/vim-addon-mw-utils'
@@ -96,16 +94,15 @@ Plug 'alfredodeza/pytest.vim'
 Plug 'StanAngeloff/php.vim'
 
 " }}}
-" *****************************************************************************
+
 " }}}
 " Plug end {{{
-" *****************************************************************************
+
 call plug#end()
-" *****************************************************************************
+
 " }}}
 
 " Basic setup {{{
-" *****************************************************************************
 
 set background=dark                             " Assume a dark background
 set mouse=a                                     " Automatically enable mouse usage
@@ -155,7 +152,7 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.rar           " MacOSX/Linux
 " *****************************************************************************
 " }}}
 " Autocmd rules {{{
-" *****************************************************************************
+
 " Always switch to the current file directory {{{
 
 augroup SwitchCurrentFile
@@ -299,10 +296,10 @@ augroup NerdtreeRules
 augroup END
 
 " }}}
-" *****************************************************************************
+
 " }}}
 " Visual settings {{{
-" *****************************************************************************
+
 " General {{{
 
 set synmaxcol=120
@@ -408,10 +405,10 @@ if has('gui_running')
 endif
 
 " }}}
-" *****************************************************************************
+
 " }}}
 " Mappings {{{
-" *****************************************************************************
+
 let mapleader = ","
 " Space to fold
 nnoremap <space> za
@@ -518,10 +515,10 @@ if &term =~ '^screen' && exists('$TMUX')
 endif
 
 " }}}
-" *****************************************************************************
+
 " }}}
 " Functions {{{
-" *****************************************************************************
+
 " Initialize directories {{{
 
 function! InitializeDirectories()
@@ -591,6 +588,7 @@ endfunction
 
 " }}}
 " NERDTree File highlighting {{{
+
 " FileType <> filetype
 function! NERDTreeHighlightFile(extension, fg, bg)
     exec 'autocmd FileType nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
@@ -617,6 +615,7 @@ call NERDTreeHighlightFile('sh', 'grey', 'none')
 
 " }}}
 " Jump to CSS definition {{{
+
 function! JumpToCSS()
   let id_pos = searchpos("id", "nb", line('.'))[1]
   let class_pos = searchpos("class", "nb", line('.'))[1]
@@ -658,10 +657,10 @@ function! NumberToggle()
 endfunc
 
 " }}}
-" *****************************************************************************
+
 " }}}
 " Plugin settings {{{
-" *****************************************************************************
+
 " Syntastic {{{
 
 let g:syntastic_javascript_checkers = ['jshint']
@@ -880,9 +879,9 @@ let g:undotree_SetFocusWhenToggle = 1
 
 " }}}
 " NeatFoldText {{{
-  
+
 let g:NeatFoldTextFancy = 1
 
 " }}}
-" *****************************************************************************
+
 " }}}
