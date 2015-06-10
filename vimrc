@@ -30,7 +30,7 @@ Plug 'mklabs/vim-fetch'
 Plug 'justinmk/vim-gtfo'
 Plug 'edkolev/tmuxline.vim'
 Plug 'scrooloose/syntastic'
-Plug 'severin-lemaignan/vim-minimap'
+Plug 'mipmip/vim-minimap'
 Plug 'benmills/vimux'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'xolox/vim-misc'
@@ -40,12 +40,15 @@ Plug 'ryanoasis/vim-webdevicons'
 "Plug '907th/vim-auto-save'
 Plug 'mbbill/undotree'
 Plug 'FelikZ/ctrlp-py-matcher'
+Plug 'Harenome/vim-neatfoldtext'
+Plug 'ConradIrwin/vim-bracketed-paste'
 
 "}}}
 " Colorschemes {{{
 
 Plug 'nbicalcarata/vim-womprat'
 Plug 'nbicalcarata/vim-airline-womprat'
+Plug 'nbicalcarata/vim-airline-dieciseis'
 Plug 'nanotech/jellybeans.vim'
 Plug 'sickill/vim-monokai'
 Plug 'tomasr/molokai'
@@ -104,10 +107,10 @@ call plug#end()
 
 " Basic setup {{{
 
+scriptencoding utf-8
 set background=dark                             " Assume a dark background
 set mouse=a                                     " Automatically enable mouse usage
 set mousehide                                   " Hide the mouse cursor while typing
-scriptencoding utf-8
 set clipboard=unnamedplus
 set shortmess+=cfilmnrxoOtT                     " Abbrev. of messages (avoids 'hit enter')
 set viewoptions=folds,options,cursor,unix,slash " Unix / Windows compatibility
@@ -149,7 +152,7 @@ set wildignore+=*.class                                  " Java byte code
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.rar           " MacOSX/Linux
 
 " }}}
-" *****************************************************************************
+
 " }}}
 " Autocmd rules {{{
 
@@ -242,6 +245,7 @@ augroup END
 augroup DisableColorcolumn
     autocmd!
     au BufNewFile,BufRead *.html setlocal colorcolumn=
+    au BufNewFile,BufRead *.php setlocal colorcolumn=
     autocmd FileType vim-plug setl colorcolumn=
 augroup END
 
@@ -271,6 +275,7 @@ augroup END
 " Enable minimap at start {{{
 
 "autocmd! VimEnter * Minimap
+"let g:minimap_highlight='LineNr'
 
 " }}}
 "  PHP Override Higlighting {{{
@@ -302,10 +307,8 @@ augroup END
 
 " General {{{
 
-set synmaxcol=120
 set ttyfast
 set foldmethod=marker
-"set colorcolumn=80
 set number
 set nowrap
 set linebreak
@@ -377,6 +380,12 @@ endif
 " Styling vertical splits {{{
 
 set fillchars=vert:│,diff:⎼,fold:⎼
+"set fillchars=vert:┃,diff:⎼,fold:⎼
+augroup OverrideSplitColor
+    autocmd!
+    autocmd ColorScheme * highlight VertSplit cterm=NONE ctermbg=NONE
+    autocmd ColorScheme * highlight Folded    ctermbg=none
+augroup END
 
 " }}}
 " Column markers {{{
@@ -680,9 +689,8 @@ let g:syntastic_loc_list_= 5
 " }}}
 " NerdTree {{{
 
-map <C-e> :NERDTreeToggle<CR>:NERDTreeMirror<CR>
+"map <C-e> :NERDTreeToggle<CR>:NERDTreeMirror<CR>
 map <leader>e :NERDTreeFind<CR>
-nmap <leader>nt :NERDTreeFind<CR>
 let NERDTreeShowBookmarks=0
 let NERDTreeIgnore=['\.pyc', '\.class', '\~$', '\.swo$', '\.swp$', '\.hg', '\.svn', '\.bzr']
 let NERDTreeChDirMode=2
@@ -700,13 +708,11 @@ let NERDTreeMapOpenVSplit='v'
 
 let g:airline_powerline_fonts = 1
 let g:tmuxline_preset = 'full'
-let g:airline_theme = 'base16'
-
-let g:airline#extensions#tabline#enabled = 1            "Activar tabline
-let g:airline#extensions#tabline#show_buffers = 0       "No mostrar buffers
-let g:airline#extensions#tabline#tab_min_count = 2      "Activar solo cuando hay 2 tabs
-let g:airline#extensions#syntastic#enabled = 1          "Enable syntastic
-let g:airline#extensions#virtualenv#enabled = 1
+let g:airline#extensions#tmuxline#snapshot_file = "~/dotfiles/snapshot_tmuxline"
+let g:airline_theme = 'dieciseis'
+let g:airline#extensions#tabline#enabled = 1            " Activar tabline
+let g:airline#extensions#tabline#show_buffers = 0
+let g:airline#extensions#tabline#tab_min_count = 2
 
 " }}}
 " CtrlP {{{
@@ -720,7 +726,7 @@ let g:ctrlp_custom_ignore = {
 let g:ctrlp_use_caching = 0
 let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
 let g:ctrlp_clear_cache_on_exit = 0
-let g:ctrlp_open_new_file = 'r'          " Open new file in current window
+let g:ctrlp_open_new_file = 'r'                        " Open new file in current window
 let g:ctrlp_mruf_max = 250
 let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:20,results:20'
 
@@ -856,12 +862,6 @@ nmap <silent><Leader>tc <Esc>:Pytest class<CR>
 nmap <silent><Leader>tm <Esc>:Pytest method<CR>
 
 " }}}
-" Webdevicons {{{
-
-"let g:webdevicons_conceal_nerdtree_brackets = 0
-let g:WebDevIconsUnicodeDecorateFolderNodes = 1
-
-" }}}
 " Autosave {{{
 
 let g:auto_save = 1                                     " Enable AutoSave on Vim startup
@@ -881,6 +881,12 @@ let g:undotree_SetFocusWhenToggle = 1
 " NeatFoldText {{{
 
 let g:NeatFoldTextFancy = 1
+
+" }}}
+" Webdevicons {{{
+
+"let g:webdevicons_conceal_nerdtree_brackets = 0
+let g:WebDevIconsUnicodeDecorateFolderNodes = 1
 
 " }}}
 
