@@ -388,12 +388,6 @@ augroup OverrideSplitColor
 augroup END
 
 " }}}
-" Column markers {{{
-" 80
-"let &colorcolumn=join(range(81,999),",")
-" 80 and 120
-let &colorcolumn="80,".join(range(120,999),",")
-
 " }}}
 " GUI Settings {{{
 
@@ -666,7 +660,19 @@ function! NumberToggle()
 endfunc
 
 " }}}
+" Toggle colorcolumn {{{
 
+function! g:ToggleColorColumn()
+  if &colorcolumn != ''
+    set colorcolumn&
+  else
+    let &colorcolumn="80,".join(range(120,999),",")
+  endif
+endfunction
+
+nnoremap <silent> <leader>co :call g:ToggleColorColumn()<CR>
+
+" }}}
 " }}}
 " Plugin settings {{{
 
