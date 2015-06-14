@@ -42,6 +42,7 @@ Plug 'mbbill/undotree'
 Plug 'FelikZ/ctrlp-py-matcher'
 Plug 'Harenome/vim-neatfoldtext'
 Plug 'ConradIrwin/vim-bracketed-paste'
+Plug 'rking/ag.vim'
 
 "}}}
 " Colorschemes {{{
@@ -485,6 +486,9 @@ nnoremap <Leader>n :call NumberToggle()<cr>
 
 " Toggle between invisible chars
 nmap <leader>l :set list!<CR>
+
+" Ag
+nnoremap <leader>a :Ag 
 
 " Tmux + vim special keys compatibility {{{
 
