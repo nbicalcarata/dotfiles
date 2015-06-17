@@ -715,6 +715,7 @@ let NERDTreeMapOpenVSplit='v'
 
 " }}}
 " Airline {{{
+let g:replace_separators = 0
 let g:airline_powerline_fonts = 1
 let g:tmuxline_preset = 'full'
 let g:airline#extensions#tmuxline#snapshot_file = "~/dotfiles/snapshot_tmuxline"
@@ -740,23 +741,25 @@ let g:airline_mode_map = {
     \ }
 
 " Remove separators
+if get(g:, 'replace_separators', 1)
 
-"if !exists('g:airline_symbols')
-"  let g:airline_symbols = {}
-"endif
+    if !exists('g:airline_symbols')
+      let g:airline_symbols = {}
+    endif
 
-"let g:airline_left_sep = ''
-"let g:airline_right_sep = ''
-"let g:airline_left_alt_sep = '│'
-"let g:airline_right_alt_sep = '│'
-"let g:tmuxline_powerline_separators = 0
+    let g:airline_left_sep = ''
+    let g:airline_right_sep = ''
+    let g:airline_left_alt_sep = '│'
+    let g:airline_right_alt_sep = '│'
+    let g:tmuxline_powerline_separators = 0
 
-"let g:tmuxline_separators = {
-"      \ 'left' : '',
-"      \ 'left_alt': ':',
-"      \ 'right' : '',
-"      \ 'right_alt' : '│',
-"      \ 'space' : ' '}
+    let g:tmuxline_separators = {
+          \ 'left' : '',
+          \ 'left_alt': ':',
+          \ 'right' : '',
+          \ 'right_alt' : '│',
+          \ 'space' : ' '}
+endif
 
 " }}}
 " CtrlP {{{
