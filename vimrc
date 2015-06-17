@@ -699,12 +699,12 @@ let g:syntastic_loc_list_= 5
 " }}}
 " NerdTree {{{
 
-"map <C-e> :NERDTreeToggle<CR>:NERDTreeMirror<CR>
+map <C-e> :NERDTreeToggle<CR>:NERDTreeMirror<CR>
 map <leader>e :NERDTreeFind<CR>
 let NERDTreeShowBookmarks=0
 let NERDTreeIgnore=['\.pyc', '\.class', '\~$', '\.swo$', '\.swp$', '\.hg', '\.svn', '\.bzr']
 let NERDTreeChDirMode=2
-let NERDTreeQuitOnOpen=0
+let NERDTreeQuitOnOpen=1
 let NERDTreeMouseMode=2
 let NERDTreeShowHidden=0
 let NERDTreeKeepTreeInNewTab=1
