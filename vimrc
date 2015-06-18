@@ -724,6 +724,11 @@ let g:airline#extensions#tabline#enabled = 1            " Activar tabline
 let g:airline#extensions#tabline#show_buffers = 0
 let g:airline#extensions#tabline#tab_min_count = 2
 let g:airline#extensions#branch#empty_message = '*'
+let g:airline#extensions#whitespace#enabled = 0
+
+"Remove percentage
+"let g:airline_section_z = '%3p%% %{g:airline_symbols.linenr}%#__accent_bold#%4l%#__restore__#:%3v'
+let g:airline_section_z = ' %{g:airline_symbols.linenr}%#__accent_bold#%4l%#__restore__#/%L%/:%3v'
 
 " Short names
 let g:airline_mode_map = {
