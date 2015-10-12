@@ -49,7 +49,7 @@ DISABLE_AUTO_TITLE="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git python tmux tmuxinator virtualenvwrapper)
+#plugins=(git python tmux tmuxinator virtualenvwrapper)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -78,7 +78,7 @@ export MANPATH="$HOME/.linuxbrew/share/man:$MANPATH"
 export INFOPATH="$HOME/.linuxbrew/share/info:$INFOPATH"
 
 #El autocompletado esta roto!
-source ~/.bin/tmuxinator.zsh
+#source ~/.bin/tmuxinator.zsh
 
 #export PROJECT_HOME=$HOME/Proyectos
 
@@ -106,9 +106,9 @@ alias v="mux dev"
 
 
 # Base16 colorscheme switcher
-# http://johnmorales.com/blog/2015/01/09/base16-shell-tmux-vim-color-#switching-dead-simple/
+# http://johnmorales.com/blog/2015/01/09/base16-shell-tmux-vim-color-switching-dead-simple/
 
-if [ -n "$PS1" ]; then # if statement guards adding these helpers #for non-interative shells
+if [ -n "$PS1" ]; then # if statement guards adding these helpers for non-interative shells
   eval "$(~/.config/base16-switcher/base16-shell/profile_helper.sh)"
 fi
 

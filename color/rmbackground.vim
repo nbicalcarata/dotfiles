@@ -39,3 +39,4 @@ hi Folded      ctermbg=none
 "highlight GitGutterChange ctermbg=none
 "highlight GitGutterDelete ctermbg=none
 "highlight GitGutterChangeDelete ctermbg=none
+highlight NonText ctermbg=none

@@ -30,7 +30,7 @@ Plug 'mklabs/vim-fetch'
 Plug 'justinmk/vim-gtfo'
 Plug 'edkolev/tmuxline.vim'
 Plug 'scrooloose/syntastic'
-Plug 'mipmip/vim-minimap'
+Plug 'severin-lemaignan/vim-minimap'
 Plug 'benmills/vimux'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'xolox/vim-misc'
@@ -346,7 +346,7 @@ set pastetoggle=<F12>           " pastetoggle (sane indentation on pastes)
 " }}}
 " Colorschemes {{{
 
-"let base16colorspace=256  " Access colors present in 256 colorspace
+let base16colorspace=256  " Access colors present in 256 colorspace
 "let g:kolor_bold=0
 "colorscheme lilypink
 "colorscheme kolor
@@ -355,9 +355,11 @@ set pastetoggle=<F12>           " pastetoggle (sane indentation on pastes)
 " colorscheme muon
 "colorscheme womprat
 "colorscheme Tomorrow-Night-Bright
-" colorscheme railscasts
+"colorscheme railscasts
 "colorscheme base16-default
-"source ~/dotfiles/color/rmbackground.vim
+colorscheme base16-paraiso
+source ~/dotfiles/color/rmbackground.vim
+
 
 " }}}
 " Cursor line {{{
@@ -642,11 +644,11 @@ nnoremap <F9> :call JumpToCSS()<CR>
 " }}}
 " Base16 helper {{{
 
-if filereadable(expand("~/.vimrc_background"))
-  let base16colorspace=256
-  source ~/.vimrc_background
-  source ~/dotfiles/color/rmbackground.vim
-endif
+"if filereadable(expand("~/.vimrc_background"))
+  "let base16colorspace=256
+  "source ~/.vimrc_background
+  "source ~/dotfiles/color/rmbackground.vim
+"endif
 
 hi Search cterm=NONE ctermfg=black
 hi CursorLineNr   cterm=bold
@@ -715,7 +717,7 @@ let NERDTreeMapOpenVSplit='v'
 
 " }}}
 " Airline {{{
-let g:replace_separators = 0
+let g:replace_separators = 1
 let g:airline_powerline_fonts = 1
 let g:tmuxline_preset = 'full'
 let g:airline#extensions#tmuxline#snapshot_file = "~/dotfiles/snapshot_tmuxline"
