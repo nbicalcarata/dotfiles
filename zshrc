@@ -101,16 +101,16 @@ alias mux=tmuxinator
 alias v="mux dev"
 
 # Base16 Shell
-#BASE16_SHELL="$HOME/.config/base16-shell/base16-default.dark.sh"
-#[[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
+BASE16_SHELL="$HOME/.config/base16-shell/base16-paraiso.dark.sh"
+[[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
 
 
 # Base16 colorscheme switcher
 # http://johnmorales.com/blog/2015/01/09/base16-shell-tmux-vim-color-switching-dead-simple/
 
-if [ -n "$PS1" ]; then # if statement guards adding these helpers for non-interative shells
-  eval "$(~/.config/base16-switcher/base16-shell/profile_helper.sh)"
-fi
+#if [ -n "$PS1" ]; then # if statement guards adding these helpers for non-interative shells
+  #eval "$(~/.config/base16-switcher/base16-shell/profile_helper.sh)"
+#fi
 
 # So as not to be disturbed by Ctrl-S ctrl-Q in terminals:
 stty -ixon
