@@ -108,27 +108,10 @@ call plug#end()
 
 " Basic setup {{{
 
-" Identify plataform
-silent function! OSX()
-    return has('macunix')
-endfunction
-silent function! LINUX()
-    return has('unix') && !has('macunix') && !has('win32unix')
-endfunction
-silent function! WINDOWS()
-    return  (has('win16') || has('win32') || has('win64'))
-endfunction
 " Basics {
 
 if !WINDOWS()
     set shell=/bin/sh
-endif
-
-" Windows Compatible {
-" On Windows, also use '.vim' instead of 'vimfiles'; this makes synchronization
-" across (heterogeneous) systems easier.
-if WINDOWS()
-  set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
 endif
 
 scriptencoding utf-8
@@ -156,7 +139,7 @@ set timeoutlen=1000 ttimeoutlen=0               " Eliminar retardo de Insert a N
 
 " Setting up the directories {{{
 
-cd ~/Codigo/                                   " Default directory
+"cd ~/Codigo/                                   " Default directory
 set noswapfile
 set backup                                     " Backups are nice ...
 if has('persistent_undo')
@@ -357,7 +340,10 @@ set incsearch                   " Find as you type search
 set ignorecase                  " Case insensitive search
 set smartcase                   " Case sensitive when uc present
 set scrolloff=5                 " Minimum lines to keep above and below cursor
-set listchars=tab:▸\ ,eol:¬,extends:»,precedes:«,trail:•
+
+if LINUX()
+    set listchars=tab:▸\ ,eol:¬,extends:»,precedes:«,trail:•
+endif
 
 " }}}
 " Formatting {{{
@@ -379,18 +365,8 @@ set pastetoggle=<F12>           " pastetoggle (sane indentation on pastes)
 
 let base16colorspace=256  " Access colors present in 256 colorspace
 "let g:kolor_bold=0
-"colorscheme lilypink
-"colorscheme kolor
-"colorscheme monokai
-"colorscheme aldmeris
-" colorscheme muon
-"colorscheme womprat
-"colorscheme Tomorrow-Night-Bright
-"colorscheme railscasts
-"colorscheme base16-default
 colorscheme base16-paraiso
 source ~/dotfiles/color/rmbackground.vim
-
 
 " }}}
 " Cursor line {{{
@@ -412,9 +388,10 @@ endif
 
 " }}}
 " Styling vertical splits {{{
-
-set fillchars=vert:│,diff:⎼,fold:⎼
-"set fillchars=vert:┃,diff:⎼,fold:⎼
+if LINUX()
+    set fillchars=vert:│,diff:⎼,fold:⎼
+    set fillchars=vert:┃,diff:⎼,fold:⎼
+endif
 augroup OverrideSplitColor
     autocmd!
     autocmd ColorScheme * highlight VertSplit cterm=NONE ctermbg=NONE
@@ -436,9 +413,9 @@ if has('gui_running')
     set wrap
     set lines=999 columns=999    " Start maximized
     set lazyredraw
-    colorscheme jellybeans
+    colorscheme base16-flat
+    let g:airline_theme = 'base16'
     "set guifont=Ubuntu\ Mono\ derivative\ Powerline\ 14
-    set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 10
 endif
 
 " }}}
@@ -900,11 +877,12 @@ nmap <Leader>gs <Plug>GitGutterStageHunk
 nmap <Leader>gr <Plug>GitGutterRevertHunk
 
 "Box Drawings Heavy Vertical U+25e3
-let g:gitgutter_sign_added = '┃'
-let g:gitgutter_sign_modified = '┃'
-let g:gitgutter_sign_removed = '┃'
-let g:gitgutter_sign_modified_removed = '┃'
-
+if LINUX()
+    let g:gitgutter_sign_added = '┃'
+    let g:gitgutter_sign_modified = '┃'
+    let g:gitgutter_sign_removed = '┃'
+    let g:gitgutter_sign_modified_removed = '┃'
+endif
 " }}}
 " Vimux {{{
 
@@ -974,8 +952,19 @@ let g:NeatFoldTextFancy = 1
 " Webdevicons {{{
 
 "let g:webdevicons_conceal_nerdtree_brackets = 0
-let g:WebDevIconsUnicodeDecorateFolderNodes = 1
+"let g:WebDevIconsUnicodeDecorateFolderNodes = 1
 
 " }}}
+
+" }}}
+" Windows gvim settings {{{
+  
+if WINDOWS()
+    let g:airline_powerline_fonts = 0
+    let g:webdevicons_enable = 0
+    let g:webdevicons_enable_ctrlp = 0
+    let g:NeatFoldTextFancy = 0
+    set guifont=Consolas:h11:cANSI
+endif
 
 " }}}
