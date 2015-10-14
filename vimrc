@@ -3,15 +3,39 @@
 set nocompatible              " be iMproved
 set modelines=0
 
+" Identify plataform
+silent function! OSX()
+    return has('macunix')
+endfunction
+silent function! LINUX()
+    return has('unix') && !has('macunix') && !has('win32unix')
+endfunction
+silent function! WINDOWS()
+    return  (has('win16') || has('win32') || has('win64'))
+endfunction
+
 " Plug automatic installation
-if empty(glob('~/.vim/autoload/plug.vim'))
-    silent !mkdir -p ~/.vim/autoload
-    silent !curl -fLo ~/.vim/autoload/plug.vim
-        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    autocmd VimEnter * PlugInstall
+if WINDOWS()
+    if empty(glob('~/vimfiles/autoload/plug.vim'))
+        silent !mkdir -p ~/vimfiles/autoload
+        silent !curl -fLo ~/vimfiles/autoload/plug.vim
+            \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+        autocmd VimEnter * PlugInstall
+    endif
+
+    call plug#begin('~/vimfiles/plugged')
 endif
 
-call plug#begin('~/.vim/plugged')
+if LINUX()
+    if empty(glob('~/.vim/autoload/plug.vim'))
+        silent !mkdir -p ~/.vim/autoload
+        silent !curl -fLo ~/.vim/autoload/plug.vim
+            \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+        autocmd VimEnter * PlugInstall
+    endif
+
+    call plug#begin('~/.vim/plugged')
+endif
 
 " }}}
 " Plug install packages {{{
@@ -78,7 +102,18 @@ Plug 'alvan/vim-closetag'
 " }}}
 " Snippets & AutoComplete {{{
 
-Plug 'Valloric/YouCompleteMe'
+if executable('clang')
+	Plug 'Valloric/YouCompleteMe', { 'do': './install.sh' }
+	let g:completionEngine = 'YouCompleteMe'
+else
+	if has('lua') && (version >= 704 || version == 703 && has('patch885'))
+		Plug 'Shougo/neocomplete.vim'
+		let g:completionEngine = 'neocomplete'
+	else
+		Plug 'Shougo/neocomplcache.vim'
+		let g:completionEngine = 'neocomplcache'
+	endif
+endif
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'jiangmiao/auto-pairs'
@@ -835,21 +870,36 @@ let g:pymode_rope = 0
 let g:pydoc_open_cmd = 'vsplit'
 
 " }}}
-" YouCompleteMe {{{
+" YouCompleteMe and Neocomplete {{{
+if g:completionEngine == 'YouCompleteMe'
+	" Cerrar la ventana de previsualizacion despues del completado semantico
+    let g:ycm_autoclose_preview_window_after_completion = 1
 
-" Cerrar la ventana de previsualizacion despues del completado semantico
-let g:ycm_autoclose_preview_window_after_completion = 1
+    " Cerrar la ventana de previsualizacion despues de salir del modo Insert
+    " Default 0
+    let g:ycm_autoclose_preview_window_after_insertion = 0
 
-" Cerrar la ventana de previsualizacion despues de salir del modo Insert
-" Default 0
-let g:ycm_autoclose_preview_window_after_insertion = 0
+    " Compatibilidad con python mode (autocompletado correcto despues de .)
+    let g:pymode_rope_complete_on_dot = 0
 
-" Compatibilidad con python mode (autocompletado correcto despues de .)
-let g:pymode_rope_complete_on_dot = 0
+    " Youcompleteme eclim
+    " let g:EclimCompletionMethod = 'omnifunc'
 
-" Youcompleteme eclim
-" let g:EclimCompletionMethod = 'omnifunc'
-
+elseif exists('g:completionEngine')
+	let g:acp_enableAtStartup=0
+	let g:{g:completionEngine}#enable_at_startup=1
+	let g:{g:completionEngine}#enable_smart_case=1
+	let g:{g:completionEngine}#sources#syntax#min_keyword_length=3
+	let g:{g:completionEngine}#auto_completion_start_length=3
+	let g:{g:completionEngine}#sources#dictionary#dictionaries={  'default' : '' }
+	let g:{g:completionEngine}#sources#omni#input_patterns={}
+	let g:{g:completionEngine}#keyword_patterns={ 'default': '\h\w*' }
+	let g:{g:completionEngine}#data_directory="~/.vim/cache/neocomplete"
+	inoremap <expr><C-g>     {g:completionEngine}#undo_completion()
+	inoremap <expr><C-l>     {g:completionEngine}#complete_common_string()
+	inoremap <expr><BS>      {g:completionEngine}#smart_close_popup()."\<C-h>"
+	inoremap <expr><TAB>     pumvisible() ? "\<C-n>" : "\<TAB>"
+endif
 " }}}
 " UltiSnips {{{
 
