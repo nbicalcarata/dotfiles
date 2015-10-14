@@ -1015,6 +1015,7 @@ if WINDOWS()
     let g:webdevicons_enable_ctrlp = 0
     let g:NeatFoldTextFancy = 0
     set guifont=Consolas:h11:cANSI
+    let g:airline_theme = 'base16'
 endif
 
 " }}}
