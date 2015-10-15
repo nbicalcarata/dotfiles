@@ -102,17 +102,12 @@ Plug 'alvan/vim-closetag'
 " }}}
 " Snippets & AutoComplete {{{
 
-if executable('clang')
-	Plug 'Valloric/YouCompleteMe', { 'do': './install.sh' }
-	let g:completionEngine = 'YouCompleteMe'
+if has('lua') && (version >= 704 || version == 703 && has('patch885'))
+    Plug 'Shougo/neocomplete.vim'
+    let g:completionEngine = 'neocomplete'
 else
-	if has('lua') && (version >= 704 || version == 703 && has('patch885'))
-		Plug 'Shougo/neocomplete.vim'
-		let g:completionEngine = 'neocomplete'
-	else
-		Plug 'Shougo/neocomplcache.vim'
-		let g:completionEngine = 'neocomplcache'
-	endif
+    Plug 'Valloric/YouCompleteMe'
+    let g:completionEngine = 'YouCompleteMe'
 endif
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
