@@ -429,28 +429,9 @@ augroup OverrideSplitColor
 augroup END
 
 " }}}
-" }}}
-" GUI Settings {{{
-
-if has('gui_running')
-    set guioptions-=T           " Remove the toolbar
-    set guioptions-=m           " Remove the menubar
-    set guioptions-=L           " Remove nerdtree scroll
-    set guioptions-=r           " Remove the scroll bar
-    nnoremap <C-F1> :if &go=~#'m'<Bar>set go-=m<Bar>else<Bar>set go+=m<Bar>endif<CR>
-    nnoremap <C-F2> :if &go=~#'T'<Bar>set go-=T<Bar>else<Bar>set go+=T<Bar>endif<CR>
-    nnoremap <C-F3> :if &go=~#'r'<Bar>set go-=r<Bar>else<Bar>set go+=r<Bar>endif<CR>
-    set wrap
-    set lines=999 columns=999    " Start maximized
-    set lazyredraw
-    colorscheme base16-flat
-    let g:airline_theme = 'base16'
-    "set guifont=Ubuntu\ Mono\ derivative\ Powerline\ 14
-endif
 
 " }}}
 
-" }}}
 " Mappings {{{
 
 let mapleader = ","
@@ -717,6 +698,7 @@ endfunction
 nnoremap <silent> <leader>co :call g:ToggleColorColumn()<CR>
 
 " }}}
+
 " }}}
 " Plugin settings {{{
 
@@ -1006,6 +988,25 @@ let g:NeatFoldTextFancy = 1
 " }}}
 
 " }}}
+" GUI Settings {{{
+
+if has('gui_running')
+    set guioptions-=T           " Remove the toolbar
+    set guioptions-=m           " Remove the menubar
+    set guioptions-=L           " Remove nerdtree scroll
+    set guioptions-=r           " Remove the scroll bar
+    nnoremap <C-F1> :if &go=~#'m'<Bar>set go-=m<Bar>else<Bar>set go+=m<Bar>endif<CR>
+    nnoremap <C-F2> :if &go=~#'T'<Bar>set go-=T<Bar>else<Bar>set go+=T<Bar>endif<CR>
+    nnoremap <C-F3> :if &go=~#'r'<Bar>set go-=r<Bar>else<Bar>set go+=r<Bar>endif<CR>
+    set wrap
+    set lines=999 columns=999    " Start maximized
+    set lazyredraw
+    colorscheme base16-paraiso
+    let g:airline_theme = 'base16'
+    "set guifont=Ubuntu\ Mono\ derivative\ Powerline\ 14
+endif
+
+" }}}
 " Windows gvim settings {{{
   
 if WINDOWS()
@@ -1014,6 +1015,7 @@ if WINDOWS()
     let g:webdevicons_enable_ctrlp = 0
     let g:NeatFoldTextFancy = 0
     set guifont=Consolas:h11:cANSI
+    colorscheme base16-flat
     let g:airline_theme = 'base16'
 endif
 
