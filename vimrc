@@ -737,8 +737,10 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
-let g:syntastic_error_symbol = "✗"
-let g:syntastic_warning_symbol = "⚠"
+if LINUX()
+    let g:syntastic_error_symbol = "✗"
+    let g:syntastic_warning_symbol = "⚠"
+endif
 let g:syntastic_loc_list_= 5
 
 " }}}
@@ -799,8 +801,10 @@ if get(g:, 'replace_separators', 1)
 
     let g:airline_left_sep = ''
     let g:airline_right_sep = ''
-    let g:airline_left_alt_sep = '│'
-    let g:airline_right_alt_sep = '│'
+    if LINUX()
+        let g:airline_left_alt_sep = '│'
+        let g:airline_right_alt_sep = '│'
+    endif
     let g:tmuxline_powerline_separators = 0
 
     let g:tmuxline_separators = {
