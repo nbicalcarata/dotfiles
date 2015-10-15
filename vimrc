@@ -96,7 +96,7 @@ Plug 'alvan/vim-closetag'
 " }}}
 " Snippets & AutoComplete {{{
 
-if has('lua') && (version >= 704 || version == 703 && has('patch885'))
+if WINDOWS()
     Plug 'Shougo/neocomplete.vim'
     let g:completionEngine = 'neocomplete'
 else
