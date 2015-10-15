@@ -15,27 +15,21 @@ silent function! WINDOWS()
 endfunction
 
 " Plug automatic installation
+
+let basedir = '.vim'
+
 if WINDOWS()
-    if empty(glob('~/vimfiles/autoload/plug.vim'))
-        silent !mkdir -p ~/vimfiles/autoload
-        silent !curl -fLo ~/vimfiles/autoload/plug.vim
-            \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-        autocmd VimEnter * PlugInstall
-    endif
-
-    call plug#begin('~/vimfiles/plugged')
+    let basedir = 'vimfiles'
 endif
 
-if LINUX()
-    if empty(glob('~/.vim/autoload/plug.vim'))
-        silent !mkdir -p ~/.vim/autoload
-        silent !curl -fLo ~/.vim/autoload/plug.vim
-            \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-        autocmd VimEnter * PlugInstall
-    endif
-
-    call plug#begin('~/.vim/plugged')
+if empty(glob('~/' . basedir . '/autoload/plug.vim'))
+    silent !mkdir -p '~/' . basedir . '/autoload'
+    silent !curl -fLo '~/' . basedir . '/autoload/plug.vim'
+        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall
 endif
+
+call plug#begin('~/' . basedir . '/plugged')
 
 " }}}
 " Plug install packages {{{
@@ -109,6 +103,7 @@ else
     Plug 'Valloric/YouCompleteMe'
     let g:completionEngine = 'YouCompleteMe'
 endif
+
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'jiangmiao/auto-pairs'
@@ -419,7 +414,7 @@ endif
 " }}}
 " Styling vertical splits {{{
 if LINUX()
-    set fillchars=vert:│,diff:⎼,fold:⎼
+    "set fillchars=vert:│,diff:⎼,fold:⎼
     set fillchars=vert:┃,diff:⎼,fold:⎼
 endif
 augroup OverrideSplitColor
@@ -875,7 +870,7 @@ elseif exists('g:completionEngine')
 	let g:{g:completionEngine}#sources#dictionary#dictionaries={  'default' : '' }
 	let g:{g:completionEngine}#sources#omni#input_patterns={}
 	let g:{g:completionEngine}#keyword_patterns={ 'default': '\h\w*' }
-	let g:{g:completionEngine}#data_directory="~/.vim/cache/neocomplete"
+	let g:{g:completionEngine}#data_directory="~/.cache/neocomplete"
 	inoremap <expr><C-g>     {g:completionEngine}#undo_completion()
 	inoremap <expr><C-l>     {g:completionEngine}#complete_common_string()
 	inoremap <expr><BS>      {g:completionEngine}#smart_close_popup()."\<C-h>"
