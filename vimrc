@@ -987,7 +987,7 @@ let g:NeatFoldTextFancy = 1
 " GUI Settings {{{
 
 if has('gui_running')
-    "set guioptions-=T           " Remove the toolbar
+    set guioptions-=T           " Remove the toolbar
     set guioptions-=m           " Remove the menubar
     set guioptions-=L           " Remove nerdtree scroll
     set guioptions-=r           " Remove the scroll bar
