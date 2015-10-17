@@ -61,6 +61,7 @@ Plug 'FelikZ/ctrlp-py-matcher'
 Plug 'Harenome/vim-neatfoldtext'
 Plug 'ConradIrwin/vim-bracketed-paste'
 Plug 'rking/ag.vim'
+Plug 'ntpeters/vim-airline-colornum'
 
 "}}}
 " Colorschemes {{{
@@ -96,7 +97,7 @@ Plug 'alvan/vim-closetag'
 " }}}
 " Snippets & AutoComplete {{{
 
-if WINDOWS()
+if has('lua') && (version >= 704 || version == 703 && has('patch885'))
     Plug 'Shougo/neocomplete.vim'
     let g:completionEngine = 'neocomplete'
 else
