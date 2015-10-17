@@ -61,7 +61,6 @@ Plug 'FelikZ/ctrlp-py-matcher'
 Plug 'Harenome/vim-neatfoldtext'
 Plug 'ConradIrwin/vim-bracketed-paste'
 Plug 'rking/ag.vim'
-Plug 'ntpeters/vim-airline-colornum'
 
 "}}}
 " Colorschemes {{{
