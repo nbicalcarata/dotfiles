@@ -1002,6 +1002,14 @@ if has('gui_running')
     "set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ Plus\ Nerd\ File\ Types\ 11
 endif
 
+if has('gui_gtk') && has('gui_running') && LINUX()
+    let s:border = synIDattr(synIDtrans(hlID('Normal')), 'bg', 'gui')
+    exe 'silent !echo ''style "vimfix" { bg[NORMAL] = "' . escape(s:border, '#') . '" }'''.
+                \' > ~/.gtkrc-2.0'
+    exe 'silent !echo ''widget "vim-main-window.*GtkForm" style "vimfix"'''.
+                \' >> ~/.gtkrc-2.0'
+endif
+
 " }}}
 " Windows gvim settings {{{
   
