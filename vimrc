@@ -394,9 +394,7 @@ set pastetoggle=<F12>           " pastetoggle (sane indentation on pastes)
 " }}}
 " Colorschemes {{{
 
-let base16colorspace=256  " Access colors present in 256 colorspace
-"let g:kolor_bold=0
-colorscheme base16-paraiso
+colorscheme womprat
 source ~/dotfiles/color/rmbackground.vim
 
 " }}}
@@ -662,13 +660,6 @@ nnoremap <F9> :call JumpToCSS()<CR>
 
 " source http://stackoverflow.com/a/12835224
 " }}}
-" Base16 helper {{{
-
-"if filereadable(expand("~/.vimrc_background"))
-  "let base16colorspace=256
-  "source ~/.vimrc_background
-  "source ~/dotfiles/color/rmbackground.vim
-"endif
 
 hi Search cterm=NONE ctermfg=black
 hi CursorLineNr   cterm=bold
@@ -744,7 +735,7 @@ let g:replace_separators = 1
 let g:airline_powerline_fonts = 1
 let g:tmuxline_preset = 'full'
 let g:airline#extensions#tmuxline#snapshot_file = "~/dotfiles/snapshot_tmuxline"
-let g:airline_theme = 'dieciseis'
+let g:airline_theme = 'womprat'
 let g:airline#extensions#tabline#enabled = 1            " Activar tabline
 let g:airline#extensions#tabline#show_buffers = 0
 let g:airline#extensions#tabline#tab_min_count = 2
@@ -984,7 +975,7 @@ let g:NeatFoldTextFancy = 1
 " Webdevicons {{{
 
 "let g:webdevicons_conceal_nerdtree_brackets = 0
-"let g:WebDevIconsUnicodeDecorateFolderNodes = 1
+let g:WebDevIconsUnicodeDecorateFolderNodes = 0
 
 " }}}
 
@@ -1002,8 +993,8 @@ if has('gui_running')
     set wrap
     set lines=999 columns=999    " Start maximized
     set lazyredraw
-    colorscheme base16-paraiso
-    let g:airline_theme = 'base16'
+    colorscheme base16-default
+    let g:airline_theme = 'dieciseis'
     set guifont=Iosevka\ Regular\ 12
     "set guifont=Ubuntu\ Mono\ derivative\ Powerline\ Plus\ Nerd\ File\ Types\ 13
     "set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ Plus\ Nerd\ File\ Types\ 11
