@@ -152,7 +152,7 @@ if has('clipboard')
     endif
 endif
 
-set shortmess+=cfilmnrxoOtT                     " Abbrev. of messages (avoids 'hit enter')
+set shortmess+=filmnrxoOtT                     " Abbrev. of messages (avoids 'hit enter')
 set viewoptions=folds,options,cursor,unix,slash " Unix / Windows compatibility
 set virtualedit=onemore                         " Allow for cursor beyond last character
 set history=1000                                " Store a ton of history (default is 20)
@@ -197,6 +197,12 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.rar           " MacOSX/Linux
 " Autocmd rules {{{
 
 " Always switch to the current file directory {{{
+if LINUX()
+    augroup TransparentGVIM
+        autocmd!
+        autocmd GuiEnter * silent exec "!transset -a 0.85"
+    augroup END
+endif
 
 augroup SwitchCurrentFile
     autocmd!
