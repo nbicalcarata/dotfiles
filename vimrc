@@ -420,13 +420,13 @@ endif
 " }}}
 " Styling vertical splits {{{
 if LINUX()
-    "set fillchars=vert:│,diff:⎼,fold:⎼
-    set fillchars=vert:┃,diff:⎼,fold:⎼
+    set fillchars=vert:│,diff:⎼,fold:⎼
+    "set fillchars=vert:┃,diff:⎼,fold:⎼
 endif
 augroup OverrideSplitColor
     autocmd!
-    autocmd ColorScheme * highlight VertSplit cterm=NONE ctermbg=NONE
-    autocmd ColorScheme * highlight Folded    ctermbg=none
+    autocmd ColorScheme * highlight VertSplit guibg=NONE cterm=NONE ctermbg=NONE
+    autocmd ColorScheme * highlight Folded    guibg=NONE ctermbg=none
 augroup END
 
 " }}}
