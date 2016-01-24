@@ -730,7 +730,7 @@ let NERDTreeMapOpenVSplit='v'
 
 " }}}
 " Airline {{{
-let g:replace_separators = 1
+let g:replace_separators = 0
 let g:airline_powerline_fonts = 1
 let g:tmuxline_preset = 'full'
 let g:airline#extensions#tmuxline#snapshot_file = "~/dotfiles/snapshot_tmuxline"
