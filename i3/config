@@ -99,7 +99,7 @@ bindsym $mod+a focus parent
 bindsym $mod+z focus child
 
 # screen lock
-#bindsym $mod+shift+x exec ~/.config/i3/scripts/screenlock.sh
+#bindsym $mod+shift+x exec ~/.i3/scripts/screenlock.sh
 
 #set $workspace1 "1: "
 #set $workspace2 "2: "
@@ -196,7 +196,7 @@ client.urgent           #383a3b #383a3b     #ee0000
 bar {
     # Using custom i3status.conf
     #status_command i3blocks
-    status_command i3blocks -c ~/.config/i3/i3blocks.conf
+    status_command i3blocks -c ~/.i3/i3blocks.conf
     font pango:ubuntu bold 10
     #tray_output primary
     position top
@@ -269,7 +269,7 @@ mode "$mode_gaps_outer" {
         bindsym Escape mode "default"
 }
 
-set $i3exit ~/.config/i3/scripts/i3exit
+set $i3exit ~/.i3/scripts/i3exit
 set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (shift+s) shutdown
 
 mode "$mode_system" {
@@ -295,14 +295,14 @@ exec --no-startup-id /usr/bin/start-pulseaudio-x11
 exec --no-startup-id xcape -e '#66=Escape'
 exec --no-startup-id xhost +
 exec --no-startup-id caffeine
-exec --no-startup-id compton --config ~/.config/i3/compton.conf
+exec --no-startup-id compton --config ~/.i3/compton.conf
 exec --no-startup-id nitrogen --restore
 exec --no-startup-id nm-applet
 exec --no-startup-id gnome-sound-applet
 exec --no-startup-id diodon
 exec --no-startup-id redshift-gtk -l 24.0:-104.6 -t 6800:4100
 exec --no-startup-id "sh -c 'sleep 15; megasync'"
-exec xautolock -time 10 -locker ~/.config/i3/scripts/screenlock.sh
+exec xautolock -time 10 -locker ~/.i3/scripts/screenlock.sh
 exec --no-startup-id i3-msg 'workspace $workspace4; exec i3-sensible-terminal'
 exec --no-startup-id i3-msg 'workspace $workspace1; exec google-chrome'
 
