@@ -112,16 +112,16 @@ bindsym $mod+z focus child
 #set $workspace9 "9: "
 #set $workspace10 "10: "
 
-set $workspace1 "1: WEB"
-set $workspace2 "2: FILES"
-set $workspace3 "3: EDITOR"
-set $workspace4 "4: TERM"
+set $workspace1 "1"
+set $workspace2 "2"
+set $workspace3 "3"
+set $workspace4 "4"
 set $workspace5 "5"
 set $workspace6 "6"
 set $workspace7 "7"
 set $workspace8 "8"
-set $workspace9 "9: VM"
-set $workspace10 "10: MUSIC"
+set $workspace9 "9"
+set $workspace10 "10"
 
 
 # switch to workspace
@@ -220,7 +220,7 @@ for_window [class="^.*"] border pixel 3
 
 gaps inner 10
 #gaps outer 4
-gaps outer 20
+gaps outer 10
 
 smart_borders on
 
@@ -229,8 +229,6 @@ bindsym $mod+c workspace back_and_forth
 
 workspace $workspace1 gaps inner 0
 workspace $workspace1 gaps outer 0
-workspace $workspace9 gaps inner 30
-workspace $workspace9 gaps outer 30
 
 set $mode_gaps Gaps: (o) outer, (i) inner
 set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
