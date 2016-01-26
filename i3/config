@@ -55,10 +55,10 @@ bindsym $mod+k focus up
 bindsym $mod+l focus right
 
 # alternatively, you can use the cursor keys:
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
+#bindsym $mod+Left focus left
+#bindsym $mod+Down focus down
+#bindsym $mod+Up focus up
+#bindsym $mod+Right focus right
 
 # move focused window
 bindsym $mod+Shift+h move left
@@ -101,27 +101,27 @@ bindsym $mod+z focus child
 # screen lock
 #bindsym $mod+shift+x exec ~/.i3/scripts/screenlock.sh
 
-#set $workspace1 "1: "
-#set $workspace2 "2: "
-#set $workspace3 "3: "
-#set $workspace4 "4: "
+set $workspace1 "1: "
+set $workspace2 "2: "
+set $workspace3 "3: "
+set $workspace4 "4: "
+set $workspace5 "5: "
+set $workspace6 "6: "
+set $workspace7 "7: "
+set $workspace8 "8: "
+set $workspace9 "9: "
+set $workspace10 "10: "
+
+#set $workspace1 "1"
+#set $workspace2 "2"
+#set $workspace3 "3"
+#set $workspace4 "4"
 #set $workspace5 "5"
 #set $workspace6 "6"
 #set $workspace7 "7"
-#set $workspace8 "8: "
-#set $workspace9 "9: "
-#set $workspace10 "10: "
-
-set $workspace1 "1"
-set $workspace2 "2"
-set $workspace3 "3"
-set $workspace4 "4"
-set $workspace5 "5"
-set $workspace6 "6"
-set $workspace7 "7"
-set $workspace8 "8"
-set $workspace9 "9"
-set $workspace10 "10"
+#set $workspace8 "8"
+#set $workspace9 "9"
+#set $workspace10 "10"
 
 
 # switch to workspace
@@ -182,6 +182,8 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 bindsym $mod+p sticky toggle
 
+bindsym $mod+Left workspace prev
+bindsym $mod+Right workspace next
 #############################################################################
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
