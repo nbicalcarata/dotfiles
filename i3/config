@@ -42,7 +42,7 @@ set $text-color #ededed
 set $border-color #d64937
 set $hlfg-color #ffffff
 set $hlbg-color #d64937
-bindsym $mod+d exec rofi -show run -lines 5 -opacity "85" -bw 3 -hlbg "$hlbg-color" -hlfg "$hlfg-color" -bc "$bg-color" -bg "$bg-color" -fg "$text-color"
+bindsym $mod+d exec rofi -show run -opacity "85" -bw 3 -hlbg "$hlbg-color" -hlfg "$hlfg-color" -bc "$bg-color" -bg "$bg-color" -fg "$text-color"
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
