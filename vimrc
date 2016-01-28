@@ -743,6 +743,7 @@ let g:airline#extensions#whitespace#enabled = 0
 
 "Remove percentage
 "let g:airline_section_z = '%3p%% %{g:airline_symbols.linenr}%#__accent_bold#%4l%#__restore__#:%3v'
+let g:airline_section_c = airline#section#create(['%F'])
 let g:airline_section_z = ' %{g:airline_symbols.linenr}%#__accent_bold#%4l%#__restore__#/%L%/:%3v'
 
 " Short names
