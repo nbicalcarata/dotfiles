@@ -296,7 +296,8 @@ exec --no-startup-id xcape -e '#66=Escape'
 exec --no-startup-id xhost +
 exec --no-startup-id caffeine
 exec --no-startup-id compton --config ~/.i3/compton.conf
-exec --no-startup-id nitrogen --restore
+#exec --no-startup-id nitrogen --restore
+exec --no-startup-id variety
 exec --no-startup-id nm-applet
 exec --no-startup-id gnome-sound-applet
 exec --no-startup-id diodon
