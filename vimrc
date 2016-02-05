@@ -755,6 +755,15 @@ let g:airline_mode_map = {
     \ '' : 'S',
     \ }
 
+let g:airline#extensions#default#section_truncate_width = {
+      \ 'b': 79,
+      \ 'x': 60,
+      \ 'y': 88,
+      \ 'z': 45,
+      \ 'warning': 80,
+      \ 'error': 80,
+      \ }
+
 " Remove separators
 if get(g:, 'replace_separators', 1)
 
