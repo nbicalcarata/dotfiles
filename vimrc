@@ -73,6 +73,7 @@ Plug 'tomasr/molokai'
 Plug 'nbicalcarata/Muon'
 Plug 'vim-scripts/lilypink'
 Plug 'chriskempson/base16-vim'
+Plug 'vim-airline/vim-airline-themes'
 
 " }}}
 " Git {{{
