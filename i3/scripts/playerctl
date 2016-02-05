@@ -18,6 +18,10 @@ elif [[ "${BLOCK_BUTTON}" -eq 2 ]]; then
     $(playerctl ${ARGUMENTS} play-pause)
 elif [[ "${BLOCK_BUTTON}" -eq 3 ]]; then
     $(playerctl ${ARGUMENTS} next)
+elif [[ "${BLOCK_BUTTON}" -eq 4 ]]; then
+    $(rhythmbox-client --volume-up) # Scroll up, volume up
+elif [[ "${BLOCK_BUTTON}" -eq 5 ]]; then
+    $(rhythmbox-client --volume-down) # Scroll down, volume down
 fi
 
 PLAYER_STATUS=$(playerctl ${ARGUMENTS} status)
