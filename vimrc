@@ -994,8 +994,8 @@ if has('gui_running')
     set wrap
     set lines=999 columns=999    " Start maximized
     set lazyredraw
-    colorscheme base16-default
-    let g:airline_theme = 'dieciseis'
+    colorscheme base16-eighties
+    let g:airline_theme = 'base16_eighties'
     set guifont=Iosevka\ Regular\ 12
     "set guifont=Ubuntu\ Mono\ derivative\ Powerline\ Plus\ Nerd\ File\ Types\ 13
     "set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ Plus\ Nerd\ File\ Types\ 11
