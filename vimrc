@@ -197,12 +197,6 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.rar           " MacOSX/Linux
 " Autocmd rules {{{
 
 " Always switch to the current file directory {{{
-if LINUX()
-    augroup TransparentGVIM
-        autocmd!
-        autocmd GuiEnter * silent exec "!transset -a 0.85"
-    augroup END
-endif
 
 augroup SwitchCurrentFile
     autocmd!
@@ -664,7 +658,6 @@ nnoremap <F9> :call JumpToCSS()<CR>
 hi Search cterm=NONE ctermfg=black
 hi CursorLineNr   cterm=bold
 
-"}}}
 " Toggle between relative and absolute line numbers {{{
 
 function! NumberToggle()
@@ -982,6 +975,13 @@ let g:WebDevIconsUnicodeDecorateFolderNodes = 0
 
 " }}}
 " GUI Settings {{{
+if LINUX()
+    augroup TransparentGVIM
+        autocmd!
+        autocmd GuiEnter * silent exec "!transset -a 0.90"
+    augroup END
+    nnoremap <F4> :!transset -a -t 0.90<cr>
+endif
 
 if has('gui_running')
     set guioptions-=T           " Remove the toolbar
