@@ -1,6 +1,6 @@
 #!/bin/sh
 lock() {
-    ~/.config/i3/scripts/screenlock.sh
+    ~/.i3/scripts/screenlock.sh
 }
 
 case "$1" in
