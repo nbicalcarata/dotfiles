@@ -805,6 +805,11 @@ let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:20,results:20'
 
 " CtrlP mappings
 nnoremap <leader>b :CtrlPBuffer<CR>
+let g:ctrlp_prompt_mappings = {
+    \ 'PrtBS()':              ['<c-h>'],
+    \ 'PrtCurLeft()':         ['<left>', '<c-^>'],
+    \ 'PrtCurRight()':        ['<c-l>', '<right>'],
+    \ }
 
 " Speed up search with ctrlp-py-matcher
 let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
