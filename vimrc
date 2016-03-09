@@ -387,8 +387,9 @@ set pastetoggle=<F12>           " pastetoggle (sane indentation on pastes)
 " }}}
 " Colorschemes {{{
 
-colorscheme womprat
-source ~/dotfiles/color/rmbackground.vim
+colorscheme jellybeans
+"let g:jellybeans_use_lowcolor_black = 0
+"source ~/dotfiles/color/rmbackground.vim
 
 " }}}
 " Cursor line {{{
