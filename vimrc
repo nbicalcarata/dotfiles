@@ -415,10 +415,17 @@ if LINUX()
     set fillchars=vert:│,diff:⎼,fold:⎼
     "set fillchars=vert:┃,diff:⎼,fold:⎼
 endif
-augroup OverrideSplitColor
+
+augroup OverrideColor
     autocmd!
     autocmd ColorScheme * highlight VertSplit guibg=NONE cterm=NONE ctermbg=NONE
     autocmd ColorScheme * highlight Folded    guibg=NONE ctermbg=none
+    autocmd ColorScheme * highlight Number    guibg=NONE ctermbg=none
+    autocmd ColorScheme * highlight LineNr    guibg=NONE ctermbg=none
+    autocmd ColorScheme * highlight GitGutterAdd guibg=NONE ctermbg=none
+    autocmd ColorScheme * highlight GitGutterChange guibg=NONE ctermbg=none
+    autocmd ColorScheme * highlight GitGutterDelete guibg=NONE ctermbg=none
+    autocmd ColorScheme * highlight GitGutterChangeDelete guibg=NONE ctermbg=none
 augroup END
 
 " }}}
