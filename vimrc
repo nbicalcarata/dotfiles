@@ -122,6 +122,7 @@ Plug 'alfredodeza/pytest.vim'
 " PHP {{{
 
 Plug 'StanAngeloff/php.vim'
+Plug 'jwalton512/vim-blade'
 
 " }}}
 
