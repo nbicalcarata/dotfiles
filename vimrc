@@ -878,6 +878,7 @@ elseif exists('g:completionEngine')
 	let g:{g:completionEngine}#enable_at_startup=1
 	let g:{g:completionEngine}#enable_smart_case=1
 	let g:{g:completionEngine}#sources#syntax#min_keyword_length=3
+	let g:{g:completionEngine}#max_list=10
 	let g:{g:completionEngine}#auto_completion_start_length=3
 	let g:{g:completionEngine}#sources#dictionary#dictionaries={  'default' : '' }
 	let g:{g:completionEngine}#sources#omni#input_patterns={}
