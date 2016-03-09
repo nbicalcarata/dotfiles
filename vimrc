@@ -53,7 +53,7 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-notes'
 Plug 'dhruvasagar/vim-vinegar'
-Plug 'ryanoasis/vim-webdevicons'
+"Plug 'ryanoasis/vim-webdevicons'
 "Plug '907th/vim-auto-save'
 Plug 'mbbill/undotree'
 Plug 'FelikZ/ctrlp-py-matcher'
@@ -74,6 +74,7 @@ Plug 'nbicalcarata/Muon'
 Plug 'vim-scripts/lilypink'
 Plug 'chriskempson/base16-vim'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'morhetz/gruvbox'
 
 " }}}
 " Git {{{
@@ -121,6 +122,7 @@ Plug 'alfredodeza/pytest.vim'
 " PHP {{{
 
 Plug 'StanAngeloff/php.vim'
+Plug 'jwalton512/vim-blade'
 
 " }}}
 
@@ -249,7 +251,7 @@ augroup END
 
 augroup CloseVimNerdtree
     autocmd!
-    autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+    autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 augroup END
 
 " }}}
@@ -318,16 +320,13 @@ augroup END
 "let g:minimap_highlight='LineNr'
 
 " }}}
-"  PHP Override Higlighting {{{
-
-function! PhpSyntaxOverride()
-    hi! def link phpDocTags  phpDefine
-    hi! def link phpDocParam phpType
-endfunction
-
-augroup phpSyntaxOverride
+" }}}
+" PHP with html syntax {{{
+  
+augroup phpLaravel
     autocmd!
-    autocmd FileType php call PhpSyntaxOverride()
+    autocmd BufRead,BufNewFile *.php set filetype=php.laravel.html
+    autocmd BufRead,BufNewFile *.blade.php set filetype=blade.html
 augroup END
 
 " }}}
@@ -388,8 +387,9 @@ set pastetoggle=<F12>           " pastetoggle (sane indentation on pastes)
 " }}}
 " Colorschemes {{{
 
-colorscheme womprat
-source ~/dotfiles/color/rmbackground.vim
+colorscheme jellybeans
+"let g:jellybeans_use_lowcolor_black = 0
+"source ~/dotfiles/color/rmbackground.vim
 
 " }}}
 " Cursor line {{{
@@ -415,10 +415,17 @@ if LINUX()
     set fillchars=vert:│,diff:⎼,fold:⎼
     "set fillchars=vert:┃,diff:⎼,fold:⎼
 endif
-augroup OverrideSplitColor
+
+augroup OverrideColor
     autocmd!
     autocmd ColorScheme * highlight VertSplit guibg=NONE cterm=NONE ctermbg=NONE
     autocmd ColorScheme * highlight Folded    guibg=NONE ctermbg=none
+    autocmd ColorScheme * highlight Number    guibg=NONE ctermbg=none
+    autocmd ColorScheme * highlight LineNr    guibg=NONE ctermbg=none
+    autocmd ColorScheme * highlight GitGutterAdd guibg=NONE ctermbg=none
+    autocmd ColorScheme * highlight GitGutterChange guibg=NONE ctermbg=none
+    autocmd ColorScheme * highlight GitGutterDelete guibg=NONE ctermbg=none
+    autocmd ColorScheme * highlight GitGutterChangeDelete guibg=NONE ctermbg=none
 augroup END
 
 " }}}
@@ -713,7 +720,7 @@ map <leader>e :NERDTreeFind<CR>
 let NERDTreeShowBookmarks=0
 let NERDTreeIgnore=['\.pyc', '\.class', '\~$', '\.swo$', '\.swp$', '\.hg', '\.svn', '\.bzr']
 let NERDTreeChDirMode=2
-let NERDTreeQuitOnOpen=1
+let NERDTreeQuitOnOpen=0
 let NERDTreeMouseMode=2
 let NERDTreeShowHidden=0
 let NERDTreeKeepTreeInNewTab=1
@@ -728,7 +735,7 @@ let g:replace_separators = 0
 let g:airline_powerline_fonts = 1
 let g:tmuxline_preset = 'full'
 let g:airline#extensions#tmuxline#snapshot_file = "~/dotfiles/snapshot_tmuxline"
-let g:airline_theme = 'womprat'
+let g:airline_theme = 'jellybeans'
 let g:airline#extensions#tabline#enabled = 1            " Activar tabline
 let g:airline#extensions#tabline#show_buffers = 0
 let g:airline#extensions#tabline#tab_min_count = 2
@@ -794,14 +801,14 @@ let g:ctrlp_cmd = 'CtrlPMixed'
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-  \ 'file': '\v\.(exe|so|dll|pyc|class|pdf|jpg|jpeg|JPG|mp3|mp4)$',
+  \ 'file': '\v\.(exe|so|dll|pyc|class|pdf|jpg|jpeg|JPG|mp3|mp4|mov|mp4|srt)$',
   \ }
 let g:ctrlp_use_caching = 1
 let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
 let g:ctrlp_clear_cache_on_exit = 0
 let g:ctrlp_open_new_file = 'r'                        " Open new file in current window
 let g:ctrlp_mruf_max = 250
-let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:20,results:20'
+let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:15,results:15'
 
 " CtrlP mappings
 nnoremap <leader>b :CtrlPBuffer<CR>
@@ -871,6 +878,7 @@ elseif exists('g:completionEngine')
 	let g:{g:completionEngine}#enable_at_startup=1
 	let g:{g:completionEngine}#enable_smart_case=1
 	let g:{g:completionEngine}#sources#syntax#min_keyword_length=3
+	let g:{g:completionEngine}#max_list=10
 	let g:{g:completionEngine}#auto_completion_start_length=3
 	let g:{g:completionEngine}#sources#dictionary#dictionaries={  'default' : '' }
 	let g:{g:completionEngine}#sources#omni#input_patterns={}
@@ -880,6 +888,7 @@ elseif exists('g:completionEngine')
 	inoremap <expr><C-l>     {g:completionEngine}#complete_common_string()
 	inoremap <expr><BS>      {g:completionEngine}#smart_close_popup()."\<C-h>"
 	inoremap <expr><TAB>     pumvisible() ? "\<C-n>" : "\<TAB>"
+    set completeopt-=preview
 endif
 " }}}
 " UltiSnips {{{
@@ -1010,8 +1019,9 @@ if has('gui_running')
     set lazyredraw
     colorscheme base16-eighties
     let g:airline_theme = 'base16_eighties'
-    set guifont=Iosevka\ Regular\ 12
-    "set guifont=Ubuntu\ Mono\ derivative\ Powerline\ Plus\ Nerd\ File\ Types\ 13
+    set guifont=Hack\ Regular\ 10
+    "set guifont=Iosevka\ Regular\ 12
+    "set guifont=Ubuntu\ Mono\ derivative\ Powerline\ Plus\ Nerd\ File\ Types\ 12
     "set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ Plus\ Nerd\ File\ Types\ 11
 endif
 
