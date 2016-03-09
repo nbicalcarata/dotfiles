@@ -808,7 +808,7 @@ let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
 let g:ctrlp_clear_cache_on_exit = 0
 let g:ctrlp_open_new_file = 'r'                        " Open new file in current window
 let g:ctrlp_mruf_max = 250
-let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:20,results:20'
+let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:15,results:15'
 
 " CtrlP mappings
 nnoremap <leader>b :CtrlPBuffer<CR>
