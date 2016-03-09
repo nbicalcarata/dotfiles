@@ -320,16 +320,13 @@ augroup END
 "let g:minimap_highlight='LineNr'
 
 " }}}
-"  PHP Override Higlighting {{{
-
-function! PhpSyntaxOverride()
-    hi! def link phpDocTags  phpDefine
-    hi! def link phpDocParam phpType
-endfunction
-
-augroup phpSyntaxOverride
+" }}}
+" PHP with html syntax {{{
+  
+augroup phpLaravel
     autocmd!
-    autocmd FileType php call PhpSyntaxOverride()
+    autocmd BufRead,BufNewFile *.php set filetype=php.laravel.html
+    autocmd BufRead,BufNewFile *.blade.php set filetype=blade.html
 augroup END
 
 " }}}
