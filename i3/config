@@ -200,7 +200,8 @@ bar {
     #status_command i3blocks
     status_command i3blocks -c ~/.i3/i3blocks.conf
     font pango:ubuntu bold 10
-    #tray_output primary
+    tray_output VGA-0
+    #tray_output DVI-0
     position top
 
     colors {
