@@ -888,6 +888,7 @@ elseif exists('g:completionEngine')
 	inoremap <expr><C-l>     {g:completionEngine}#complete_common_string()
 	inoremap <expr><BS>      {g:completionEngine}#smart_close_popup()."\<C-h>"
 	inoremap <expr><TAB>     pumvisible() ? "\<C-n>" : "\<TAB>"
+    set completeopt-=preview
 endif
 " }}}
 " UltiSnips {{{
