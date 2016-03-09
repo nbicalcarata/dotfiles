@@ -801,7 +801,7 @@ let g:ctrlp_cmd = 'CtrlPMixed'
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-  \ 'file': '\v\.(exe|so|dll|pyc|class|pdf|jpg|jpeg|JPG|mp3|mp4)$',
+  \ 'file': '\v\.(exe|so|dll|pyc|class|pdf|jpg|jpeg|JPG|mp3|mp4|mov|mp4|srt)$',
   \ }
 let g:ctrlp_use_caching = 1
 let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
