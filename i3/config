@@ -102,7 +102,8 @@ bindsym $mod+z focus child
 #bindsym $mod+shift+x exec ~/.i3/scripts/screenlock.sh
 
 set $workspace1 "1: "
-set $workspace2 "2: "
+#set $workspace2 "2: "
+set $workspace2 "2: "
 set $workspace3 "3: "
 set $workspace4 "4: "
 set $workspace5 "5: "
