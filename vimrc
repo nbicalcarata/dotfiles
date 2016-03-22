@@ -1000,11 +1000,10 @@ let g:WebDevIconsUnicodeDecorateFolderNodes = 0
 " }}}
 " GUI Settings {{{
 if LINUX()
-    augroup TransparentGVIM
-        autocmd!
-        autocmd GuiEnter * silent exec "!transset -a 0.90"
+    augroup TransparentGVIM autocmd!
+        autocmd GuiEnter * silent exec "!transset -a 0.97"
     augroup END
-    nnoremap <F4> :!transset -a -t 0.90<cr>
+    nnoremap <F4> :!transset -a -t 0.97<CR>
 endif
 
 if has('gui_running')
