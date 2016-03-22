@@ -221,7 +221,7 @@ bar {
 
 
 # Gaps config
-for_window [class="^.*"] border pixel 3
+for_window [class="^.*"] border pixel 2
 
 gaps inner 10
 gaps outer 10
