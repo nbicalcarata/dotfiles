@@ -83,6 +83,7 @@ Plug 'mattn/webapi-vim'
 Plug 'mattn/gist-vim'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
+Plug 'cohama/agit.vim'
 
 " }}}
 " Html {{{
@@ -999,11 +1000,10 @@ let g:WebDevIconsUnicodeDecorateFolderNodes = 0
 " }}}
 " GUI Settings {{{
 if LINUX()
-    augroup TransparentGVIM
-        autocmd!
-        autocmd GuiEnter * silent exec "!transset -a 0.90"
+    augroup TransparentGVIM autocmd!
+        autocmd GuiEnter * silent exec "!transset -a 0.97"
     augroup END
-    nnoremap <F4> :!transset -a -t 0.90<cr>
+    nnoremap <F4> :!transset -a -t 0.97<CR>
 endif
 
 if has('gui_running')
@@ -1019,7 +1019,7 @@ if has('gui_running')
     set lazyredraw
     colorscheme base16-eighties
     let g:airline_theme = 'base16_eighties'
-    set guifont=Hack\ Regular\ 10
+    set guifont=Hack\ Regular\ 11
     "set guifont=Iosevka\ Regular\ 12
     "set guifont=Ubuntu\ Mono\ derivative\ Powerline\ Plus\ Nerd\ File\ Types\ 12
     "set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ Plus\ Nerd\ File\ Types\ 11

@@ -13,7 +13,7 @@ set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:ubuntu bold 9
+font pango:ubuntu bold 10
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -102,7 +102,7 @@ bindsym $mod+z focus child
 #bindsym $mod+shift+x exec ~/.i3/scripts/screenlock.sh
 
 set $workspace1 "1: "
-set $workspace2 "2: "
+set $workspace2 "2: "
 set $workspace3 "3: "
 set $workspace4 "4: "
 set $workspace5 "5: "
@@ -137,16 +137,16 @@ bindsym Shift+F9 workspace $workspace9
 bindsym Shift+F10 workspace $workspace10
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace $workspace1
-bindsym $mod+Shift+2 move container to workspace $workspace2
-bindsym $mod+Shift+3 move container to workspace $workspace3
-bindsym $mod+Shift+4 move container to workspace $workspace4
-bindsym $mod+Shift+5 move container to workspace $workspace5
-bindsym $mod+Shift+6 move container to workspace $workspace6
-bindsym $mod+Shift+7 move container to workspace $workspace7
-bindsym $mod+Shift+8 move container to workspace $workspace8
-bindsym $mod+Shift+9 move container to workspace $workspace9
-bindsym $mod+Shift+0 move container to workspace $workspace10
+bindsym $mod+Shift+F1 move container to workspace $workspace1
+bindsym $mod+Shift+F2 move container to workspace $workspace2
+bindsym $mod+Shift+F3 move container to workspace $workspace3
+bindsym $mod+Shift+F4 move container to workspace $workspace4
+bindsym $mod+Shift+F5 move container to workspace $workspace5
+bindsym $mod+Shift+F6 move container to workspace $workspace6
+bindsym $mod+Shift+F7 move container to workspace $workspace7
+bindsym $mod+Shift+F8 move container to workspace $workspace8
+bindsym $mod+Shift+F9 move container to workspace $workspace9
+bindsym $mod+Shift+F10 move container to workspace $workspace10
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -199,9 +199,12 @@ bar {
     # Using custom i3status.conf
     #status_command i3blocks
     status_command i3blocks -c ~/.i3/i3blocks.conf
-    font pango:ubuntu bold 10
-    #tray_output primary
+    font pango:ubuntu bold 9
+    tray_output VGA-0
+    #tray_output DVI-0
     position top
+    tray_padding 4
+    height 26
 
     colors {
         background #2d2d2d
@@ -218,10 +221,9 @@ bar {
 
 
 # Gaps config
-for_window [class="^.*"] border pixel 3
+for_window [class="^.*"] border pixel 2
 
 gaps inner 10
-#gaps outer 4
 gaps outer 10
 
 smart_borders on
@@ -231,6 +233,9 @@ bindsym $mod+c workspace back_and_forth
 
 workspace $workspace1 gaps inner 0
 workspace $workspace1 gaps outer 0
+
+workspace $workspace2 gaps inner 0
+workspace $workspace2 gaps outer 0
 
 set $mode_gaps Gaps: (o) outer, (i) inner
 set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
@@ -296,15 +301,14 @@ exec --no-startup-id xcape -e '#66=Escape'
 exec --no-startup-id compton --config ~/.i3/compton.conf
 exec --no-startup-id /usr/bin/variety
 exec --no-startup-id xhost +
-exec --no-startup-id caffeine
+exec --no-startup-id caffeine-indicator
 #exec --no-startup-id nitrogen --restore
 exec --no-startup-id nm-applet
-exec --no-startup-id gnome-sound-applet
 exec --no-startup-id diodon
 exec --no-startup-id redshift-gtk -l 24.0:-104.6 -t 6800:4100
 exec --no-startup-id indicator-kdeconnect
 exec --no-startup-id megasync
 exec --no-startup-id xautolock -time 10 -locker ~/.i3/scripts/screenlock.sh
 #exec --no-startup-id i3-msg 'workspace $workspace2; exec i3-sensible-terminal'
-exec --no-startup-id i3-msg 'workspace $workspace1; exec google-chrome'
+#exec --no-startup-id i3-msg 'workspace $workspace1; exec google-chrome'
 
