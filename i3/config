@@ -309,6 +309,7 @@ exec --no-startup-id diodon
 exec --no-startup-id redshift-gtk -l 24.0:-104.6 -t 6800:4100
 exec --no-startup-id indicator-kdeconnect
 exec --no-startup-id megasync
+exec --no-startup-id volti
 exec --no-startup-id xautolock -time 10 -locker ~/.i3/scripts/screenlock.sh
 #exec --no-startup-id i3-msg 'workspace $workspace2; exec i3-sensible-terminal'
 #exec --no-startup-id i3-msg 'workspace $workspace1; exec google-chrome'
