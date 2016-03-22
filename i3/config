@@ -235,8 +235,8 @@ bindsym $mod+c workspace back_and_forth
 workspace $workspace1 gaps inner 0
 workspace $workspace1 gaps outer 0
 
-workspace $workspace2 gaps inner 0
-workspace $workspace2 gaps outer 0
+workspace $workspace2 gaps inner 10
+workspace $workspace2 gaps outer 10
 
 set $mode_gaps Gaps: (o) outer, (i) inner
 set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
