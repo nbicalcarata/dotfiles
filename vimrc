@@ -1019,7 +1019,7 @@ if has('gui_running')
     set lazyredraw
     colorscheme base16-eighties
     let g:airline_theme = 'base16_eighties'
-    set guifont=Hack\ Regular\ 11
+    set guifont=Hack\ Regular\ 10
     "set guifont=Iosevka\ Regular\ 12
     "set guifont=Ubuntu\ Mono\ derivative\ Powerline\ Plus\ Nerd\ File\ Types\ 12
     "set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ Plus\ Nerd\ File\ Types\ 11
