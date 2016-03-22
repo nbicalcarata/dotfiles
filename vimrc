@@ -83,6 +83,7 @@ Plug 'mattn/webapi-vim'
 Plug 'mattn/gist-vim'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
+Plug 'cohama/agit.vim'
 
 " }}}
 " Html {{{
