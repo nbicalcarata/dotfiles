@@ -199,10 +199,12 @@ bar {
     # Using custom i3status.conf
     #status_command i3blocks
     status_command i3blocks -c ~/.i3/i3blocks.conf
-    font pango:ubuntu bold 10
+    font pango:ubuntu bold 9
     tray_output VGA-0
     #tray_output DVI-0
     position top
+    tray_padding 4
+    height 26
 
     colors {
         background #2d2d2d
