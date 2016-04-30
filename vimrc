@@ -722,7 +722,7 @@ let g:syntastic_loc_list_= 5
 " }}}
 " NerdTree {{{
 
-map <C-e> :NERDTreeToggle<CR>:NERDTreeMirror<CR>
+map <C-e> :NERDTreeToggle<CR>:silent NERDTreeMirror<CR>
 map <leader>e :NERDTreeFind<CR>
 let NERDTreeShowBookmarks=0
 let NERDTreeIgnore=['\.pyc', '\.class', '\~$', '\.swo$', '\.swp$', '\.hg', '\.svn', '\.bzr']
