@@ -342,7 +342,6 @@ augroup END
 
 " }}}
 
-" }}}
 " Visual settings {{{
 
 " General {{{
@@ -390,7 +389,6 @@ set pastetoggle=<F12>           " pastetoggle (sane indentation on pastes)
 
 colorscheme jellybeans
 "let g:jellybeans_use_lowcolor_black = 0
-"source ~/dotfiles/color/rmbackground.vim
 
 " }}}
 " Cursor line {{{
@@ -661,6 +659,14 @@ endfunction
 nnoremap <F9> :call JumpToCSS()<CR>
 
 " source http://stackoverflow.com/a/12835224
+" }}}
+" Set airline and colorscheme color {{{
+
+function! Base16(scheme)
+    execute 'colorscheme base16-' . a:scheme
+    let g:airline_theme = 'base16_' . a:scheme
+endfunction
+
 " }}}
 
 hi Search cterm=NONE ctermfg=black
@@ -1017,8 +1023,9 @@ if has('gui_running')
     set wrap
     set lines=999 columns=999    " Start maximized
     set lazyredraw
-    colorscheme base16-eighties
-    let g:airline_theme = 'base16_eighties'
+    "colorscheme base16-paraiso
+    "let g:airline_theme = 'base16_paraiso'
+    call Base16("railscasts")
     set guifont=Hack\ Regular\ 11
     "set guifont=Iosevka\ Regular\ 12
     "set guifont=Ubuntu\ Mono\ derivative\ Powerline\ Plus\ Nerd\ File\ Types\ 12
