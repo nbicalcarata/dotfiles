@@ -40,7 +40,6 @@ Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'tomtom/tlib_vim'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
-Plug 'ctrlpvim/ctrlp.vim'
 "Plug 'majutsushi/tagbar'
 Plug 'bling/vim-airline'
 Plug 'mklabs/vim-fetch'
@@ -56,11 +55,13 @@ Plug 'dhruvasagar/vim-vinegar'
 "Plug 'ryanoasis/vim-webdevicons'
 "Plug '907th/vim-auto-save'
 Plug 'mbbill/undotree'
-Plug 'FelikZ/ctrlp-py-matcher'
 Plug 'Harenome/vim-neatfoldtext'
 Plug 'ConradIrwin/vim-bracketed-paste'
 Plug 'rking/ag.vim'
-
+Plug 'Shougo/unite.vim'
+Plug 'Shougo/neomru.vim'
+Plug 'Shougo/vimproc.vim', { 'do': 'make' }
+Plug 'Shougo/neoyank.vim'
 "}}}
 " Colorschemes {{{
 
@@ -508,7 +509,7 @@ nnoremap <Leader>n :call NumberToggle()<cr>
 nmap <leader>l :set list!<CR>
 
 " Ag
-nnoremap <leader>a :Ag 
+"nnoremap <leader>a :Ag 
 
 " Tmux + vim special keys compatibility {{{
 
@@ -802,45 +803,59 @@ if get(g:, 'replace_separators', 1)
 endif
 
 " }}}
-" CtrlP {{{
+" Unite {{{
+"
+nnoremap <leader>f :<C-u>Unite -buffer-name=files file<CR>
+nnoremap <leader>a :<C-u>Unite -buffer-name=files_rec file_rec/async:!<CR>
+nnoremap <silent> <leader>b :<C-u>Unite -buffer-name=buffers buffer bookmark<CR>
+nnoremap <leader>r :<C-u>Unite -buffer-name=mru file_mru<cr>
+nnoremap <leader>y :<C-u>Unite -buffer-name=yank history/yank<cr>
+let g:unite_source_codesearch_ignore_case = 1
+call unite#filters#matcher_default#use(['matcher_fuzzy'])
+call unite#custom#source('file,file/new,file_mru,buffer,file_rec',
+    \ 'matchers', 'matcher_fuzzy')
+let g:unite_data_directory='~/.vim/.cache/unite'
+let g:unite_source_history_yank_enable=1
+if executable('ag')
+    let g:unite_source_grep_command = 'ag'
+    let g:unite_source_grep_default_opts='-i -r --line-numbers --nocolor --nogroup -S'
+    let g:unite_source_grep_recursive_opt = ''
+endif
 
-let g:ctrlp_cmd = 'CtrlPMixed'
-let g:ctrlp_working_path_mode = 'ra'
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-  \ 'file': '\v\.(exe|so|dll|pyc|class|pdf|jpg|jpeg|JPG|mp3|mp4|mov|mp4|srt)$',
-  \ }
-let g:ctrlp_use_caching = 1
-let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
-let g:ctrlp_clear_cache_on_exit = 0
-let g:ctrlp_open_new_file = 'r'                        " Open new file in current window
-let g:ctrlp_mruf_max = 250
-let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:15,results:15'
+" Start insert.
+call unite#custom#profile('default', 'context', {
+\   'start_insert': 1
+\ })
 
-" CtrlP mappings
-nnoremap <leader>b :CtrlPBuffer<CR>
-let g:ctrlp_prompt_mappings = {
-    \ 'PrtBS()':              ['<c-h>'],
-    \ 'PrtCurLeft()':         ['<left>', '<c-^>'],
-    \ 'PrtCurRight()':        ['<c-l>', '<right>'],
-    \ }
+" Like ctrlp.vim settings.
+call unite#custom#profile('default', 'context', {
+\   'start_insert': 1,
+\   'winheight': 20,
+\   'direction': 'botright',
+\ })
 
-" Speed up search with ctrlp-py-matcher
-let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
+" settings for neomru
+let g:neomru#file_mru_limit = 10
+let g:neomru#file_mru_ignore_pattern = 'COMMIT_EDITMSG'
 
-" Indexing with the_silver_searcher, install with: sudo dnf install the_silver_searcher
-"if executable('ag')
-  "" Use Ag over Grep
-  "set grepprg=ag\ --nogroup\ --nocolor
+autocmd FileType unite call s:unite_settings()
+function! s:unite_settings()
+  nmap <silent><buffer><expr> Enter unite#do_action('switch')
+  nmap <silent><buffer><expr> <C-t> unite#do_action('tabswitch')
+  nmap <silent><buffer><expr> <C-h> unite#do_action('splitswitch')
+  nmap <silent><buffer><expr> <C-v> unite#do_action('vsplitswitch')
 
-  "" Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  "let g:ctrlp_user_command = 'ag %s -l --nocolor -g "" %s'
+  imap <silent><buffer><expr> Enter unite#do_action('switch')
+  imap <silent><buffer><expr> <C-t> unite#do_action('tabswitch')
+  imap <silent><buffer><expr> <C-h> unite#do_action('splitswitch')
+  imap <silent><buffer><expr> <C-v> unite#do_action('vsplitswitch')
 
-  "" ag is fast enough that CtrlP doesn't need to cache
-  "let g:ctrlp_use_caching = 0
+"  map <buffer> <C-p> <Plug>(unite_toggle_auto_preview)
+
+  nnoremap <ESC> :UniteClose<cr>
+endfunction
 
 if WINDOWS()
-    let s:ctrlp_fallback = 'dir %s /-n /b /s /a-d'
 endif
 
 " }}}
