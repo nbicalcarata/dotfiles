@@ -803,7 +803,9 @@ nnoremap <leader>a :<C-u>Unite -buffer-name=files_rec file_rec/async:!<CR>
 nnoremap <silent> <leader>b :<C-u>Unite -buffer-name=buffers buffer bookmark<CR>
 nnoremap <leader>r :<C-u>Unite -buffer-name=mru file_mru<cr>
 nnoremap <leader>y :<C-u>Unite -buffer-name=yank history/yank<cr>
+nnoremap <leader>/ :<C-u>Unite -buffer-name=line -start-insert line <cr>
 let g:unite_source_codesearch_ignore_case = 1
+let g:unite_prompt='> '
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
 call unite#custom#source('file,file/new,file_mru,buffer,file_rec',
     \ 'matchers', 'matcher_fuzzy')
@@ -842,10 +844,7 @@ function! s:unite_settings()
   imap <silent><buffer><expr> <C-t> unite#do_action('tabswitch')
   imap <silent><buffer><expr> <C-h> unite#do_action('splitswitch')
   imap <silent><buffer><expr> <C-v> unite#do_action('vsplitswitch')
-
 "  map <buffer> <C-p> <Plug>(unite_toggle_auto_preview)
-
-  nnoremap <ESC> :UniteClose<cr>
 endfunction
 
 if WINDOWS()
