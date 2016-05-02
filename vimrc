@@ -213,11 +213,11 @@ augroup END
 
 augroup RunningCode
     autocmd!
-    autocmd FileType python map <leader>r :w<CR>:!python %<CR>
-    autocmd FileType php map <leader>r :w<CR>:!php %<CR>
-    autocmd FileType bash map <leader>r :w<CR>:!./%<CR>
+    autocmd FileType python map <leader>e :w<CR>:!python %<CR>
+    autocmd FileType php map <leader>e :w<CR>:!php %<CR>
+    autocmd FileType bash map <leader>e :w<CR>:!./%<CR>
     autocmd FileType java map <leader>c :w<CR>:!javac %<CR>
-    autocmd FileType java map <leader>r :w<CR>:!java %:r<CR>
+    autocmd FileType java map <leader>e :w<CR>:!java %:r<CR>
 augroup END
 
 " }}}
