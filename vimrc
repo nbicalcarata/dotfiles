@@ -451,12 +451,6 @@ noremap <C-n> :nohl<CR>
 vnoremap <C-n> :nohl<CR>
 inoremap <C-n> :nohl<CR>
 
-" Bind Ctrl+<movement> keys to move around the windows
-map <c-j> <c-w>j
-map <c-k> <c-w>k
-map <c-l> <c-w>l
-map <c-h> <c-w>h
-
 " Resizing windows
 nnoremap <C-up> <C-W>-
 nnoremap <C-down> <C-W>+
