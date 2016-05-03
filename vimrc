@@ -28,7 +28,6 @@ if empty(glob('~/' . basedir . '/autoload/plug.vim'))
         \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     autocmd VimEnter * PlugInstall
 endif
-
 call plug#begin('~/' . basedir . '/plugged')
 
 " }}}
@@ -57,7 +56,6 @@ Plug 'dhruvasagar/vim-vinegar'
 Plug 'mbbill/undotree'
 Plug 'Harenome/vim-neatfoldtext'
 Plug 'ConradIrwin/vim-bracketed-paste'
-Plug 'rking/ag.vim'
 Plug 'Shougo/unite.vim'
 Plug 'Shougo/neomru.vim'
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
@@ -76,6 +74,9 @@ Plug 'vim-scripts/lilypink'
 Plug 'chriskempson/base16-vim'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'morhetz/gruvbox'
+Plug 'AlessandroYorba/Alduin'
+Plug 'whatyouhide/vim-gotham'
+Plug 'AlessandroYorba/Sierra'
 
 " }}}
 " Git {{{
@@ -92,7 +93,6 @@ Plug 'cohama/agit.vim'
 Plug 'Valloric/MatchTagAlways'
 Plug 'chrisgillis/vim-bootstrap3-snippets'
 Plug 'mattn/emmet-vim'
-Plug 'hail2u/vim-css3-syntax'
 Plug 'jaxbot/browserlink.vim'
 Plug 'alvan/vim-closetag'
 
@@ -115,16 +115,14 @@ Plug 'jiangmiao/auto-pairs'
 " Python {{{
 
 Plug 'klen/python-mode'
-Plug 'python.vim'
 Plug 'python_match.vim'
 Plug 'jmcantrell/vim-virtualenv'
 Plug 'alfredodeza/pytest.vim'
 
 " }}}
-" PHP {{{
+" Syntax highlighting{{{
 
-Plug 'StanAngeloff/php.vim'
-Plug 'jwalton512/vim-blade'
+Plug 'sheerun/vim-polyglot'
 
 " }}}
 
@@ -388,7 +386,7 @@ set pastetoggle=<F12>           " pastetoggle (sane indentation on pastes)
 " }}}
 " Colorschemes {{{
 
-colorscheme jellybeans
+colorscheme alduin
 "let g:jellybeans_use_lowcolor_black = 0
 
 " }}}
@@ -736,7 +734,7 @@ let g:replace_separators = 0
 let g:airline_powerline_fonts = 1
 let g:tmuxline_preset = 'full'
 let g:airline#extensions#tmuxline#snapshot_file = "~/dotfiles/snapshot_tmuxline"
-let g:airline_theme = 'jellybeans'
+let g:airline_theme = 'hybrid'
 let g:airline#extensions#tabline#enabled = 1            " Activar tabline
 let g:airline#extensions#tabline#show_buffers = 0
 let g:airline#extensions#tabline#tab_min_count = 2
@@ -1030,9 +1028,15 @@ if has('gui_running')
     set wrap
     set lines=999 columns=999    " Start maximized
     set lazyredraw
-    "colorscheme base16-paraiso
-    "let g:airline_theme = 'base16_paraiso'
-    call Base16("railscasts")
+    " Dark Version of Alduin
+    "let g:alduin_Shout_Become_Ethereal = 1
+    "Starts at 5pm - Ends at 7am
+    "let g:alduin_Contract_Vampirism = 1
+    "let g:alduin_Shout_Aura_Whisper = 1
+    let g:alduin_Shout_Fire_Breath = 1
+    colorscheme alduin
+    let g:airline_theme = 'base16_default'
+    "call Base16("railscasts")
     set guifont=Hack\ Regular\ 11
     "set guifont=Iosevka\ Regular\ 12
     "set guifont=Ubuntu\ Mono\ derivative\ Powerline\ Plus\ Nerd\ File\ Types\ 12
