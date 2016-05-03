@@ -820,13 +820,6 @@ call unite#custom#profile('default', 'context', {
 \   'start_insert': 1
 \ })
 
-" Like ctrlp.vim settings.
-call unite#custom#profile('default', 'context', {
-\   'start_insert': 1,
-\   'winheight': 20,
-\   'direction': 'botright',
-\ })
-
 " settings for neomru
 let g:neomru#file_mru_limit = 10
 let g:neomru#file_mru_ignore_pattern = 'COMMIT_EDITMSG'
