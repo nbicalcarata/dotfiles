@@ -824,20 +824,6 @@ call unite#custom#profile('default', 'context', {
 let g:neomru#file_mru_limit = 10
 let g:neomru#file_mru_ignore_pattern = 'COMMIT_EDITMSG'
 
-autocmd FileType unite call s:unite_settings()
-function! s:unite_settings()
-  nmap <silent><buffer><expr> Enter unite#do_action('switch')
-  nmap <silent><buffer><expr> <C-t> unite#do_action('tabswitch')
-  nmap <silent><buffer><expr> <C-h> unite#do_action('splitswitch')
-  nmap <silent><buffer><expr> <C-v> unite#do_action('vsplitswitch')
-
-  imap <silent><buffer><expr> Enter unite#do_action('switch')
-  imap <silent><buffer><expr> <C-t> unite#do_action('tabswitch')
-  imap <silent><buffer><expr> <C-h> unite#do_action('splitswitch')
-  imap <silent><buffer><expr> <C-v> unite#do_action('vsplitswitch')
-"  map <buffer> <C-p> <Plug>(unite_toggle_auto_preview)
-endfunction
-
 if WINDOWS()
 endif
 
