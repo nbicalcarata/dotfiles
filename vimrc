@@ -60,6 +60,7 @@ Plug 'Shougo/unite.vim'
 Plug 'Shougo/neomru.vim'
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'Shougo/neoyank.vim'
+
 "}}}
 " Colorschemes {{{
 
@@ -738,7 +739,7 @@ nnoremap <leader>a :<C-u>Unite -buffer-name=files_rec file_rec/async:!<CR>
 nnoremap <silent> <leader>b :<C-u>Unite -buffer-name=buffers buffer bookmark<CR>
 nnoremap <leader>r :<C-u>Unite -buffer-name=mru file_mru<cr>
 nnoremap <leader>y :<C-u>Unite -buffer-name=yank history/yank<cr>
-nnoremap <leader>/ :<C-u>Unite -buffer-name=line -start-insert line <cr>
+nnoremap <leader>/ :<C-u>Unite -buffer-name=line line <cr>
 let g:unite_source_codesearch_ignore_case = 1
 let g:unite_prompt='> '
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
@@ -754,7 +755,8 @@ endif
 
 " Start insert.
 call unite#custom#profile('default', 'context', {
-\   'start_insert': 1
+\   'start_insert': 1,
+\   'silent': 1
 \ })
 
 " settings for neomru
