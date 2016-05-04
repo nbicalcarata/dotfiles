@@ -37,7 +37,7 @@ call plug#begin('~/' . basedir . '/plugged')
 
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'tomtom/tlib_vim'
-Plug 'scrooloose/nerdtree'
+Plug 'Shougo/vimfiler.vim'
 Plug 'scrooloose/nerdcommenter'
 "Plug 'majutsushi/tagbar'
 Plug 'bling/vim-airline'
@@ -47,7 +47,7 @@ Plug 'justinmk/vim-gtfo'
 Plug 'scrooloose/syntastic'
 Plug 'severin-lemaignan/vim-minimap'
 Plug 'benmills/vimux'
-Plug 'christoomey/vim-tmux-navigator'
+"Plug 'christoomey/vim-tmux-navigator'
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-notes'
 Plug 'dhruvasagar/vim-vinegar'
@@ -247,14 +247,6 @@ augroup OmniCompletion
     autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 augroup END
 " }}}
-" Close vim when the window left open is Nerdtree {{{
-
-augroup CloseVimNerdtree
-    autocmd!
-    autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-augroup END
-
-" }}}
 "No delay between Insert and Normal mode {{{
 
 augroup FastEscape
@@ -330,16 +322,6 @@ augroup phpLaravel
 augroup END
 
 " }}}
-" Nerdtree {{{
-
-augroup NerdtreeRules
-    autocmd!
-    autocmd FileType nerdtree setlocal nolist       " suppress whitespace highlighting
-    autocmd FileType nerdtree setlocal nofoldenable " suppress folding
-    autocmd FileType nerdtree setlocal colorcolumn= " no colorcolumn
-augroup END
-
-" }}}
 
 " Visual settings {{{
 
@@ -393,6 +375,8 @@ colorscheme alduin
 " Cursor line {{{
 
 set cursorline
+hi Search cterm=NONE ctermfg=black
+hi CursorLineNr   cterm=bold
 
 " }}}
 " Statusline {{{
@@ -578,19 +562,6 @@ endfunction
 call InitializeDirectories()
 
 " }}}
-" Initialize NERDTree as needed {{{
-
-function! NERDTreeInitAsNeeded()
-    redir => bufoutput
-    buffers!
-    redir END
-    let idx = stridx(bufoutput, "NERD_tree")
-    if idx > -1
-        NERDTreeMirror
-        NERDTreeFind
-        wincmd l
-    endif
-endfunction
 
 " }}}
 " Change status on tmux {{{
@@ -605,33 +576,6 @@ endfunction
 ""  endif
 "endfunction
 "au VimEnter * :call AddTmuxline()
-
-" }}}
-" NERDTree File highlighting {{{
-
-" FileType <> filetype
-function! NERDTreeHighlightFile(extension, fg, bg)
-    exec 'autocmd FileType nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
-    exec 'autocmd FileType nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg
-endfunction
-
-call NERDTreeHighlightFile('jade', 'green', 'none')
-call NERDTreeHighlightFile('ini', 'yellow', 'none')
-call NERDTreeHighlightFile('md', 'darkgrey', 'none')
-call NERDTreeHighlightFile('markdown', 'darkgrey', 'none')
-call NERDTreeHighlightFile('yml', 'yellow', 'none')
-call NERDTreeHighlightFile('config', 'yellow', 'none')
-call NERDTreeHighlightFile('conf', 'yellow', 'none')
-call NERDTreeHighlightFile('json', 'yellow', 'none')
-call NERDTreeHighlightFile('html', 'yellow', 'none')
-call NERDTreeHighlightFile('styl', 'cyan', 'none')
-call NERDTreeHighlightFile('css', 'cyan', 'none')
-call NERDTreeHighlightFile('coffee', 'Red', 'none')
-call NERDTreeHighlightFile('js', 'Red', 'none')
-call NERDTreeHighlightFile('php', 'Magenta', 'none')
-call NERDTreeHighlightFile('py', 'green', 'none')
-call NERDTreeHighlightFile('sh', 'grey', 'none')
-" source: https://github.com/scrooloose/nerdtree/issues/201#issuecomment-9954740"
 
 " }}}
 " Jump to CSS definition {{{
@@ -662,9 +606,6 @@ endfunction
 
 " }}}
 
-hi Search cterm=NONE ctermfg=black
-hi CursorLineNr   cterm=bold
-
 " Toggle between relative and absolute line numbers {{{
 
 function! NumberToggle()
@@ -691,7 +632,6 @@ nnoremap <silent> <leader>co :call g:ToggleColorColumn()<CR>
 
 " }}}
 
-" }}}
 " Plugin settings {{{
 
 " Syntastic {{{
@@ -713,20 +653,16 @@ endif
 let g:syntastic_loc_list_= 5
 
 " }}}
-" NerdTree {{{
+" Vimfiler {{{
+let g:vimfiler_as_default_explorer = 1
+map <C-e> :VimFilerExplorer<CR>
 
-map <C-e> :NERDTreeToggle<CR>:silent NERDTreeMirror<CR>
-let NERDTreeShowBookmarks=0
-let NERDTreeIgnore=['\.pyc', '\.class', '\~$', '\.swo$', '\.swp$', '\.hg', '\.svn', '\.bzr']
-let NERDTreeChDirMode=2
-let NERDTreeQuitOnOpen=0
-let NERDTreeMouseMode=2
-let NERDTreeShowHidden=0
-let NERDTreeKeepTreeInNewTab=1
-let g:nerdtree_tabs_open_on_gui_startup=0
-let NERDTreeMinimalUI=1
-let NERDTreeRespectWildIgnore=1
-let NERDTreeMapOpenVSplit='v'
+" Like Textmate icons.
+let g:vimfiler_tree_leaf_icon = ' '
+let g:vimfiler_tree_opened_icon = '▾'
+let g:vimfiler_tree_closed_icon = '▸'
+let g:vimfiler_file_icon = '-'
+let g:vimfiler_marked_file_icon = '*'
 
 " }}}
 " Airline {{{
@@ -795,7 +731,7 @@ endif
 
 " }}}
 " Unite {{{
-"
+
 nnoremap <leader>f :<C-u>Unite -buffer-name=files file<CR>
 nnoremap <leader>a :<C-u>Unite -buffer-name=files_rec file_rec/async:!<CR>
 nnoremap <silent> <leader>b :<C-u>Unite -buffer-name=buffers buffer bookmark<CR>
@@ -982,7 +918,6 @@ let g:NeatFoldTextFancy = 1
 " }}}
 " Webdevicons {{{
 
-"let g:webdevicons_conceal_nerdtree_brackets = 0
 let g:WebDevIconsUnicodeDecorateFolderNodes = 0
 
 " }}}
