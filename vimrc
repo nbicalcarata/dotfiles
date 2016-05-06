@@ -50,7 +50,6 @@ Plug 'benmills/vimux'
 "Plug 'christoomey/vim-tmux-navigator'
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-notes'
-Plug 'dhruvasagar/vim-vinegar'
 "Plug '907th/vim-auto-save'
 Plug 'mbbill/undotree'
 Plug 'Harenome/vim-neatfoldtext'
@@ -745,7 +744,7 @@ endif
 " }}}
 " Unite {{{
 
-nnoremap <C-P> :<C-u>Unite<CR>
+nnoremap <C-Space> :<C-u>Unite<CR>
 nnoremap <leader>f :<C-u>Unite -buffer-name=files file<CR>
 nnoremap <leader>a :<C-u>Unite -buffer-name=files_rec file_rec/async:!<CR>
 nnoremap <silent> <leader>b :<C-u>Unite -buffer-name=buffers buffer bookmark<CR>
