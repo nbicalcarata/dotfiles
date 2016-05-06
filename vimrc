@@ -51,7 +51,6 @@ Plug 'benmills/vimux'
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-notes'
 Plug 'dhruvasagar/vim-vinegar'
-"Plug 'ryanoasis/vim-webdevicons'
 "Plug '907th/vim-auto-save'
 Plug 'mbbill/undotree'
 Plug 'Harenome/vim-neatfoldtext'
@@ -60,6 +59,8 @@ Plug 'Shougo/unite.vim'
 Plug 'Shougo/neomru.vim'
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'Shougo/neoyank.vim'
+Plug 'Shougo/vimshell.vim'
+"Plug 'ryanoasis/vim-webdevicons'
 
 "}}}
 " Colorschemes {{{
@@ -87,6 +88,8 @@ Plug 'mattn/gist-vim'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'cohama/agit.vim'
+Plug 'chemzqm/unite-git-log'
+Plug 'chemzqm/vim-easygit'
 
 " }}}
 " Html {{{
@@ -155,7 +158,7 @@ if has('clipboard')
     endif
 endif
 
-set shortmess+=filmnrxoOtT                     " Abbrev. of messages (avoids 'hit enter')
+set shortmess+=afilmnrxoOtT                     " Abbrev. of messages (avoids 'hit enter')
 set viewoptions=folds,options,cursor,unix,slash " Unix / Windows compatibility
 set virtualedit=onemore                         " Allow for cursor beyond last character
 set history=1000                                " Store a ton of history (default is 20)
@@ -222,16 +225,16 @@ augroup END
 " }}}
 " Restore cursor to file position in previous editing session {{{
 
-function! ResCur()
-    if line("'\"") <= line("$")
-        normal! g`"
-        return 1
-    endif
-endfunction
-augroup resCur
-    autocmd!
-    autocmd BufWinEnter * call ResCur()
-augroup END
+"function! ResCur()
+    "if line("'\"") <= line("$")
+        "normal! g`"
+        "return 1
+    "endif
+"endfunction
+"augroup resCur
+    "autocmd!
+    "autocmd BufWinEnter * call ResCur()
+"augroup END
 
 " }}}
 "Omnicompletion {{{
@@ -290,6 +293,14 @@ augroup END
 augroup DisableListPreviewWindow
     autocmd!
     autocmd WinEnter * if &previewwindow | setlocal nolist | endif
+augroup END
+
+" }}}
+" Vimfiler rules {{{
+
+augroup VimfilerRules
+    autocmd!
+    autocmd FileType vimfiler setlocal nonumber     " no line number
 augroup END
 
 " }}}
@@ -369,6 +380,7 @@ set pastetoggle=<F12>           " pastetoggle (sane indentation on pastes)
 " }}}
 " Colorschemes {{{
 
+let g:alduin_Shout_Fire_Breath = 1
 colorscheme alduin
 "let g:jellybeans_use_lowcolor_black = 0
 
@@ -377,7 +389,7 @@ colorscheme alduin
 
 set cursorline
 hi Search cterm=NONE ctermfg=black
-hi CursorLineNr   cterm=bold
+"hi CursorLineNr   cterm=bold
 
 " }}}
 " Statusline {{{
@@ -402,9 +414,9 @@ endif
 augroup OverrideColor
     autocmd!
     autocmd ColorScheme * highlight VertSplit guibg=NONE cterm=NONE ctermbg=NONE
-    autocmd ColorScheme * highlight Folded    guibg=NONE ctermbg=none
-    autocmd ColorScheme * highlight Number    guibg=NONE ctermbg=none
-    autocmd ColorScheme * highlight LineNr    guibg=NONE ctermbg=none
+    "autocmd ColorScheme * highlight Folded    guibg=NONE ctermbg=none
+    "autocmd ColorScheme * highlight Number    guibg=NONE ctermbg=none
+    "autocmd ColorScheme * highlight LineNr    guibg=NONE ctermbg=none
     autocmd ColorScheme * highlight GitGutterAdd guibg=NONE ctermbg=none
     autocmd ColorScheme * highlight GitGutterChange guibg=NONE ctermbg=none
     autocmd ColorScheme * highlight GitGutterDelete guibg=NONE ctermbg=none
@@ -671,7 +683,7 @@ let g:replace_separators = 0
 let g:airline_powerline_fonts = 1
 let g:tmuxline_preset = 'full'
 let g:airline#extensions#tmuxline#snapshot_file = "~/dotfiles/snapshot_tmuxline"
-let g:airline_theme = 'hybrid'
+let g:airline_theme = 'tomorrow'
 let g:airline#extensions#tabline#enabled = 1            " Activar tabline
 let g:airline#extensions#tabline#show_buffers = 0
 let g:airline#extensions#tabline#tab_min_count = 2
@@ -743,8 +755,9 @@ nnoremap <leader>/ :<C-u>Unite -buffer-name=line line <cr>
 let g:unite_source_codesearch_ignore_case = 1
 let g:unite_prompt='> '
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
-call unite#custom#source('file,file/new,file_mru,buffer,file_rec',
-    \ 'matchers', 'matcher_fuzzy')
+call unite#filters#sorter_default#use(['sorter_rank'])
+"call unite#custom#source('file,file/new,file_mru,buffer,file_rec',
+    "\ 'matchers', 'matcher_fuzzy')
 let g:unite_data_directory='~/.vim/.cache/unite'
 let g:unite_source_history_yank_enable=1
 if executable('ag')
@@ -753,7 +766,6 @@ if executable('ag')
     let g:unite_source_grep_recursive_opt = ''
 endif
 
-" Start insert.
 call unite#custom#profile('default', 'context', {
 \   'start_insert': 1,
 \   'silent': 1
@@ -850,8 +862,9 @@ nmap <Leader>gr <Plug>GitGutterRevertHunk
 if LINUX()
     let g:gitgutter_sign_added = '┃'
     let g:gitgutter_sign_modified = '┃'
-    let g:gitgutter_sign_removed = '┃'
-    let g:gitgutter_sign_modified_removed = '┃'
+    let g:gitgutter_sign_removed_first_line = '^'
+    "let g:gitgutter_sign_removed = '┃'
+    "let g:gitgutter_sign_modified_removed = '┃'
 endif
 " }}}
 " Vimux {{{
@@ -921,7 +934,13 @@ let g:NeatFoldTextFancy = 1
 " }}}
 " Webdevicons {{{
 
-let g:WebDevIconsUnicodeDecorateFolderNodes = 0
+"let g:WebDevIconsUnicodeDecorateFolderNodes = 0
+
+" }}}
+" Vimshell {{{
+ 
+let g:vimshell_prompt_expr ='escape(fnamemodify(getcwd(), ":~").">", "\\[]()?! ")." "'
+let g:vimshell_prompt_pattern = '^\%(\f\|\\.\)\+> '
 
 " }}}
 
@@ -952,9 +971,11 @@ if has('gui_running')
     "let g:alduin_Shout_Aura_Whisper = 1
     let g:alduin_Shout_Fire_Breath = 1
     colorscheme alduin
-    let g:airline_theme = 'base16_default'
+    let g:airline_theme = 'tomorrow'
     "call Base16("railscasts")
     set guifont=Hack\ Regular\ 11
+    "set guifont=Knack\ Nerd\ Font\ Regular\ 11
+    "set guifont=Ubuntu\ Mono\ Nerd\ Font\ Regular\ 13
     "set guifont=Iosevka\ Regular\ 12
     "set guifont=Ubuntu\ Mono\ derivative\ Powerline\ Plus\ Nerd\ File\ Types\ 12
     "set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ Plus\ Nerd\ File\ Types\ 11
