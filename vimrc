@@ -744,7 +744,7 @@ endif
 " }}}
 " Unite {{{
 
-nnoremap <C-P> :<C-u>Unite<CR>
+nnoremap <C-Space> :<C-u>Unite<CR>
 nnoremap <leader>f :<C-u>Unite -buffer-name=files file<CR>
 nnoremap <leader>a :<C-u>Unite -buffer-name=files_rec file_rec/async:!<CR>
 nnoremap <silent> <leader>b :<C-u>Unite -buffer-name=buffers buffer bookmark<CR>
