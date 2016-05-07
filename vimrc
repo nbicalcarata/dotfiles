@@ -667,8 +667,8 @@ let g:syntastic_loc_list_= 5
 " }}}
 " Vimfiler {{{
 let g:vimfiler_as_default_explorer = 1
-nnoremap <C-e> :VimFilerExplorer<CR>
-nnoremap - :VimFiler<CR>
+"nnoremap <C-e> :VimFilerBufferDir -explorer<CR>
+nnoremap <silent> - :<c-u>VimFilerBufferDir -simple<CR>
 
 " Like Textmate icons.
 let g:vimfiler_tree_leaf_icon = ' '
