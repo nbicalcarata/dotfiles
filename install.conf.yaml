@@ -14,6 +14,7 @@
     ~/.zshrc: zshrc
     ~/.zprofile: zprofile
     ~/.bash_profile: bash_profile
+    ~/.config/nvim/init.vim: nvimrc
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]
