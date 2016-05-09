@@ -1,5 +1,10 @@
 - clean: ['~']
 
+- defaults:
+    link:
+      create: true
+      relink: true
+
 - link:
     ~/dotfiles: ''
     ~/.i3: i3/
