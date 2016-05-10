@@ -529,8 +529,8 @@ endfunction
 " }}}
 " Vimfiler {{{
 let g:vimfiler_as_default_explorer = 1
-nnoremap <leader>e :VimFilerBufferDir -explorer<CR>
-nnoremap <silent> - :<c-u>VimFilerBufferDir -simple<CR>
+nnoremap <leader>e :VimFilerExplorer -project<CR>
+nnoremap <silent>- :<c-u>VimFilerBufferDir -simple<CR>
 
 " Like Textmate icons.
 let g:vimfiler_tree_leaf_icon = ' '
