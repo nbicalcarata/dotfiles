@@ -47,6 +47,8 @@ Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'Shougo/neoyank.vim'
 Plug 'Shougo/vimshell.vim'
 Plug 'kassio/neoterm'
+"Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+"Plug 'junegunn/fzf.vim'
 
 "}}}
 " Colorschemes {{{
@@ -639,6 +641,36 @@ let g:neomru#file_mru_ignore_pattern = 'COMMIT_EDITMSG'
 
 if WINDOWS()
 endif
+
+" }}}
+" FZF {{{
+
+"let g:fzf_nvim_statusline = 0
+"nnoremap <C-p> :<C-u>Files<CR>
+"nnoremap <leader>a :<C-u>ProjectFiles<CR>
+"nnoremap <silent> <leader>b :<C-u>Buffers<CR>
+"nnoremap <leader>r :<C-u>History<cr>
+"nnoremap <leader>f :<C-u>Lines<cr>
+
+function! s:find_git_root()
+  return system('git rev-parse --show-toplevel 2> /dev/null')[:-2]
+endfunction
+
+command! ProjectFiles execute 'Files' s:find_git_root()
+
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
 
 " }}}
 " UltiSnips {{{
