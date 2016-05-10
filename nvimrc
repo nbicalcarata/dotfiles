@@ -607,8 +607,9 @@ endif
 " Unite {{{
 
 nnoremap <C-@> :<C-u>Unite<CR>
-nnoremap <leader>f :<C-u>Unite -buffer-name=files file<CR>
-nnoremap <leader>a :<C-u>Unite -buffer-name=files_rec file_rec/async:!<CR>
+" file_rec/async 
+" https://github.com/Shougo/unite.vim/issues/1079
+nnoremap <leader>a :<C-u>UniteWithProjectDir -buffer-name=files_rec file_rec/async:!<CR>
 nnoremap <silent> <leader>b :<C-u>Unite -buffer-name=buffers buffer bookmark<CR>
 nnoremap <leader>r :<C-u>Unite -buffer-name=mru file_mru<cr>
 nnoremap <leader>y :<C-u>Unite -buffer-name=yank history/yank<cr>
