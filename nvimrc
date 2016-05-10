@@ -613,7 +613,7 @@ nnoremap <leader>a :<C-u>UniteWithProjectDir -buffer-name=files_rec file_rec/asy
 nnoremap <silent> <leader>b :<C-u>Unite -buffer-name=buffers buffer bookmark<CR>
 nnoremap <leader>r :<C-u>Unite -buffer-name=mru file_mru<cr>
 nnoremap <leader>y :<C-u>Unite -buffer-name=yank history/yank<cr>
-nnoremap <leader>/ :<C-u>Unite -buffer-name=line line <cr>
+nnoremap <leader>f :<C-u>Unite -buffer-name=search line<cr>
 let g:unite_source_codesearch_ignore_case = 1
 let g:unite_prompt='> '
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
