@@ -296,7 +296,7 @@ set visualbell t_vb=            " turn off error beep/flash
 set novisualbell                " turn off visual bell
 set noea
 set lazyredraw
-set noshowmode                  " Dont display the current mode
+"set noshowmode                  " Dont display the current mode
 set nohlsearch                  " Highlight search matches
 set showmatch                   " show matching brackets/parenthesis
 set ignorecase                  " Case insensitive search
