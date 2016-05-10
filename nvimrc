@@ -295,7 +295,7 @@ set novisualbell                " turn off visual bell
 set noea
 set lazyredraw
 set noshowmode                  " Dont display the current mode
-set nohlsearch                   " Highlight search matches
+set nohlsearch                  " Highlight search matches
 set showmatch                   " show matching brackets/parenthesis
 set ignorecase                  " Case insensitive search
 set smartcase                   " Case sensitive when uc present
