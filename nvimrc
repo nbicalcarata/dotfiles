@@ -25,6 +25,7 @@ if empty(glob('~/' . basedir . '/autoload/plug.vim'))
         \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     autocmd VimEnter * PlugInstall
 endif
+
 call plug#begin('~/' . basedir . '/plugged')
 
 " }}}
@@ -98,7 +99,6 @@ Plug 'honza/vim-snippets'
 Plug 'jiangmiao/auto-pairs'
 
 " }}}
-
 " Syntax highlighting{{{
 
 Plug 'sheerun/vim-polyglot'
@@ -178,14 +178,14 @@ augroup END
 " }}}
 " Running code with ,r {{{
 
-augroup RunningCode
-    autocmd!
-    autocmd FileType python map <leader>e :w<CR>:!python %<CR>
-    autocmd FileType php map <leader>e :w<CR>:!php %<CR>
-    autocmd FileType bash map <leader>e :w<CR>:!./%<CR>
-    autocmd FileType java map <leader>c :w<CR>:!javac %<CR>
-    autocmd FileType java map <leader>e :w<CR>:!java %:r<CR>
-augroup END
+"augroup RunningCode
+    "autocmd!
+    "autocmd FileType python map <leader>e :w<CR>:!python %<CR>
+    "autocmd FileType php map <leader>e :w<CR>:!php %<CR>
+    "autocmd FileType bash map <leader>e :w<CR>:!./%<CR>
+    "autocmd FileType java map <leader>c :w<CR>:!javac %<CR>
+    "autocmd FileType java map <leader>e :w<CR>:!java %:r<CR>
+"augroup END
 
 " }}}
 "Omnicompletion {{{
