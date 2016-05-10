@@ -497,6 +497,36 @@ nnoremap <silent> <leader>co :call g:ToggleColorColumn()<CR>
 let g:ycm_autoclose_preview_window_after_completion = 1
 
 " }}}
+" Deoplete {{{
+
+" Use deoplete.
+let g:deoplete#enable_at_startup = 1
+" Use smartcase.
+let g:deoplete#enable_smart_case = 1
+
+"" <C-h>, <BS>: close popup and delete backword char.
+
+"inoremap <expr><C-h> deoplete#mappings#smart_close_popup()."\<C-h>"
+"inoremap <expr><BS>  deoplete#mappings#smart_close_popup()."\<C-h>"
+
+"" <CR>: close popup and save indent.
+
+"inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+"function! s:my_cr_function() abort
+  "return deoplete#mappings#close_popup() . "\<CR>"
+"endfunction
+
+" TAB to select.
+inoremap <silent><expr><Tab> pumvisible() ? "\<c-n>"
+      \ : (<SID>is_whitespace() ? "\<Tab>" : deoplete#mappings#manual_complete())
+inoremap <expr><S-Tab>  pumvisible() ? "\<c-p>" : "\<c-h>"
+
+function! s:is_whitespace()
+  let l:col = col('.') - 1
+  return !l:col || getline('.')[l:col - 1]  =~? '\s'
+endfunction
+
+" }}}
 " Vimfiler {{{
 let g:vimfiler_as_default_explorer = 1
 nnoremap <leader>e :VimFilerBufferDir -explorer<CR>
