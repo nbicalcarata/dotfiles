@@ -612,17 +612,17 @@ nnoremap <C-@> :<C-u>Unite<CR>
 " file_rec/async 
 " https://github.com/Shougo/unite.vim/issues/1079
 nnoremap <leader>a :<C-u>UniteWithProjectDir -buffer-name=files_rec file_rec/async:!<CR>
-nnoremap <silent> <leader>b :<C-u>Unite -buffer-name=buffers buffer bookmark<CR>
+nnoremap <leader>b :<C-u>Unite -buffer-name=buffers buffer bookmark<CR>
 nnoremap <leader>r :<C-u>Unite -buffer-name=mru file_mru<cr>
 nnoremap <leader>y :<C-u>Unite -buffer-name=yank history/yank<cr>
 nnoremap <leader>f :<C-u>Unite -buffer-name=search line<cr>
 let g:unite_source_codesearch_ignore_case = 1
 let g:unite_prompt='> '
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
-call unite#filters#sorter_default#use(['sorter_rank'])
-"call unite#custom#source('file,file/new,file_mru,buffer,file_rec',
-    "\ 'matchers', 'matcher_fuzzy')
-let g:unite_data_directory='~/.vim/.cache/unite'
+"call unite#filters#sorter_default#use(['sorter_rank'])
+""call unite#custom#source('file,file/new,file_mru,buffer,file_rec',
+    ""\ 'matchers', 'matcher_fuzzy')
+let g:unite_data_directory='~/.config/nvim/cache/unite'
 let g:unite_source_history_yank_enable=1
 if executable('ag')
     let g:unite_source_grep_command = 'ag'
@@ -634,6 +634,31 @@ call unite#custom#profile('default', 'context', {
 \   'start_insert': 1,
 \   'silent': 1
 \ })
+
+"function! s:EscapeUnite()
+    "augroup CloseUniteBuffer
+        "autocmd!
+        "autocmd InsertEnter <buffer>
+            "\ let b:close = 0 |
+            "\ let g:udt = &updatetime |
+            "\ set updatetime=3
+
+        "autocmd InsertLeave <buffer>
+            "\ let b:close = 1
+
+        "autocmd BufLeave,CursorHold <buffer>
+            "\ let &updatetime = g:udt |
+            "\ unlet g:udt
+
+        "autocmd CursorHold <buffer>
+            "\ if b:close | close | endif
+    "augroup END
+"endfunction
+
+"augroup EscapeUnite
+    "autocmd!
+    "autocmd FileType unite call s:EscapeUnite()
+"augroup END
 
 " settings for neomru
 let g:neomru#file_mru_limit = 10
