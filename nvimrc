@@ -617,6 +617,7 @@ nnoremap <leader>b :<C-u>Unite -buffer-name=buffers buffer bookmark<CR>
 nnoremap <leader>r :<C-u>Unite -buffer-name=mru file_mru<cr>
 nnoremap <leader>y :<C-u>Unite -buffer-name=yank history/yank<cr>
 nnoremap <leader>f :<C-u>Unite -buffer-name=search line<cr>
+
 let g:unite_source_codesearch_ignore_case = 1
 let g:unite_prompt='> '
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
@@ -625,10 +626,20 @@ call unite#filters#sorter_default#use(['sorter_selecta'])
     ""\ 'matchers', 'matcher_fuzzy')
 let g:unite_data_directory='~/.config/nvim/cache/unite'
 let g:unite_source_history_yank_enable=1
+
 if executable('ag')
     let g:unite_source_grep_command = 'ag'
     let g:unite_source_grep_default_opts='-i -r --line-numbers --nocolor --nogroup -S'
     let g:unite_source_grep_recursive_opt = ''
+    let g:unite_source_rec_async_command =
+        \ ['ag', '--follow', '--nogroup', '--nocolor', '--hidden', '-g', '']
+endif
+
+if executable('pt')
+  let g:unite_source_grep_command = 'pt'
+  let g:unite_source_grep_default_opts = '--nogroup --nocolor -S --column'
+  let g:unite_source_grep_recursive_opt = ''
+  let g:unite_source_rec_async_command = ['pt', '--nogroup', '--nocolor', '-S', '-g', '.']
 endif
 
 call unite#custom#profile('default', 'context', {
