@@ -612,7 +612,7 @@ nnoremap <C-@> :<C-u>Unite<CR>
 " file_rec/async 
 " https://github.com/Shougo/unite.vim/issues/1079
 nnoremap <leader>m :<C-u>UniteWithProjectDir -buffer-name=files_rec file_rec/async:!<CR>
-nnoremap <leader>a :<C-u>UniteWithProjectDir grep<CR>
+nnoremap <leader>a :<C-u>UniteWithProjectDir grep -buffer-name=grep<CR>
 nnoremap <leader>b :<C-u>Unite -buffer-name=buffers buffer bookmark<CR>
 nnoremap <leader>r :<C-u>Unite -buffer-name=mru file_mru<cr>
 nnoremap <leader>y :<C-u>Unite -buffer-name=yank history/yank<cr>
@@ -733,6 +733,7 @@ nmap <leader>gn <Plug>GitGutterNextHunk
 nmap <leader>gp <Plug>GitGutterPrevHunk
 nmap <Leader>gs <Plug>GitGutterStageHunk
 nmap <Leader>gr <Plug>GitGutterRevertHunk
+nmap <Leader>gc :Gcommit<cr>
 
 "Box Drawings Heavy Vertical U+25e3
 if LINUX()
