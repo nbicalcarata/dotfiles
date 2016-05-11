@@ -673,9 +673,9 @@ endif
 
 let g:fzf_nvim_statusline = 0
 "nnoremap <C-p> :<C-u>Files<CR>
-"nnoremap <leader>a :<C-u>ProjectFiles<CR>
-"nnoremap <silent> <leader>b :<C-u>Buffers<CR>
-"nnoremap <leader>r :<C-u>History<cr>
+"nnoremap <leader>r :<C-u>ProjectFiles<CR>
+"nnoremap <leader>b :<C-u>Buffers<CR>
+"nnoremap <leader>m :<C-u>History<cr>
 "nnoremap <leader>f :<C-u>Lines<cr>
 
 function! s:find_git_root()
