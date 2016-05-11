@@ -619,7 +619,7 @@ nnoremap <leader>f :<C-u>Unite -buffer-name=search line<cr>
 let g:unite_source_codesearch_ignore_case = 1
 let g:unite_prompt='> '
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
-"call unite#filters#sorter_default#use(['sorter_rank'])
+call unite#filters#sorter_default#use(['sorter_selecta'])
 ""call unite#custom#source('file,file/new,file_mru,buffer,file_rec',
     ""\ 'matchers', 'matcher_fuzzy')
 let g:unite_data_directory='~/.config/nvim/cache/unite'
