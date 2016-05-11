@@ -671,7 +671,7 @@ endif
 " }}}
 " FZF {{{
 
-"let g:fzf_nvim_statusline = 0
+let g:fzf_nvim_statusline = 0
 "nnoremap <C-p> :<C-u>Files<CR>
 "nnoremap <leader>a :<C-u>ProjectFiles<CR>
 "nnoremap <silent> <leader>b :<C-u>Buffers<CR>
