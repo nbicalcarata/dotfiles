@@ -640,6 +640,16 @@ call unite#custom#profile('default', 'context', {
 \   'silent': 1
 \ })
 
+function! s:unite_settings()
+   " Enable navigation with control-j and control-k in insert mode
+   imap <buffer> <Esc>   <Plug>(unite_exit)
+   imap <buffer> <c-j>   <Plug>(unite_select_next_line)
+   imap <buffer> <c-k>   <Plug>(unite_select_previous_line)
+ endfunction
+
+ " Custom mappings for the unite buffer
+ autocmd FileType unite call s:unite_settings()
+
 "function! s:EscapeUnite()
     "augroup CloseUniteBuffer
         "autocmd!
