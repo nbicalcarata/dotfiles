@@ -33,6 +33,7 @@ call plug#begin('~/' . basedir . '/plugged')
 
 " General {{{
 
+Plug 'FilipBB/tmuxline.vim'
 Plug 'Shougo/vimfiler.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'bling/vim-airline'
@@ -552,6 +553,9 @@ let g:airline#extensions#tabline#show_buffers = 0
 let g:airline#extensions#tabline#tab_min_count = 2
 let g:airline#extensions#branch#empty_message = '*'
 let g:airline#extensions#whitespace#enabled = 0
+let g:airline#extensions#tmuxline#enabled = 1
+let g:tmuxline_preset = 'full'
+let g:airline#extensions#tmuxline#snapshot_file = "~/dotfiles/snapshot_tmuxline"
 
 "Remove percentage
 "let g:airline_section_z = '%3p%% %{g:airline_symbols.linenr}%#__accent_bold#%4l%#__restore__#:%3v'
