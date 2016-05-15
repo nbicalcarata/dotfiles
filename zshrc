@@ -118,3 +118,4 @@ man() {
 }
 export NO_AT_BRIDGE=1
 
+export TERM="xterm-256color"
