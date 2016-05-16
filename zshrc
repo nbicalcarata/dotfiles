@@ -9,7 +9,14 @@ export ZSH=$HOME/.oh-my-zsh
 #ZSH_THEME="robbyrussell"
 #ZSH_THEME="gnzh"
 #ZSH_THEME="bira"
-ZSH_THEME="nanotech"
+#ZSH_THEME="nanotech"
+#ZSH_THEME="fox"
+#ZSH_THEME="jonathan"
+#ZSH_THEME="juanghurtado"
+ZSH_THEME="mortalscumbag"
+#ZSH_THEME="steeef"
+#ZSH_THEME="wezm"
+#ZSH_THEME="darkblood"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
