@@ -66,6 +66,8 @@ Plug 'morhetz/gruvbox'
 Plug 'AlessandroYorba/Alduin'
 Plug 'whatyouhide/vim-gotham'
 Plug 'AlessandroYorba/Sierra'
+Plug 'joshdick/onedark.vim'
+Plug 'joshdick/airline-onedark.vim'
 
 " }}}
 " Git {{{
