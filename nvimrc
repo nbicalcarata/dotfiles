@@ -328,8 +328,13 @@ set pastetoggle=<F12>           " pastetoggle (sane indentation on pastes)
 " Colorschemes {{{
 
 let g:alduin_Shout_Fire_Breath = 1
-colorscheme alduin
 "let g:jellybeans_use_lowcolor_black = 0
+"Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
+"If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
+"(see < http://sunaku.github.io/tmux-24bit-color.html#usage > for more information.)
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+
+colorscheme onedark
 
 " }}}
 " Cursor line {{{
