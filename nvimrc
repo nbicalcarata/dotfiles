@@ -368,7 +368,7 @@ endif
 
 augroup OverrideColor
     autocmd!
-    "autocmd ColorScheme * highlight VertSplit guibg=NONE cterm=NONE ctermbg=NONE
+    autocmd ColorScheme * highlight VertSplit guibg=NONE cterm=NONE ctermbg=NONE
     "autocmd ColorScheme * highlight Folded    guibg=NONE ctermbg=none
     "autocmd ColorScheme * highlight Number    guibg=NONE ctermbg=none
     "autocmd ColorScheme * highlight LineNr    guibg=NONE ctermbg=none
