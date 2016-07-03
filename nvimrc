@@ -33,7 +33,7 @@ call plug#begin('~/' . basedir . '/plugged')
 
 " General {{{
 
-Plug 'FilipBB/tmuxline.vim'
+Plug 'adambiggs/tmuxline.vim'
 Plug 'Shougo/vimfiler.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'bling/vim-airline'
