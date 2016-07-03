@@ -362,7 +362,7 @@ set statusline+=%#NeotermTestFailed#%{neoterm#test#status('failed')}%*
 " }}}
 " Styling vertical splits {{{
 if LINUX()
-    set fillchars=vert:│,diff:⎼,fold:⎼
+    "set fillchars=vert:│,diff:⎼,fold:⎼
     "set fillchars=vert:┃,diff:⎼,fold:⎼
 endif
 
