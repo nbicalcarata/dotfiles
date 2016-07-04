@@ -567,6 +567,7 @@ let g:airline#extensions#whitespace#enabled = 0
 let g:airline#extensions#tmuxline#enabled = 1
 let g:tmuxline_preset = 'full'
 let g:airline#extensions#tmuxline#snapshot_file = "~/dotfiles/snapshot_tmuxline"
+let g:airline_skip_empty_sections = 1
 
 "Remove percentage
 "let g:airline_section_z = '%3p%% %{g:airline_symbols.linenr}%#__accent_bold#%4l%#__restore__#:%3v'
