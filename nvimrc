@@ -327,14 +327,30 @@ set pastetoggle=<F12>           " pastetoggle (sane indentation on pastes)
 " }}}
 " Colorschemes {{{
 
-let g:alduin_Shout_Fire_Breath = 1
+"let g:alduin_Shout_Fire_Breath = 1
 "let g:jellybeans_use_lowcolor_black = 0
 "Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
 "If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
 "(see < http://sunaku.github.io/tmux-24bit-color.html#usage > for more information.)
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
-colorscheme onedark
+colorscheme alduin
+let g:airline_theme = 'base16_default'
+"let g:airline_theme = 'base16_grayscale'
+"colorscheme base16-railscasts
+"let g:airline_theme = 'base16_bright'
+"colorscheme base16-darktooth
+"let g:airline_theme = 'base16_bright'
+"colorscheme gruvbox
+"let g:airline_theme = 'base16_default'
+"colorscheme sierra
+"let g:airline_theme = 'base16_bright'
+"colorscheme base16-default
+"let g:airline_theme = 'base16_default'
+"colorscheme base16-eighties
+"let g:airline_theme = 'base16_eighties'
+"colorscheme base16-chalk
+"let g:airline_theme = 'base16_chalk'
 
 " }}}
 " Cursor line {{{
@@ -557,8 +573,6 @@ let g:vimfiler_marked_file_icon = '*'
 let g:replace_separators = 0
 let g:airline_powerline_fonts = 1
 let g:tmuxline_preset = 'full'
-"let g:airline_theme = 'tomorrow'
-let g:airline_theme = 'behelit'
 let g:airline#extensions#tabline#enabled = 1            " Activar tabline
 let g:airline#extensions#tabline#show_buffers = 0
 let g:airline#extensions#tabline#tab_min_count = 2
