@@ -114,6 +114,7 @@ endfunction
 
 Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
 "Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
+"Plug 'JazzCore/ctrlp-cmatcher', { 'do': './install.sh' }
 Plug 'neomake/neomake'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
@@ -121,12 +122,14 @@ Plug 'jiangmiao/auto-pairs'
 
 " }}}
 " Syntax highlighting{{{
-
+"Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'sheerun/vim-polyglot'
+"Plug 'ryanoasis/vim-devicons'
+Plug 'tweekmonster/django-plus.vim'
+"Plug 'reedes/vim-pencil'
 
 " }}}
 
-" }}}
 " Plug end {{{
 
 call plug#end()
