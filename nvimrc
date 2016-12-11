@@ -227,8 +227,6 @@ set wildignore+=*.class                                  " Java byte code
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.rar           " MacOSX/Linux
 
 " }}}
-
-" }}}
 " Autocmd rules {{{
 
 " Always switch to the current file directory {{{
@@ -288,7 +286,7 @@ augroup END
 
 augroup HelpFilesRightSide
     autocmd!
-    autocmd FileType help :wincmd L
+    autocmd FileType help wincmd L
     autocmd FileType help set bufhidden=unload
 augroup END
 
