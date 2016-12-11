@@ -311,11 +311,13 @@ augroup DisableListPreviewWindow
 augroup END
 
 " }}}
-" Vimfiler rules {{{
+" Zim rules {{{
 
-augroup VimfilerRules
+augroup ZimRules
     autocmd!
-    autocmd FileType vimfiler setlocal nonumber     " no line number
+    autocmd FileType zimwiki setlocal nonumber
+    autocmd FileType zimwiki setlocal wrap
+    autocmd BufEnter * if &ft == 'zimwiki' | vert resize 60 | endif
 augroup END
 
 " }}}
