@@ -141,6 +141,7 @@ call plug#end()
 if !WINDOWS()
     set shell=/bin/sh
 endif
+set shell=/usr/bin/zsh
 
 "set completeopt+=noinsert
 set mouse=a                                     " Automatically enable mouse usage
