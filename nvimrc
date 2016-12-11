@@ -13,23 +13,22 @@ endfunction
 
 " Plug automatic installation
 
-let basedir = '.config/nvim'
+"let basedir = '.config/nvim'
 
 if WINDOWS()
     let basedir = 'vimfiles'
 endif
 
-if empty(glob('~/' . basedir . '/autoload/plug.vim'))
-    silent !mkdir -p '~/' . basedir . '/autoload'
-    silent !curl -fLo '~/' . basedir . '/autoload/plug.vim'
+if empty(glob('~/.config/nvim/autoload/plug.vim'))
+    silent !mkdir -p '~/.config/nvim/autoload'
+    silent !curl -fLo '~/.config/nvim/autoload/plug.vim'
         \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     autocmd VimEnter * PlugInstall
 endif
 
-call plug#begin('~/' . basedir . '/plugged')
+call plug#begin('~/.config/nvim/plugged')
 
 " }}}
-" Plug install packages {{{
 
 " General {{{
 
