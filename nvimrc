@@ -162,6 +162,7 @@ set foldlevel=99                                " Folds open at start"
 set timeoutlen=1000 ttimeoutlen=0               " Eliminar retardo de Insert a Normal
 set conceallevel=2
 
+" }}}
 " Setting up the directories {{{
 
 set noswapfile
@@ -171,6 +172,42 @@ if has('persistent_undo')
     set undolevels=10000                        " Maximum number of changes that can be undone
     set undoreload=10000                        " Maximum number lines to save for undo
 endif
+
+function! InitializeDirectories()
+    let parent = $HOME
+    let prefix = 'nvim'
+    let dir_list = {
+                \ 'backup': 'backupdir',
+                \ 'views': 'viewdir', }
+
+    if has('persistent_undo')
+        let dir_list['undo'] = 'undodir'
+    endif
+
+    " To specify a different directory in which to place the vimbackup,
+    " vimviews, vimundo, and vimswap files/directories, add the following to
+    " your .vimrc.before.local file:
+    "directory = $HOME . '/.vim/'
+
+    let common_dir = parent . '/.' . prefix
+
+    for [dirname, settingname] in items(dir_list)
+        let directory = common_dir . dirname . '/'
+        if exists("*mkdir")
+            if !isdirectory(directory)
+                call mkdir(directory)
+            endif
+        endif
+        if !isdirectory(directory)
+            echo "Warning: Unable to create backup directory: " . directory
+            echo "Try: mkdir -p " . directory
+        else
+            let directory = substitute(directory, " ", "\\\\ ", "g")
+            exec "set " . settingname . "=" . directory
+        endif
+    endfor
+endfunction
+call InitializeDirectories()
 
 " }}}
 " Wild menu options {{{
