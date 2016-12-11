@@ -32,8 +32,13 @@ call plug#begin('~/.config/nvim/plugged')
 
 " General {{{
 
-Plug 'adambiggs/tmuxline.vim'
-Plug 'Shougo/vimfiler.vim'
+Plug 'equalsraf/neovim-gui-shim'
+"Plug 'adambiggs/tmuxline.vim'
+Plug 'scrooloose/nerdtree'
+Plug 'dhruvasagar/vim-vinegar'
+"Plug 'dbakker/vim-projectroot'
+"Plug 'tweekmonster/fzf-filemru'
+"Plug 'Shougo/vimfiler.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'bling/vim-airline'
 Plug 'justinmk/vim-gtfo'
