@@ -329,6 +329,24 @@ augroup NerdTreeExit
 augroup END
 
 " }}}
+" NerdTree start {{{
+
+"autocmd StdinReadPre * let s:std_in=1
+"autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+
+" }}}
+" Detect django files {{{
+
+"augroup DjangoFiles
+    "autocmd!
+    "au BufNewFile,BufRead admin.py     setlocal filetype=python.django
+    "au BufNewFile,BufRead urls.py      setlocal filetype=python.django
+    "au BufNewFile,BufRead models.py    setlocal filetype=python.django
+    "au BufNewFile,BufRead views.py     setlocal filetype=python.django
+    "au BufNewFile,BufRead settings.py  setlocal filetype=python.django
+    "au BufNewFile,BufRead forms.py     setlocal filetype=python.django
+    ""au BufNewFile,BufRead *.html       setlocal filetype=htmldjango
+"augroup END
 
 " }}}
 " PHP with html syntax {{{
