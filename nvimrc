@@ -321,17 +321,11 @@ augroup ZimRules
 augroup END
 
 " }}}
-" Detect django files {{{
+" NerdTreeExit {{{
 
-augroup DjangoFiles
+augroup NerdTreeExit
     autocmd!
-    au BufNewFile,BufRead admin.py     setlocal filetype=python.django
-    au BufNewFile,BufRead urls.py      setlocal filetype=python.django
-    au BufNewFile,BufRead models.py    setlocal filetype=python.django
-    au BufNewFile,BufRead views.py     setlocal filetype=python.django
-    au BufNewFile,BufRead settings.py  setlocal filetype=python.django
-    au BufNewFile,BufRead forms.py     setlocal filetype=python.django
-    "au BufNewFile,BufRead *.html       setlocal filetype=htmldjango
+    autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 augroup END
 
 " }}}
