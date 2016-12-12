@@ -575,6 +575,18 @@ function! NumberToggle()
 endfunc
 
 " }}}
+" Toggle fullscreen {{{
+
+function! ToggleFullScreen()
+  if g:GuiWindowFullScreen
+    let state = 0
+  else
+    let state = 1
+  endif
+  call GuiWindowFullScreen(state)
+endfunction
+
+" }}}
 " Toggle colorcolumn {{{
 
 function! g:ToggleColorColumn()
