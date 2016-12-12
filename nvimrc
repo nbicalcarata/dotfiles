@@ -549,8 +549,10 @@ tnoremap <C-k> <C-\><C-n><C-w>k
 tnoremap <C-l> <C-\><C-n><C-w>l
 "tnoremap <C-w> <C-\><C-n><C-w>c
 
-" }}}
+"set working directory to current file
+nnoremap <leader>cd :cd %:p:h<CR>:pwd<CR>
 
+" }}}
 " Functions {{{
 
 " Set airline and colorscheme color {{{
