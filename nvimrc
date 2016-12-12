@@ -229,15 +229,6 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.rar           " MacOSX/Linux
 " }}}
 " Autocmd rules {{{
 
-" Always switch to the current file directory {{{
-
-augroup SwitchCurrentFile
-    autocmd!
-    autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | lcd %:p:h | endif
-    autocmd FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
-augroup END
-
-" }}}
 " Running code with ,r {{{
 
 "augroup RunningCode
