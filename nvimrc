@@ -954,6 +954,7 @@ nmap <leader>gp <Plug>GitGutterPrevHunk
 nmap <Leader>gs <Plug>GitGutterStageHunk
 nmap <Leader>gr <Plug>GitGutterRevertHunk
 nmap <Leader>gc :Gcommit<cr>
+"let g:gitgutter_max_signs = 800  " default value 500
 
 "Box Drawings Heavy Vertical U+25e3
 if LINUX()
