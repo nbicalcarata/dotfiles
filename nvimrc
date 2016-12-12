@@ -667,16 +667,24 @@ endfunction
 
 " }}}
 " Vimfiler {{{
-let g:vimfiler_as_default_explorer = 1
-nnoremap <leader>e :VimFilerExplorer -project<CR>
-nnoremap <silent>- :<c-u>VimFilerBufferDir -simple<CR>
+"let g:vimfiler_as_default_explorer = 1
+"nnoremap <leader>e :VimFilerExplorer -project<CR>
+"nnoremap <silent>- :<c-u>VimFilerBufferDir -simple<CR>
+"nnoremap <C-e> :VimFilerExplorer -toggle<CR>
 
-" Like Textmate icons.
-let g:vimfiler_tree_leaf_icon = ' '
-let g:vimfiler_tree_opened_icon = '▾'
-let g:vimfiler_tree_closed_icon = '▸'
-let g:vimfiler_file_icon = '-'
-let g:vimfiler_marked_file_icon = '*'
+" Folder icons.
+let g:vimfiler_tree_leaf_icon = '  '
+let g:vimfiler_tree_opened_icon = ' '
+let g:vimfiler_tree_closed_icon = ' '
+let g:vimfiler_file_icon = '- '
+let g:vimfiler_marked_file_icon = '* '
+
+"" Like Textmate icons.
+"let g:vimfiler_tree_leaf_icon = ' '
+"let g:vimfiler_tree_opened_icon = '▾'
+"let g:vimfiler_tree_closed_icon = '▸'
+"let g:vimfiler_file_icon = '-'
+"let g:vimfiler_marked_file_icon = '*'
 
 " }}}
 " Airline {{{
