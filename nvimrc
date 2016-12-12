@@ -589,7 +589,7 @@ endfunction
 " }}}
 " Toggle colorcolumn {{{
 
-function! g:ToggleColorColumn()
+function! ToggleColorColumn()
   if &colorcolumn != ''
     set colorcolumn&
   else
@@ -597,7 +597,7 @@ function! g:ToggleColorColumn()
   endif
 endfunction
 
-nnoremap <silent> <leader>co :call g:ToggleColorColumn()<CR>
+nnoremap <silent> <leader>co :call ToggleColorColumn()<CR>
 
 " }}}
 
