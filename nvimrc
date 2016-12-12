@@ -846,18 +846,20 @@ endif
 " }}}
 " FZF {{{
 
-let g:fzf_nvim_statusline = 0
-"nnoremap <C-p> :<C-u>Files<CR>
-"nnoremap <leader>r :<C-u>ProjectFiles<CR>
-"nnoremap <leader>b :<C-u>Buffers<CR>
-"nnoremap <leader>m :<C-u>History<cr>
-"nnoremap <leader>f :<C-u>Lines<cr>
+"let g:fzf_nvim_statusline = 0
+"nnoremap <leader>r :<C-u>Files<CR>
+"nnoremap <leader>m :<C-u>GFiles<CR>
+"nnoremap <leader>j :<C-u>Buffers<CR>
+"nnoremap <leader>h :<C-u>History<cr>
+""nnoremap <leader>r :FilesMru --tiebreak=end<cr>
+"nnoremap <leader>f :<C-u>BLines<cr>
+"nnoremap <leader>az :Ag ~/Documentos/Apuntes/<cr>
+""nnoremap <leader>az :Ack!  ~/Documentos/Apuntes/<C-Left><Left>
+"function! s:find_git_root()
+  "return system('git rev-parse --show-toplevel 2> /dev/null')[:-2]
+"endfunction
 
-function! s:find_git_root()
-  return system('git rev-parse --show-toplevel 2> /dev/null')[:-2]
-endfunction
-
-command! ProjectFiles execute 'Files' s:find_git_root()
+"command! ProjectFiles execute 'Files' s:find_git_root()
 
 let g:fzf_colors =
 \ { 'fg':      ['fg', 'Normal'],
@@ -873,15 +875,50 @@ let g:fzf_colors =
   \ 'spinner': ['fg', 'Label'],
   \ 'header':  ['fg', 'Comment'] }
 
-function! s:fzf_statusline()
-  " Override statusline as you like
-  highlight fzf1 ctermfg=161 ctermbg=235
-  highlight fzf2 ctermfg=23 ctermbg=235
-  highlight fzf3 ctermfg=237 ctermbg=235
-  setlocal statusline=%#fzf1#\ >\ %#fzf2#fz%#fzf3#f
-endfunction
+"function! s:fzf_statusline()
+  "" Override statusline as you like
+  "highlight fzf1 ctermfg=161 ctermbg=235
+  "highlight fzf2 ctermfg=23 ctermbg=235
+  "highlight fzf3 ctermfg=237 ctermbg=235
+  "setlocal statusline=%#fzf1#\ >\ %#fzf2#fz%#fzf3#f
+"endfunction
 
-autocmd! User FzfStatusLine call <SID>fzf_statusline()
+"autocmd! User FzfStatusLine call <SID>fzf_statusline()
+
+" }}}
+" CtrlP {{{
+
+"nnoremap <leader>m :CtrlPBuffer<cr>
+"nnoremap <leader>f :CtrlPLine<cr>
+"nnoremap <leader>r :CtrlPMRUFiles<cr>
+"nnoremap <leader>z :CtrlP ~/Documentos/Apuntes/<cr>
+
+"let g:ctrlp_extensions = ['tag', 'buffertag', 'quickfix', 'dir', 'rtscript',
+                          "\ 'undo', 'line', 'changes', 'mixed', 'bookmarkdir']
+let g:ctrlp_extensions = ['line']
+
+"" PyMatcher for CtrlP
+"let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
+
+" CMatcher
+"let g:ctrlp_match_func = {'match' : 'matcher#cmatch' }
+
+" Set delay to prevent extra search
+"let g:ctrlp_lazy_update = 350
+
+" Do not clear filenames cache, to improve CtrlP startup
+" You can manualy clear it by <F5>
+let g:ctrlp_clear_cache_on_exit = 0
+let g:ctrlp_use_caching = 0
+
+" Set no file limit, we are building a big project
+"let g:ctrlp_max_files = 0
+
+"" If ag is available use it as filename list generator instead of 'find'
+"if executable("ag")
+    "set grepprg=ag\ --nogroup\ --nocolor
+    "let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --ignore ''.git'' --ignore ''.DS_Store'' --ignore ''node_modules'' --hidden -g ""'
+"endif
 
 " }}}
 " UltiSnips {{{
