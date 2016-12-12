@@ -455,9 +455,13 @@ augroup OverrideColor
     "autocmd ColorScheme * highlight GitGutterChangeDelete guibg=NONE ctermbg=none
 augroup END
 " }}}
+" Colorscheme {{{
+
+colorscheme base16-solarized-dark
 
 " }}}
 
+" }}}
 " Mappings {{{
 
 let mapleader = ","
