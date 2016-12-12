@@ -763,54 +763,56 @@ endif
 " }}}
 " Unite {{{
 
-nnoremap <C-@> :<C-u>Unite<CR>
+"nnoremap <C-@> :<C-u>Unite<CR>
+"nnoremap <C-Space> :<C-u>Unite<CR>
 " file_rec/async 
 " https://github.com/Shougo/unite.vim/issues/1079
-nnoremap <leader>m :<C-u>UniteWithProjectDir -buffer-name=files_rec file_rec/async:!<CR>
-nnoremap <leader>a :<C-u>UniteWithProjectDir grep -buffer-name=grep<CR>
-nnoremap <leader>b :<C-u>Unite -buffer-name=buffers buffer bookmark<CR>
-nnoremap <leader>r :<C-u>Unite -buffer-name=mru file_mru<cr>
-nnoremap <leader>y :<C-u>Unite -buffer-name=yank history/yank<cr>
-nnoremap <leader>f :<C-u>Unite -buffer-name=search line<cr>
+"nnoremap <leader>m :<C-u>UniteWithProjectDir -buffer-name=project_files file_rec/async:!<CR>
+"nnoremap <leader>a :<C-u>UniteWithProjectDir grep -buffer-name=grep<CR>
+"nnoremap <leader>b :<C-u>Unite -buffer-name=buffers buffer bookmark<CR>
+"nnoremap <leader>r :<C-u>Unite -buffer-name=mru file_mru<cr>
+"nnoremap <leader>y :<C-u>Unite -buffer-name=yank history/yank<cr>
+"nnoremap <leader>f :<C-u>Unite -buffer-name=search line<cr>
 
-let g:unite_source_codesearch_ignore_case = 1
-let g:unite_prompt='> '
-call unite#filters#matcher_default#use(['matcher_fuzzy'])
-call unite#filters#sorter_default#use(['sorter_selecta'])
-""call unite#custom#source('file,file/new,file_mru,buffer,file_rec',
+"let g:unite_source_codesearch_ignore_case = 1
+"let g:unite_prompt='> '
+"call unite#filters#matcher_default#use(['matcher_fuzzy'])
+"call unite#filters#sorter_default#use(['sorter_rank'])
+"call unite#custom#source('file_rec/async','sorters','sorter_rank', )
+"call unite#custom#source('file,file/new,file_mru,buffer,file_rec',
     ""\ 'matchers', 'matcher_fuzzy')
-let g:unite_data_directory='~/.config/nvim/cache/unite'
-let g:unite_source_history_yank_enable=1
+"let g:unite_data_directory='~/.config/nvim/cache/unite'
+"let g:unite_source_history_yank_enable=1
 
-if executable('ag')
-    let g:unite_source_grep_command = 'ag'
-    let g:unite_source_grep_default_opts='-i -r --line-numbers --nocolor --nogroup -S'
-    let g:unite_source_grep_recursive_opt = ''
-    let g:unite_source_rec_async_command =
-        \ ['ag', '--follow', '--nogroup', '--nocolor', '--hidden', '-g', '']
-endif
+"if executable('ag')
+    "let g:unite_source_grep_command = 'ag'
+    "let g:unite_source_grep_default_opts='-i -r --line-numbers --nocolor --nogroup -S'
+    "let g:unite_source_grep_recursive_opt = ''
+    "let g:unite_source_rec_async_command =
+        "\ ['ag', '--follow', '--nogroup', '--nocolor', '--hidden', '-g', '']
+"endif
 
-if executable('pt')
-  let g:unite_source_grep_command = 'pt'
-  let g:unite_source_grep_default_opts = '--nogroup --nocolor -S --column'
-  let g:unite_source_grep_recursive_opt = ''
-  let g:unite_source_rec_async_command = ['pt', '--nogroup', '--nocolor', '-S', '-g', '.']
-endif
+"if executable('pt')
+  "let g:unite_source_grep_command = 'pt'
+  "let g:unite_source_grep_default_opts = '--nogroup --nocolor -S --column'
+  "let g:unite_source_grep_recursive_opt = ''
+  "let g:unite_source_rec_async_command = ['pt', '--nogroup', '--nocolor', '-S', '-g', '.']
+"endif
 
-call unite#custom#profile('default', 'context', {
-\   'start_insert': 1,
-\   'silent': 1
-\ })
+"call unite#custom#profile('default', 'context', {
+"\   'start_insert': 1,
+"\   'silent': 1
+"\ })
 
-function! s:unite_settings()
-   " Enable navigation with control-j and control-k in insert mode
-   imap <buffer> <Esc>   <Plug>(unite_exit)
-   imap <buffer> <c-j>   <Plug>(unite_select_next_line)
-   imap <buffer> <c-k>   <Plug>(unite_select_previous_line)
- endfunction
+"function! s:unite_settings()
+   "" Enable navigation with control-j and control-k in insert mode
+   "imap <buffer> <Esc>   <Plug>(unite_exit)
+   "imap <buffer> <c-j>   <Plug>(unite_select_next_line)
+   "imap <buffer> <c-k>   <Plug>(unite_select_previous_line)
+ "endfunction
 
- " Custom mappings for the unite buffer
- autocmd FileType unite call s:unite_settings()
+ "" Custom mappings for the unite buffer
+ "autocmd FileType unite call s:unite_settings()
 
 "function! s:EscapeUnite()
     "augroup CloseUniteBuffer
@@ -837,12 +839,9 @@ function! s:unite_settings()
     "autocmd FileType unite call s:EscapeUnite()
 "augroup END
 
-" settings for neomru
-let g:neomru#file_mru_limit = 10
-let g:neomru#file_mru_ignore_pattern = 'COMMIT_EDITMSG'
-
-if WINDOWS()
-endif
+"" settings for neomru
+"let g:neomru#file_mru_limit = 10
+"let g:neomru#file_mru_ignore_pattern = 'COMMIT_EDITMSG'
 
 " }}}
 " FZF {{{
