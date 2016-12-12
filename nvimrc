@@ -408,24 +408,31 @@ set termguicolors
 " Cursor line {{{
 
 set cursorline
-hi Search cterm=NONE ctermfg=black
-"hi CursorLineNr   cterm=bold
 
 " }}}
 " Statusline {{{
-
-set statusline=%<%f\                     " Filename
-set statusline+=\ \ 
-set statusline+=%w%h%m%r                 " Options
-set statusline+=%{fugitive#statusline()} " Git Hotness
+if has('statusline')
+    set laststatus=2
+    set statusline=%<%f\                     " Filename
+    set statusline+=%w%h%m%r                 " Options
+    set statusline+=%{fugitive#statusline()} " Git Hotness
+    set statusline+=\ [%{&ff}/%Y]            " Filetype
+    set statusline+=\ [%{getcwd()}]          " Current dir
+    set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info
+endif
+"set laststatus=2
+"set statusline=%<%f\                     " Filename
 "set statusline+=\ \ 
-set statusline+=\ %{&ff}/%Y            " Filetype
-set statusline+=\ \ 
-set statusline+=\ %{getcwd()}          " Current dir
-set statusline+=%=%-14.(\ %l,%c%V%)\ %p%%  " Right aligned file nav info
-set statusline+=%#NeotermTestRunning#%{neoterm#test#status('running')}%*
-set statusline+=%#NeotermTestSuccess#%{neoterm#test#status('success')}%*
-set statusline+=%#NeotermTestFailed#%{neoterm#test#status('failed')}%*
+"set statusline+=%w%h%m%r                 " Options
+"set statusline+=%{fugitive#statusline()} " Git Hotness
+""set statusline+=\ \ 
+"set statusline+=\ %{&ff}/%Y            " Filetype
+"set statusline+=\ \ 
+"set statusline+=\ %{getcwd()}          " Current dir
+"set statusline+=%=%-14.(\ %l,%c%V%)\ %p%%  " Right aligned file nav info
+"set statusline+=%#NeotermTestRunning#%{neoterm#test#status('running')}%*
+"set statusline+=%#NeotermTestSuccess#%{neoterm#test#status('success')}%*
+"set statusline+=%#NeotermTestFailed#%{neoterm#test#status('failed')}%*
 
 " }}}
 " Styling vertical splits {{{
