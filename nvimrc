@@ -997,5 +997,93 @@ let g:vimshell_prompt_expr ='escape(fnamemodify(getcwd(), ":~").">", "\\[]()?! "
 let g:vimshell_prompt_pattern = '^\%(\f\|\\.\)\+> '
 
 " }}}
+" Zim {{{
+
+nnoremap <leader>az :Ack!  ~/Documentos/Apuntes/<C-Left><Left>
+
+" }}}
+" Devicons {{{
+
+let g:WebDevIconsUnicodeDecorateFolderNodes = 1
+let g:DevIconsEnableFoldersOpenClose = 1
+
+" }}}
+" Nvimux {{{
+
+"let g:nvimux_prefix='<C-a>'
+"let nvimux_open_term_by_default=1
+""let g:nvimux_quickterm_provider="/usr/bin/zsh"
+"let g:nvimux_override_x = ':bd! %<CR>'
+
+" }}}
+" Pencil {{{
+
+"let g:pencil#wrapModeDefault = 'soft'   " default is 'hard'
+
+"augroup pencil
+  "autocmd!
+  "autocmd FileType zimwiki      call pencil#init()
+  "autocmd FileType markdown,mkd call pencil#init()
+  "autocmd FileType text         call pencil#init({'wrap': 'hard'})
+"augroup END
+
+" }}}
+" Denite {{{
+
+" Change mappings.
+nnoremap <leader>r :Denite file_rec<CR>
+"nnoremap <leader>m :GFiles<CR>
+nnoremap <leader>m :Denite buffer<CR>
+nnoremap <leader>h :Denite file_mru<cr>
+nnoremap <leader>f :Denite line<cr>
+"nnoremap <leader>az :Denite grep -path=~/Documentos/Apuntes/<cr>
+nnoremap <leader>z :Denite file_rec -path=~/Documentos/Apuntes/<cr>
+
+if executable("ag")
+    call denite#custom#var('file_rec', 'command',
+	\ ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
+endif
+
+" Change mappings
+call denite#custom#map(
+      \ 'insert',
+      \ '<C-j>',
+      \ '<denite:move_to_next_line>',
+      \ 'noremap'
+      \)
+call denite#custom#map(
+      \ 'insert',
+      \ '<C-k>',
+      \ '<denite:move_to_previous_line>',
+      \ 'noremap'
+      \)
+
+call denite#custom#option('default', 'prompt', '>>>')
+call denite#custom#option("default", "auto_resize", 1)
+
+" }}}
+" Neoterm {{{
+
+let g:neoterm_position = 'horizontal'
+let g:neoterm_automap_keys = ',tt'
+let g:neoterm_size = 15
+" hide/close terminal
+nnoremap <silent> ,th :Ttoggle<cr>
+" clear terminal
+nnoremap <silent> ,tl :call neoterm#clear()<cr>
+" kills the current job (send a <c-c>)
+nnoremap <silent> ,tc :call neoterm#kill()<cr>
+
+" }}}
+" Ack {{{
+
+if executable('ag')
+    let g:ackprg = 'ag --vimgrep --smart-case'                                                   
+endif
+
+cnoreabbrev Ack Ack!
+nnoremap <Leader>a :Ack!<Space>
+
+" }}}
 
 " }}}
