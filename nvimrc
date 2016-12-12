@@ -932,6 +932,14 @@ let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
 " Custom MatchTag syntax group with a default highlight color
 "let g:mta_use_matchparen_group = 0
+let g:mta_filetypes = {
+    \ 'html' : 1,
+    \ 'xhtml' : 1,
+    \ 'xml' : 1,
+    \ 'jinja' : 1,
+    \ 'blade' : 1,
+    \ 'php' : 1,
+    \}
 
 " }}}
 " Vim notes {{{
