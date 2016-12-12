@@ -615,8 +615,21 @@ function! NERDTreeInitAsNeeded()
 endfunction
 
 " }}}
-" Plugin settings {{{
 
+" }}}
+
+" Plugins settings {{{
+
+" NERDTree {{{
+
+let NERDTreeMinimalUI = 1
+let NERDTreeRespectWildIgnore = 1 
+let NERDTreeAutoDeleteBuffer = 1
+nnoremap <silent> <leader>e :NERDTreeFind<cr>
+map <C-e> :NERDTreeToggle<CR>
+let NERDTreeWinPos="right"
+
+" }}}
 " YCM {{{
 
 " Cerrar la ventana de previsualizacion despues del completado semantico
