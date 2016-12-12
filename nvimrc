@@ -688,23 +688,27 @@ let g:vimfiler_marked_file_icon = '* '
 
 " }}}
 " Airline {{{
+
 let g:replace_separators = 0
 let g:airline_powerline_fonts = 1
 let g:tmuxline_preset = 'full'
-let g:airline#extensions#tabline#enabled = 1            " Activar tabline
-let g:airline#extensions#tabline#show_buffers = 0
-let g:airline#extensions#tabline#tab_min_count = 2
+let g:airline_skip_empty_sections = 1
 let g:airline#extensions#branch#empty_message = '*'
 let g:airline#extensions#whitespace#enabled = 0
-let g:airline#extensions#tmuxline#enabled = 1
-let g:tmuxline_preset = 'full'
-let g:airline#extensions#tmuxline#snapshot_file = "~/dotfiles/snapshot_tmuxline"
-let g:airline_skip_empty_sections = 1
+let g:airline#extensions#tabline#enabled = 1            " Activar tabline
+let g:airline#extensions#tabline#switch_buffers_and_tabs = 1
+"let g:airline#extensions#tabline#tab_min_count = 2
+let g:airline#extensions#tabline#formatter = 'unique_tail'
+"let g:airline#extensions#tmuxline#snapshot_file = "~/dotfiles/snapshot_tmuxline"
+"let g:airline_left_sep = '»'
+"let g:airline_left_sep = '▶'
+"let g:airline_right_sep = '«'
+"let g:airline_right_sep = '◀'
 
 "Remove percentage
-"let g:airline_section_z = '%3p%% %{g:airline_symbols.linenr}%#__accent_bold#%4l%#__restore__#:%3v'
-let g:airline_section_c = airline#section#create(['%<%F'])
-let g:airline_section_z = ' %{g:airline_symbols.linenr}%#__accent_bold#%4l%#__restore__#/%L%/:%3v'
+""let g:airline_section_z = '%3p%% %{g:airline_symbols.linenr}%#__accent_bold#%4l%#__restore__#:%3v'
+"let g:airline_section_c = airline#section#create(['%<%F'])
+"let g:airline_section_z = ' %{g:airline_symbols.linenr}%#__accent_bold#%4l%#__restore__#/%L%/:%3v'
 
 " Short names
 let g:airline_mode_map = {
@@ -721,14 +725,17 @@ let g:airline_mode_map = {
     \ '' : 'S',
     \ }
 
-let g:airline#extensions#default#section_truncate_width = {
-      \ 'b': 79,
-      \ 'x': 60,
-      \ 'y': 88,
-      \ 'z': 45,
-      \ 'warning': 80,
-      \ 'error': 80,
-      \ }
+let g:airline#extensions#tabline#buffers_label = 'B'
+let g:airline#extensions#tabline#tabs_label = 'T'
+
+"let g:airline#extensions#default#section_truncate_width = {
+      "\ 'b': 79,
+      "\ 'x': 60,
+      "\ 'y': 88,
+      "\ 'z': 45,
+      "\ 'warning': 80,
+      "\ 'error': 80,
+      "\ }
 
 " Remove separators
 if get(g:, 'replace_separators', 1)
