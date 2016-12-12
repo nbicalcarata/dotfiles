@@ -481,7 +481,7 @@ vnoremap <leader>P "+P
 " Space to fold
 nnoremap <space> za
 " Quick edit vimrc
-nnoremap <leader>ev :vsplit ~/.config/nvim/init.vim<cr>
+nnoremap <leader>ev :e ~/.config/nvim/init.vim<cr>
 nnoremap <leader>sv :source ~/.config/nvim/init.vim<cr>
 
 nnoremap <F1> <nop>
