@@ -441,18 +441,19 @@ endif
     ""set fillchars=vert:┃,diff:⎼,fold:⎼
 "endif
 
+" }}}
+" Override color au {{{
 augroup OverrideColor
     autocmd!
-    autocmd ColorScheme * highlight VertSplit guibg=NONE cterm=NONE ctermbg=NONE
+    autocmd ColorScheme * highlight VertSplit guibg=NONE ctermfg=NONE ctermbg=NONE
     "autocmd ColorScheme * highlight Folded    guibg=NONE ctermbg=none
     "autocmd ColorScheme * highlight Number    guibg=NONE ctermbg=none
     "autocmd ColorScheme * highlight LineNr    guibg=NONE ctermbg=none
-    autocmd ColorScheme * highlight GitGutterAdd guibg=NONE ctermbg=none
-    autocmd ColorScheme * highlight GitGutterChange guibg=NONE ctermbg=none
-    autocmd ColorScheme * highlight GitGutterDelete guibg=NONE ctermbg=none
-    autocmd ColorScheme * highlight GitGutterChangeDelete guibg=NONE ctermbg=none
+    "autocmd ColorScheme * highlight GitGutterAdd guibg=NONE ctermbg=none
+    "autocmd ColorScheme * highlight GitGutterChange guibg=NONE ctermbg=none
+    "autocmd ColorScheme * highlight GitGutterDelete guibg=NONE ctermbg=none
+    "autocmd ColorScheme * highlight GitGutterChangeDelete guibg=NONE ctermbg=none
 augroup END
-
 " }}}
 
 " }}}
