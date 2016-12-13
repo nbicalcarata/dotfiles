@@ -427,10 +427,11 @@ endif
 
 " }}}
 " Styling vertical splits {{{
-"if LINUX()
+if LINUX()
     ""set fillchars=vert:│,diff:⎼,fold:⎼
     ""set fillchars=vert:┃,diff:⎼,fold:⎼
-"endif
+    set fillchars=""
+endif
 
 " }}}
 " Override color au {{{
@@ -613,6 +614,23 @@ function! NERDTreeInitAsNeeded()
         wincmd l
     endif
 endfunction
+
+" }}}
+" Unthemed vert split char in airline {{{
+
+augroup ThemedChar 
+    autocmd!
+    au User AirlineAfterInit,AirlineAfterTheme call FixSplitColours()
+augroup END
+
+fun! FixSplitColours()
+    let l:theme = get(g:, 'airline_theme', g:colors_name)
+    "let l:focusedColour = g:airline#themes#{l:theme}#palette['inactive']['airline_c'][1]
+    let l:focusedColour = g:airline#themes#{l:theme}#palette['inactive']['airline_a'][1]
+    let l:inactiveColour = g:airline#themes#{l:theme}#palette['inactive']['airline_a'][1]
+    exec 'hi StatusLine guibg=' . l:focusedColour
+    exec 'hi StatusLineNC guibg=' . l:inactiveColour
+endfun
 
 " }}}
 
