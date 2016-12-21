@@ -4,8 +4,3 @@ call GuiWindowMaximized(1)
 " fc-list | grep iosevka
 GuiFont Iosevka Term:h12
 colorscheme base16-darktooth
-let g:airline_theme = 'darktooth'
-"let g:airline_theme = 'laederon'
-"let g:airline_theme = 'zenburn'
-hi link deniteMatched Statement
-hi link deniteMatchedChar Type
