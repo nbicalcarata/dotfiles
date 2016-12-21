@@ -33,32 +33,15 @@ call plug#begin('~/.config/nvim/plugged')
 " General {{{
 
 Plug 'equalsraf/neovim-gui-shim'
-"Plug 'adambiggs/tmuxline.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'dhruvasagar/vim-vinegar'
-"Plug 'dbakker/vim-projectroot'
-"Plug 'tweekmonster/fzf-filemru'
-"Plug 'Shougo/vimfiler.vim'
 Plug 'scrooloose/nerdcommenter'
-Plug 'bling/vim-airline'
 Plug 'justinmk/vim-gtfo'
-"Plug 'xolox/vim-misc'
-"Plug 'xolox/vim-notes'
 Plug 'mbbill/undotree'
 Plug 'Harenome/vim-neatfoldtext'
-"Plug 'ctrlpvim/ctrlp.vim'
-"Plug 'FelikZ/ctrlp-py-matcher'
-"Plug 'Shougo/unite.vim'
 Plug 'Shougo/neomru.vim'
-"Plug 'Shougo/vimproc.vim', { 'do': 'make' }
-"Plug 'Shougo/neoyank.vim'
-"Plug 'Shougo/vimshell.vim'
 Plug 'kassio/neoterm'
-"Plug 'hkupty/nvimux'
-"Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
-"Plug 'junegunn/fzf.vim'
 Plug 'Shougo/denite.nvim'
-"Plug 'christoomey/vim-tmux-navigator'
 Plug 'metakirby5/codi.vim'
 Plug 'mileszs/ack.vim'
 Plug 'nbicalcarata/vim-zim'
@@ -75,7 +58,6 @@ Plug 'joanrivera/vim-zimwiki-syntax'
 Plug 'nbicalcarata/vim-airline-darktooth'
 Plug 'nanotech/jellybeans.vim'
 Plug 'chriskempson/base16-vim'
-Plug 'vim-airline/vim-airline-themes'
 Plug 'morhetz/gruvbox'
 Plug 'AlessandroYorba/Alduin'
 Plug 'whatyouhide/vim-gotham'
@@ -93,7 +75,6 @@ Plug 'mattn/gist-vim'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'cohama/agit.vim'
-Plug 'chemzqm/unite-git-log'
 Plug 'chemzqm/vim-easygit'
 
 " }}}
@@ -114,7 +95,6 @@ endfunction
 
 Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
 "Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
-"Plug 'JazzCore/ctrlp-cmatcher', { 'do': './install.sh' }
 Plug 'neomake/neomake'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
