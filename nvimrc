@@ -763,10 +763,9 @@ let g:DevIconsEnableFoldersOpenClose = 1
 " Denite {{{
 
 " Change mappings.
-nnoremap <leader>r :Denite file_rec<CR>
-"nnoremap <leader>m :GFiles<CR>
+nnoremap <C-P> :Denite file_rec<CR>
 nnoremap <leader>m :Denite buffer<CR>
-nnoremap <leader>h :Denite file_mru<cr>
+nnoremap <leader>r :Denite file_mru<cr>
 nnoremap <leader>f :Denite line<cr>
 "nnoremap <leader>az :Denite grep -path=~/Documentos/Apuntes/<cr>
 nnoremap <leader>z :Denite file_rec -path=~/Documentos/Apuntes/<cr>
