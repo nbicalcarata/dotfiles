@@ -45,3 +45,5 @@ ssh() {
   sleep 60 && exit
   tmux rename-window "bash (exited ssh)"
 }
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
