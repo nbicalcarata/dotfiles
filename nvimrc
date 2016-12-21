@@ -412,7 +412,13 @@ endif
 " Override color au {{{
 augroup OverrideColor
     autocmd!
-    autocmd ColorScheme * highlight VertSplit guibg=NONE ctermfg=NONE ctermbg=NONE
+    autocmd ColorScheme * hi VertSplit guibg=NONE ctermfg=NONE ctermbg=NONE
+    autocmd ColorScheme * hi link deniteMatched Statement
+    autocmd ColorScheme * hi link deniteMatchedChar Type
+    autocmd ColorScheme * hi! link StatusLine CursorLine
+    autocmd ColorScheme * hi! link TabLineFill CursorLine
+    autocmd ColorScheme * hi! link TabLineSel CursorLine
+    autocmd ColorScheme * hi! link TabLine LineNr
     "autocmd ColorScheme * highlight Folded    guibg=NONE ctermbg=none
     "autocmd ColorScheme * highlight Number    guibg=NONE ctermbg=none
     "autocmd ColorScheme * highlight LineNr    guibg=NONE ctermbg=none
