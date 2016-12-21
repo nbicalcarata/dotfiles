@@ -367,28 +367,38 @@ set cursorline
 
 " }}}
 " Statusline {{{
-if has('statusline')
-    set laststatus=2
-    set statusline=%<%f\                     " Filename
-    set statusline+=%w%h%m%r                 " Options
-    set statusline+=%{fugitive#statusline()} " Git Hotness
-    set statusline+=\ [%{&ff}/%Y]            " Filetype
-    set statusline+=\ [%{getcwd()}]          " Current dir
-    set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info
-endif
-"set laststatus=2
-"set statusline=%<%f\                     " Filename
-"set statusline+=\ \ 
-"set statusline+=%w%h%m%r                 " Options
-"set statusline+=%{fugitive#statusline()} " Git Hotness
-""set statusline+=\ \ 
-"set statusline+=\ %{&ff}/%Y            " Filetype
-"set statusline+=\ \ 
-"set statusline+=\ %{getcwd()}          " Current dir
-"set statusline+=%=%-14.(\ %l,%c%V%)\ %p%%  " Right aligned file nav info
-"set statusline+=%#NeotermTestRunning#%{neoterm#test#status('running')}%*
-"set statusline+=%#NeotermTestSuccess#%{neoterm#test#status('success')}%*
-"set statusline+=%#NeotermTestFailed#%{neoterm#test#status('failed')}%*
+set statusline=
+set laststatus=2
+set statusline+=\ %(%{'help'!=&filetype?bufnr('%'):''}\ \ %)
+set statusline+=%< " Where to truncate line
+set statusline+=%{Relative_Path_CWD()}         " Current dir
+set statusline+=\ \ %f " Path to the file in the buffer, as typed or relative to current directory
+set statusline+=\%{&modified?'\ +':''}
+set statusline+=%= " Separation point between left and right aligned items
+set statusline+=\%{&readonly?'\ ':''}
+set statusline+=\ %{''!=#&filetype?&filetype:'none'}   "FileType
+"set statusline+=\ \ %{''.(&fenc!=''?&fenc:&enc).''}  "Encoding
+"set statusline+=\%{(&bomb?\",BOM\":\"\")}\            "Encoding2
+"set statusline+=\%{&ff}\                              "FileFormat (dos/unix..) 
+set statusline+=\ \ %2v " Virtual column number
+set statusline+=%5l             "current line
+set statusline+=/%L  
+"set statusline+=\ \ %{strftime(\"%d/%m/%y\ -\ %H:%M\")}
+set statusline+=\ \ %{'help'!=&filetype?Current_git_branch():''}
+set statusline+=\ %{strftime(\"%H:%M\ \")}
+
+function! Current_git_branch()
+    let l:branch = split(fugitive#statusline(),'[()]')
+    if len(l:branch) > 1
+         return remove(l:branch, 1)
+    endif
+    return ""
+endfunction
+
+function! Relative_Path_CWD()
+    let l:path = fnamemodify(getcwd(),":~")
+    return l:path
+endfunction
 
 " }}}
 " Styling vertical splits {{{
