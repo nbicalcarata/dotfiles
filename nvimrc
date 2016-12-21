@@ -704,11 +704,6 @@ let g:mta_filetypes = {
     \}
 
 " }}}
-" Vim notes {{{
-
-let g:notes_directories = ['~/Documentos/Notas']
-
-" }}}
 " Git gutter {{{
 
 nmap <leader>gn <Plug>GitGutterNextHunk
@@ -753,12 +748,6 @@ let g:undotree_SetFocusWhenToggle = 1
 let g:NeatFoldTextFancy = 1
 
 " }}}
-" Vimshell {{{
- 
-let g:vimshell_prompt_expr ='escape(fnamemodify(getcwd(), ":~").">", "\\[]()?! ")." "'
-let g:vimshell_prompt_pattern = '^\%(\f\|\\.\)\+> '
-
-" }}}
 " Zim {{{
 
 nnoremap <leader>az :Ack!  ~/Documentos/Apuntes/<C-Left><Left>
@@ -770,26 +759,7 @@ let g:WebDevIconsUnicodeDecorateFolderNodes = 1
 let g:DevIconsEnableFoldersOpenClose = 1
 
 " }}}
-" Nvimux {{{
 
-"let g:nvimux_prefix='<C-a>'
-"let nvimux_open_term_by_default=1
-""let g:nvimux_quickterm_provider="/usr/bin/zsh"
-"let g:nvimux_override_x = ':bd! %<CR>'
-
-" }}}
-" Pencil {{{
-
-"let g:pencil#wrapModeDefault = 'soft'   " default is 'hard'
-
-"augroup pencil
-  "autocmd!
-  "autocmd FileType zimwiki      call pencil#init()
-  "autocmd FileType markdown,mkd call pencil#init()
-  "autocmd FileType text         call pencil#init({'wrap': 'hard'})
-"augroup END
-
-" }}}
 " Denite {{{
 
 " Change mappings.
