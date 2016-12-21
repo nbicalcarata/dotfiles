@@ -124,7 +124,7 @@ if !WINDOWS()
 endif
 set shell=/usr/bin/zsh
 
-cd ~/Codigo
+cd ~/Workspace
 "set completeopt+=noinsert
 set mouse=a                                     " Automatically enable mouse usage
 set mousehide                                   " Hide the mouse cursor while typing
