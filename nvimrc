@@ -403,9 +403,9 @@ endfunction
 " }}}
 " Styling vertical splits {{{
 if LINUX()
-    ""set fillchars=vert:│,diff:⎼,fold:⎼
-    ""set fillchars=vert:┃,diff:⎼,fold:⎼
-    set fillchars=""
+    set fillchars=vert:│,diff:⎼,fold:⎼
+    "set fillchars=vert:┃,diff:⎼,fold:⎼
+    "set fillchars=""
 endif
 
 " }}}
