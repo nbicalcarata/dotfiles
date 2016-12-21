@@ -108,6 +108,7 @@ alias mux=tmuxinator
 alias v="mux dev"
 alias win7="sudo /usr/win7"
 alias win10="sudo /usr/win10"
+alias fed="sudo /usr/fed"
 
 # So as not to be disturbed by Ctrl-S ctrl-Q in terminals:
 stty -ixon
