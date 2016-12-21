@@ -1,3 +1,4 @@
+set visualbell t_vb=            " turn off error beep/flash
 call GuiWindowMaximized(1)
 " Gui font
 " fc-list | grep iosevka
