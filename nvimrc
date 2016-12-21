@@ -264,18 +264,6 @@ augroup HelpFilesRightSide
 augroup END
 
 " }}}
-" Disable colorcolumn on specific files {{{
-
-"augroup DisableColorcolumn
-    "autocmd!
-    "au BufNewFile,BufRead *.html setlocal colorcolumn=
-    "au BufNewFile,BufRead *.php setlocal colorcolumn=
-    "au BufNewFile,BufRead *.blade setlocal colorcolumn=
-    "au FileType vim-plug setlocal colorcolumn=
-    "au FileType diff setlocal colorcolumn=
-"augroup END
-
-" }}}
 " Disable list on preview window {{{
 
 augroup DisableListPreviewWindow
