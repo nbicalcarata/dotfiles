@@ -790,7 +790,7 @@ call denite#custom#map(
       \ 'noremap'
       \)
 
-call denite#custom#option('default', 'prompt', '>>>')
+call denite#custom#option('default', 'prompt', '>')
 call denite#custom#option("default", "auto_resize", 1)
 
 " }}}
