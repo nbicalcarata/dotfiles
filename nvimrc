@@ -278,7 +278,7 @@ augroup ZimRules
     autocmd!
     autocmd FileType zimwiki setlocal nonumber
     autocmd FileType zimwiki setlocal wrap
-    autocmd BufEnter * if &ft == 'zimwiki' | vert resize 60 | endif
+    "autocmd BufEnter * if &ft == 'zimwiki' | vert resize 60 | endif
 augroup END
 
 " }}}
