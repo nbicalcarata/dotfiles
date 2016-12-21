@@ -47,6 +47,7 @@ Plug 'mileszs/ack.vim'
 Plug 'nbicalcarata/vim-zim'
 Plug 'joanrivera/vim-zimwiki-syntax'
 "Plug 'coxjc/VimSearch'
+Plug 'wesQ3/vim-windowswap'
 
 "}}}
 " Colorschemes {{{
