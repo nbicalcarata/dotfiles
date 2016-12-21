@@ -543,6 +543,9 @@ tnoremap <C-l> <C-\><C-n><C-w>l
 "set working directory to current file
 nnoremap <leader>cd :cd %:p:h<CR>:pwd<CR>
 
+" Save as sudo
+"cmap w!! w !gksudo tee > /dev/null %
+
 " }}}
 " Functions {{{
 
