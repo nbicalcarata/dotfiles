@@ -142,3 +142,7 @@ function set-title(){
   PS1=${ORIG}${TITLE}
 }
 
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+alias gtypist=gtypist esp.typ
