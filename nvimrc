@@ -427,6 +427,11 @@ augroup OverrideColor
     "autocmd ColorScheme * highlight GitGutterDelete guibg=NONE ctermbg=none
     "autocmd ColorScheme * highlight GitGutterChangeDelete guibg=NONE ctermbg=none
 augroup END
+
+"exec 'hi SyntasticErrorSign guifg=red ctermfg=red' .
+            "\' guibg=' . synIDattr(synIDtrans(hlID('SignColumn')), 'bg', 'gui') .
+            "\' ctermbg=' . synIDattr(synIDtrans(hlID('SignColumn')), 'bg', 'cterm')
+
 " }}}
 " Colorscheme {{{
 
