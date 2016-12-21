@@ -235,14 +235,15 @@ augroup OmniCompletion
     autocmd FileType htmldjango set omnifunc=htmldjangocomplete#CompleteDjango
     autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 augroup END
+
 " }}}
 "No delay between Insert and Normal mode {{{
 
-augroup FastEscape
-    autocmd!
-    au InsertEnter * set timeoutlen=0
-    au InsertLeave * set timeoutlen=1000
-augroup END
+"augroup FastEscape
+    "autocmd!
+    "au InsertEnter * set timeoutlen=0
+    "au InsertLeave * set timeoutlen=1000
+"augroup END
 
 " }}}
 " Only show cursorline in the current window {{{
