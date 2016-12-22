@@ -421,13 +421,16 @@ augroup OverrideColor
     autocmd ColorScheme * hi! link TabLineFill CursorLine
     autocmd ColorScheme * hi! link TabLineSel CursorLine
     autocmd ColorScheme * hi! link TabLine LineNr
-    "autocmd ColorScheme * highlight Folded    guibg=NONE ctermbg=none
-    "autocmd ColorScheme * highlight Number    guibg=NONE ctermbg=none
-    "autocmd ColorScheme * highlight LineNr    guibg=NONE ctermbg=none
-    "autocmd ColorScheme * highlight GitGutterAdd guibg=NONE ctermbg=none
-    "autocmd ColorScheme * highlight GitGutterChange guibg=NONE ctermbg=none
-    "autocmd ColorScheme * highlight GitGutterDelete guibg=NONE ctermbg=none
-    "autocmd ColorScheme * highlight GitGutterChangeDelete guibg=NONE ctermbg=none
+    autocmd ColorScheme * hi! link FoldColumn LineNr
+    autocmd ColorScheme * hi! link CursorLineNr CursorLine
+    "autocmd ColorScheme * hi CursorLineNr guibg=none
+    autocmd ColorScheme * hi Folded        guibg=NONE ctermbg=none
+    "autocmd ColorScheme * hi FoldColumn    guibg=NONE guifg=bg ctermbg=none ctermfg=bg
+    autocmd ColorScheme * hi LineNr        guibg=NONE ctermbg=none
+    autocmd ColorScheme * hi GitGutterAdd guibg=NONE ctermbg=none
+    autocmd ColorScheme * hi GitGutterChange guibg=NONE ctermbg=none
+    autocmd ColorScheme * hi GitGutterDelete guibg=NONE ctermbg=none
+    autocmd ColorScheme * hi GitGutterChangeDelete guibg=NONE ctermbg=none
 augroup END
 
 "exec 'hi SyntasticErrorSign guifg=red ctermfg=red' .
