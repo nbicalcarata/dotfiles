@@ -757,6 +757,7 @@ let g:undotree_SetFocusWhenToggle = 1
 " NeatFoldText {{{
 
 let g:NeatFoldTextFancy = 1
+let g:NeatFoldTextShowLineCount = 0
 
 " }}}
 " Zim {{{
