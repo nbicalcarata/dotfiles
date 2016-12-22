@@ -225,7 +225,7 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.rar           " MacOSX/Linux
 "augroup END
 
 " }}}
-"Omnicompletion {{{
+" Omnicompletion {{{
 
 augroup OmniCompletion
     autocmd!
@@ -240,7 +240,7 @@ augroup OmniCompletion
 augroup END
 
 " }}}
-"No delay between Insert and Normal mode {{{
+" No delay between Insert and Normal mode {{{
 
 "augroup FastEscape
     "autocmd!
