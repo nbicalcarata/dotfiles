@@ -771,6 +771,22 @@ let g:WebDevIconsUnicodeDecorateFolderNodes = 1
 let g:DevIconsEnableFoldersOpenClose = 1
 
 " }}}
+" AnyFold {{{
+
+"let g:anyfold_activate=1
+let g:anyfold_fold_display=0
+augroup FileTypeFolds
+    autocmd!
+    autocmd Filetype python let b:anyfold_activate=1
+    autocmd Filetype javascript let b:anyfold_activate=1
+    autocmd Filetype php let b:anyfold_activate=1
+    autocmd Filetype bash let b:anyfold_activate=1
+    autocmd Filetype java let b:anyfold_activate=1
+    autocmd Filetype cs let b:anyfold_activate=1
+    autocmd Filetype html let b:anyfold_activate=1
+augroup END
+
+" }}}
 
 " Denite {{{
 
