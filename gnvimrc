@@ -1,6 +1,15 @@
 set visualbell t_vb=            " turn off error beep/flash
-call GuiWindowMaximized(1)
+
 " Gui font
 " fc-list | grep iosevka
-GuiFont Iosevka Term:h12
-colorscheme base16-darktooth
+"GuiFont Iosevka Term:h12
+GuiFont Iosevka Nerd Font:h12
+"GuiFont FantasqueSansMono Nerd Font:h13
+"GuiFont DejaVuSansMono Nerd Font:h12
+"GuiFont InconsolataForPowerline Nerd Font:h12
+"GuiFont Knack Nerd Font:h**
+"GuiFont TerminessTTF Nerd Font:h13
+"GuiFont UbuntuMono Nerd Font:h13
+
+colorscheme base16-ocean
+call GuiWindowMaximized(1)
