@@ -41,6 +41,8 @@ Plug 'Harenome/vim-neatfoldtext'
 Plug 'Shougo/neomru.vim'
 Plug 'kassio/neoterm'
 Plug 'Shougo/denite.nvim'
+"Plug 'ctrlpvim/ctrlp.vim'
+"Plug 'FelikZ/ctrlp-py-matcher'
 Plug 'metakirby5/codi.vim'
 Plug 'mileszs/ack.vim'
 Plug 'nbicalcarata/vim-zim'
@@ -787,6 +789,13 @@ augroup FileTypeFolds
 augroup END
 
 " }}}
+" CtrlP {{{
+
+"nnoremap <leader>z :CtrlP ~/Documentos/Apuntes/<cr>
+"nnoremap <leader>f :CtrlPLine<cr>
+"nnoremap <leader>m :CtrlPBuffer<cr>
+"let g:ctrlp_working_path_mode = 0
+"let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
 
 " Denite {{{
 
