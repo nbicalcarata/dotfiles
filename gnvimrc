@@ -10,8 +10,6 @@ set visualbell t_vb=            " turn off error beep/flash
 GuiFont Knack Nerd Font:h11
 "GuiFont TerminessTTF Nerd Font:h13
 "GuiFont UbuntuMono Nerd Font:h13
-
-colorscheme base16-ocean
 "GuiFont FuraMonoForPowerline Nerd Font:h12
 colorscheme base16-twilight
 call GuiWindowMaximized(1)
