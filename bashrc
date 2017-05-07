@@ -39,3 +39,9 @@ ssh() {
 }
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+export VAGRANT_DEFAULT_PROVIDER=virtualbox
+
+function homestead() {
+    ( cd ~/.homestead && vagrant $* )
+}
+
