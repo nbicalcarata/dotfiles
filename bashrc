@@ -29,10 +29,6 @@ alias v="mux dev"
 
 export EDITOR='vim'
 
-source ~/.bin/tmuxinator.bash
-
-. ~/.bash_prompt
-
 # Auto rename window title on ssh logins
 ssh() {
   tmux rename-window "$*"
