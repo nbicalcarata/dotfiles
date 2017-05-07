@@ -30,9 +30,11 @@ call plug#begin('~/.config/nvim/plugged')
 " }}}
 
 " General {{{
-
+"Plug 'rliang/nvim-pygtk3', {'do': 'make install'}
 Plug 'equalsraf/neovim-gui-shim'
 Plug 'scrooloose/nerdtree'
+"Plug 'eiginn/netrw'
+"Plug 'tpope/vim-vinegar'
 Plug 'dhruvasagar/vim-vinegar'
 Plug 'scrooloose/nerdcommenter'
 Plug 'justinmk/vim-gtfo'
@@ -403,10 +405,10 @@ set statusline+=\%{&readonly?'\ ':''}
 set statusline+=\ %{''!=#&filetype?&filetype:'none'}   "FileType
 "set statusline+=\ \ %{''.(&fenc!=''?&fenc:&enc).''}  "Encoding
 "set statusline+=\%{(&bomb?\",BOM\":\"\")}\            "Encoding2
-"set statusline+=\%{&ff}\                              "FileFormat (dos/unix..) 
+"set statusline+=\%{&ff}\                              "FileFormat (dos/unix..)
 set statusline+=\ \ %2v " Virtual column number
 set statusline+=%5l             "current line
-set statusline+=/%L  
+set statusline+=/%L
 "set statusline+=\ \ %{strftime(\"%d/%m/%y\ -\ %H:%M\")}
 set statusline+=\ \ %{'help'!=&filetype?Current_git_branch():''}
 set statusline+=\ %{strftime(\"%H:%M\ \")}
@@ -501,7 +503,6 @@ nnoremap <leader>sv :source ~/.config/nvim/init.vim<cr>
 
 nnoremap <F1> <nop>
 nnoremap Q <nop>
-nnoremap K <nop>
 
 " Bind nohl
 " Removes highlight of your last search
