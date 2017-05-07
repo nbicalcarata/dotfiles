@@ -22,10 +22,6 @@ export MOZILLA_FIVE_HOME=/usr/lib/mozilla
 export PATH=/home/adrian/npm/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games
 export NODE_PATH=:/home/adrian/npm/lib/node_modules
 
-source /etc/bash_completion.d/virtualenvwrapper
-
-source /usr/share/virtualenvwrapper/virtualenvwrapper.sh
-
 # Tmux with italics support
 alias tmux="env TERM=xterm-it tmux -2"
 
