@@ -42,9 +42,10 @@ Plug 'mbbill/undotree'
 Plug 'Harenome/vim-neatfoldtext'
 Plug 'Shougo/neomru.vim'
 Plug 'kassio/neoterm'
-Plug 'Shougo/denite.nvim'
-"Plug 'ctrlpvim/ctrlp.vim'
-"Plug 'FelikZ/ctrlp-py-matcher'
+"Plug 'Shougo/denite.nvim'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'sgur/ctrlp-extensions.vim'
+Plug 'FelikZ/ctrlp-py-matcher'
 "Plug 'metakirby5/codi.vim'
 Plug 'nbicalcarata/vim-zim'
 Plug 'joanrivera/vim-zimwiki-syntax'
@@ -52,8 +53,10 @@ Plug 'joanrivera/vim-zimwiki-syntax'
 Plug 'wesQ3/vim-windowswap'
 "Plug 'tmhedberg/SimpylFold'
 Plug 'pseewald/vim-anyfold'
-Plug 'bling/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+"Plug 'bling/vim-airline'
+"Plug 'vim-airline/vim-airline-themes'
+Plug 'kevinkjt2000/tmuxline.vim'
+Plug 'christoomey/vim-tmux-navigator'
 Plug 'mhinz/vim-startify'
 Plug 'frace/vim-unsurpriseme'
 Plug 'mhinz/vim-grepper'
@@ -77,6 +80,7 @@ Plug 'w0ng/vim-hybrid'
 Plug 'ayu-theme/ayu-vim'
 Plug 'jacoborus/tender'
 Plug 'MaxSt/FlatColor'
+Plug 'miyakogi/seiya.vim'
 
 " }}}
 " Git {{{
@@ -104,7 +108,7 @@ function! DoRemote(arg)
 endfunction
 
 "Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
+"Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 Plug 'w0rp/ale'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
@@ -120,6 +124,7 @@ Plug 'alvan/vim-php-manual'
 " }}}
 " Syntax highlighting{{{
 
+Plug 'dominikduda/vim_current_word'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'sheerun/vim-polyglot'
 Plug 'ryanoasis/vim-devicons'
@@ -213,14 +218,14 @@ call InitializeDirectories()
 " }}}
 " Wild menu options {{{
 
-set wildmode=list:longest                                " matches mimic bash or zsh
+set wildignorecase
+set wildmode=list:longest,full                           " matches mimic bash or zsh
 set wildignore+=.hg,.git,.svn                            " Version control
 set wildignore+=*.aux,*.out,*.toc                        " LaTeX intermediate files
 set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg,*.ico     " binary images
 set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest         " compiled object files
 set wildignore+=*.spl                                    " compiled spelling word lists
 set wildignore+=*.sw?                                    " Vim swap files
-set wildignore+=migrations                               " Django migrations
 set wildignore+=*.pyc                                    " Python byte code
 set wildignore+=*.class                                  " Java byte code
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.rar           " MacOSX/Linux
@@ -283,11 +288,11 @@ augroup END
 " }}}
 " Open help files in right side {{{
 
-"augroup HelpFilesRightSide
-    "autocmd!
-    "autocmd FileType help wincmd L
-    "autocmd FileType help set bufhidden=unload
-"augroup END
+augroup HelpFilesRightSide
+    autocmd!
+    autocmd FileType help wincmd L
+    autocmd FileType help set bufhidden=unload
+augroup END
 
 " }}}
 " Disable list on preview window {{{
@@ -359,7 +364,8 @@ set showmatch                   " show matching brackets/parenthesis
 set ignorecase                  " Case insensitive search
 set smartcase                   " Case sensitive when uc present
 set scrolloff=5                 " Minimum lines to keep above and below cursor
-let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+"let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+set inccommand=split            " live sustitution
 
 if LINUX()
     set listchars=tab:▸\ ,eol:¬,extends:»,precedes:«,trail:•
@@ -390,48 +396,51 @@ set termguicolors
 
 set cursorline
 let g:terminal_color_7  = '#FBBC05'
-
+set guicursor=n-v-c:block-Cursor/lCursor-blinkon0,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor
+let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 " }}}
 " Statusline {{{
 set statusline=
 set laststatus=2
-set statusline+=\ %(%{'help'!=&filetype?bufnr('%'):''}\ \ %)
-set statusline+=%< " Where to truncate line
-set statusline+=%{Relative_Path_CWD()}         " Current dir
-set statusline+=\ \ %f " Path to the file in the buffer, as typed or relative to current directory
+set statusline+=\ %(%{'help'!=&filetype?'':''}\ \ %)
+set statusline+=%<                                     " Where to truncate line
+set statusline+=%{Relative_Path_CWD()}                 " Current dir
+set statusline+=\ \ %f                                " Path relative to current buffer
 set statusline+=\%{&modified?'\ +':''}
-set statusline+=%= " Separation point between left and right aligned items
+set statusline+=%=                                     " Separation point
 set statusline+=\%{&readonly?'\ ':''}
-set statusline+=\ %{''!=#&filetype?&filetype:'none'}   "FileType
-"set statusline+=\ \ %{''.(&fenc!=''?&fenc:&enc).''}  "Encoding
-"set statusline+=\%{(&bomb?\",BOM\":\"\")}\            "Encoding2
-"set statusline+=\%{&ff}\                              "FileFormat (dos/unix..)
-set statusline+=\ \ %2v " Virtual column number
-set statusline+=%5l             "current line
+set statusline+=\ %{''!=#&filetype?&filetype:'none'}   " FileType
+set statusline+=\ %{WebDevIconsGetFileTypeSymbol()}
+set statusline+=\\ %2v                                " Virtual column number
+set statusline+=%5l                                    " Current line
 set statusline+=/%L
-"set statusline+=\ \ %{strftime(\"%d/%m/%y\ -\ %H:%M\")}
-set statusline+=\ \ %{'help'!=&filetype?Current_git_branch():''}
-set statusline+=\ %{strftime(\"%H:%M\ \")}
+set statusline+=\ \ %{fugitive#head()!=''?'\ \ '.fugitive#head().'\ ':''}
+"set statusline+=\ %{strftime(\"%H:%M\ \")}
+set statusline+=\ %{LinterStatus()}
 
-function! Current_git_branch()
-    let l:branch = split(fugitive#statusline(),'[()]')
-    if len(l:branch) > 1
-         return remove(l:branch, 1)
-    endif
-    return ''
+function! Relative_Path_CWD()
+    let l:path = fnamemodify(getcwd(),":t")
+    return l:path
 endfunction
 
-"function! Relative_Path_CWD()
-    ""let l:path = fnamemodify(getcwd(),":~")
-    "let l:path = fnamemodify(getcwd(),":t")
-    "return l:path
-"endfunction
+function! LinterStatus() abort
+    let l:counts = ale#statusline#Count(bufnr(''))
+
+    let l:all_errors = l:counts.error + l:counts.style_error
+    let l:all_non_errors = l:counts.total - l:all_errors
+
+    return l:counts.total == 0 ? '✓ ' : printf(
+    \   '%dW %dE ',
+    \   all_non_errors,
+    \   all_errors
+    \)
+endfunction
 
 " }}}
 " Styling vertical splits {{{
 if LINUX()
-    "set fillchars=vert:│,diff:⎼,fold:⎼
-    set fillchars=vert:┃,diff:⎼,fold:⎼
+    set fillchars=vert:│,fold:۰,diff:·
+    "set fillchars=vert:┃,diff:⎼,fold:⎼
     "set fillchars=""
 endif
 
@@ -439,30 +448,31 @@ endif
 " Override color au {{{
 augroup OverrideColor
     autocmd!
-    "autocmd ColorScheme * hi VertSplit guibg=NONE ctermfg=NONE ctermbg=NONE
     autocmd ColorScheme * hi! link VertSplit LineNr
     "autocmd ColorScheme * hi link deniteMatched Statement
     "autocmd ColorScheme * hi link deniteMatchedChar Type
-    "autocmd ColorScheme * hi! link StatusLine CursorLine
-    "autocmd ColorScheme * hi! link TabLineFill CursorLine
+    " No background
+    "autocmd ColorScheme * hi! link StatusLine FoldColumn
+    "autocmd ColorScheme * hi! link StatusLineNC LineNr
+    " Background
+    autocmd ColorScheme * hi! link StatusLine CursorLine
+    autocmd ColorScheme * hi! link TabLineFill FoldColumn
     "autocmd ColorScheme * hi! link TabLineSel CursorLine
-    "autocmd ColorScheme * hi! link TabLine LineNr
+    autocmd ColorScheme * hi! link TabLine LineNr
     autocmd ColorScheme * hi! link FoldColumn LineNr
     autocmd ColorScheme * hi! link CursorLineNr CursorLine
     autocmd ColorScheme * hi! link ALEErrorSign ErrorMsg
     autocmd ColorScheme * hi! link ALEWarningSign WarningMsg
-    "autocmd ColorScheme * hi CursorLineNr guibg=none
-    "autocmd ColorScheme * hi Folded        guibg=NONE ctermbg=none
     autocmd ColorScheme * hi! link Folded LineNr
-    "autocmd ColorScheme * hi FoldColumn    guibg=NONE guifg=bg ctermbg=none ctermfg=bg
+    autocmd ColorScheme * hi FoldColumn    guibg=NONE guifg=bg ctermbg=none ctermfg=bg
     autocmd ColorScheme * hi LineNr        guibg=NONE ctermbg=none
     autocmd ColorScheme * hi SignColumn        guibg=NONE ctermbg=none
     autocmd ColorScheme * hi GitGutterAdd guibg=NONE ctermbg=none
     autocmd ColorScheme * hi GitGutterChange guibg=NONE ctermbg=none
     autocmd ColorScheme * hi GitGutterDelete guibg=NONE ctermbg=none
     autocmd ColorScheme * hi GitGutterChangeDelete guibg=NONE ctermbg=none
-"    autocmd ColorScheme * hi ALEErrorSign guibg=NONE ctermbg=none
-"    autocmd ColorScheme * hi ALEWarningSign guibg=NONE ctermbg=none
+    "autocmd ColorScheme * hi ALEErrorSign guibg=NONE ctermbg=none
+    "autocmd ColorScheme * hi ALEWarningSign guibg=NONE ctermbg=none
 augroup END
 
 "exec 'hi SyntasticErrorSign guifg=red ctermfg=red' .
@@ -473,7 +483,7 @@ augroup END
 " Colorscheme {{{
 let g:alduin_Shout_Fire_Breath = 1
 "colorscheme base16-solarized-dark
-colorscheme base16-twilight
+colorscheme base16-darktooth
 "let g:airline_theme = 'base16_solarized'
 
 " }}}
@@ -561,10 +571,10 @@ nmap <leader>l :set list!<CR>
 "nnoremap <leader>a :Ag
 
 " Move between splits
-nnoremap <C-H> <C-W><C-H>
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
+"nnoremap <C-H> <C-W><C-H>
+"nnoremap <C-J> <C-W><C-J>
+"nnoremap <C-K> <C-W><C-K>
+"nnoremap <C-L> <C-W><C-L>
 
 " Term move between splits
 tnoremap <Esc> <C-\><C-n>
@@ -587,10 +597,25 @@ nnoremap <leader>cd :cd %:p:h<CR>:pwd<CR>
 "Focus term
 "nnoremap <leader>te :buf term<CR>
 "Rename buffer
-nnoremap <leader>tn :keepalt file<space>
+nnoremap <leader>bn :keepalt file<space>
 " }}}
 " Functions {{{
 
+" Highlight word under cursor {{{
+
+"set updatetime=10
+
+"function! HighlightWordUnderCursor()
+    "if getline(".")[col(".")-1] !~# '[[:punct:][:blank:]]' 
+        "exec 'match' 'Visual' '/\V\<'.expand('<cword>').'\>/' 
+    "else 
+        "match none 
+    "endif
+"endfunction
+
+"autocmd! CursorHold,CursorHoldI * call HighlightWordUnderCursor()
+
+" }}}
 " Set airline and colorscheme color {{{
 
 function! Base16(scheme)
@@ -629,11 +654,12 @@ function! ToggleColorColumn()
   if &colorcolumn != ''
     set colorcolumn&
   else
-    let &colorcolumn='80,'.join(range(120,999),',')
+    "let &colorcolumn='80,'.join(range(120,999),',')
+    let &colorcolumn=80
   endif
 endfunction
 
-nnoremap <silent> <leader>co :call ToggleColorColumn()<CR>
+"nnoremap <silent> <leader>co :call ToggleColorColumn()<CR>
 
 " }}}
 " Initialize NERDTree as needed {{{
@@ -686,9 +712,10 @@ augroup END
 let g:NERDTreeMinimalUI = 1
 let g:NERDTreeRespectWildIgnore = 1
 let g:NERDTreeAutoDeleteBuffer = 1
+let g:NERDTreeCascadeSingleChildDir = 0
 nnoremap <silent> <leader>e :NERDTreeFind<cr>
 map <C-e> :NERDTreeToggle<CR>
-let NERDTreeWinPos="right"
+let g:NERDTreeWinPos="right"
 let g:NERDTreeQuitOnOpen=0
 
 " }}}
@@ -696,6 +723,7 @@ let g:NERDTreeQuitOnOpen=0
 
 " Cerrar la ventana de previsualizacion despues del completado semantico
 let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_use_ultisnips_completer = 1
 
 " }}}
 " Deoplete {{{
@@ -726,7 +754,8 @@ let g:UltiSnipsExpandTrigger='<c-e>'
 "let g:UltiSnipsListSnippets="<c-l>"
 let g:UltiSnipsJumpForwardTrigger='<c-j>'
 let g:UltiSnipsJumpBackwardTrigger='<c-k>'
-"inoremap <c-x><c-k> <c-x><c-k>
+inoremap <c-x><c-k> <c-x><c-k>
+let g:UltiSnipsSnippetDirectories = ['UltiSnips']
 
 "To load frameworks honza snippets
 "UltiSnipsAddFiletypes php-laravel
@@ -751,17 +780,18 @@ let g:mta_filetypes = {
 " }}}
 " Git gutter {{{
 
-"nmap <leader>gn <Plug>GitGutterNextHunk
-"nmap <leader>gp <Plug>GitGutterPrevHunk
-"nmap <Leader>gs <Plug>GitGutterStageHunk
-"nmap <Leader>gr <Plug>GitGutterRevertHunk
+nmap <leader>gn <Plug>GitGutterNextHunk
+nmap <leader>gp <Plug>GitGutterPrevHunk
+nmap <Leader>gs <Plug>GitGutterStageHunk
+nmap <Leader>gr <Plug>GitGutterRevertHunk
 "nmap <Leader>gc :Gcommit<cr>
 ""let g:gitgutter_max_signs = 800  " default value 500
 
 "Box Drawings Heavy Vertical U+25e3
 "let g:gitgutter_sign_added = '┃'
 if LINUX()
-    let g:gitgutter_sign_added = '╂'
+    let g:gitgutter_sign_added = '┃'
+    "let g:gitgutter_sign_added = '╂'
     let g:gitgutter_sign_modified = '┃'
     "let g:gitgutter_sign_modified = '┣'
     let g:gitgutter_sign_removed_first_line = '▔'
@@ -834,6 +864,7 @@ let g:webdevicons_enable_airline_statusline = 0
 "let g:anyfold_activate=1
 let g:anyfold_fold_display=0
 let g:anyfold_fold_comments=1
+
 augroup FileTypeFolds
     autocmd!
     autocmd Filetype python let b:anyfold_activate=1
@@ -842,18 +873,22 @@ augroup FileTypeFolds
     autocmd Filetype bash let b:anyfold_activate=1
     autocmd Filetype java let b:anyfold_activate=1
     autocmd Filetype cs let b:anyfold_activate=1
-    autocmd Filetype *.html let b:anyfold_activate=1
+    autocmd Filetype html let b:anyfold_activate=1
+    autocmd Filetype html,blade setlocal foldcolumn=0
+    autocmd TermOpen * setlocal foldcolumn=0
 augroup END
 
 " }}}
 " CtrlP {{{
 
-"nnoremap <leader>z :CtrlP ~/Documentos/Apuntes/<cr>
-"nnoremap <leader>f :CtrlPLine<cr>
-"nnoremap <leader>m :CtrlPBuffer<cr>
-"let g:ctrlp_working_path_mode = 0
-"let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
-"let g:ctrlp_use_caching = 0
+nnoremap <leader>z :CtrlP ~/Documentos/Apuntes/<cr>
+nnoremap <leader>f :CtrlPLine<cr>
+nnoremap <leader>r :CtrlPYankring<cr>
+nnoremap <leader>m :CtrlPBuffer<cr>
+nnoremap <leader>D :CtrlP
+let g:ctrlp_working_path_mode = 0
+let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
+let g:ctrlp_use_caching = 0
 
 "" Set delay to prevent extra search
 "let g:ctrlp_lazy_update = 1
@@ -867,59 +902,62 @@ augroup END
 
 "" If ag is available use it as filename list generator instead of 'find'
 "if executable("ag")
-    "set grepprg=ag\ --nogroup\ --nocolor
-    "let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --ignore ''.git'' --ignore ''.DS_Store'' --ignore ''node_modules'' --hidden -g ""'
+   ""set grepprg=ag\ --nogroup\ --nocolor
+   "let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --ignore ''.git'' --ignore ''.DS_Store'' --ignore ''node_modules'' --hidden -g ""'
 "endif
 
 " }}}
 " Denite {{{
 
 " Change mappings.
-nnoremap <C-P> :Denite buffer file_rec<CR>
-nnoremap <leader>m :Denite file_mru<cr>
-nnoremap <leader>f :Denite line<cr>
-nnoremap <leader>o :Denite outline<cr>
-nnoremap <leader>r :Denite register<cr>
-"nnoremap <leader>az :Denite grep -path=~/Documentos/Apuntes/<cr>
-nnoremap <leader>z :Denite file_rec -path=~/Documentos/Apuntes/<cr>
+"nnoremap <C-P> :Denite buffer file_rec<CR>
+"nnoremap <leader>D :Denite 
+"nnoremap <leader>m :Denite file_mru<cr>
+"nnoremap <leader>f :Denite line<cr>
+"nnoremap <leader>o :Denite outline<cr>
+"nnoremap <leader>r :Denite register<cr>
+""nnoremap <leader>az :Denite grep -path=~/Documentos/Apuntes/<cr>
+"nnoremap <leader>z :Denite file_rec -path=~/Documentos/Apuntes/<cr>
 
-call denite#custom#alias('source', 'file_rec/git', 'file_rec')
-call denite#custom#var('file_rec/git', 'command',
-\ ['git', 'ls-files', '-co', '--exclude-standard'])
-nnoremap <silent> <C-p> :<C-u>Denite buffer
-\ `finddir('.git', ';') != '' ? 'file_rec/git' : 'file_rec'`<CR>
+"call denite#custom#alias('source', 'file_rec/git', 'file_rec')
+"call denite#custom#var('file_rec/git', 'command',
+"\ ['git', 'ls-files', '-co', '--exclude-standard'])
+"nnoremap <silent> <C-p> :<C-u>Denite buffer
+"\ `finddir('.git', ';') != '' ? 'file_rec/git' : 'file_rec'`<CR>
 
-if executable('ag')
-   call denite#custom#var('file_rec', 'command',
-   \ ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
-   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-   " ag is fast enough that CtrlP doesn't need to cache
-   let g:ctrlp_use_caching = 0
-endif
+"if executable('ag')
+   "call denite#custom#var('file_rec', 'command',
+   "\ ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
+   "" Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+   "let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+   "" ag is fast enough that CtrlP doesn't need to cache
+   "let g:ctrlp_use_caching = 0
+"endif
 
-" Change mappings
-call denite#custom#map(
-     \ 'insert',
-     \ '<C-j>',
-     \ '<denite:move_to_next_line>',
-     \ 'noremap'
-     \)
-call denite#custom#map(
-     \ 'insert',
-     \ '<C-k>',
-     \ '<denite:move_to_previous_line>',
-     \ 'noremap'
-     \)
+"" Change mappings
+"call denite#custom#map(
+     "\ 'insert',
+     "\ '<C-j>',
+     "\ '<denite:move_to_next_line>',
+     "\ 'noremap'
+     "\)
+"call denite#custom#map(
+     "\ 'insert',
+     "\ '<C-k>',
+     "\ '<denite:move_to_previous_line>',
+     "\ 'noremap'
+     "\)
 
-call denite#custom#option('default', 'prompt', '❯')
-"call denite#custom#option('default', 'auto_resize', 1)
+"call denite#custom#option('default', 'prompt', '❯')
+""call denite#custom#option('default', 'auto_resize', 1)
 
 " }}}
 " Neoterm {{{
 let g:neoterm_position = 'horizontal'
+let g:neoterm_size = 5
+"let g:neoterm_position = 'vertical'
+"let g:neoterm_size = 80
 let g:neoterm_automap_keys = ',tt'
-let g:neoterm_size = 15
 let g:neoterm_autoscroll = 1
 " hide/close terminal
 nnoremap <silent> ,tj :Ttoggle<cr>
@@ -941,17 +979,26 @@ xmap as  <plug>(GrepperOperator)
 nnoremap <leader>x :Grepper -tool ag -cword -noprompt<cr>
 
 " }}}
+" Workspace {{{
+
+let g:workspace_use_devicons = 1
+let g:workspace_powerline_separators = 1
+let g:workspace_tab_icon = "\uf00a"
+let g:workspace_left_trunc_icon = "\uf0a8"
+let g:workspace_right_trunc_icon = "\uf0a9"
+
+" }}}
 " Airline {{{
 
 let g:replace_separators = 0
 let g:airline_powerline_fonts = 1
 let g:tmuxline_preset = 'full'
-let g:airline_skip_empty_sections = 1
+"let g:airline_skip_empty_sections = 1
 "let g:airline#extensions#branch#empty_message = '*'
 let g:airline#extensions#whitespace#enabled = 1
 let g:airline#extensions#tabline#enabled = 1            " Activar tabline
 "let g:airline#extensions#tabline#switch_buffers_and_tabs = 1
-let g:airline#extensions#tabline#show_buffers = 1
+let g:airline#extensions#tabline#show_buffe1s = 1
 "let g:airline#extensions#tabline#tab_min_count = 2
 let g:airline#extensions#tabline#formatter = 'unique_tail'
 "let g:airline#extensions#tmuxline#snapshot_file = "~/dotfiles/snapshot_tmuxline"
@@ -965,17 +1012,17 @@ let g:airline#extensions#tabline#formatter = 'unique_tail'
 "let g:airline_section_c = airline#section#create(['%<%F'])
 let g:airline_section_z = ' %{g:airline_symbols.linenr}%#__accent_bold#%4l%#__restore__#/%L%/:%3v'
 
-"Add clock
-function! AirlineInit()
-  "let g:airline_section_y = airline#section#create(['ffenc', ' %{strftime("%H:%M")}'])
-  "let g:airline_section_y = airline#section#create([' %{Relative_Path_CWD()}', '   %{strftime("%H:%M")}'])
-  let g:airline_section_y = airline#section#create([' %{fnamemodify(getcwd(),":t")}', '   %{strftime("%H:%M")}'])
-endfunction
+""Add clock
+"function! AirlineInit()
+  ""let g:airline_section_y = airline#section#create(['ffenc', ' %{strftime("%H:%M")}'])
+  ""let g:airline_section_y = airline#section#create([' %{Relative_Path_CWD()}', '   %{strftime("%H:%M")}'])
+  "let g:airline_section_y = airline#section#create([' %{fnamemodify(getcwd(),":t")}', '   %{strftime("%H:%M")}'])
+"endfunction
 
-augroup AirlineClock
-    autocmd!
-    autocmd VimEnter * call AirlineInit()
-augroup END
+"augroup AirlineClock
+    "autocmd!
+    "autocmd VimEnter * call AirlineInit()
+"augroup END
 
 
 " Short names
@@ -1065,16 +1112,21 @@ endfun
 "let g:airline_right_alt_sep = "\uE0B7"
 
 "Edge down
-"let g:airline_left_sep = "\uE0B8"
-"let g:airline_left_alt_sep = "\uE0B9"
-"let g:airline_right_sep = "\uE0BA"
-"let g:airline_right_alt_sep = "\uE0BB"
-
+let g:airline_left_sep = "\uE0B8"
+let g:airline_left_alt_sep = "\uE0B9"
+let g:airline_right_sep = "\uE0BA"
+let g:airline_right_alt_sep = "\uE0BB"
+let g:tmuxline_separators = {
+    \ 'left' : '',
+    \ 'left_alt': '',
+    \ 'right' : '',
+    \ 'right_alt' : '',
+    \ 'space' : ' '}
 "Edge up
-let g:airline_left_sep = "\uE0BC"
-let g:airline_left_alt_sep = "\uE0BD"
-let g:airline_right_sep = "\uE0BE"
-let g:airline_right_alt_sep = "\uE0BF"
+"let g:airline_left_sep = "\uE0BC"
+"let g:airline_left_alt_sep = "\uE0BD"
+"let g:airline_right_sep = "\uE0BE"
+"let g:airline_right_alt_sep = "\uE0BF"
 
 "Flames
 "let g:airline_left_sep = "\uE0C0"
@@ -1114,10 +1166,9 @@ augroup StartifyAu
     autocmd User Startified setlocal cursorline
 augroup END
 
-let g:startify_change_to_dir = 0
-let g:startify_session_persistence = 1
+"let g:startify_change_to_dir = 0
+"let g:startify_session_persistence = 1
 let g:startify_session_autoload = 1
-"let g:startify_session_remove_lines = ['neoterm']
 
 function! KillNeoterm()
     "bufdo if bufname("%")=~"term://*" | bd! | endif
@@ -1128,6 +1179,8 @@ endfunction
 "bufdo if bufname("%")=~'' | bd! | endif
 
 nnoremap <leader>kn :call KillNeoterm()<cr>
+nnoremap <leader>S :SSave<cr>
+
 
 let g:startify_session_before_save = [
         \ 'echo "Cleaning up before saving.."',
@@ -1174,5 +1227,85 @@ nmap <silent> <C-a>j <Plug>(ale_next_wrap)
 "inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 "let g:UltiSnipsExpandTrigger = "<Plug>(ultisnips_expand)"
 "inoremap <silent> <c-u> <c-r>=cm#sources#ultisnips#trigger_or_popup("\<Plug>(ultisnips_expand)")<cr>
+
+" }}}
+" vim-gtfo {{{
+
+"let g:gtfo#terminals = { 'unix': 'tilix' }
+
+" }}}
+" Set gnome-terminal color with dconf-cli, linux mint 18.1 {{{
+" Based on https://antonioshadji.github.io/switch-terminal-colors-at-night/
+" To make it work, create new terminal profile, set it as default, enable custom background and transparency
+" Install https://github.com/miyakogi/seiya.vim
+
+let g:profile_id = system('dconf read /org/gnome/terminal/legacy/profiles:/default')
+" Remove new line and quotes from dconf key
+let g:profile_id = substitute(g:profile_id, "\n", "", "g") 
+let g:profile_id = substitute(g:profile_id, "'", "", "g")
+let g:trans_level = system('dconf read /org/gnome/terminal/legacy/profiles:/:' . g:profile_id . '/background-transparency-percent')
+let previous_exists = 0
+
+function! GetNvimBackgroundColor()
+    let l:nvim_background = synIDattr(synIDtrans(hlID('Normal')), 'bg', 'gui')
+    return l:nvim_background
+endfunction
+
+function! GetNvimForegroundColor()
+    let l:nvim_foreground = synIDattr(synIDtrans(hlID('Normal')), 'fg', 'gui')
+    return l:nvim_foreground
+endfunction
+
+function! SetTermBackground()
+    silent! SeiyaDisable
+    let l:background = GetNvimBackgroundColor()
+    let l:foreground = GetNvimForegroundColor()
+    silent exec system('dconf write /org/gnome/terminal/legacy/profiles:/:' . g:profile_id . '/background-color ' . "'".'"' . l:background . '"'."'")
+    silent exec system('dconf write /org/gnome/terminal/legacy/profiles:/:' . g:profile_id . '/foreground-color ' . "'".'"' . l:foreground . '"'."'")
+    silent! SeiyaEnable
+endfunction
+
+function! TermTransparency(order)
+    if g:previous_exists == 1
+        let g:trans_level = g:previous_level
+        let g:previous_exists = 0
+    elseif a:order == 0
+        let g:previous_level = g:trans_level
+        let g:previous_exists = 1
+        let g:trans_level = 0
+    elseif g:trans_level <= 40 && a:order == 2
+        let g:trans_level += 5
+    elseif g:trans_level >= 5 && a:order == 1
+        let g:trans_level -= 5
+    endif
+    silent exec system('dconf write /org/gnome/terminal/legacy/profiles:/:' . g:profile_id . '/background-transparency-percent ' . g:trans_level)
+    echom g:trans_level
+endfunction
+
+"Reset to opaque
+nnoremap <leader><Space> :call TermTransparency(0)<cr>
+"Decrease transparency
+nnoremap <leader>1 :call TermTransparency(1)<cr>
+"Increase transparency
+nnoremap <leader>2 :call TermTransparency(2)<cr>
+",co to set colorscheme and terminal background
+nnoremap <leader>co :colorscheme  <bar>:call SetTermBackground()<bar>:Tmuxline vim_statusline_3<C-Left><C-Left><C-Left><left>
+
+"augroup TermBackground
+    "autocmd!
+    "autocmd ColorScheme * call SetTermBackground()
+"augroup END
+
+" }}}
+" Seiya {{{
+
+let g:seiya_auto_enable=1
+let g:seiya_target_groups = has('nvim') ? ['guibg'] : ['ctermbg']
+
+" }}}
+" {{{
+
+hi! link CurrentWordTwins Visual
+let g:vim_current_word#highlight_current_word = 0
 
 " }}}

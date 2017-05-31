@@ -22,12 +22,14 @@ export MOZILLA_FIVE_HOME=/usr/lib/mozilla
 export PATH=/home/adrian/npm/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games
 export NODE_PATH=:/home/adrian/npm/lib/node_modules
 
+export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/lib"
+
 # Tmux with italics support
-alias tmux="env TERM=xterm-it tmux -2"
+#alias tmux="env TERM=xterm-it tmux -2"
+export TERM="xterm-256color"
+alias nv="mux dev"
 
-alias v="mux dev"
-
-export EDITOR='vim'
+export EDITOR='nvim'
 
 # Auto rename window title on ssh logins
 ssh() {
