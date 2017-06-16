@@ -53,13 +53,14 @@ Plug 'joanrivera/vim-zimwiki-syntax'
 Plug 'wesQ3/vim-windowswap'
 "Plug 'tmhedberg/SimpylFold'
 Plug 'pseewald/vim-anyfold'
-"Plug 'bling/vim-airline'
-"Plug 'vim-airline/vim-airline-themes'
+Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'kevinkjt2000/tmuxline.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'mhinz/vim-startify'
 Plug 'frace/vim-unsurpriseme'
 Plug 'mhinz/vim-grepper'
+Plug 'Yggdroot/indentLine'
 
 "}}}
 " Colorschemes {{{
@@ -74,7 +75,6 @@ Plug 'chriskempson/base16-vim'
 Plug 'morhetz/gruvbox'
 Plug 'AlessandroYorba/Alduin'
 Plug 'whatyouhide/vim-gotham'
-Plug 'AlessandroYorba/Sierra'
 Plug 'joshdick/onedark.vim'
 Plug 'w0ng/vim-hybrid'
 Plug 'ayu-theme/ayu-vim'
@@ -107,27 +107,33 @@ function! DoRemote(arg)
   UpdateRemotePlugins
 endfunction
 
-"Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
+Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
+"Plug 'wellle/tmux-complete.vim'
+" Showing function signature and inline doc.
+Plug 'Shougo/echodoc.vim'
+"Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 "Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
-Plug 'w0rp/ale'
+"Plug 'w0rp/ale'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'jiangmiao/auto-pairs'
-Plug 'shawncplus/phpcomplete.vim'
+"Plug 'shawncplus/phpcomplete.vim'
 "Plug 'lvht/phpcd.vim', { 'for': 'php' , 'do': 'composer update' }
+"Plug 'lvht/phpcd.vim', { 'for': 'php', 'do': 'composer install' }
 " `npm install` For javascript code completion support
-"Plug 'roxma/nvim-completion-manager', {'do': 'npm install'}
+Plug 'roxma/nvim-completion-manager'
 " PHP code completion is moved to a standalone plugin
-"Plug 'roxma/nvim-cm-php-language-server',  {'do': 'composer install && composer run-script parse-stubs'}
+Plug 'roxma/LanguageServer-php-neovim',  {'do': 'composer install && composer run-script parse-stubs'}
 "Plug 'roxma/python-support.nvim'
-Plug 'alvan/vim-php-manual'
+"Plug 'alvan/vim-php-manual'
+"Plug 'padawan-php/deoplete-padawan', { 'do': 'composer install' }
 " }}}
 " Syntax highlighting{{{
 
 Plug 'dominikduda/vim_current_word'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'sheerun/vim-polyglot'
-Plug 'ryanoasis/vim-devicons'
+"Plug 'ryanoasis/vim-devicons'
 "Plug 'tweekmonster/django-plus.vim'
 "Plug 'reedes/vim-pencil'
 "Plug 'majutsushi/tagbar'
@@ -135,6 +141,8 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'janko-m/vim-test'
 "Plug 'rhysd/nyaovim-mini-browser'
 Plug 'StanAngeloff/php.vim'
+"Plug 'rafaelndev/deoplete-laravel-plugin', {'for': ['php'], 'do': 'composer install'}
+"Plug 'maralla/completor.vim'
 
 " }}}
 
@@ -149,14 +157,16 @@ call plug#end()
 "set shell=/bin/sh
 
 cd ~/Workspace
-"set completeopt+=noinsert
+set completeopt-=preview
+set completeopt+=noinsert
 set mouse=a                                     " Automatically enable mouse usage
 set mousehide                                   " Hide the mouse cursor while typing
 set clipboard=unnamedplus
 if !WINDOWS()
     set clipboard=unnamed
 endif
-set shortmess+=afilmnrxoOtT                     " Abbrev. of messages (avoids 'hit enter')
+"set shortmess+=cafilmnrxoOtT                     " Abbrev. of messages (avoids 'hit enter')
+set shortmess+=c                     " Abbrev. of messages (avoids 'hit enter')
 set viewoptions=folds,options,cursor,unix,slash " Unix / Windows compatibility
 set virtualedit=onemore                         " Allow for cursor beyond last character
 set nospell                                     " Spell checking off
@@ -265,7 +275,7 @@ augroup OmniCompletion
     autocmd FileType ruby set omnifunc=rubycomplete#Complete
     autocmd FileType htmldjango set omnifunc=htmldjangocomplete#CompleteDjango
     autocmd FileType php set omnifunc=phpcomplete#CompletePHP
-augroup END
+"augroup END
 
 " }}}
 " No delay between Insert and Normal mode {{{
@@ -349,7 +359,6 @@ augroup END
 " Visual settings {{{
 
 " General {{{
-
 set number
 set wrap
 set linebreak
@@ -358,7 +367,7 @@ set visualbell t_vb=            " turn off error beep/flash
 set novisualbell                " turn off visual bell
 set equalalways
 set lazyredraw
-"set noshowmode                  " Dont display the current mode
+set noshowmode                  " Dont display the current mode
 set nohlsearch                  " Highlight search matches
 set showmatch                   " show matching brackets/parenthesis
 set ignorecase                  " Case insensitive search
@@ -397,24 +406,28 @@ set termguicolors
 set cursorline
 let g:terminal_color_7  = '#FBBC05'
 set guicursor=n-v-c:block-Cursor/lCursor-blinkon0,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor
-let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+"let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 " }}}
 " Statusline {{{
 set statusline=
 set laststatus=2
-set statusline+=\ %(%{'help'!=&filetype?'':''}\ \ %)
+"set statusline+=\ %(%{'help'!=&filetype?'':''}\ \ %)
+set statusline+=\ %(%{'help'!=&filetype?'CWD':''}\ \ %)
 set statusline+=%<                                     " Where to truncate line
 set statusline+=%{Relative_Path_CWD()}                 " Current dir
-set statusline+=\ \ %f                                " Path relative to current buffer
+"set statusline+=\ \ %f                                " Path relative to current buffer
+set statusline+=\ \ %f                                " Path relative to current buffer
 set statusline+=\%{&modified?'\ +':''}
 set statusline+=%=                                     " Separation point
 set statusline+=\%{&readonly?'\ ':''}
 set statusline+=\ %{''!=#&filetype?&filetype:'none'}   " FileType
-set statusline+=\ %{WebDevIconsGetFileTypeSymbol()}
-set statusline+=\\ %2v                                " Virtual column number
+"set statusline+=\ %{WebDevIconsGetFileTypeSymbol()}
+"set statusline+=\\ %2v                                " Virtual column number
+set statusline+=\ \ %2v                                " Virtual column number
 set statusline+=%5l                                    " Current line
 set statusline+=/%L
-set statusline+=\ \ %{fugitive#head()!=''?'\ \ '.fugitive#head().'\ ':''}
+"set statusline+=\ \ %{fugitive#head()!=''?'\ \ '.fugitive#head().'\ ':''}
+set statusline+=\ \ %{fugitive#head()!=''?'\ \ '.fugitive#head().'\ ':''}
 "set statusline+=\ %{strftime(\"%H:%M\ \")}
 set statusline+=\ %{LinterStatus()}
 
@@ -429,7 +442,7 @@ function! LinterStatus() abort
     let l:all_errors = l:counts.error + l:counts.style_error
     let l:all_non_errors = l:counts.total - l:all_errors
 
-    return l:counts.total == 0 ? '✓ ' : printf(
+    return l:counts.total == 0 ? 'OK ' : printf(
     \   '%dW %dE ',
     \   all_non_errors,
     \   all_errors
@@ -456,6 +469,7 @@ augroup OverrideColor
     "autocmd ColorScheme * hi! link StatusLineNC LineNr
     " Background
     autocmd ColorScheme * hi! link StatusLine CursorLine
+
     autocmd ColorScheme * hi! link TabLineFill FoldColumn
     "autocmd ColorScheme * hi! link TabLineSel CursorLine
     autocmd ColorScheme * hi! link TabLine LineNr
@@ -464,7 +478,7 @@ augroup OverrideColor
     autocmd ColorScheme * hi! link ALEErrorSign ErrorMsg
     autocmd ColorScheme * hi! link ALEWarningSign WarningMsg
     autocmd ColorScheme * hi! link Folded LineNr
-    autocmd ColorScheme * hi FoldColumn    guibg=NONE guifg=bg ctermbg=none ctermfg=bg
+    "autocmd ColorScheme * hi FoldColumn    guibg=NONE guifg=bg ctermbg=none ctermfg=bg
     autocmd ColorScheme * hi LineNr        guibg=NONE ctermbg=none
     autocmd ColorScheme * hi SignColumn        guibg=NONE ctermbg=none
     autocmd ColorScheme * hi GitGutterAdd guibg=NONE ctermbg=none
@@ -483,7 +497,8 @@ augroup END
 " Colorscheme {{{
 let g:alduin_Shout_Fire_Breath = 1
 "colorscheme base16-solarized-dark
-colorscheme base16-darktooth
+"colorscheme gotham
+colorscheme onedark
 "let g:airline_theme = 'base16_solarized'
 
 " }}}
@@ -491,15 +506,23 @@ colorscheme base16-darktooth
 " }}}
 " Mappings {{{
 
+" During insert, kj escapes, `^ is so that the cursor doesn't move
+inoremap kj <Esc>`^
+inoremap jk <Esc>`^
+
+" Escape from command line using jk and kj
+"cmap jk <C-c>
+"cmap kj <C-c>
+
 let g:mapleader = ','
 
-" " Copy to clipboard
+" Copy to clipboard
 vnoremap  <leader>y  "+y
 nnoremap  <leader>Y  "+yg_
 nnoremap  <leader>y  "+y
 nnoremap  <leader>yy  "+yy
 
-" " Paste from clipboard
+" Paste from clipboard
 nnoremap <leader>p "+p
 nnoremap <leader>P "+P
 vnoremap <leader>p "+p
@@ -507,6 +530,7 @@ vnoremap <leader>P "+P
 
 " Space to fold
 nnoremap <space> za
+
 " Quick edit vimrc
 nnoremap <leader>ev :e ~/.config/nvim/init.vim<cr>
 nnoremap <leader>sv :source ~/.config/nvim/init.vim<cr>
@@ -528,6 +552,7 @@ nnoremap <C-left> 5<C-W>>
 
 " Substitute
 nnoremap <leader>s :%s//<left>
+vnoremap <leader>s :%s//<left>
 
 " Select current line (no indentation)
 nnoremap vv ^vg_
@@ -556,7 +581,7 @@ map zl zL
 map zh zH
 
 " fullscreen mode for GVIM and Terminal, need 'wmctrl' in you PATH
-map <silent> <F11> :call ToggleFullScreen()<CR>
+"map <silent> <F11> :call ToggleFullScreen()<CR>
 
 "<leader>q to close buffer without closing the window
 map <leader>q :bp<bar>sp<bar>bn<bar>bd<CR>
@@ -731,10 +756,10 @@ let g:ycm_use_ultisnips_completer = 1
 "" Use deoplete.
 "let g:deoplete#enable_at_startup = 1
 
-"" Use smartcase.
+""" Use smartcase.
 "let g:deoplete#enable_smart_case = 1
 
-"" TAB to select.
+""" TAB to select.
 "inoremap <silent><expr><Tab> pumvisible() ? "\<c-n>"
       "\ : (<SID>is_whitespace() ? "\<Tab>" : deoplete#mappings#manual_complete())
 "inoremap <expr><S-Tab>  pumvisible() ? "\<c-p>" : "\<c-h>"
@@ -884,7 +909,8 @@ augroup END
 nnoremap <leader>z :CtrlP ~/Documentos/Apuntes/<cr>
 nnoremap <leader>f :CtrlPLine<cr>
 nnoremap <leader>r :CtrlPYankring<cr>
-nnoremap <leader>m :CtrlPBuffer<cr>
+nnoremap <leader>j :CtrlPBuffer<cr>
+nnoremap <leader>m :CtrlPMRUFiles<cr>
 nnoremap <leader>D :CtrlP
 let g:ctrlp_working_path_mode = 0
 let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
@@ -993,15 +1019,16 @@ let g:workspace_right_trunc_icon = "\uf0a9"
 let g:replace_separators = 0
 let g:airline_powerline_fonts = 1
 let g:tmuxline_preset = 'full'
-"let g:airline_skip_empty_sections = 1
+let g:airline_skip_empty_sections = 1
 "let g:airline#extensions#branch#empty_message = '*'
 let g:airline#extensions#whitespace#enabled = 1
+let g:airline#extensions#whitespace#symbol = '!'
 let g:airline#extensions#tabline#enabled = 1            " Activar tabline
 "let g:airline#extensions#tabline#switch_buffers_and_tabs = 1
-let g:airline#extensions#tabline#show_buffe1s = 1
+let g:airline#extensions#tabline#show_buffers = 1
 "let g:airline#extensions#tabline#tab_min_count = 2
 let g:airline#extensions#tabline#formatter = 'unique_tail'
-"let g:airline#extensions#tmuxline#snapshot_file = "~/dotfiles/snapshot_tmuxline"
+let g:airline#extensions#tmuxline#snapshot_file = "~/.config/snapshot_tmuxline"
 "let g:airline_left_sep = '»'
 "let g:airline_left_sep = '▶'
 "let g:airline_right_sep = '«'
@@ -1010,19 +1037,20 @@ let g:airline#extensions#tabline#formatter = 'unique_tail'
 "Remove percentage
 ""let g:airline_section_z = '%3p%% %{g:airline_symbols.linenr}%#__accent_bold#%4l%#__restore__#:%3v'
 "let g:airline_section_c = airline#section#create(['%<%F'])
-let g:airline_section_z = ' %{g:airline_symbols.linenr}%#__accent_bold#%4l%#__restore__#/%L%/:%3v'
+let g:airline_section_z = '%#__accent_bold#%4l%#__restore__#/%L%/:%3v'
 
 ""Add clock
-"function! AirlineInit()
-  ""let g:airline_section_y = airline#section#create(['ffenc', ' %{strftime("%H:%M")}'])
-  ""let g:airline_section_y = airline#section#create([' %{Relative_Path_CWD()}', '   %{strftime("%H:%M")}'])
+function! AirlineInit()
+  "let g:airline_section_y = airline#section#create(['ffenc', ' %{strftime("%H:%M")}'])
+  "let g:airline_section_y = airline#section#create([' %{Relative_Path_CWD()}', '   %{strftime("%H:%M")}'])
   "let g:airline_section_y = airline#section#create([' %{fnamemodify(getcwd(),":t")}', '   %{strftime("%H:%M")}'])
-"endfunction
+  let g:airline_section_y = airline#section#create(['%{fnamemodify(getcwd(),":t")}'])
+endfunction
 
-"augroup AirlineClock
-    "autocmd!
-    "autocmd VimEnter * call AirlineInit()
-"augroup END
+augroup AirlineClock
+    autocmd!
+    autocmd VimEnter * call AirlineInit()
+augroup END
 
 
 " Short names
@@ -1078,19 +1106,19 @@ endif
 " }}}
 " Unthemed vert split char in airline {{{
 
-augroup ThemedChar
-    autocmd!
-    au User AirlineAfterInit,AirlineAfterTheme call FixSplitColours()
-augroup END
+"augroup ThemedChar
+    "autocmd!
+    "au User AirlineAfterInit,AirlineAfterTheme call FixSplitColours()
+"augroup END
 
-fun! FixSplitColours()
-    let l:theme = get(g:, 'airline_theme', g:colors_name)
-    "let l:focusedColour = g:airline#themes#{l:theme}#palette['inactive']['airline_c'][1]
-    let l:focusedColour = g:airline#themes#{l:theme}#palette['inactive']['airline_a'][1]
-    let l:inactiveColour = g:airline#themes#{l:theme}#palette['inactive']['airline_a'][1]
-    exec 'hi StatusLine guibg=' . l:focusedColour
-    exec 'hi StatusLineNC guibg=' . l:inactiveColour
-endfun
+"fun! FixSplitColours()
+    "let l:theme = get(g:, 'airline_theme', g:colors_name)
+    ""let l:focusedColour = g:airline#themes#{l:theme}#palette['inactive']['airline_c'][1]
+    "let l:focusedColour = g:airline#themes#{l:theme}#palette['inactive']['airline_a'][1]
+    "let l:inactiveColour = g:airline#themes#{l:theme}#palette['inactive']['airline_a'][1]
+    "exec 'hi StatusLine guibg=' . l:focusedColour
+    "exec 'hi StatusLineNC guibg=' . l:inactiveColour
+"endfun
 
 " }}}
 " NerdFonts {{{
@@ -1112,16 +1140,17 @@ endfun
 "let g:airline_right_alt_sep = "\uE0B7"
 
 "Edge down
-let g:airline_left_sep = "\uE0B8"
-let g:airline_left_alt_sep = "\uE0B9"
-let g:airline_right_sep = "\uE0BA"
-let g:airline_right_alt_sep = "\uE0BB"
-let g:tmuxline_separators = {
-    \ 'left' : '',
-    \ 'left_alt': '',
-    \ 'right' : '',
-    \ 'right_alt' : '',
-    \ 'space' : ' '}
+"let g:airline_left_sep = "\uE0B8"
+"let g:airline_left_alt_sep = "\uE0B9"
+"let g:airline_right_sep = "\uE0BA"
+"let g:airline_right_alt_sep = "\uE0BB"
+
+"let g:tmuxline_separators = {
+    "\ 'left' : '',
+    "\ 'left_alt': '',
+    "\ 'right' : '',
+    "\ 'right_alt' : '',
+    "\ 'space' : ' '}
 "Edge up
 "let g:airline_left_sep = "\uE0BC"
 "let g:airline_left_alt_sep = "\uE0BD"
@@ -1202,14 +1231,14 @@ let g:startify_session_remove_lines = ['neoterm']
 " }}}
 " ale {{{
 
-nmap <silent> <C-a>k <Plug>(ale_previous_wrap)
-nmap <silent> <C-a>j <Plug>(ale_next_wrap)
+"nmap <silent> <C-s>k <Plug>(ale_previous_wrap)
+"nmap <silent> <C-s>j <Plug>(ale_next_wrap)
 
 " }}}
 " phpcd {{{
 
 "let g:deoplete#ignore_sources = get(g:, 'deoplete#ignore_sources', {})
-"let g:deoplete#ignore_sources.php = ['omni']
+"let g:deoplete#ignore_sources.php = ['phpcd', 'omni']
 
 " }}}
 " nvim-completion-manager {{{
@@ -1221,12 +1250,12 @@ nmap <silent> <C-a>j <Plug>(ale_next_wrap)
 "" utils, optional
 "let g:python_support_python3_requirements = add(get(g:,'python_support_python3_requirements',[]),'psutil')
 "let g:python_support_python3_requirements = add(get(g:,'python_support_python3_requirements',[]),'setproctitle')
-"" don't give |ins-completion-menu| messages.  For example,
-"set shortmess+=c
-"inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-"inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-"let g:UltiSnipsExpandTrigger = "<Plug>(ultisnips_expand)"
-"inoremap <silent> <c-u> <c-r>=cm#sources#ultisnips#trigger_or_popup("\<Plug>(ultisnips_expand)")<cr>
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+let g:UltiSnipsExpandTrigger = "<Plug>(ultisnips_expand)"
+inoremap <silent> <c-e> <c-r>=cm#sources#ultisnips#trigger_or_popup("\<Plug>(ultisnips_expand)")<cr>
+let g:cm_matcher = {'module': 'cm_matchers.fuzzy_matcher', 'case': 'smartcase'}
+let g:cm_refresh_default_min_word_len = 2
 
 " }}}
 " vim-gtfo {{{
@@ -1299,7 +1328,7 @@ nnoremap <leader>co :colorscheme  <bar>:call SetTermBackground()<bar>:Tmuxline v
 " }}}
 " Seiya {{{
 
-let g:seiya_auto_enable=1
+"let g:seiya_auto_enable=1
 let g:seiya_target_groups = has('nvim') ? ['guibg'] : ['ctermbg']
 
 " }}}
@@ -1307,5 +1336,64 @@ let g:seiya_target_groups = has('nvim') ? ['guibg'] : ['ctermbg']
 
 hi! link CurrentWordTwins Visual
 let g:vim_current_word#highlight_current_word = 0
+
+" }}}
+" LanguageClient {{{
+
+let g:LanguageClient_autoStart = 1
+nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
+nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
+let g:LanguageClient_diagnosticsDisplay = {
+    \   1: {
+    \       'name': 'Error',
+    \       'texthl': 'SyntasticError',
+    \       'signText': '>>',
+    \       'signTexthl': 'Error',
+    \   },
+    \   2: {
+    \      'name': 'Warning',
+    \       'texthl': 'SyntasticWarning',
+    \       'signText': '!',
+    \       'signTexthl': 'SignWarning',
+    \   },
+    \   3: {
+    \       'name': 'Information',
+    \       'texthl': 'LanguageClientInformation',
+    \       'signText': 'i',
+    \       'signTexthl': 'SignInformation',
+    \   },
+    \   4: {
+    \       'name': 'Hint',
+    \       'texthl': 'LanguageClientHint',
+    \       'signText': '.',
+    \       'signTexthl': 'SignHint',
+    \   },
+    \}
+
+" }}
+" Tmux-complete {{{
+
+"let g:tmuxcomplete#trigger = ''
+
+" }}}
+" IndentLine {{{
+" You can also use one of ¦, ┆, or │ 
+"let g:indentLine_char = '│' 
+let g:indentLine_char = '┆'
+
+" }}}
+" echodoc {{{
+
+"let g:echodoc#enable_at_startup = 1
+
+"}}}
+" completor {{{
+
+"let g:completor_php_omni_trigger = '([$\w]{2,}|use\s*|->[$\w]*|::[$\w]*|implements\s*|extends\s*|class\s+[$\w]+|new\s*)$'
+
+"inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+"inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+"inoremap <expr> <cr> pumvisible() ? "\<C-y>\<cr>" : "\<cr>"
 
 " }}}
