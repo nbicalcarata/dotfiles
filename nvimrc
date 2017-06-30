@@ -40,7 +40,7 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'justinmk/vim-gtfo'
 Plug 'mbbill/undotree'
 Plug 'Harenome/vim-neatfoldtext'
-Plug 'Shougo/neomru.vim'
+"Plug 'Shougo/neomru.vim'
 Plug 'kassio/neoterm'
 "Plug 'Shougo/denite.nvim'
 Plug 'ctrlpvim/ctrlp.vim'
@@ -90,7 +90,6 @@ Plug 'miyakogi/seiya.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'cohama/agit.vim'
-"Plug 'chemzqm/vim-easygit'
 Plug 'jreybert/vimagit'
 " }}}
 " Html {{{
@@ -102,47 +101,34 @@ Plug 'alvan/vim-closetag'
 
 " }}}
 " Snippets & AutoComplete {{{
-
-function! DoRemote(arg)
-  UpdateRemotePlugins
-endfunction
-
-Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
-"Plug 'wellle/tmux-complete.vim'
-" Showing function signature and inline doc.
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/echodoc.vim'
-"Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-"Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
-"Plug 'w0rp/ale'
+Plug 'wellle/tmux-complete.vim'
+Plug 'w0rp/ale'
+"Plug 'ajh17/VimCompletesMe'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'jiangmiao/auto-pairs'
 "Plug 'shawncplus/phpcomplete.vim'
-"Plug 'lvht/phpcd.vim', { 'for': 'php' , 'do': 'composer update' }
-"Plug 'lvht/phpcd.vim', { 'for': 'php', 'do': 'composer install' }
-" `npm install` For javascript code completion support
-Plug 'roxma/nvim-completion-manager'
-" PHP code completion is moved to a standalone plugin
-Plug 'roxma/LanguageServer-php-neovim',  {'do': 'composer install && composer run-script parse-stubs'}
-"Plug 'roxma/python-support.nvim'
-"Plug 'alvan/vim-php-manual'
-"Plug 'padawan-php/deoplete-padawan', { 'do': 'composer install' }
+Plug 'lvht/phpcd.vim', { 'for': 'php', 'do': 'composer install' }
+Plug 'rafaelndev/deoplete-laravel-plugin', {'for': 'php', 'do': 'composer install'}
+"Plug 'jsfaint/gen_tags.vim'
+Plug 'ludovicchabant/vim-gutentags'
+"Plug 'majutsushi/tagbar'
+Plug 'carlitux/deoplete-ternjs', { 'do': 'sudo npm install -g tern' }
+
 " }}}
 " Syntax highlighting{{{
 
-Plug 'dominikduda/vim_current_word'
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+"Plug 'dominikduda/vim_current_word'
+"Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'sheerun/vim-polyglot'
 "Plug 'ryanoasis/vim-devicons'
 "Plug 'tweekmonster/django-plus.vim'
 "Plug 'reedes/vim-pencil'
 "Plug 'majutsushi/tagbar'
-"Plug 'ludovicchabant/vim-gutentags'
 Plug 'janko-m/vim-test'
-"Plug 'rhysd/nyaovim-mini-browser'
 Plug 'StanAngeloff/php.vim'
-"Plug 'rafaelndev/deoplete-laravel-plugin', {'for': ['php'], 'do': 'composer install'}
-"Plug 'maralla/completor.vim'
 
 " }}}
 
@@ -275,7 +261,7 @@ augroup OmniCompletion
     autocmd FileType ruby set omnifunc=rubycomplete#Complete
     autocmd FileType htmldjango set omnifunc=htmldjangocomplete#CompleteDjango
     autocmd FileType php set omnifunc=phpcomplete#CompletePHP
-"augroup END
+augroup END
 
 " }}}
 " No delay between Insert and Normal mode {{{
@@ -349,9 +335,7 @@ augroup END
 
 augroup phpLaravel
     autocmd!
-    "autocmd BufRead,BufNewFile *.php UltiSnipsAddFiletypes php.php-laravel.html
     autocmd BufRead,BufNewFile *.blade.php UltiSnipsAddFiletypes php.php-laravel.html
-    ""autocmd BufRead,BufNewFile *.blade.php set filetype=blade.html
 augroup END
 
 " }}}
@@ -368,7 +352,7 @@ set novisualbell                " turn off visual bell
 set equalalways
 set lazyredraw
 set noshowmode                  " Dont display the current mode
-set nohlsearch                  " Highlight search matches
+"set nohlsearch                  " Highlight search matches
 set showmatch                   " show matching brackets/parenthesis
 set ignorecase                  " Case insensitive search
 set smartcase                   " Case sensitive when uc present
@@ -496,9 +480,9 @@ augroup END
 " }}}
 " Colorscheme {{{
 let g:alduin_Shout_Fire_Breath = 1
-"colorscheme base16-solarized-dark
+colorscheme base16-twilight
 "colorscheme gotham
-colorscheme onedark
+"colorscheme onedark
 "let g:airline_theme = 'base16_solarized'
 
 " }}}
@@ -507,8 +491,8 @@ colorscheme onedark
 " Mappings {{{
 
 " During insert, kj escapes, `^ is so that the cursor doesn't move
-inoremap kj <Esc>`^
-inoremap jk <Esc>`^
+"inoremap kj <Esc>`^
+"inoremap jk <Esc>`^
 
 " Escape from command line using jk and kj
 "cmap jk <C-c>
@@ -744,39 +728,10 @@ let g:NERDTreeWinPos="right"
 let g:NERDTreeQuitOnOpen=0
 
 " }}}
-" YouCcompleteMe {{{
-
-" Cerrar la ventana de previsualizacion despues del completado semantico
-let g:ycm_autoclose_preview_window_after_completion = 1
-let g:ycm_use_ultisnips_completer = 1
-
-" }}}
-" Deoplete {{{
-
-"" Use deoplete.
-"let g:deoplete#enable_at_startup = 1
-
-""" Use smartcase.
-"let g:deoplete#enable_smart_case = 1
-
-""" TAB to select.
-"inoremap <silent><expr><Tab> pumvisible() ? "\<c-n>"
-      "\ : (<SID>is_whitespace() ? "\<Tab>" : deoplete#mappings#manual_complete())
-"inoremap <expr><S-Tab>  pumvisible() ? "\<c-p>" : "\<c-h>"
-
-"function! s:is_whitespace()
-  "let l:col = col('.') - 1
-  "return !l:col || getline('.')[l:col - 1]  =~? '\s'
-"endfunction
-
-"call deoplete#custom#set('ultisnips', 'matchers', ['matcher_fuzzy'])
-
-" }}}
 
 " UltiSnips {{{
-
 let g:UltiSnipsExpandTrigger='<c-e>'
-"let g:UltiSnipsListSnippets="<c-l>"
+let g:UltiSnipsListSnippets='<c-l>'
 let g:UltiSnipsJumpForwardTrigger='<c-j>'
 let g:UltiSnipsJumpBackwardTrigger='<c-k>'
 inoremap <c-x><c-k> <c-x><c-k>
@@ -912,6 +867,7 @@ nnoremap <leader>r :CtrlPYankring<cr>
 nnoremap <leader>j :CtrlPBuffer<cr>
 nnoremap <leader>m :CtrlPMRUFiles<cr>
 nnoremap <leader>D :CtrlP
+nnoremap <leader>T :CtrlPTag<CR>
 let g:ctrlp_working_path_mode = 0
 let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
 let g:ctrlp_use_caching = 0
@@ -1003,15 +959,6 @@ xmap as  <plug>(GrepperOperator)
 
 "Start searching the word under the cursor:
 nnoremap <leader>x :Grepper -tool ag -cword -noprompt<cr>
-
-" }}}
-" Workspace {{{
-
-let g:workspace_use_devicons = 1
-let g:workspace_powerline_separators = 1
-let g:workspace_tab_icon = "\uf00a"
-let g:workspace_left_trunc_icon = "\uf0a8"
-let g:workspace_right_trunc_icon = "\uf0a9"
 
 " }}}
 " Airline {{{
@@ -1182,7 +1129,8 @@ endif
 " }}}
 " Startify {{{
 
-set sessionoptions-=help,blank
+set sessionoptions-=help,blank,folds
+"set sessionoptions=blank,curdir,folds,help,tabpages,winpos
 
 let g:startify_custom_header = [
              \ '                       █▀▀▄ █▀▀ █▀▀█ ▀█░█▀ ░▀░ █▀▄▀█',
@@ -1221,7 +1169,9 @@ let g:startify_session_remove_lines = ['neoterm']
 " }}}
 " Tagbar {{{
 
-"nmap <leader>tb :TagbarToggle<CR>
+let g:tagbar_left = 1
+let g:tagbar_width = 30
+"nmap <leader>T :TagbarToggle<CR>
 
 " }}}
 " Magit {{{
@@ -1231,31 +1181,8 @@ let g:startify_session_remove_lines = ['neoterm']
 " }}}
 " ale {{{
 
-"nmap <silent> <C-s>k <Plug>(ale_previous_wrap)
-"nmap <silent> <C-s>j <Plug>(ale_next_wrap)
-
-" }}}
-" phpcd {{{
-
-"let g:deoplete#ignore_sources = get(g:, 'deoplete#ignore_sources', {})
-"let g:deoplete#ignore_sources.php = ['phpcd', 'omni']
-
-" }}}
-" nvim-completion-manager {{{
-
-"let g:python_support_python3_requirements = add(get(g:,'python_support_python3_requirements',[]),'jedi')
-"" language specific completions on markdown file
-"let g:python_support_python3_requirements = add(get(g:,'python_support_python3_requirements',[]),'mistune')
-
-"" utils, optional
-"let g:python_support_python3_requirements = add(get(g:,'python_support_python3_requirements',[]),'psutil')
-"let g:python_support_python3_requirements = add(get(g:,'python_support_python3_requirements',[]),'setproctitle')
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-let g:UltiSnipsExpandTrigger = "<Plug>(ultisnips_expand)"
-inoremap <silent> <c-e> <c-r>=cm#sources#ultisnips#trigger_or_popup("\<Plug>(ultisnips_expand)")<cr>
-let g:cm_matcher = {'module': 'cm_matchers.fuzzy_matcher', 'case': 'smartcase'}
-let g:cm_refresh_default_min_word_len = 2
+nmap <silent> <C-s>k <Plug>(ale_previous_wrap)
+nmap <silent> <C-s>j <Plug>(ale_next_wrap)
 
 " }}}
 " vim-gtfo {{{
@@ -1332,68 +1259,34 @@ nnoremap <leader>co :colorscheme  <bar>:call SetTermBackground()<bar>:Tmuxline v
 let g:seiya_target_groups = has('nvim') ? ['guibg'] : ['ctermbg']
 
 " }}}
-" {{{
+" Hilight current word {{{
 
-hi! link CurrentWordTwins Visual
-let g:vim_current_word#highlight_current_word = 0
-
-" }}}
-" LanguageClient {{{
-
-let g:LanguageClient_autoStart = 1
-nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
-nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
-nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
-let g:LanguageClient_diagnosticsDisplay = {
-    \   1: {
-    \       'name': 'Error',
-    \       'texthl': 'SyntasticError',
-    \       'signText': '>>',
-    \       'signTexthl': 'Error',
-    \   },
-    \   2: {
-    \      'name': 'Warning',
-    \       'texthl': 'SyntasticWarning',
-    \       'signText': '!',
-    \       'signTexthl': 'SignWarning',
-    \   },
-    \   3: {
-    \       'name': 'Information',
-    \       'texthl': 'LanguageClientInformation',
-    \       'signText': 'i',
-    \       'signTexthl': 'SignInformation',
-    \   },
-    \   4: {
-    \       'name': 'Hint',
-    \       'texthl': 'LanguageClientHint',
-    \       'signText': '.',
-    \       'signTexthl': 'SignHint',
-    \   },
-    \}
-
-" }}
-" Tmux-complete {{{
-
-"let g:tmuxcomplete#trigger = ''
+"hi! link CurrentWordTwins Visual
+"let g:vim_current_word#highlight_current_word = 0
 
 " }}}
-" IndentLine {{{
-" You can also use one of ¦, ┆, or │ 
-"let g:indentLine_char = '│' 
-let g:indentLine_char = '┆'
+" gentags {{{
+
+"let g:loaded_gentags#gtags = 1
+"let g:gen_tags#ctags_auto_gen = 1
+"let g:gen_tags#verbose = 1
+"let g:gen_tags#ctags_opts = "--exclude=.git --exclude=node_modules --exclude=db --exclude=log"
 
 " }}}
-" echodoc {{{
+" gutentags {{{
 
-"let g:echodoc#enable_at_startup = 1
+let g:gutentags_cache_dir = '~/.cache/gutentags'
+"let g:gutentags_ctags_exclude = ["*.min.js", "*.min.css", "build", ".git", "node_modules", "db", "log"]
 
-"}}}
-" completor {{{
+" }}}
+" Deoplete {{{
 
-"let g:completor_php_omni_trigger = '([$\w]{2,}|use\s*|->[$\w]*|::[$\w]*|implements\s*|extends\s*|class\s+[$\w]+|new\s*)$'
-
-"inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-"inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-"inoremap <expr> <cr> pumvisible() ? "\<C-y>\<cr>" : "\<cr>"
+let g:deoplete#enable_at_startup = 1
+call deoplete#custom#set('ultisnips', 'matchers', ['matcher_fuzzy'])
+let g:deoplete#ignore_sources = get(g:, 'deoplete#ignore_sources', {})
+let g:deoplete#ignore_sources.php = ['omni']
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+let g:echodoc_enable_at_startup = 1
 
 " }}}
