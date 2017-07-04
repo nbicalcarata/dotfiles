@@ -60,7 +60,7 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'mhinz/vim-startify'
 Plug 'frace/vim-unsurpriseme'
 Plug 'mhinz/vim-grepper'
-Plug 'Yggdroot/indentLine'
+"Plug 'Yggdroot/indentLine'
 
 "}}}
 " Colorschemes {{{
@@ -116,6 +116,10 @@ Plug 'rafaelndev/deoplete-laravel-plugin', {'for': 'php', 'do': 'composer instal
 Plug 'ludovicchabant/vim-gutentags'
 "Plug 'majutsushi/tagbar'
 Plug 'carlitux/deoplete-ternjs', { 'do': 'sudo npm install -g tern' }
+" ES2015 code snippets (Optional)
+Plug 'epilande/vim-es2015-snippets'
+" React code snippets
+Plug 'epilande/vim-react-snippets'
 
 " }}}
 " Syntax highlighting{{{
@@ -129,6 +133,7 @@ Plug 'sheerun/vim-polyglot'
 "Plug 'majutsushi/tagbar'
 Plug 'janko-m/vim-test'
 Plug 'StanAngeloff/php.vim'
+Plug 'mxw/vim-jsx'
 
 " }}}
 
@@ -243,10 +248,12 @@ set wildignore+=*/node_modules/*,*/vendor/*
 
 " }}}
 " Whitespace settings per filetype {{{
-
-"autocmd Filetype html,blade,php setlocal ts=2 sts=2 sw=2
-"autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
-"autocmd Filetype javascript setlocal ts=4 sts=4 sw=4
+"augroup WhitespaceSettings
+    "autocmd!
+    "autocmd BufRead,BufNewFile,Filetype html,blade,php setlocal ts=2 sts=2 sw=2
+    ""autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
+    "autocmd BufRead,BufNewFile,Filetype javascript,jsx setlocal ts=2 sts=2 sw=2
+"augroup END
 
 " }}}
 " Omnicompletion {{{
@@ -317,7 +324,7 @@ augroup NerdTreeExit
 augroup END
 
 " }}}
-" Detgect django files {{{
+" Detect django files {{{
 
 "augroup DjangoFiles
     "autocmd!
@@ -336,6 +343,7 @@ augroup END
 augroup phpLaravel
     autocmd!
     autocmd BufRead,BufNewFile *.blade.php UltiSnipsAddFiletypes php.php-laravel.html
+    autocmd BufRead,BufNewFile *.js UltiSnipsAddFiletypes js.html
 augroup END
 
 " }}}
@@ -369,10 +377,10 @@ endif
 
 filetype plugin indent on
 set autoindent
-set shiftwidth=4                " Use indents of 4 spaces
+set shiftwidth=2                " Use indents of 2 spaces
 set expandtab                   " Tabs are spaces, not tabs
-set tabstop=4                   " An indentation every four columns
-set softtabstop=4               " Let backspace delete indent
+set tabstop=2                   " An indentation every four columns
+set softtabstop=2               " Let backspace delete indent
 set nojoinspaces                " Prevents inserting two spaces after
 set splitright                  " Puts new vsplit windows to the right
 set splitbelow                  " Puts new split windows to the bottom
@@ -755,6 +763,7 @@ let g:mta_filetypes = {
     \ 'jinja' : 1,
     \ 'blade' : 1,
     \ 'php' : 1,
+    \ 'javascript.jsx' : 1,
     \}
 
 " }}}
@@ -804,12 +813,12 @@ nmap <silent> <leader>tv :TestVisit<CR>
 
 let g:test#strategy = 'neoterm'
 
-function! DockerTransform(cmd) abort
-  return 'docker exec -it --user=laradock laradock_workspace_1 '.a:cmd
-endfunction
+"function! DockerTransform(cmd) abort
+  "return 'docker exec -it --user=laradock laradock_workspace_1 '.a:cmd
+"endfunction
 
-let g:test#custom_transformations = {'docker': function('DockerTransform')}
-let g:test#transformation = 'docker'
+"let g:test#custom_transformations = {'docker': function('DockerTransform')}
+"let g:test#transformation = 'docker'
 
 " }}}
 " Undotree {{{
@@ -848,7 +857,8 @@ let g:anyfold_fold_comments=1
 augroup FileTypeFolds
     autocmd!
     autocmd Filetype python let b:anyfold_activate=1
-    autocmd Filetype javascript let b:anyfold_activate=1
+    autocmd Filetype javascript let b:anyfold_activate=0
+    autocmd Filetype jsx let b:anyfold_activate=0
     autocmd Filetype php let b:anyfold_activate=1
     autocmd Filetype bash let b:anyfold_activate=1
     autocmd Filetype java let b:anyfold_activate=1
@@ -936,7 +946,7 @@ let g:ctrlp_use_caching = 0
 " }}}
 " Neoterm {{{
 let g:neoterm_position = 'horizontal'
-let g:neoterm_size = 5
+let g:neoterm_size = 12
 "let g:neoterm_position = 'vertical'
 "let g:neoterm_size = 80
 let g:neoterm_automap_keys = ',tt'
@@ -1245,7 +1255,8 @@ nnoremap <leader>1 :call TermTransparency(1)<cr>
 "Increase transparency
 nnoremap <leader>2 :call TermTransparency(2)<cr>
 ",co to set colorscheme and terminal background
-nnoremap <leader>co :colorscheme  <bar>:call SetTermBackground()<bar>:Tmuxline vim_statusline_3<C-Left><C-Left><C-Left><left>
+"nnoremap <leader>co :colorscheme  <bar>:call SetTermBackground()<bar>:Tmuxline vim_statusline_3<C-Left><C-Left><C-Left><left>
+nnoremap <leader>co :colorscheme  <bar>:call SetTermBackground()<C-Left><C-Left><left>
 
 "augroup TermBackground
     "autocmd!
@@ -1288,5 +1299,10 @@ let g:deoplete#ignore_sources.php = ['omni']
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 let g:echodoc_enable_at_startup = 1
+
+" }}}
+" vim-jsx {{{
+
+let g:jsx_ext_required = 0
 
 " }}}

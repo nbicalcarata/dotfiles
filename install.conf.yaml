@@ -11,6 +11,7 @@
     ~/.tmux.conf: tmux.conf
     ~/.vimrc: vimrc
     ~/.bashrc: bashrc
+    ~/.eslintrc: eslintrc
     ~/.zshrc: zshrc
     ~/.zprofile: zprofile
     ~/.bash_profile: bash_profile
