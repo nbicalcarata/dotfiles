@@ -347,6 +347,14 @@ augroup phpLaravel
 augroup END
 
 " }}}
+" Neovim term settings {{{
+
+augroup termSettings
+    autocmd!
+    autocmd TermOpen * setlocal foldcolumn=0 signcolumn=no
+augroup END
+
+" }}}
 " }}}
 " Visual settings {{{
 
