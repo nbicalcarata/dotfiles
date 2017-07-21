@@ -881,7 +881,6 @@ augroup FileTypeFolds
     autocmd Filetype cs let b:anyfold_activate=1
     autocmd Filetype html let b:anyfold_activate=1
     autocmd Filetype html,blade setlocal foldcolumn=0
-    autocmd TermOpen * setlocal foldcolumn=0
 augroup END
 
 " }}}
