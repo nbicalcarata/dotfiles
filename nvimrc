@@ -923,8 +923,8 @@ let g:ctrlp_use_caching = 0
 "nnoremap <leader>f :Denite line<cr>
 "nnoremap <leader>o :Denite outline<cr>
 "nnoremap <leader>r :Denite register<cr>
-""nnoremap <leader>az :Denite grep -path=~/Documentos/Apuntes/<cr>
-"nnoremap <leader>z :Denite file_rec -path=~/Documentos/Apuntes/<cr>
+""nnoremap <leader>az :Denite grep -path=~/Dropbox/Documentos/Apuntes/<cr>
+"nnoremap <leader>z :Denite file_rec -path=~/Dropbox/Documentos/Apuntes/<cr>
 
 "call denite#custom#alias('source', 'file_rec/git', 'file_rec')
 "call denite#custom#var('file_rec/git', 'command',
