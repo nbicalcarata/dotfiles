@@ -960,8 +960,9 @@ let g:ctrlp_use_caching = 0
 
 " }}}
 " Neoterm {{{
-let g:neoterm_position = 'horizontal'
-let g:neoterm_size = 12
+let g:neoterm_position = 'vertical'
+"let g:neoterm_size = 75
+let g:neoterm_size = 50
 "let g:neoterm_position = 'vertical'
 "let g:neoterm_size = 80
 let g:neoterm_automap_keys = ',tt'
