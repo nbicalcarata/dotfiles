@@ -886,7 +886,7 @@ augroup END
 " }}}
 " CtrlP {{{
 
-nnoremap <leader>z :CtrlP ~/Documentos/Apuntes/<cr>
+nnoremap <leader>z :CtrlP ~/Dropbox/Documentos/Apuntes/<cr>
 nnoremap <leader>f :CtrlPLine<cr>
 nnoremap <leader>r :CtrlPYankring<cr>
 nnoremap <leader>j :CtrlPBuffer<cr>
