@@ -90,35 +90,10 @@ alias fed="sudo /usr/fed"
 # So as not to be disturbed by Ctrl-S ctrl-Q in terminals:
 stty -ixon
 
-#Colored man pages
-man() {
-    #env LESS_TERMCAP_mb=$'\E[01;31m' \
-    #LESS_TERMCAP_md=$'\E[01;38;5;74m' \
-    #LESS_TERMCAP_me=$'\E[0m' \
-    #LESS_TERMCAP_se=$'\E[0m' \
-    #LESS_TERMCAP_so=$'\E[38;5;246m' \
-    #LESS_TERMCAP_ue=$'\E[0m' \
-    #LESS_TERMCAP_us=$'\E[04;38;5;146m' \
-    #man "$@"
-}
 export NO_AT_BRIDGE=1
 
 export TERM="xterm-256color"
 export PATH="$PATH:$HOME/.config/composer/vendor/bin"
-
-function homestead() {
-    ( cd ~/Homestead && vagrant $* )
-}
-
-# function to set terminal title
-function set-title(){
-  if [[ -z "$ORIG" ]]; then
-    ORIG=$PS1
-  fi
-  TITLE="\[\e]2;$*\a\]"
-  PS1=${ORIG}${TITLE}
-}
-
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
