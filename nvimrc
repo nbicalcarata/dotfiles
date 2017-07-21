@@ -550,8 +550,8 @@ nnoremap <C-right> 5<C-W><
 nnoremap <C-left> 5<C-W>>
 
 " Substitute
-nnoremap <leader>s :%s//<left>
-vnoremap <leader>s :%s//<left>
+nnoremap <leader>s :%s///g<left><left><left>
+vnoremap <leader>s :s///g<left><left><left>
 
 " Select current line (no indentation)
 nnoremap vv ^vg_
