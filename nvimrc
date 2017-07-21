@@ -373,7 +373,6 @@ set showmatch                   " show matching brackets/parenthesis
 set ignorecase                  " Case insensitive search
 set smartcase                   " Case sensitive when uc present
 set scrolloff=5                 " Minimum lines to keep above and below cursor
-"let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 set inccommand=split            " live sustitution
 
 if LINUX()
