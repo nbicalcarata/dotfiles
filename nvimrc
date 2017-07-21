@@ -165,7 +165,7 @@ set hidden                                      " Allow buffer switching without
 set foldenable                                  " Enable folding
 set foldmethod=marker
 set foldcolumn=4
-set foldlevel=99                                " Folds open at start"
+set foldlevel=99                                " Folds open at start
 set timeoutlen=1000 ttimeoutlen=0               " Eliminar retardo de Insert a Normal
 set conceallevel=2
 
