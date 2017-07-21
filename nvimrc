@@ -843,7 +843,16 @@ let g:NeatFoldTextShowLineCount = 0
 " }}}
 " Zim {{{
 
-nnoremap <leader>az :GrepperAg  ~/Documentos/Apuntes/<C-Left><Left>
+nnoremap <leader>az :GrepperAg  ~/Dropbox/Documentos/Apuntes/<C-Left><Left>
+
+"Zim files keymaps
+",wH   Create Zim header on a buffer
+",wb   Bold a range
+",wi   Italicize a range
+",wh   Highlight a range
+",ws   Strikw a range
+",wh   Header 1 to 5
+"<f8>  Change [ ] to *
 
 " }}}
 " Devicons {{{
