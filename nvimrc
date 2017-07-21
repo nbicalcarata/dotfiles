@@ -334,7 +334,7 @@ augroup END
     "au BufNewFile,BufRead views.py     setlocal filetype=python.django
     "au BufNewFile,BufRead settings.py  setlocal filetype=python.django
     "au BufNewFile,BufRead forms.py     setlocal filetype=python.django
-    ""au BufNewFile,BufRead *.html       setlocal filetype=htmldjango
+    "au BufNewFile,BufRead *.html       setlocal filetype=htmldjango
 "augroup END
 
 " }}}
