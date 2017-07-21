@@ -485,6 +485,7 @@ augroup OverrideColor
     autocmd ColorScheme * hi GitGutterChangeDelete guibg=NONE ctermbg=none
     "autocmd ColorScheme * hi ALEErrorSign guibg=NONE ctermbg=none
     "autocmd ColorScheme * hi ALEWarningSign guibg=NONE ctermbg=none
+    autocmd ColorScheme * hi TermCursor ctermfg=red guifg=red
 augroup END
 
 "exec 'hi SyntasticErrorSign guifg=red ctermfg=red' .
