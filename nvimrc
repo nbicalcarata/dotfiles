@@ -31,7 +31,7 @@ call plug#begin('~/.config/nvim/plugged')
 
 " General {{{
 "Plug 'rliang/nvim-pygtk3', {'do': 'make install'}
-Plug 'equalsraf/neovim-gui-shim'
+"Plug 'equalsraf/neovim-gui-shim'
 Plug 'scrooloose/nerdtree'
 "Plug 'eiginn/netrw'
 "Plug 'tpope/vim-vinegar'
