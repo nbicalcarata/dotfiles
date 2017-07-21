@@ -1220,6 +1220,10 @@ let g:tagbar_width = 30
 nmap <silent> <C-s>k <Plug>(ale_previous_wrap)
 nmap <silent> <C-s>j <Plug>(ale_next_wrap)
 
+"let g:ale_linters = {
+"\   'javascript': ['standard'],
+"\}
+
 " }}}
 " vim-gtfo {{{
 
