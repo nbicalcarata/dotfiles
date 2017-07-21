@@ -147,7 +147,7 @@ call plug#end()
 
 "set shell=/bin/sh
 
-cd ~/Workspace
+cd ~/Dropbox/Workspace
 set completeopt-=preview
 set completeopt+=noinsert
 set mouse=a                                     " Automatically enable mouse usage
