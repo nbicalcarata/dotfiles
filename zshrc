@@ -98,3 +98,7 @@ export PATH="$PATH:$HOME/.config/composer/vendor/bin"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 alias gtypist=gtypist esp.typ
+
+function homestead() {
+    ( cd ~/Homestead && vagrant $* )
+  }

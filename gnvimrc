@@ -4,13 +4,18 @@ set visualbell t_vb=            " turn off error beep/flash
 " fc-list | grep iosevka
 "GuiFont Iosevka Term:h12
 "GuiFont! Iosevka Nerd Font:h13
-"GuiFont FantasqueSansMono Nerd Font:h13
+"GuiFont FantasqueSansMono Nerd Font Mono:h13
 "GuiFont DejaVuSansMono Nerd Font:h12
-GuiFont! InconsolataForPowerline Nerd Font:h13
+"GuiFont DejaVuSansMonoForPowerline Nerd Font:h11
+"GuiFont! InconsolataForPowerline Nerd Font:h13
 "GuiFont Knack Nerd Font:h11
 "GuiFont TerminessTTF Nerd Font:h13
 "GuiFont UbuntuMono Nerd Font:h13
 "GuiFont FuraMonoForPowerline Nerd Font:h12
 "GuiFont Roboto Mono Nerd Font:h12
-colorscheme base16-twilight
+Guifont DejaVu Sans Mono:h11
+"colorscheme base16-darktooth
+"call rpcnotify(1, 'Gui', 'Font', 'Iosevka Term 13')
+"let g:airline_theme = 'raven'
+"let g:airline_theme = 'minimalist'
 call GuiWindowMaximized(1)
