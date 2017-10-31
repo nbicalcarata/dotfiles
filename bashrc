@@ -32,13 +32,13 @@ alias nv="mux dev"
 export EDITOR='nvim'
 
 # Auto rename window title on ssh logins
-ssh() {
-  tmux rename-window "$*"
-  command ssh "$@"
-  echo "Counting to 60"
-  sleep 60 && exit
-  tmux rename-window "bash (exited ssh)"
-}
+#ssh() {
+  #tmux rename-window "$*"
+  #command ssh "$@"
+  #echo "Counting to 60"
+  #sleep 60 && exit
+  #tmux rename-window "bash (exited ssh)"
+#}
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 export VAGRANT_DEFAULT_PROVIDER=virtualbox
