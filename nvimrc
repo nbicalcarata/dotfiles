@@ -31,7 +31,7 @@ call plug#begin('~/.config/nvim/plugged')
 
 " General {{{
 "Plug 'rliang/nvim-pygtk3', {'do': 'make install'}
-Plug 'equalsraf/neovim-gui-shim'
+"Plug 'equalsraf/neovim-gui-shim'
 Plug 'scrooloose/nerdtree'
 "Plug 'eiginn/netrw'
 "Plug 'tpope/vim-vinegar'
@@ -40,12 +40,12 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'justinmk/vim-gtfo'
 Plug 'mbbill/undotree'
 Plug 'Harenome/vim-neatfoldtext'
-"Plug 'Shougo/neomru.vim'
-Plug 'kassio/neoterm'
-"Plug 'Shougo/denite.nvim'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'sgur/ctrlp-extensions.vim'
-Plug 'FelikZ/ctrlp-py-matcher'
+Plug 'Shougo/neomru.vim'
+"Plug 'kassio/neoterm'
+Plug 'Shougo/denite.nvim'
+"Plug 'ctrlpvim/ctrlp.vim'
+"Plug 'sgur/ctrlp-extensions.vim'
+"Plug 'FelikZ/ctrlp-py-matcher'
 "Plug 'metakirby5/codi.vim'
 Plug 'nbicalcarata/vim-zim'
 Plug 'joanrivera/vim-zimwiki-syntax'
@@ -53,14 +53,18 @@ Plug 'joanrivera/vim-zimwiki-syntax'
 Plug 'wesQ3/vim-windowswap'
 "Plug 'tmhedberg/SimpylFold'
 Plug 'pseewald/vim-anyfold'
-Plug 'bling/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+"Plug 'bling/vim-airline'
+"Plug 'vim-airline/vim-airline-themes'
 Plug 'kevinkjt2000/tmuxline.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'mhinz/vim-startify'
 Plug 'frace/vim-unsurpriseme'
 Plug 'mhinz/vim-grepper'
 "Plug 'Yggdroot/indentLine'
+Plug 'roman/golden-ratio'
+Plug 'mklabs/split-term.vim'
+Plug 'drzel/vim-line-no-indicator'
+"Plug 'severin-lemaignan/vim-minimap'
 
 "}}}
 " Colorschemes {{{
@@ -69,18 +73,19 @@ Plug 'mhinz/vim-grepper'
 "Plug 'nbicalcarata/vim-womprat'
 "Plug 'nbicalcarata/vim-airline-womprat'
 "Plug 'nbicalcarata/vim-airline-dieciseis'
-Plug 'nbicalcarata/vim-airline-darktooth'
-Plug 'nanotech/jellybeans.vim'
+"Plug 'nbicalcarata/vim-airline-darktooth'
+"Plug 'nanotech/jellybeans.vim'
 Plug 'chriskempson/base16-vim'
-Plug 'morhetz/gruvbox'
-Plug 'AlessandroYorba/Alduin'
-Plug 'whatyouhide/vim-gotham'
-Plug 'joshdick/onedark.vim'
-Plug 'w0ng/vim-hybrid'
-Plug 'ayu-theme/ayu-vim'
-Plug 'jacoborus/tender'
-Plug 'MaxSt/FlatColor'
+"Plug 'AlessandroYorba/Alduin'
+"Plug 'whatyouhide/vim-gotham'
+"Plug 'w0ng/vim-hybrid'
+"Plug 'ayu-theme/ayu-vim'
+"Plug 'jacoborus/tender'
+"Plug 'MaxSt/FlatColor'
 Plug 'miyakogi/seiya.vim'
+Plug 'xolox/vim-colorscheme-switcher'
+Plug 'Taverius/vim-colorscheme-manager'
+Plug 'xolox/vim-misc'
 
 " }}}
 " Git {{{
@@ -90,7 +95,7 @@ Plug 'miyakogi/seiya.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'cohama/agit.vim'
-Plug 'jreybert/vimagit'
+"Plug 'jreybert/vimagit'
 " }}}
 " Html {{{
 
@@ -101,21 +106,25 @@ Plug 'alvan/vim-closetag'
 
 " }}}
 " Snippets & AutoComplete {{{
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+"Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/echodoc.vim'
-Plug 'wellle/tmux-complete.vim'
-Plug 'w0rp/ale'
+"Plug 'wellle/tmux-complete.vim'
+"Plug 'w0rp/ale'
+Plug 'roxma/nvim-completion-manager'
+Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
+Plug 'roxma/nvim-cm-tern',  {'do': 'npm install'}
+Plug 'roxma/LanguageServer-php-neovim',  {'do': 'composer install && composer run-script parse-stubs'}
 "Plug 'ajh17/VimCompletesMe'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'jiangmiao/auto-pairs'
 "Plug 'shawncplus/phpcomplete.vim'
-Plug 'lvht/phpcd.vim', { 'for': 'php', 'do': 'composer install' }
-Plug 'rafaelndev/deoplete-laravel-plugin', {'for': 'php', 'do': 'composer install'}
+"Plug 'lvht/phpcd.vim', { 'for': 'php', 'do': 'composer install' }
+"Plug 'rafaelndev/deoplete-laravel-plugin', {'for': 'php', 'do': 'composer install'}
 "Plug 'jsfaint/gen_tags.vim'
 Plug 'ludovicchabant/vim-gutentags'
-"Plug 'majutsushi/tagbar'
-Plug 'carlitux/deoplete-ternjs', { 'do': 'sudo npm install -g tern' }
+Plug 'majutsushi/tagbar'
+"Plug 'carlitux/deoplete-ternjs', { 'do': 'sudo npm install -g tern' }
 " ES2015 code snippets (Optional)
 Plug 'epilande/vim-es2015-snippets'
 " React code snippets
@@ -134,7 +143,6 @@ Plug 'sheerun/vim-polyglot'
 Plug 'janko-m/vim-test'
 Plug 'StanAngeloff/php.vim'
 Plug 'mxw/vim-jsx'
-
 " }}}
 
 " Plug end {{{
@@ -147,7 +155,9 @@ call plug#end()
 
 "set shell=/bin/sh
 
-cd ~/Workspace
+"cd ~/Dropbox/Workspace
+set spell spelllang=es
+"set spellfile=~/.local/share/nvim/site/spell/es.utf-8.add
 set completeopt-=preview
 set completeopt+=noinsert
 set mouse=a                                     " Automatically enable mouse usage
@@ -164,8 +174,8 @@ set nospell                                     " Spell checking off
 set hidden                                      " Allow buffer switching without saving
 set foldenable                                  " Enable folding
 set foldmethod=marker
-set foldcolumn=4
-set foldlevel=99                                " Folds open at start"
+set foldcolumn=0
+set foldlevel=99                                " Folds open at start
 set timeoutlen=1000 ttimeoutlen=0               " Eliminar retardo de Insert a Normal
 set conceallevel=2
 
@@ -273,11 +283,11 @@ augroup END
 " }}}
 " No delay between Insert and Normal mode {{{
 
-"augroup FastEscape
-    "autocmd!
-    "au InsertEnter * set timeoutlen=0
-    "au InsertLeave * set timeoutlen=1000
-"augroup END
+augroup FastEscape
+    autocmd!
+    au InsertEnter * set timeoutlen=0
+    au InsertLeave * set timeoutlen=1000
+augroup END
 
 " }}}
 " Only show cursorline in the current window {{{
@@ -316,6 +326,15 @@ augroup ZimRules
 augroup END
 
 " }}}
+" rst rules {{{
+
+augroup RstRules
+    autocmd!
+    autocmd FileType rst syn spell toplevel
+    autocmd FileType rst setlocal spell
+augroup END
+
+" }}}
 " NerdTreeExit {{{
 
 augroup NerdTreeExit
@@ -334,7 +353,7 @@ augroup END
     "au BufNewFile,BufRead views.py     setlocal filetype=python.django
     "au BufNewFile,BufRead settings.py  setlocal filetype=python.django
     "au BufNewFile,BufRead forms.py     setlocal filetype=python.django
-    ""au BufNewFile,BufRead *.html       setlocal filetype=htmldjango
+    "au BufNewFile,BufRead *.html       setlocal filetype=htmldjango
 "augroup END
 
 " }}}
@@ -347,11 +366,20 @@ augroup phpLaravel
 augroup END
 
 " }}}
+" Term settings {{{
+
+augroup termSettings
+    autocmd!
+    autocmd TermOpen * setlocal foldcolumn=0 signcolumn=no nonumber
+augroup END
+
+" }}}
 " }}}
 " Visual settings {{{
 
 " General {{{
 set number
+set background=dark
 set wrap
 set linebreak
 set title
@@ -365,7 +393,6 @@ set showmatch                   " show matching brackets/parenthesis
 set ignorecase                  " Case insensitive search
 set smartcase                   " Case sensitive when uc present
 set scrolloff=5                 " Minimum lines to keep above and below cursor
-"let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 set inccommand=split            " live sustitution
 
 if LINUX()
@@ -396,55 +423,52 @@ set termguicolors
 " Cursor line {{{
 
 set cursorline
-let g:terminal_color_7  = '#FBBC05'
 set guicursor=n-v-c:block-Cursor/lCursor-blinkon0,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor
 "let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 " }}}
-" Statusline {{{
-set statusline=
-set laststatus=2
-"set statusline+=\ %(%{'help'!=&filetype?'':''}\ \ %)
-set statusline+=\ %(%{'help'!=&filetype?'CWD':''}\ \ %)
-set statusline+=%<                                     " Where to truncate line
-set statusline+=%{Relative_Path_CWD()}                 " Current dir
-"set statusline+=\ \ %f                                " Path relative to current buffer
-set statusline+=\ \ %f                                " Path relative to current buffer
-set statusline+=\%{&modified?'\ +':''}
-set statusline+=%=                                     " Separation point
-set statusline+=\%{&readonly?'\ ':''}
-set statusline+=\ %{''!=#&filetype?&filetype:'none'}   " FileType
-"set statusline+=\ %{WebDevIconsGetFileTypeSymbol()}
-"set statusline+=\\ %2v                                " Virtual column number
-set statusline+=\ \ %2v                                " Virtual column number
-set statusline+=%5l                                    " Current line
-set statusline+=/%L
-"set statusline+=\ \ %{fugitive#head()!=''?'\ \ '.fugitive#head().'\ ':''}
-set statusline+=\ \ %{fugitive#head()!=''?'\ \ '.fugitive#head().'\ ':''}
-"set statusline+=\ %{strftime(\"%H:%M\ \")}
-set statusline+=\ %{LinterStatus()}
+" Ruler {{{
 
+"set rulerformat=%40(%{&filetype}\⎼⎼%{fugitive#head()}\⎼⎼%05l⎼%(%02v\⎼⎼%P%)%)
+"set rulerformat=%75(%{&filetype}\⎼⎼%{fugitive#head()}\⎼⎼%{strftime('%a\⎼%b\⎼%e\⎼%H:%M\⎼%p')}\⎼%05l,%-6(%c%V%)\⎼⎼%P%)
+"set rulerformat=%50(%{&filetype}\⎼⎼%{fugitive#head()}\⎼⎼%{strftime('%H:%M\⎼')}\⎼%05l,%(%03v%)\⎼⎼%P%)
+set rulerformat=%40(%{&filetype}\⎼⎼%{fugitive#head()}\⎼⎼%{strftime('%H:%M\─')}\┤%{LineNoIndicator()}\├─%03c%)
+"set rulerformat=%40(%{&filetype}\⎼⎼%{fugitive#head()}\⎼⎼%{strftime('%H:%M\⎼')}\⎼⎼%{LineNoIndicator()}\ %03c%)
+
+" }}}
+" Statusline {{{
+"
+set laststatus=2
+"set statusline+=\ %{strftime(\"%H:%M\ \")}
+"set statusline+=\ %{LinterStatus()}
+"
 function! Relative_Path_CWD()
     let l:path = fnamemodify(getcwd(),":t")
     return l:path
 endfunction
 
-function! LinterStatus() abort
-    let l:counts = ale#statusline#Count(bufnr(''))
+"let timer = timer_start(4000, 'UpdateStatusBar',{'repeat':-1})
+"let timer = timer_start(30000, 'UpdateStatusBar',{'repeat':-1})
+"function! UpdateStatusBar(timer)
+  "execute 'let &ro = &ro'
+"endfunction
 
-    let l:all_errors = l:counts.error + l:counts.style_error
-    let l:all_non_errors = l:counts.total - l:all_errors
+"function! LinterStatus() abort
+    "let l:counts = ale#statusline#Count(bufnr(''))
 
-    return l:counts.total == 0 ? 'OK ' : printf(
-    \   '%dW %dE ',
-    \   all_non_errors,
-    \   all_errors
-    \)
-endfunction
+    "let l:all_errors = l:counts.error + l:counts.style_error
+    "let l:all_non_errors = l:counts.total - l:all_errors
+
+    "return l:counts.total == 0 ? 'OK ' : printf(
+    "\   '%dW %dE ',
+    "\   all_non_errors,
+    "\   all_errors
+    "\)
+"endfunction
 
 " }}}
 " Styling vertical splits {{{
 if LINUX()
-    set fillchars=vert:│,fold:۰,diff:·
+    set fillchars=vert:│,fold:۰,diff:·,stl:⎼,stlnc:⎼
     "set fillchars=vert:┃,diff:⎼,fold:⎼
     "set fillchars=""
 endif
@@ -454,21 +478,23 @@ endif
 augroup OverrideColor
     autocmd!
     autocmd ColorScheme * hi! link VertSplit LineNr
-    "autocmd ColorScheme * hi link deniteMatched Statement
-    "autocmd ColorScheme * hi link deniteMatchedChar Type
+    "autocmd ColorScheme * hi link deniteMatched Type
+    autocmd ColorScheme * hi link deniteMatchedChar Statement
     " No background
-    "autocmd ColorScheme * hi! link StatusLine FoldColumn
-    "autocmd ColorScheme * hi! link StatusLineNC LineNr
+    "autocmd ColorScheme * hi! StatusLine guibg=NONE
+    autocmd ColorScheme * hi! StatusLineNC guibg=NONE
+    autocmd ColorScheme * hi! link StatusLine LineNr
+
     " Background
-    autocmd ColorScheme * hi! link StatusLine CursorLine
+    "autocmd ColorScheme * hi! link StatusLine CursorLine
 
     autocmd ColorScheme * hi! link TabLineFill FoldColumn
     "autocmd ColorScheme * hi! link TabLineSel CursorLine
     autocmd ColorScheme * hi! link TabLine LineNr
     autocmd ColorScheme * hi! link FoldColumn LineNr
     autocmd ColorScheme * hi! link CursorLineNr CursorLine
-    autocmd ColorScheme * hi! link ALEErrorSign ErrorMsg
-    autocmd ColorScheme * hi! link ALEWarningSign WarningMsg
+    "autocmd ColorScheme * hi! link ALEErrorSign ErrorMsg
+    "autocmd ColorScheme * hi! link ALEWarningSign WarningMsg
     autocmd ColorScheme * hi! link Folded LineNr
     "autocmd ColorScheme * hi FoldColumn    guibg=NONE guifg=bg ctermbg=none ctermfg=bg
     autocmd ColorScheme * hi LineNr        guibg=NONE ctermbg=none
@@ -479,6 +505,7 @@ augroup OverrideColor
     autocmd ColorScheme * hi GitGutterChangeDelete guibg=NONE ctermbg=none
     "autocmd ColorScheme * hi ALEErrorSign guibg=NONE ctermbg=none
     "autocmd ColorScheme * hi ALEWarningSign guibg=NONE ctermbg=none
+    "autocmd ColorScheme * hi TermCursor ctermfg=green guifg=green
 augroup END
 
 "exec 'hi SyntasticErrorSign guifg=red ctermfg=red' .
@@ -487,11 +514,10 @@ augroup END
 
 " }}}
 " Colorscheme {{{
-let g:alduin_Shout_Fire_Breath = 1
-colorscheme base16-twilight
-"colorscheme gotham
-"colorscheme onedark
-"let g:airline_theme = 'base16_solarized'
+
+"if LINUX()
+  ""colorscheme alduin
+"endif
 
 " }}}
 
@@ -526,6 +552,7 @@ nnoremap <space> za
 " Quick edit vimrc
 nnoremap <leader>ev :e ~/.config/nvim/init.vim<cr>
 nnoremap <leader>sv :source ~/.config/nvim/init.vim<cr>
+nnoremap <leader>sg :source ~/.config/nvim/ginit.vim<cr>
 
 nnoremap <F1> <nop>
 nnoremap Q <nop>
@@ -543,8 +570,8 @@ nnoremap <C-right> 5<C-W><
 nnoremap <C-left> 5<C-W>>
 
 " Substitute
-nnoremap <leader>s :%s//<left>
-vnoremap <leader>s :%s//<left>
+nnoremap <leader>s :%s///g<left><left><left>
+vnoremap <leader>s :s///g<left><left><left>
 
 " Select current line (no indentation)
 nnoremap vv ^vg_
@@ -572,8 +599,8 @@ map <Leader>= <C-w>=
 map zl zL
 map zh zH
 
-" fullscreen mode for GVIM and Terminal, need 'wmctrl' in you PATH
-"map <silent> <F11> :call ToggleFullScreen()<CR>
+" Fullscreen mode for neovim-qt
+map <silent> <F11> :call ToggleFullScreen()<CR>
 
 "<leader>q to close buffer without closing the window
 map <leader>q :bp<bar>sp<bar>bn<bar>bd<CR>
@@ -607,6 +634,7 @@ tnoremap <C-l> <C-\><C-n><C-w>l
 
 "set working directory to current file
 nnoremap <leader>cd :cd %:p:h<CR>:pwd<CR>
+nnoremap <leader>td :tc %:p:h<CR>:pwd<CR>
 
 " Save as sudo
 "cmap w!! w !gksudo tee > /dev/null %
@@ -623,10 +651,10 @@ nnoremap <leader>bn :keepalt file<space>
 "set updatetime=10
 
 "function! HighlightWordUnderCursor()
-    "if getline(".")[col(".")-1] !~# '[[:punct:][:blank:]]' 
-        "exec 'match' 'Visual' '/\V\<'.expand('<cword>').'\>/' 
-    "else 
-        "match none 
+    "if getline(".")[col(".")-1] !~# '[[:punct:][:blank:]]'
+        "exec 'match' 'Visual' '/\V\<'.expand('<cword>').'\>/'
+    "else
+        "match none
     "endif
 "endfunction
 
@@ -656,7 +684,7 @@ endfunc
 " Toggle fullscreen {{{
 
 function! ToggleFullScreen()
-  if g:GuiWindowFullScreen
+  if g:GuiWindowFullScreen == 1
     let l:state = 0
   else
     let l:state = 1
@@ -730,10 +758,13 @@ let g:NERDTreeMinimalUI = 1
 let g:NERDTreeRespectWildIgnore = 1
 let g:NERDTreeAutoDeleteBuffer = 1
 let g:NERDTreeCascadeSingleChildDir = 0
-nnoremap <silent> <leader>e :NERDTreeFind<cr>
-map <C-e> :NERDTreeToggle<CR>
-let g:NERDTreeWinPos="right"
+"nnoremap <silent> <leader>e :NERDTreeFind<cr>
+"map <silent> <C-e> :NERDTreeToggle<CR>
+let g:NERDTreeWinPos="left"
 let g:NERDTreeQuitOnOpen=0
+let g:NERDTreeStatusline="⎼%{Relative_Path_CWD()}"
+"let g:NERDTreeStatusline="⎼%{Relative_Path_CWD()}⎼⎼%{strftime(\"%H:%M\")}"
+
 
 " }}}
 
@@ -811,7 +842,7 @@ nmap <silent> <leader>ts :TestSuite<CR>
 nmap <silent> <leader>tl :TestLast<CR>
 nmap <silent> <leader>tv :TestVisit<CR>
 
-let g:test#strategy = 'neoterm'
+let g:test#strategy = 'neovim'
 
 "function! DockerTransform(cmd) abort
   "return 'docker exec -it --user=laradock laradock_workspace_1 '.a:cmd
@@ -819,6 +850,17 @@ let g:test#strategy = 'neoterm'
 
 "let g:test#custom_transformations = {'docker': function('DockerTransform')}
 "let g:test#transformation = 'docker'
+
+"Ejemplo
+"vagrant ssh --command "cd /home/vagrant/project; ./vendor/bin/phpunit
+
+function! VagrantTransform(cmd) abort
+  let l:vagrant_project = fnamemodify(getcwd(),":t")
+  "return "cd ~/Homestead && ssh -tt $(vagrant ssh-config | awk 'NR>1 {print \" -o \"$1\"=\"$2}') localhost ".shellescape('cd /home/vagrant/sitios/'.vagrant_project.'; '.a:cmd)
+  return "cd ~/Homestead && ssh -tt vagrant@192.168.10.10 ".shellescape('cd /home/vagrant/sitios/'.vagrant_project.'; '.a:cmd)
+endfunction
+let g:test#custom_transformations = {'vagrant': function('VagrantTransform')}
+let g:test#transformation = 'vagrant'
 
 " }}}
 " Undotree {{{
@@ -836,15 +878,24 @@ let g:NeatFoldTextShowLineCount = 0
 " }}}
 " Zim {{{
 
-nnoremap <leader>az :GrepperAg  ~/Documentos/Apuntes/<C-Left><Left>
+nnoremap <leader>gz :GrepperAg  ~/Documentos/Apuntes/<C-Left><Left>
+
+"Zim files keymaps
+",wH   Create Zim header on a buffer
+",wb   Bold a range
+",wi   Italicize a range
+",wh   Highlight a range
+",ws   Strikw a range
+",wh   Header 1 to 5
+"<f8>  Change * to *
 
 " }}}
 " Devicons {{{
 
-let g:WebDevIconsUnicodeDecorateFolderNodes = 0
-let g:DevIconsEnableFoldersOpenClose = 0
-"let g:WebDevIconsNerdTreeAfterGlyphPadding = ' '
-let g:webdevicons_enable_airline_statusline = 0
+"let g:WebDevIconsUnicodeDecorateFolderNodes = 0
+"let g:DevIconsEnableFoldersOpenClose = 0
+""let g:WebDevIconsNerdTreeAfterGlyphPadding = ' '
+"let g:webdevicons_enable_airline_statusline = 0
 
 
 " }}}
@@ -864,23 +915,25 @@ augroup FileTypeFolds
     autocmd Filetype java let b:anyfold_activate=1
     autocmd Filetype cs let b:anyfold_activate=1
     autocmd Filetype html let b:anyfold_activate=1
-    autocmd Filetype html,blade setlocal foldcolumn=0
-    autocmd TermOpen * setlocal foldcolumn=0
+    "autocmd Filetype html,blade setlocal foldcolumn=0
 augroup END
 
 " }}}
 " CtrlP {{{
 
-nnoremap <leader>z :CtrlP ~/Documentos/Apuntes/<cr>
-nnoremap <leader>f :CtrlPLine<cr>
-nnoremap <leader>r :CtrlPYankring<cr>
-nnoremap <leader>j :CtrlPBuffer<cr>
-nnoremap <leader>m :CtrlPMRUFiles<cr>
-nnoremap <leader>D :CtrlP
-nnoremap <leader>T :CtrlPTag<CR>
-let g:ctrlp_working_path_mode = 0
-let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
-let g:ctrlp_use_caching = 0
+"nnoremap <leader>z :CtrlP ~/Documentos/Apuntes/<cr>
+"nnoremap <leader>f :CtrlPLine<cr>
+"nnoremap <leader>r :CtrlPYankring<cr>
+"nnoremap <leader>j :CtrlPBuffer<cr>
+"nnoremap <leader>m :CtrlPMRUFiles<cr>
+"nnoremap <leader>D :CtrlP
+"nnoremap <leader>T :CtrlPTag<CR>
+""let g:ctrlp_cmd = 'CtrlPMixed"'
+"let g:ctrlp_working_path_mode = 0
+"let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
+"let g:ctrlp_use_caching = 0
+
+
 
 "" Set delay to prevent extra search
 "let g:ctrlp_lazy_update = 1
@@ -903,60 +956,63 @@ let g:ctrlp_use_caching = 0
 
 " Change mappings.
 "nnoremap <C-P> :Denite buffer file_rec<CR>
-"nnoremap <leader>D :Denite 
-"nnoremap <leader>m :Denite file_mru<cr>
-"nnoremap <leader>f :Denite line<cr>
-"nnoremap <leader>o :Denite outline<cr>
-"nnoremap <leader>r :Denite register<cr>
+nnoremap <leader>j :Denite buffer<CR>
+"nnoremap <C-P> :Denite file_rec<CR>
+nnoremap <leader>D :Denite 
+nnoremap <leader>m :Denite file_mru<cr>
+nnoremap <leader>f :Denite line<cr>
+nnoremap <leader>o :Denite outline<cr>
+nnoremap <leader>r :Denite register<cr>
 ""nnoremap <leader>az :Denite grep -path=~/Documentos/Apuntes/<cr>
-"nnoremap <leader>z :Denite file_rec -path=~/Documentos/Apuntes/<cr>
+nnoremap <leader>z :Denite file_rec -path=~/Documentos/Apuntes/<cr>
 
-"call denite#custom#alias('source', 'file_rec/git', 'file_rec')
-"call denite#custom#var('file_rec/git', 'command',
-"\ ['git', 'ls-files', '-co', '--exclude-standard'])
-"nnoremap <silent> <C-p> :<C-u>Denite buffer
-"\ `finddir('.git', ';') != '' ? 'file_rec/git' : 'file_rec'`<CR>
+call denite#custom#alias('source', 'file_rec/git', 'file_rec')
+call denite#custom#var('file_rec/git', 'command',
+\ ['git', 'ls-files', '-co', '--exclude-standard'])
+nnoremap <silent> <C-p> :<C-u>Denite buffer
+\ `finddir('.git', ';') != '' ? 'file_rec/git' : 'file_rec'`<CR>
 
-"if executable('ag')
-   "call denite#custom#var('file_rec', 'command',
-   "\ ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
-   "" Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-   "let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-   "" ag is fast enough that CtrlP doesn't need to cache
-   "let g:ctrlp_use_caching = 0
-"endif
+if executable('ag')
+   call denite#custom#var('file_rec', 'command',
+   \ ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
+   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+   " ag is fast enough that CtrlP doesn't need to cache
+   let g:ctrlp_use_caching = 0
+endif
 
-"" Change mappings
-"call denite#custom#map(
-     "\ 'insert',
-     "\ '<C-j>',
-     "\ '<denite:move_to_next_line>',
-     "\ 'noremap'
-     "\)
-"call denite#custom#map(
-     "\ 'insert',
-     "\ '<C-k>',
-     "\ '<denite:move_to_previous_line>',
-     "\ 'noremap'
-     "\)
+" Change mappings
+call denite#custom#map(
+     \ 'insert',
+     \ '<C-j>',
+     \ '<denite:move_to_next_line>',
+     \ 'noremap'
+     \)
+call denite#custom#map(
+     \ 'insert',
+     \ '<C-k>',
+     \ '<denite:move_to_previous_line>',
+     \ 'noremap'
+     \)
 
-"call denite#custom#option('default', 'prompt', '❯')
-""call denite#custom#option('default', 'auto_resize', 1)
+call denite#custom#option('default', 'prompt', '❯')
+"call denite#custom#option('default', 'auto_resize', 1)
 
 " }}}
 " Neoterm {{{
-let g:neoterm_position = 'horizontal'
-let g:neoterm_size = 12
 "let g:neoterm_position = 'vertical'
-"let g:neoterm_size = 80
-let g:neoterm_automap_keys = ',tt'
-let g:neoterm_autoscroll = 1
-" hide/close terminal
-nnoremap <silent> ,tj :Ttoggle<cr>
-" clear terminal
-nnoremap <silent> ,tc :call neoterm#clear()<cr>
-" kills the current job (send a <c-c>)
-nnoremap <silent> ,tk :call neoterm#kill()<cr>
+""let g:neoterm_size = 75
+"let g:neoterm_size = 50
+""let g:neoterm_position = 'vertical'
+""let g:neoterm_size = 80
+"let g:neoterm_automap_keys = ',tt'
+"let g:neoterm_autoscroll = 1
+"" hide/close terminal
+"nnoremap <silent> ,tj :Ttoggle<cr>
+"" clear terminal
+"nnoremap <silent> ,tc :call neoterm#clear()<cr>
+"" kills the current job (send a <c-c>)
+"nnoremap <silent> ,tk :call neoterm#kill()<cr>
 
 " }}}
 " Grepper {{{
@@ -973,60 +1029,63 @@ nnoremap <leader>x :Grepper -tool ag -cword -noprompt<cr>
 " }}}
 " Airline {{{
 
-let g:replace_separators = 0
-let g:airline_powerline_fonts = 1
-let g:tmuxline_preset = 'full'
-let g:airline_skip_empty_sections = 1
-"let g:airline#extensions#branch#empty_message = '*'
-let g:airline#extensions#whitespace#enabled = 1
-let g:airline#extensions#whitespace#symbol = '!'
-let g:airline#extensions#tabline#enabled = 1            " Activar tabline
-"let g:airline#extensions#tabline#switch_buffers_and_tabs = 1
-let g:airline#extensions#tabline#show_buffers = 1
+"let g:replace_separators = 0
+"let g:airline_powerline_fonts = 1
+"let g:tmuxline_preset = 'full'
+"let g:airline_skip_empty_sections = 1
+""let g:airline#extensions#branch#empty_message = '*'
+"let g:airline#extensions#whitespace#enabled = 1
+""let g:airline#extensions#whitespace#symbol = '!'
+"let g:airline#extensions#tabline#enabled = 1            " Activar tabline
+""let g:airline#extensions#tabline#switch_buffers_and_tabs = 1
+"let g:airline#extensions#tabline#show_buffers = 1
 "let g:airline#extensions#tabline#tab_min_count = 2
-let g:airline#extensions#tabline#formatter = 'unique_tail'
-let g:airline#extensions#tmuxline#snapshot_file = "~/.config/snapshot_tmuxline"
-"let g:airline_left_sep = '»'
-"let g:airline_left_sep = '▶'
-"let g:airline_right_sep = '«'
-"let g:airline_right_sep = '◀'
+""let g:airline#extensions#tabline#formatter = 'unique_tail'
+"let g:airline#extensions#tabline#fnamemod = ':t'
+"let g:airline#extensions#tmuxline#snapshot_file = "~/.config/snapshot_tmuxline"
+
+"if !exists('g:airline_symbols')
+  "let g:airline_symbols = {}
+"endif
+
+"let g:airline_symbols.branch = 'Ψ'
 
 "Remove percentage
 ""let g:airline_section_z = '%3p%% %{g:airline_symbols.linenr}%#__accent_bold#%4l%#__restore__#:%3v'
 "let g:airline_section_c = airline#section#create(['%<%F'])
-let g:airline_section_z = '%#__accent_bold#%4l%#__restore__#/%L%/:%3v'
+"let g:airline_section_z = '%#__accent_bold#%4l%#__restore__#/%L%/:%3v'
 
-""Add clock
-function! AirlineInit()
-  "let g:airline_section_y = airline#section#create(['ffenc', ' %{strftime("%H:%M")}'])
-  "let g:airline_section_y = airline#section#create([' %{Relative_Path_CWD()}', '   %{strftime("%H:%M")}'])
-  "let g:airline_section_y = airline#section#create([' %{fnamemodify(getcwd(),":t")}', '   %{strftime("%H:%M")}'])
-  let g:airline_section_y = airline#section#create(['%{fnamemodify(getcwd(),":t")}'])
-endfunction
+"""Add clock
+"function! AirlineInit()
+  ""let g:airline_section_y = airline#section#create(['ffenc', ' %{strftime("%H:%M")}'])
+  ""let g:airline_section_y = airline#section#create([' %{Relative_Path_CWD()}', '   %{strftime("%H:%M")}'])
+  ""let g:airline_section_y = airline#section#create([' %{fnamemodify(getcwd(),":t")}', '   %{strftime("%H:%M")}'])
+  "let g:airline_section_y = airline#section#create([' %{fnamemodify(getcwd(),":t")}'])
+"endfunction
 
-augroup AirlineClock
-    autocmd!
-    autocmd VimEnter * call AirlineInit()
-augroup END
+"augroup AirlineClock
+    "autocmd!
+    "autocmd VimEnter * call AirlineInit()
+"augroup END
 
 
-" Short names
-let g:airline_mode_map = {
-    \ '__' : '-',
-    \ 'n'  : 'N',
-    \ 'i'  : 'I',
-    \ 'R'  : 'R',
-    \ 'c'  : 'C',
-    \ 'v'  : 'V',
-    \ 'V'  : 'V',
-    \ '' : 'V',
-    \ 's'  : 'S',
-    \ 'S'  : 'S',
-    \ '' : 'S',
-    \ }
+"" Short names
+"let g:airline_mode_map = {
+    "\ '__' : '-',
+    "\ 'n'  : 'N',
+    "\ 'i'  : 'I',
+    "\ 'R'  : 'R',
+    "\ 'c'  : 'C',
+    "\ 'v'  : 'V',
+    "\ 'V'  : 'V',
+    "\ '' : 'V',
+    "\ 's'  : 'S',
+    "\ 'S'  : 'S',
+    "\ '' : 'S',
+    "\ }
 
-let g:airline#extensions#tabline#buffers_label = 'B'
-let g:airline#extensions#tabline#tabs_label = 'T'
+"let g:airline#extensions#tabline#buffers_label = 'B'
+"let g:airline#extensions#tabline#tabs_label = 'T'
 
 "let g:airline#extensions#default#section_truncate_width = {
       "\ 'b': 79,
@@ -1037,28 +1096,30 @@ let g:airline#extensions#tabline#tabs_label = 'T'
       "\ 'error': 80,
       "\ }
 
-" Remove separators
-if get(g:, 'replace_separators', 1)
+"" Remove separators
+"if get(g:, 'replace_separators', 1)
 
-    if !exists('g:airline_symbols')
-      let g:airline_symbols = {}
-    endif
+    "if !exists('g:airline_symbols')
+      "let g:airline_symbols = {}
+    "endif
 
-    let g:airline_left_sep = ''
-    let g:airline_right_sep = ''
-    if LINUX()
-        let g:airline_left_alt_sep = '│'
-        let g:airline_right_alt_sep = '│'
-    endif
-    let g:tmuxline_powerline_separators = 0
+    "let g:airline_left_sep = ''
+    "let g:airline_right_sep = ''
+    "if LINUX()
+        ""let g:airline_left_alt_sep = '│'
+        ""let g:airline_right_alt_sep = '│'
+        "let g:airline_left_alt_sep = '┃'
+        "let g:airline_right_alt_sep = '┃'
+    "endif
+    "let g:tmuxline_powerline_separators = 0
 
-    let g:tmuxline_separators = {
-          \ 'left' : '',
-          \ 'left_alt': ':',
-          \ 'right' : '',
-          \ 'right_alt' : '│',
-          \ 'space' : ' '}
-endif
+    "let g:tmuxline_separators = {
+          "\ 'left' : '',
+          "\ 'left_alt': ':',
+          "\ 'right' : '',
+          "\ 'right_alt' : '│',
+          "\ 'space' : ' '}
+"endif
 
 " }}}
 " Unthemed vert split char in airline {{{
@@ -1157,15 +1218,25 @@ augroup END
 "let g:startify_session_persistence = 1
 let g:startify_session_autoload = 1
 
-function! KillNeoterm()
-    "bufdo if bufname("%")=~"term://*" | bd! | endif
-    bufdo if bufname("%")=~"neoterm-1$" | bd! | endif
+function! KillTerm()
+    bufdo if bufname("%")=~"term://*" | bd! | endif
+    "bufdo if bufname("%")=~"neoterm-1$" | bd! | endif
 endfunction
 
 "bufdo if bufname("%")=~?'.exe$' | bdel | endif
 "bufdo if bufname("%")=~'' | bd! | endif
 
-nnoremap <leader>kn :call KillNeoterm()<cr>
+function! CleanNoNameEmptyBuffers()
+    let buffers = filter(range(1, bufnr('$')), 'buflisted(v:val) && empty(bufname(v:val)) && bufwinnr(v:val) < 0 && (getbufline(v:val, 1, "$") == [""])')
+    if !empty(buffers)
+        exe 'bd '.join(buffers, ' ')
+    else
+        echo 'No buffer deleted'
+    endif
+endfunction
+
+nnoremap <silent> ,C :call CleanNoNameEmptyBuffers()<CR>
+nnoremap <leader>kt :call KillTerm()<cr>
 nnoremap <leader>S :SSave<cr>
 
 
@@ -1179,9 +1250,9 @@ let g:startify_session_remove_lines = ['neoterm']
 " }}}
 " Tagbar {{{
 
-let g:tagbar_left = 1
-let g:tagbar_width = 30
-"nmap <leader>T :TagbarToggle<CR>
+"let g:tagbar_left = 1
+let g:tagbar_width = 31
+nmap <leader>T :TagbarToggle<CR>
 
 " }}}
 " Magit {{{
@@ -1191,8 +1262,12 @@ let g:tagbar_width = 30
 " }}}
 " ale {{{
 
-nmap <silent> <C-s>k <Plug>(ale_previous_wrap)
-nmap <silent> <C-s>j <Plug>(ale_next_wrap)
+"nmap <silent> <C-s>k <Plug>(ale_previous_wrap)
+"nmap <silent> <C-s>j <Plug>(ale_next_wrap)
+
+"let g:ale_linters = {
+"\   'javascript': ['standard'],
+"\}
 
 " }}}
 " vim-gtfo {{{
@@ -1202,7 +1277,7 @@ nmap <silent> <C-s>j <Plug>(ale_next_wrap)
 " }}}
 " Set gnome-terminal color with dconf-cli, linux mint 18.1 {{{
 " Based on https://antonioshadji.github.io/switch-terminal-colors-at-night/
-" To make it work, create new terminal profile, set it as default, enable custom background and transparency
+" To make it work enable  transparency in terminal settings.
 " Install https://github.com/miyakogi/seiya.vim
 
 let g:profile_id = system('dconf read /org/gnome/terminal/legacy/profiles:/default')
@@ -1266,8 +1341,8 @@ nnoremap <leader>co :colorscheme  <bar>:call SetTermBackground()<C-Left><C-Left>
 " }}}
 " Seiya {{{
 
-"let g:seiya_auto_enable=1
-let g:seiya_target_groups = has('nvim') ? ['guibg'] : ['ctermbg']
+"let g:seiya_auto_enable=0
+"let g:seiya_target_groups = has('nvim') ? ['guibg'] : ['ctermbg']
 
 " }}}
 " Hilight current word {{{
@@ -1292,17 +1367,48 @@ let g:gutentags_cache_dir = '~/.cache/gutentags'
 " }}}
 " Deoplete {{{
 
-let g:deoplete#enable_at_startup = 1
-call deoplete#custom#set('ultisnips', 'matchers', ['matcher_fuzzy'])
-let g:deoplete#ignore_sources = get(g:, 'deoplete#ignore_sources', {})
-let g:deoplete#ignore_sources.php = ['omni']
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+"let g:deoplete#enable_at_startup = 1
+"call deoplete#custom#set('ultisnips', 'matchers', ['matcher_fuzzy'])
+"let g:deoplete#ignore_sources = get(g:, 'deoplete#ignore_sources', {})
+"let g:deoplete#ignore_sources.php = ['omni']
 let g:echodoc_enable_at_startup = 1
 
 " }}}
 " vim-jsx {{{
 
 let g:jsx_ext_required = 0
+
+" }}}
+" language-server {{{
+
+let g:LanguageClient_autoStart = 1
+
+nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
+nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
+
+" }}}
+" nvim-completion-manager {{{
+
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+" }}}
+" color-switcher {{{
+
+let g:colorscheme_switcher_keep_background = 1
+let g:colorscheme_switcher_exclude_builtins = 1
+let g:colorscheme_manager_global_last = 1
+
+" }}}
+" split-term {{{
+
+let g:disable_key_mappings = 1
+
+" }}}
+" vim-line-no-indicator {{{
+
+"let g:line_no_indicator_chars = ['⎼', '▁', '▂', '▃', '▄', '▅', '▆', '▇', '█']
+"let g:line_no_indicator_chars = ['⎼⎼', '░⎼', '▒⎼', '▓⎼', '█⎼', '█░', '█▒', '█▓', '██']
 
 " }}}
