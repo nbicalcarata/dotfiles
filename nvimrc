@@ -431,8 +431,8 @@ set guicursor=n-v-c:block-Cursor/lCursor-blinkon0,i-ci:ver25-Cursor/lCursor,r-cr
 "set rulerformat=%40(%{&filetype}\⎼⎼%{fugitive#head()}\⎼⎼%05l⎼%(%02v\⎼⎼%P%)%)
 "set rulerformat=%75(%{&filetype}\⎼⎼%{fugitive#head()}\⎼⎼%{strftime('%a\⎼%b\⎼%e\⎼%H:%M\⎼%p')}\⎼%05l,%-6(%c%V%)\⎼⎼%P%)
 "set rulerformat=%50(%{&filetype}\⎼⎼%{fugitive#head()}\⎼⎼%{strftime('%H:%M\⎼')}\⎼%05l,%(%03v%)\⎼⎼%P%)
-set rulerformat=%40(%{&filetype}\⎼⎼%{fugitive#head()}\⎼⎼%{strftime('%H:%M\─')}\┤%{LineNoIndicator()}\├─%03c%)
-"set rulerformat=%40(%{&filetype}\⎼⎼%{fugitive#head()}\⎼⎼%{strftime('%H:%M\⎼')}\⎼⎼%{LineNoIndicator()}\ %03c%)
+set rulerformat=%40(%{&filetype}\──%{fugitive#head()}\──%{strftime('%H:%M\')}\┤%{LineNoIndicator()}\├─%03c%)
+"set rulerformat=%40(%{&filetype}\──%{fugitive#head()}\──%{strftime('%H:%M\⎼')}\⎼⎼%{LineNoIndicator()}\ %03c%)
 
 " }}}
 " Statusline {{{
@@ -468,7 +468,7 @@ endfunction
 " }}}
 " Styling vertical splits {{{
 if LINUX()
-    set fillchars=vert:│,fold:۰,diff:·,stl:⎼,stlnc:⎼
+    set fillchars=vert:│,fold:۰,diff:·,stl:⎼,stlnc:─
     "set fillchars=vert:┃,diff:⎼,fold:⎼
     "set fillchars=""
 endif
