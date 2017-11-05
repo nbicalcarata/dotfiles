@@ -156,7 +156,7 @@ call plug#end()
 "set shell=/bin/sh
 
 "cd ~/Dropbox/Workspace
-set spell spelllang=es
+"set spell spelllang=es
 "set spellfile=~/.local/share/nvim/site/spell/es.utf-8.add
 set completeopt-=preview
 set completeopt+=noinsert
