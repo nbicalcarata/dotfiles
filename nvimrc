@@ -958,19 +958,11 @@ let g:ctrlp_max_files = 0
 "nnoremap <C-P> :Denite buffer file_rec<CR>
 "nnoremap <leader>j :Denite buffer file_rec<CR>
 "nnoremap <C-P> :Denite file_rec<CR>
-<<<<<<< HEAD
-nnoremap <leader>D :Denite
-nnoremap <leader>m :Denite file_mru<cr>
-nnoremap <leader>f :Denite line<cr>
-nnoremap <leader>o :Denite outline<cr>
-nnoremap <leader>r :Denite register<cr>
-=======
-"nnoremap <leader>D :Denite 
+"nnoremap <leader>D :Denite
 "nnoremap <leader>m :Denite file_mru<cr>
 "unnoremap <leader>f :Denite line<cr>
 "nnoremap <leader>o :Denite outline<cr>
 "nnoremap <leader>r :Denite register<cr>
->>>>>>> f6a5cf40724f0504b72544c79170e4a00cd61b18
 ""nnoremap <leader>az :Denite grep -path=~/Documentos/Apuntes/<cr>
 "nnoremap <leader>z :Denite file_rec -path=~/Documentos/Apuntes/<cr>
 
