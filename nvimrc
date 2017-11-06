@@ -431,8 +431,7 @@ set guicursor=n-v-c:block-Cursor/lCursor-blinkon0,i-ci:ver25-Cursor/lCursor,r-cr
 "set rulerformat=%40(%{&filetype}\⎼⎼%{fugitive#head()}\⎼⎼%05l⎼%(%02v\⎼⎼%P%)%)
 "set rulerformat=%75(%{&filetype}\⎼⎼%{fugitive#head()}\⎼⎼%{strftime('%a\⎼%b\⎼%e\⎼%H:%M\⎼%p')}\⎼%05l,%-6(%c%V%)\⎼⎼%P%)
 "set rulerformat=%50(%{&filetype}\⎼⎼%{fugitive#head()}\⎼⎼%{strftime('%H:%M\⎼')}\⎼%05l,%(%03v%)\⎼⎼%P%)
-set rulerformat=%40(%{&filetype}\──%{fugitive#head()}\──%{strftime('%H:%M\')}\┤%{LineNoIndicator()}\├─%03c%)
-"set rulerformat=%40(%{&filetype}\──%{fugitive#head()}\──%{strftime('%H:%M\⎼')}\⎼⎼%{LineNoIndicator()}\ %03c%)
+set rulerformat=%40(%{&filetype}\──%{fugitive#head()}\──%{strftime('%H:%M\')}\─┤%{LineNoIndicator()}\├─%03c%)
 
 " }}}
 " Statusline {{{
@@ -471,6 +470,9 @@ if LINUX()
     set fillchars=vert:│,fold:۰,diff:·,stl:─,stlnc:─
     "set fillchars=vert:┃,diff:⎼,fold:⎼
     "set fillchars=""
+endif
+if WINDOWS()
+    set fillchars=vert:│,fold:۰,diff:·,stl:─,stlnc:─
 endif
 
 " }}}
@@ -809,17 +811,15 @@ nmap <Leader>gr <Plug>GitGutterRevertHunk
 
 "Box Drawings Heavy Vertical U+25e3
 "let g:gitgutter_sign_added = '┃'
-if LINUX()
-    let g:gitgutter_sign_added = '┃'
-    "let g:gitgutter_sign_added = '╂'
-    let g:gitgutter_sign_modified = '┃'
-    "let g:gitgutter_sign_modified = '┣'
-    let g:gitgutter_sign_removed_first_line = '▔'
-    "let g:gitgutter_sign_removed_first_line = '^'
-    "let g:gitgutter_sign_removed = '┻'
-    let g:gitgutter_sign_removed = '▁'
-    let g:gitgutter_sign_modified_removed = '┗'
-endif
+let g:gitgutter_sign_added = '┃'
+"let g:gitgutter_sign_added = '╂'
+let g:gitgutter_sign_modified = '┃'
+"let g:gitgutter_sign_modified = '┣'
+let g:gitgutter_sign_removed_first_line = '▔'
+"let g:gitgutter_sign_removed_first_line = '^'
+"let g:gitgutter_sign_removed = '┻'
+let g:gitgutter_sign_removed = '▁'
+let g:gitgutter_sign_modified_removed = '┗'
 "http://www.utf8-chartable.de/unicode-utf8-table.pl?start=9472&unicodeinhtml=dec
 
 " }}}
