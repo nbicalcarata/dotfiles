@@ -468,7 +468,7 @@ endfunction
 " }}}
 " Styling vertical splits {{{
 if LINUX()
-    set fillchars=vert:│,fold:۰,diff:·,stl:⎼,stlnc:─
+    set fillchars=vert:│,fold:۰,diff:·,stl:─,stlnc:─
     "set fillchars=vert:┃,diff:⎼,fold:⎼
     "set fillchars=""
 endif
@@ -958,7 +958,7 @@ augroup END
 "nnoremap <C-P> :Denite buffer file_rec<CR>
 nnoremap <leader>j :Denite buffer file_rec<CR>
 "nnoremap <C-P> :Denite file_rec<CR>
-nnoremap <leader>D :Denite 
+nnoremap <leader>D :Denite
 nnoremap <leader>m :Denite file_mru<cr>
 nnoremap <leader>f :Denite line<cr>
 nnoremap <leader>o :Denite outline<cr>
@@ -1282,7 +1282,7 @@ nmap <leader>T :TagbarToggle<CR>
 
 let g:profile_id = system('dconf read /org/gnome/terminal/legacy/profiles:/default')
 " Remove new line and quotes from dconf key
-let g:profile_id = substitute(g:profile_id, "\n", "", "g") 
+let g:profile_id = substitute(g:profile_id, "\n", "", "g")
 let g:profile_id = substitute(g:profile_id, "'", "", "g")
 let g:trans_level = system('dconf read /org/gnome/terminal/legacy/profiles:/:' . g:profile_id . '/background-transparency-percent')
 let previous_exists = 0
