@@ -979,14 +979,10 @@ endif
 "nnoremap <silent> <leader>j :<C-u>Denite buffer
 "\ `finddir('.git', ';') != '' ? 'file_rec/git' : 'file_rec'`<CR>
 
-if executable('ag')
+"if executable('ag')
    "call denite#custom#var('file_rec', 'command',
    "\ ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
-   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-   " ag is fast enough that CtrlP doesn't need to cache
-   let g:ctrlp_use_caching = 0
-endif
+"endif
 
 " Change mappings
 "call denite#custom#map(
