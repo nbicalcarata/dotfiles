@@ -105,6 +105,9 @@ Plug 'Shougo/echodoc.vim'
 "Plug 'wellle/tmux-complete.vim'
 Plug 'w0rp/ale'
 Plug 'roxma/nvim-completion-manager'
+" requires phpactor
+Plug 'phpactor/phpactor' ,  {'do': 'composer install'}
+Plug 'roxma/ncm-phpactor'
 "Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
 Plug 'roxma/nvim-cm-tern',  {'do': 'npm install'}
 "Plug 'roxma/LanguageServer-php-neovim',  {'do': 'composer install && composer run-script parse-stubs'}
