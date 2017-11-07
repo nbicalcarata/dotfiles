@@ -762,8 +762,8 @@ let g:NERDTreeMinimalUI = 1
 let g:NERDTreeRespectWildIgnore = 1
 let g:NERDTreeAutoDeleteBuffer = 1
 let g:NERDTreeCascadeSingleChildDir = 0
-"nnoremap <silent> <leader>e :NERDTreeFind<cr>
-"map <silent> <C-e> :NERDTreeToggle<CR>
+nnoremap <silent> <leader>e :NERDTreeFind<cr>
+map <silent> <C-e> :NERDTreeToggle<CR>
 let g:NERDTreeWinPos="left"
 let g:NERDTreeQuitOnOpen=0
 let g:NERDTreeStatusline="⎼%{Relative_Path_CWD()}"
