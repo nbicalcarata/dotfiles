@@ -768,7 +768,10 @@ let g:NERDTreeWinPos="left"
 let g:NERDTreeQuitOnOpen=0
 let g:NERDTreeStatusline="⎼%{Relative_Path_CWD()}"
 "let g:NERDTreeStatusline="⎼%{Relative_Path_CWD()}⎼⎼%{strftime(\"%H:%M\")}"
-
+if WINDOWS()
+  let NERDTreeDirArrowExpandable = "▶"
+  let NERDTreeDirArrowCollapsible = "▼"
+endif
 
 " }}}
 
