@@ -105,9 +105,9 @@ Plug 'Shougo/echodoc.vim'
 "Plug 'wellle/tmux-complete.vim'
 Plug 'w0rp/ale'
 Plug 'roxma/nvim-completion-manager'
-Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
+"Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
 Plug 'roxma/nvim-cm-tern',  {'do': 'npm install'}
-Plug 'roxma/LanguageServer-php-neovim',  {'do': 'composer install && composer run-script parse-stubs'}
+"Plug 'roxma/LanguageServer-php-neovim',  {'do': 'composer install && composer run-script parse-stubs'}
 "Plug 'ajh17/VimCompletesMe'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
@@ -1383,11 +1383,11 @@ let g:jsx_ext_required = 0
 " }}}
 " language-server {{{
 
-let g:LanguageClient_autoStart = 1
+"let g:LanguageClient_autoStart = 1
 
-nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
-nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
-nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
+"nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
+"nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
+"nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
 
 " }}}
 " nvim-completion-manager {{{
