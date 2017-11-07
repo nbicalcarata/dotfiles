@@ -924,7 +924,7 @@ augroup END
 
 " }}}
 " CtrlP {{{
-let g:ctrlp_map = '<leader>j'
+"let g:ctrlp_map = '<leader>j'
 nnoremap <leader>z :CtrlP ~/Documentos/Apuntes/<cr>
 if WINDOWS()
   nnoremap <leader>z :CtrlP ~/Documents/Apuntes/<cr>
