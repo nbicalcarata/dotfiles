@@ -103,7 +103,7 @@ Plug 'alvan/vim-closetag'
 "Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/echodoc.vim'
 "Plug 'wellle/tmux-complete.vim'
-"Plug 'w0rp/ale'
+Plug 'w0rp/ale'
 Plug 'roxma/nvim-completion-manager'
 Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
 Plug 'roxma/nvim-cm-tern',  {'do': 'npm install'}
@@ -425,7 +425,7 @@ set guicursor=n-v-c:block-Cursor/lCursor-blinkon0,i-ci:ver25-Cursor/lCursor,r-cr
 "set rulerformat=%40(%{&filetype}\⎼⎼%{fugitive#head()}\⎼⎼%05l⎼%(%02v\⎼⎼%P%)%)
 "set rulerformat=%75(%{&filetype}\⎼⎼%{fugitive#head()}\⎼⎼%{strftime('%a\⎼%b\⎼%e\⎼%H:%M\⎼%p')}\⎼%05l,%-6(%c%V%)\⎼⎼%P%)
 "set rulerformat=%50(%{&filetype}\⎼⎼%{fugitive#head()}\⎼⎼%{strftime('%H:%M\⎼')}\⎼%05l,%(%03v%)\⎼⎼%P%)
-set rulerformat=%40(%{&filetype}\──%{fugitive#head()}\──%{strftime('%H:%M\')}\─┤%{LineNoIndicator()}\├─%03c%)
+set rulerformat=%40(%{&filetype}\──%{fugitive#head()}\──%{strftime('%H:%M\')}\─┤%{LineNoIndicator()}\├─%03c%%\─%{LinterStatus()}%)
 
 " }}}
 " Statusline {{{
@@ -445,18 +445,18 @@ endfunction
   "execute 'let &ro = &ro'
 "endfunction
 
-"function! LinterStatus() abort
-    "let l:counts = ale#statusline#Count(bufnr(''))
+function! LinterStatus() abort
+    let l:counts = ale#statusline#Count(bufnr(''))
 
-    "let l:all_errors = l:counts.error + l:counts.style_error
-    "let l:all_non_errors = l:counts.total - l:all_errors
+    let l:all_errors = l:counts.error + l:counts.style_error
+    let l:all_non_errors = l:counts.total - l:all_errors
 
-    "return l:counts.total == 0 ? 'OK ' : printf(
-    "\   '%dW %dE ',
-    "\   all_non_errors,
-    "\   all_errors
-    "\)
-"endfunction
+    return l:counts.total == 0 ? 'OK' : printf(
+    \   '%dW %dE',
+    \   all_non_errors,
+    \   all_errors
+    \)
+endfunction
 
 " }}}
 " Styling vertical splits {{{
@@ -489,8 +489,8 @@ augroup OverrideColor
     autocmd ColorScheme * hi! link TabLine LineNr
     autocmd ColorScheme * hi! link FoldColumn LineNr
     autocmd ColorScheme * hi! link CursorLineNr CursorLine
-    "autocmd ColorScheme * hi! link ALEErrorSign ErrorMsg
-    "autocmd ColorScheme * hi! link ALEWarningSign WarningMsg
+    autocmd ColorScheme * hi! link ALEErrorSign ErrorMsg
+    autocmd ColorScheme * hi! link ALEWarningSign WarningMsg
     autocmd ColorScheme * hi! link Folded LineNr
     "autocmd ColorScheme * hi FoldColumn    guibg=NONE guifg=bg ctermbg=none ctermfg=bg
     autocmd ColorScheme * hi LineNr        guibg=NONE ctermbg=none
@@ -1264,8 +1264,8 @@ nmap <leader>T :TagbarToggle<CR>
 " }}}
 " ale {{{
 
-"nmap <silent> <C-s>k <Plug>(ale_previous_wrap)
-"nmap <silent> <C-s>j <Plug>(ale_next_wrap)
+nmap <silent> <C-s>k <Plug>(ale_previous_wrap)
+nmap <silent> <C-s>j <Plug>(ale_next_wrap)
 
 "let g:ale_linters = {
 "\   'javascript': ['standard'],
