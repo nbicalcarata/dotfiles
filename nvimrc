@@ -554,6 +554,10 @@ nnoremap <space> za
 " Quick edit vimrc
 nnoremap <leader>ev :e ~/.config/nvim/init.vim<cr>
 nnoremap <leader>sv :source ~/.config/nvim/init.vim<cr>
+if WINDOWS()
+  nnoremap <leader>ev :e ~\AppData\Local\nvim\init.vim<cr>
+  nnoremap <leader>sv :source ~\AppData\Local\nvim\ginit.vim<cr>
+endif
 nnoremap <leader>sg :source ~/.config/nvim/ginit.vim<cr>
 
 nnoremap <F1> <nop>
