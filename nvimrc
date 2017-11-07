@@ -1049,6 +1049,13 @@ let g:airline#extensions#tabline#show_buffers = 1
 "let g:airline#extensions#tabline#fnamemod = ':t'
 "let g:airline#extensions#tmuxline#snapshot_file = "~/.config/snapshot_tmuxline"
 
+if WINDOWS()
+  let g:airline_left_alt_sep = '│'
+  let g:airline_right_alt_sep = '│'
+  "let g:airline_left_alt_sep = '┃'
+  "let g:airline_right_alt_sep = '┃'
+endif
+
 "if !exists('g:airline_symbols')
   "let g:airline_symbols = {}
 "endif
