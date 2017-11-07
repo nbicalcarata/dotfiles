@@ -1409,3 +1409,8 @@ let g:disable_key_mappings = 1
 "let g:line_no_indicator_chars = ['⎼⎼', '░⎼', '▒⎼', '▓⎼', '█⎼', '█░', '█▒', '█▓', '██']
 
 " }}}
+" fugitive {{{
+
+nnoremap <leader>gc :Gcommit<cr>  
+
+" }}}
