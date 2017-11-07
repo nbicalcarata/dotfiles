@@ -47,8 +47,8 @@ Plug 'joanrivera/vim-zimwiki-syntax'
 Plug 'wesQ3/vim-windowswap'
 "Plug 'tmhedberg/SimpylFold'
 Plug 'pseewald/vim-anyfold'
-"Plug 'bling/vim-airline'
-"Plug 'vim-airline/vim-airline-themes'
+Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'kevinkjt2000/tmuxline.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'mhinz/vim-startify'
@@ -1041,9 +1041,9 @@ nnoremap <leader>x :Grepper -tool ag -cword -noprompt<cr>
 ""let g:airline#extensions#branch#empty_message = '*'
 "let g:airline#extensions#whitespace#enabled = 1
 ""let g:airline#extensions#whitespace#symbol = '!'
-"let g:airline#extensions#tabline#enabled = 1            " Activar tabline
+let g:airline#extensions#tabline#enabled = 1            " Activar tabline
 ""let g:airline#extensions#tabline#switch_buffers_and_tabs = 1
-"let g:airline#extensions#tabline#show_buffers = 1
+let g:airline#extensions#tabline#show_buffers = 1
 "let g:airline#extensions#tabline#tab_min_count = 2
 ""let g:airline#extensions#tabline#formatter = 'unique_tail'
 "let g:airline#extensions#tabline#fnamemod = ':t'
