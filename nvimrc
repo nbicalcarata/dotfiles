@@ -843,23 +843,27 @@ nmap <silent> <leader>tv :TestVisit<CR>
 
 let g:test#strategy = 'neovim'
 
-"function! DockerTransform(cmd) abort
-  "return 'docker exec -it --user=laradock laradock_workspace_1 '.a:cmd
-"endfunction
+function! DockerTransform(cmd) abort
+  let l:docker_project = fnamemodify(getcwd(),":t")
+  let l:forward_slashes = a:cmd
+  let l:forward_slashes = substitute(l:forward_slashes, "\\", "\/", "g")
+  "docker exec -it containerName sh -c "cd /var/www && /bin/bash"
+  return "docker exec -it --user=laradock laradock_workspace_1 sh -c ".shellescape('cd '.docker_project.'; '.forward_slashes)
+endfunction
 
-"let g:test#custom_transformations = {'docker': function('DockerTransform')}
-"let g:test#transformation = 'docker'
+let g:test#custom_transformations = {'docker': function('DockerTransform')}
+let g:test#transformation = 'docker'
 
 "Ejemplo
 "vagrant ssh --command "cd /home/vagrant/project; ./vendor/bin/phpunit
 
-function! VagrantTransform(cmd) abort
-  let l:vagrant_project = fnamemodify(getcwd(),":t")
+"function! VagrantTransform(cmd) abort
+  "let l:vagrant_project = fnamemodify(getcwd(),":t")
   "return "cd ~/Homestead && ssh -tt $(vagrant ssh-config | awk 'NR>1 {print \" -o \"$1\"=\"$2}') localhost ".shellescape('cd /home/vagrant/sitios/'.vagrant_project.'; '.a:cmd)
-  return "cd ~/Homestead && ssh -tt vagrant@192.168.10.10 ".shellescape('cd /home/vagrant/sitios/'.vagrant_project.'; '.a:cmd)
-endfunction
-let g:test#custom_transformations = {'vagrant': function('VagrantTransform')}
-let g:test#transformation = 'vagrant'
+  "return "cd ~/Homestead && ssh -tt vagrant@192.168.10.10 ".shellescape('cd /home/vagrant/sitios/'.vagrant_project.'; '.a:cmd)
+"endfunction
+"let g:test#custom_transformations = {'vagrant': function('VagrantTransform')}
+"let g:test#transformation = 'vagrant'
 
 " }}}
 " Undotree {{{
