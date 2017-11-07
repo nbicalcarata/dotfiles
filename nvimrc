@@ -1422,3 +1422,10 @@ let g:disable_key_mappings = 1
 nnoremap <leader>gc :Gcommit<cr>  
 
 " }}}
+"  Macros {{{
+"  Command :reg show macro content, and register
+"
+"  Prices table csv, public price must be removed first
+"  kyypf"di"lf"di"lf"di"0jwvf,hxkf"pj0wxvf,hxkf"f"f"pj0wxvf,hxk$hhhhpjdd
+"
+"  }}}
