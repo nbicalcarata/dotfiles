@@ -35,7 +35,7 @@ Plug 'justinmk/vim-gtfo'
 Plug 'mbbill/undotree'
 Plug 'Harenome/vim-neatfoldtext'
 Plug 'Shougo/neomru.vim'
-"Plug 'kassio/neoterm'
+Plug 'kassio/neoterm'
 "Plug 'Shougo/denite.nvim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'sgur/ctrlp-extensions.vim'
@@ -1008,19 +1008,19 @@ endif
 
 " }}}
 " Neoterm {{{
-"let g:neoterm_position = 'vertical'
-""let g:neoterm_size = 75
+let g:neoterm_position = 'vertical'
+let g:neoterm_size = 75
 "let g:neoterm_size = 50
 ""let g:neoterm_position = 'vertical'
 ""let g:neoterm_size = 80
-"let g:neoterm_automap_keys = ',tt'
+let g:neoterm_automap_keys = ',tt'
 "let g:neoterm_autoscroll = 1
-"" hide/close terminal
-"nnoremap <silent> ,tj :Ttoggle<cr>
-"" clear terminal
-"nnoremap <silent> ,tc :call neoterm#clear()<cr>
-"" kills the current job (send a <c-c>)
-"nnoremap <silent> ,tk :call neoterm#kill()<cr>
+" hide/close terminal
+nnoremap <silent> ,tj :Ttoggle<cr>
+" clear terminal
+nnoremap <silent> ,tc :call neoterm#clear()<cr>
+" kills the current job (send a <c-c>)
+nnoremap <silent> ,tk :call neoterm#kill()<cr>
 
 " }}}
 " Grepper {{{
