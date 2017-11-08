@@ -1040,7 +1040,7 @@ nnoremap <leader>x :Grepper -tool ag -cword -noprompt<cr>
 "let g:replace_separators = 0
 let g:airline_powerline_fonts = 1
 "let g:tmuxline_preset = 'full'
-"let g:airline_skip_empty_sections = 1
+let g:airline_skip_empty_sections = 1
 ""let g:airline#extensions#branch#empty_message = '*'
 "let g:airline#extensions#whitespace#enabled = 1
 ""let g:airline#extensions#whitespace#symbol = '!'
