@@ -1208,11 +1208,11 @@ endif
 "let g:airline_section_z = airline#section#create(["\uE0A1" . '%{line(".")}' . " \uE0A3" . '%{col(".")}'])
 
 "Improves the contrast for the inactive statusline. To enable it: >
-"let g:airline_base16_improved_contrast = 1
+let g:airline_base16_improved_contrast = 1
 
 "Uses a predefined colorpalette for defining the colors, instead of guessing
 "the values from other highlight groups. To enable it: >
-"let g:airline#themes#base16#constant = 1
+let g:airline#themes#base16#constant = 1
 
 " }}}
 " Startify {{{
