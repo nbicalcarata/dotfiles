@@ -35,7 +35,7 @@ Plug 'justinmk/vim-gtfo'
 Plug 'mbbill/undotree'
 Plug 'Harenome/vim-neatfoldtext'
 Plug 'Shougo/neomru.vim'
-"Plug 'kassio/neoterm'
+Plug 'kassio/neoterm'
 "Plug 'Shougo/denite.nvim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'sgur/ctrlp-extensions.vim'
@@ -1008,19 +1008,19 @@ endif
 
 " }}}
 " Neoterm {{{
-"let g:neoterm_position = 'vertical'
-""let g:neoterm_size = 75
+let g:neoterm_position = 'vertical'
+let g:neoterm_size = 75
 "let g:neoterm_size = 50
 ""let g:neoterm_position = 'vertical'
 ""let g:neoterm_size = 80
-"let g:neoterm_automap_keys = ',tt'
+let g:neoterm_automap_keys = ',tt'
 "let g:neoterm_autoscroll = 1
-"" hide/close terminal
-"nnoremap <silent> ,tj :Ttoggle<cr>
-"" clear terminal
-"nnoremap <silent> ,tc :call neoterm#clear()<cr>
-"" kills the current job (send a <c-c>)
-"nnoremap <silent> ,tk :call neoterm#kill()<cr>
+" hide/close terminal
+nnoremap <silent> ,tj :Ttoggle<cr>
+" clear terminal
+nnoremap <silent> ,tc :call neoterm#clear()<cr>
+" kills the current job (send a <c-c>)
+nnoremap <silent> ,tk :call neoterm#kill()<cr>
 
 " }}}
 " Grepper {{{
@@ -1040,7 +1040,7 @@ nnoremap <leader>x :Grepper -tool ag -cword -noprompt<cr>
 "let g:replace_separators = 0
 let g:airline_powerline_fonts = 1
 "let g:tmuxline_preset = 'full'
-"let g:airline_skip_empty_sections = 1
+let g:airline_skip_empty_sections = 1
 ""let g:airline#extensions#branch#empty_message = '*'
 "let g:airline#extensions#whitespace#enabled = 1
 ""let g:airline#extensions#whitespace#symbol = '!'
@@ -1053,8 +1053,10 @@ let g:airline#extensions#tabline#show_buffers = 1
 "let g:airline#extensions#tmuxline#snapshot_file = "~/.config/snapshot_tmuxline"
 
 if WINDOWS()
-  let g:airline_left_alt_sep = '│'
-  let g:airline_right_alt_sep = '│'
+  "let g:airline_left_alt_sep = '│'
+  let g:airline_left_alt_sep = ''
+  "let g:airline_right_alt_sep = '│'
+  let g:airline_right_alt_sep = ''
   "let g:airline_left_alt_sep = '┃'
   "let g:airline_right_alt_sep = '┃'
 endif
@@ -1206,11 +1208,11 @@ endif
 "let g:airline_section_z = airline#section#create(["\uE0A1" . '%{line(".")}' . " \uE0A3" . '%{col(".")}'])
 
 "Improves the contrast for the inactive statusline. To enable it: >
-"let g:airline_base16_improved_contrast = 1
+let g:airline_base16_improved_contrast = 1
 
 "Uses a predefined colorpalette for defining the colors, instead of guessing
 "the values from other highlight groups. To enable it: >
-"let g:airline#themes#base16#constant = 1
+let g:airline#themes#base16#constant = 1
 
 " }}}
 " Startify {{{
@@ -1414,6 +1416,7 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 let g:colorscheme_switcher_keep_background = 1
 let g:colorscheme_switcher_exclude_builtins = 1
 let g:colorscheme_manager_global_last = 1
+let g:colorscheme_switcher_exclude = ['base16-atelier-cave-light', 'base16-atelier-dune-light', 'base16-atelier-estuary-light', 'base16-atelier-forest-light', 'base16-atelier-heath-light', 'base16-atelier-lakeside-light', 'base16-atelier-plateau-light', 'base16-atelier-savanna-light', 'base16-atelier-seaside-light', 'base16-atelier-sulphurpool-light', 'base16-classic-light', 'base16-default-light',  'base16-google-light', 'base16-grayscale-light', 'base16-gruvbox-light-hard', 'base16-gruvbox-light-medium', 'base16-gruvbox-light-soft', 'base16-harmonic-light', 'base16-mexico-light', 'base16-one-light', 'base16-solarized-light', 'base16-summerfruit-light', 'base16-unikitty-light', 'base16-material-lighter', 'base16-brushtrees', 'base16-cupcake', 'base16-cupertino', 'base16-brushtrees-dark']
 
 " }}}
 " split-term {{{
@@ -1429,7 +1432,7 @@ let g:disable_key_mappings = 1
 " }}}
 " fugitive {{{
 
-nnoremap <leader>gc :Gcommit<cr>  
+nnoremap <leader>gc :Gcommit<cr>
 
 " }}}
 "  Macros {{{
