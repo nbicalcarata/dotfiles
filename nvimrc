@@ -106,11 +106,11 @@ Plug 'Shougo/echodoc.vim'
 Plug 'w0rp/ale'
 Plug 'roxma/nvim-completion-manager'
 " requires phpactor
-Plug 'phpactor/phpactor' ,  {'do': 'composer install'}
-Plug 'roxma/ncm-phpactor'
-"Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
+"Plug 'phpactor/phpactor' ,  {'do': 'composer install'}
+"Plug 'roxma/ncm-phpactor'
+Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
 Plug 'roxma/nvim-cm-tern',  {'do': 'npm install'}
-"Plug 'roxma/LanguageServer-php-neovim',  {'do': 'composer install && composer run-script parse-stubs'}
+Plug 'roxma/LanguageServer-php-neovim',  {'do': 'composer install && composer run-script parse-stubs'}
 "Plug 'ajh17/VimCompletesMe'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
