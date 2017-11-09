@@ -375,7 +375,7 @@ augroup END
 " Visual settings {{{
 
 " General {{{
-set number relativenumber
+set number
 set background=dark
 set wrap
 set linebreak
