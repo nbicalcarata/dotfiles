@@ -100,17 +100,18 @@ Plug 'alvan/vim-closetag'
 
 " }}}
 " Snippets & AutoComplete {{{
-"Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/echodoc.vim'
+Plug 'padawan-php/deoplete-padawan', { 'do': 'composer install' }
 "Plug 'wellle/tmux-complete.vim'
 Plug 'w0rp/ale'
-Plug 'roxma/nvim-completion-manager'
+"Plug 'roxma/nvim-completion-manager'
 " requires phpactor
 "Plug 'phpactor/phpactor' ,  {'do': 'composer install'}
 "Plug 'roxma/ncm-phpactor'
-Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
-Plug 'roxma/nvim-cm-tern',  {'do': 'npm install'}
-Plug 'roxma/LanguageServer-php-neovim',  {'do': 'composer install && composer run-script parse-stubs'}
+"Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
+"Plug 'roxma/nvim-cm-tern',  {'do': 'npm install'}
+"Plug 'roxma/LanguageServer-php-neovim',  {'do': 'composer install && composer run-script parse-stubs'}
 "Plug 'ajh17/VimCompletesMe'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
@@ -274,7 +275,7 @@ augroup OmniCompletion
     autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
     autocmd FileType ruby set omnifunc=rubycomplete#Complete
     autocmd FileType htmldjango set omnifunc=htmldjangocomplete#CompleteDjango
-    autocmd FileType php set omnifunc=phpcomplete#CompletePHP
+    "autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 augroup END
 
 " }}}
@@ -1384,12 +1385,13 @@ let g:gutentags_cache_dir = '~/.cache/gutentags'
 " }}}
 " Deoplete {{{
 
-"let g:deoplete#enable_at_startup = 1
-"call deoplete#custom#set('ultisnips', 'matchers', ['matcher_fuzzy'])
-"let g:deoplete#ignore_sources = get(g:, 'deoplete#ignore_sources', {})
-"let g:deoplete#ignore_sources.php = ['omni']
+let g:deoplete#enable_at_startup = 1
+call deoplete#custom#set('ultisnips', 'matchers', ['matcher_fuzzy'])
+let g:deoplete#ignore_sources = get(g:, 'deoplete#ignore_sources', {})
+let g:deoplete#ignore_sources.php = ['omni']
 let g:echodoc_enable_at_startup = 1
-
+let g:deoplete#omni#input_patterns = {}
+let g:deoplete#omni#input_patterns.php = '\w*|[^. \t]->\w*|\w*::\w*'
 " }}}
 " vim-jsx {{{
 
@@ -1398,14 +1400,20 @@ let g:jsx_ext_required = 0
 " }}}
 " language-server {{{
 
-let g:LanguageClient_autoStart = 1
+"let g:LanguageClient_autoStart = 1
 
-nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
-nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
-nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
+"nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
+"nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
+"nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
+
+"if WINDOWS()
+  "let g:LanguageClient_serverCommands = {
+      "\ 'php': ['php','~\.config\nvim\plugged\LanguageServer-php-neovim\vendor\felixfbecker\language-server\bin\php-language-server.php'],
+      "\ }
+"endif
 
 " }}}
-" nvim-completion-manager {{{
+" nvim-completion-manager and deoplete {{{
 
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
@@ -1441,4 +1449,15 @@ nnoremap <leader>gc :Gcommit<cr>
 "  Prices table csv, public price must be removed first
 "  kyypf"di"lf"di"lf"di"0jwvf,hxkf"pj0wxvf,hxkf"f"f"pj0wxvf,hxk$hhhhpjdd
 "
+"  }}}
+"  Padawan {{{
+
+command! PadawanStart call deoplete#sources#padawan#StartServer()
+command! PadawanStop call deoplete#sources#padawan#StopServer()
+command! PadawanRestart call deoplete#sources#padawan#RestartServer()
+command! PadawanInstall call deoplete#sources#padawan#InstallServer()
+command! PadawanUpdate call deoplete#sources#padawan#UpdatePadawan()
+command! -bang PadawanGenerate call deoplete#sources#padawan#Generate(<bang>0)
+let g:deoplete#sources#padawan#add_parentheses = 0
+
 "  }}}
