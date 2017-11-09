@@ -102,7 +102,7 @@ Plug 'alvan/vim-closetag'
 " Snippets & AutoComplete {{{
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/echodoc.vim'
-Plug 'padawan-php/deoplete-padawan', { 'do': 'composer install' }
+"Plug 'padawan-php/deoplete-padawan', { 'do': 'composer install' }
 "Plug 'wellle/tmux-complete.vim'
 Plug 'w0rp/ale'
 "Plug 'roxma/nvim-completion-manager'
@@ -1452,12 +1452,12 @@ nnoremap <leader>gc :Gcommit<cr>
 "  }}}
 "  Padawan {{{
 
-command! PadawanStart call deoplete#sources#padawan#StartServer()
-command! PadawanStop call deoplete#sources#padawan#StopServer()
-command! PadawanRestart call deoplete#sources#padawan#RestartServer()
-command! PadawanInstall call deoplete#sources#padawan#InstallServer()
-command! PadawanUpdate call deoplete#sources#padawan#UpdatePadawan()
-command! -bang PadawanGenerate call deoplete#sources#padawan#Generate(<bang>0)
-let g:deoplete#sources#padawan#add_parentheses = 0
+"command! PadawanStart call deoplete#sources#padawan#StartServer()
+"command! PadawanStop call deoplete#sources#padawan#StopServer()
+"command! PadawanRestart call deoplete#sources#padawan#RestartServer()
+"command! PadawanInstall call deoplete#sources#padawan#InstallServer()
+"command! PadawanUpdate call deoplete#sources#padawan#UpdatePadawan()
+"command! -bang PadawanGenerate call deoplete#sources#padawan#Generate(<bang>0)
+"let g:deoplete#sources#padawan#add_parentheses = 0
 
 "  }}}
