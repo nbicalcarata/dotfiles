@@ -826,7 +826,6 @@ let g:gitgutter_sign_removed_first_line = '▔'
 let g:gitgutter_sign_removed = '▁'
 let g:gitgutter_sign_modified_removed = '┗'
 "http://www.utf8-chartable.de/unicode-utf8-table.pl?start=9472&unicodeinhtml=dec
-let g:gitgutter_override_sign_column_highlight = 0
 
 " }}}
 " Preview file on browser {{{
