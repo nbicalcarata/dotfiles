@@ -483,34 +483,37 @@ endif
 augroup OverrideColor
     autocmd!
     autocmd ColorScheme * hi! link VertSplit LineNr
-    "autocmd ColorScheme * hi link deniteMatched Type
     autocmd ColorScheme * hi link deniteMatchedChar Statement
+
     " No background
-    "autocmd ColorScheme * hi! StatusLine guibg=NONE
     autocmd ColorScheme * hi! StatusLineNC guibg=NONE
     autocmd ColorScheme * hi! link StatusLine LineNr
 
-    " Background
-    "autocmd ColorScheme * hi! link StatusLine CursorLine
-
     autocmd ColorScheme * hi! link TabLineFill FoldColumn
-    "autocmd ColorScheme * hi! link TabLineSel CursorLine
     autocmd ColorScheme * hi! link TabLine LineNr
     autocmd ColorScheme * hi! link FoldColumn LineNr
     autocmd ColorScheme * hi! link CursorLineNr CursorLine
     autocmd ColorScheme * hi! link ALEErrorSign ErrorMsg
     autocmd ColorScheme * hi! link ALEWarningSign WarningMsg
     autocmd ColorScheme * hi! link Folded LineNr
-    "autocmd ColorScheme * hi FoldColumn    guibg=NONE guifg=bg ctermbg=none ctermfg=bg
     autocmd ColorScheme * hi LineNr        guibg=NONE ctermbg=none
     autocmd ColorScheme * hi SignColumn        guibg=NONE ctermbg=none
     autocmd ColorScheme * hi GitGutterAdd guibg=NONE ctermbg=none
     autocmd ColorScheme * hi GitGutterChange guibg=NONE ctermbg=none
     autocmd ColorScheme * hi GitGutterDelete guibg=NONE ctermbg=none
     autocmd ColorScheme * hi GitGutterChangeDelete guibg=NONE ctermbg=none
-    "autocmd ColorScheme * hi ALEErrorSign guibg=NONE ctermbg=none
-    "autocmd ColorScheme * hi ALEWarningSign guibg=NONE ctermbg=none
-    "autocmd ColorScheme * hi TermCursor ctermfg=green guifg=green
+
+    ""autocmd ColorScheme * hi! link TabLineSel CursorLine
+    ""autocmd ColorScheme * hi FoldColumn    guibg=NONE guifg=bg ctermbg=none ctermfg=bg
+    ""autocmd ColorScheme * hi ALEErrorSign guibg=NONE ctermbg=none
+    ""autocmd ColorScheme * hi ALEWarningSign guibg=NONE ctermbg=none
+    ""autocmd ColorScheme * hi TermCursor ctermfg=green guifg=green
+    ""autocmd ColorScheme * hi link deniteMatched Type
+    
+    ""autocmd ColorScheme * hi! StatusLine guibg=NONE
+
+    "" Background statusline
+    ""autocmd ColorScheme * hi! link StatusLine CursorLine
 augroup END
 
 "exec 'hi SyntasticErrorSign guifg=red ctermfg=red' .
