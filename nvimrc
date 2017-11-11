@@ -502,6 +502,7 @@ augroup OverrideColor
     autocmd ColorScheme * hi GitGutterChange guibg=NONE ctermbg=none
     autocmd ColorScheme * hi GitGutterDelete guibg=NONE ctermbg=none
     autocmd ColorScheme * hi GitGutterChangeDelete guibg=NONE ctermbg=none
+    autocmd Colorscheme * hi EndOfBuffer ctermfg=black guifg=black
 
     ""autocmd ColorScheme * hi! link TabLineSel CursorLine
     ""autocmd ColorScheme * hi FoldColumn    guibg=NONE guifg=bg ctermbg=none ctermfg=bg
