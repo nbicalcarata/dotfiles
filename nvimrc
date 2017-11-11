@@ -144,6 +144,8 @@ Plug 'sheerun/vim-polyglot'
 Plug 'janko-m/vim-test'
 Plug 'StanAngeloff/php.vim'
 Plug 'mxw/vim-jsx'
+Plug 'posva/vim-vue'
+
 " }}}
 
 " Plug end {{{
