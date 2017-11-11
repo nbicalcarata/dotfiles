@@ -906,6 +906,9 @@ let g:NeatFoldTextShowLineCount = 0
 " Zim {{{
 
 nnoremap <leader>gz :GrepperAg  ~/Documentos/Apuntes/<C-Left><Left>
+if WINDOWS()
+  nnoremap <leader>gz :GrepperAg  ~\Documentos\Apuntes\<C-Left><Left>
+endif
 
 "Zim files keymaps
 ",wH   Create Zim header on a buffer
