@@ -59,6 +59,7 @@ Plug 'mhinz/vim-grepper'
 Plug 'mklabs/split-term.vim'
 Plug 'drzel/vim-line-no-indicator'
 "Plug 'severin-lemaignan/vim-minimap'
+Plug 'enricobacis/vim-airline-clock'
 
 "}}}
 " Colorschemes {{{
