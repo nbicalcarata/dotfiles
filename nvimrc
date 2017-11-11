@@ -824,17 +824,26 @@ nmap <Leader>gc :Gcommit<cr>
 "let g:gitgutter_max_signs = 800  " default value 500
 
 "Box Drawings Heavy Vertical U+25e3
-"let g:gitgutter_sign_added = '┃'
-let g:gitgutter_sign_added = '┃'
-"let g:gitgutter_sign_added = '╂'
-let g:gitgutter_sign_modified = '┃'
-"let g:gitgutter_sign_modified = '┣'
-let g:gitgutter_sign_removed_first_line = '▔'
-"let g:gitgutter_sign_removed_first_line = '^'
-"let g:gitgutter_sign_removed = '┻'
-let g:gitgutter_sign_removed = '▁'
-let g:gitgutter_sign_modified_removed = '┗'
-"http://www.utf8-chartable.de/unicode-utf8-table.pl?start=9472&unicodeinhtml=dec
+if LINUX()
+  let g:gitgutter_sign_added = '┃'
+  "let g:gitgutter_sign_added = '╂'
+  let g:gitgutter_sign_modified = '┃'
+  "let g:gitgutter_sign_modified = '┣'
+  let g:gitgutter_sign_removed_first_line = '▔'
+  "let g:gitgutter_sign_removed_first_line = '^'
+  "let g:gitgutter_sign_removed = '┻'
+  let g:gitgutter_sign_removed = '▁'
+  let g:gitgutter_sign_modified_removed = '┗'
+  "http://www.utf8-chartable.de/unicode-utf8-table.pl?start=9472&unicodeinhtml=dec
+endif
+if WINDOWS()
+  let g:gitgutter_sign_added = '│'
+  let g:gitgutter_sign_modified = '│'
+  "let g:gitgutter_sign_modified = '▶'
+  "let g:gitgutter_sign_modified = '●'
+  let g:gitgutter_sign_removed_first_line = '▔'
+  let g:gitgutter_sign_removed = '▁'
+endif
 
 " }}}
 " Preview file on browser {{{
