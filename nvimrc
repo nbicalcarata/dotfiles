@@ -125,7 +125,7 @@ Plug 'jiangmiao/auto-pairs'
 "Plug 'jsfaint/gen_tags.vim'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'majutsushi/tagbar'
-"Plug 'carlitux/deoplete-ternjs', { 'do': 'sudo npm install -g tern' }
+Plug 'carlitux/deoplete-ternjs', { 'do': 'sudo npm install -g tern' }
 " ES2015 code snippets (Optional)
 Plug 'epilande/vim-es2015-snippets'
 " React code snippets
@@ -958,7 +958,7 @@ if WINDOWS()
 endif
 nnoremap <leader>f :CtrlPLine<cr>
 nnoremap <leader>r :CtrlPYankring<cr>
-"nnoremap <leader>j :CtrlPBuffer<cr>
+nnoremap <leader>j :CtrlPBuffer<cr>
 nnoremap <leader>m :CtrlPMRUFiles<cr>
 nnoremap <leader>D :CtrlP
 nnoremap <leader>T :CtrlPTag<CR>
@@ -1036,7 +1036,7 @@ let g:neoterm_size = 75
 ""let g:neoterm_position = 'vertical'
 ""let g:neoterm_size = 80
 let g:neoterm_automap_keys = ',tt'
-"let g:neoterm_autoscroll = 1
+let g:neoterm_autoscroll = 1
 " hide/close terminal
 nnoremap <silent> ,tj :Ttoggle<cr>
 " clear terminal
@@ -1304,9 +1304,9 @@ nmap <leader>T :TagbarToggle<CR>
 nmap <silent> <C-s>k <Plug>(ale_previous_wrap)
 nmap <silent> <C-s>j <Plug>(ale_next_wrap)
 
-"let g:ale_linters = {
-"\   'javascript': ['standard'],
-"\}
+let g:ale_linters = {
+\   'javascript': ['standard'],
+\}
 
 " }}}
 " vim-gtfo {{{
@@ -1413,6 +1413,11 @@ let g:deoplete#ignore_sources.php = ['omni']
 let g:echodoc_enable_at_startup = 1
 let g:deoplete#omni#input_patterns = {}
 let g:deoplete#omni#input_patterns.php = '\w*|[^. \t]->\w*|\w*::\w*'
+let g:deoplete#sources#ternjs#filetypes = [
+                \ 'jsx',
+                \ 'javascript.jsx',
+                \ 'vue'
+                \ ]
 " }}}
 " vim-jsx {{{
 
