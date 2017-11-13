@@ -166,7 +166,7 @@ set completeopt+=noinsert
 set mouse=a                                     " Automatically enable mouse usage
 set mousehide                                   " Hide the mouse cursor while typing
 set clipboard=unnamedplus
-if !WINDOWS()
+if WINDOWS()
     set clipboard=unnamed
 endif
 "set shortmess+=cafilmnrxoOtT                     " Abbrev. of messages (avoids 'hit enter')
