@@ -14,6 +14,9 @@ set visualbell t_vb=            " turn off error beep/flash
 "GuiFont FuraMonoForPowerline Nerd Font:h12
 "GuiFont Roboto Mono Nerd Font:h12
 "Guifont DejaVu Sans Mono:h11
+if WINDOWS()
+  Guifont! Consolas:h12
+endif
 "colorscheme base16-darktooth
 "call rpcnotify(1, 'Gui', 'Font', 'Iosevka Term 13')
 "let g:airline_theme = 'raven'
