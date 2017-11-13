@@ -1031,8 +1031,8 @@ endif
 " }}}
 " Neoterm {{{
 let g:neoterm_position = 'vertical'
-let g:neoterm_size = 75
-"let g:neoterm_size = 50
+"let g:neoterm_size = 75
+let g:neoterm_size = 55
 ""let g:neoterm_position = 'vertical'
 ""let g:neoterm_size = 80
 let g:neoterm_automap_keys = ',tt'
