@@ -60,6 +60,7 @@ Plug 'mklabs/split-term.vim'
 Plug 'drzel/vim-line-no-indicator'
 "Plug 'severin-lemaignan/vim-minimap'
 Plug 'enricobacis/vim-airline-clock'
+Plug 'skywind3000/asyncrun.vim'
 
 "}}}
 " Colorschemes {{{
@@ -866,7 +867,7 @@ nmap <silent> <leader>ts :TestSuite<CR>
 nmap <silent> <leader>tl :TestLast<CR>
 nmap <silent> <leader>tv :TestVisit<CR>
 
-let g:test#strategy = 'neovim'
+let g:test#strategy = 'asyncrun'
 
 function! DockerTransform(cmd) abort
   let l:docker_project = fnamemodify(getcwd(),":t")
@@ -1488,5 +1489,75 @@ nnoremap <leader>gc :Gcommit<cr>
 "command! PadawanUpdate call deoplete#sources#padawan#UpdatePadawan()
 "command! -bang PadawanGenerate call deoplete#sources#padawan#Generate(<bang>0)
 "let g:deoplete#sources#padawan#add_parentheses = 0
+
+"  }}}
+"  AsyncRun {{{
+
+noremap <leader>ta :call asyncrun#quickfix_toggle(8)<cr>
+
+augroup QuickfixStatus
+	au! BufWinEnter quickfix setlocal 
+		\ statusline=%t\ [%{g:asyncrun_status}]\ %{exists('w:quickfix_title')?\ '\ '.w:quickfix_title\ :\ ''}\ %=%-15(%l,%c%V%)\ %P
+augroup END
+
+" Auto toggle the quickfix window
+augroup AutoToggleQFWindow
+au! User AsyncRunStop
+            \ if g:asyncrun_status=='failure' |
+            \   execute('call asyncrun#quickfix_toggle(8, 1)') |
+            \ else |
+            \   execute('call asyncrun#quickfix_toggle(8, 0)') |
+            \ endif
+augroup END
+
+"let g:airline_section_error = airline#section#create_right(['%{g:asyncrun_status}'])
+
+" Define new accents
+function! AirlineThemePatch(palette)
+  " [ guifg, guibg, ctermfg, ctermbg, opts ].
+  " See "help attr-list" for valid values for the "opt" value.
+  " http://vim.wikia.com/wiki/Xterm256_color_names_for_console_Vim
+  let a:palette.accents.running = [ '', '', '', '', '' ]
+  let a:palette.accents.success = [ '#00ff00', '' , 'green', '', '' ]
+  let a:palette.accents.failure = [ '#ff0000', '' , 'red', '', '' ]
+endfunction
+let g:airline_theme_patch_func = 'AirlineThemePatch'
+
+
+" Change color of the relevant section according to g:asyncrun_status, a global variable exposed by AsyncRun
+" 'running': default, 'success': green, 'failure': red
+let g:async_status_old = ''
+function! Get_asyncrun_running()
+
+  let async_status = g:asyncrun_status
+  if async_status != g:async_status_old
+
+    if async_status == 'running'
+      call airline#parts#define_accent('asyncrun_status', 'running')
+    elseif async_status == 'success'
+      call airline#parts#define_accent('asyncrun_status', 'success')
+    elseif async_status == 'failure'
+      call airline#parts#define_accent('asyncrun_status', 'failure')
+    endif
+
+    let g:airline_section_y = airline#section#create(['asyncrun_status'])
+    AirlineRefresh
+    let g:async_status_old = async_status
+
+  endif
+
+  return async_status
+
+endfunction
+
+call airline#parts#define_function('asyncrun_status', 'Get_asyncrun_running')
+let g:airline_section_y = airline#section#create(['asyncrun_status'])
+
+"Execute command from docker container
+"To make it work, removed de t option from command
+
+"docker exec -i --user=laradock laradock_workspace_1 sh -c "cd interpos; ./vendor/bin/behat features/order.feature
+
+"docker exec -i --user=laradock laradock_workspace_1 sh -lc "cd interpos; npm run dev
 
 "  }}}
