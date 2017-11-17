@@ -125,8 +125,8 @@ Plug 'jiangmiao/auto-pairs'
 "Plug 'rafaelndev/deoplete-laravel-plugin', {'for': 'php', 'do': 'composer install'}
 "Plug 'jsfaint/gen_tags.vim'
 Plug 'ludovicchabant/vim-gutentags'
-Plug 'majutsushi/tagbar'
-Plug 'carlitux/deoplete-ternjs', { 'do': 'sudo npm install -g tern' }
+"Plug 'majutsushi/tagbar'
+Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
 " ES2015 code snippets (Optional)
 Plug 'epilande/vim-es2015-snippets'
 " React code snippets
@@ -497,6 +497,7 @@ augroup OverrideColor
     autocmd ColorScheme * hi! link ALEErrorSign ErrorMsg
     autocmd ColorScheme * hi! link ALEWarningSign WarningMsg
     autocmd ColorScheme * hi! link Folded LineNr
+    autocmd ColorScheme * hi! link Comment LineNr
     autocmd ColorScheme * hi LineNr        guibg=NONE ctermbg=none
     autocmd ColorScheme * hi SignColumn        guibg=NONE ctermbg=none
     autocmd ColorScheme * hi GitGutterAdd guibg=NONE ctermbg=none
@@ -1198,10 +1199,10 @@ endif
 "let g:airline_right_alt_sep = "\uE0B7"
 
 "Edge down
-"let g:airline_left_sep = "\uE0B8"
-"let g:airline_left_alt_sep = "\uE0B9"
-"let g:airline_right_sep = "\uE0BA"
-"let g:airline_right_alt_sep = "\uE0BB"
+let g:airline_left_sep = "\uE0B8"
+let g:airline_left_alt_sep = "\uE0B9"
+let g:airline_right_sep = "\uE0BA"
+let g:airline_right_alt_sep = "\uE0BB"
 
 "let g:tmuxline_separators = {
     "\ 'left' : '',
@@ -1462,7 +1463,7 @@ let g:alduin_Shout_Fire_Breath = 1
 let g:disable_key_mappings = 1
 
 " }}}
-" vim-line-no-indicator {{{
+" vim-line-noindicator {{{
 
 "let g:line_no_indicator_chars = ['⎼', '▁', '▂', '▃', '▄', '▅', '▆', '▇', '█']
 "let g:line_no_indicator_chars = ['⎼⎼', '░⎼', '▒⎼', '▓⎼', '█⎼', '█░', '█▒', '█▓', '██']
@@ -1540,7 +1541,7 @@ function! Get_asyncrun_running()
       call airline#parts#define_accent('asyncrun_status', 'failure')
     endif
 
-    let g:airline_section_y = airline#section#create(['asyncrun_status'])
+    let g:airline_section_x = airline#section#create(['asyncrun_status'])
     AirlineRefresh
     let g:async_status_old = async_status
 
@@ -1551,7 +1552,7 @@ function! Get_asyncrun_running()
 endfunction
 
 call airline#parts#define_function('asyncrun_status', 'Get_asyncrun_running')
-let g:airline_section_y = airline#section#create(['asyncrun_status'])
+let g:airline_section_x = airline#section#create(['asyncrun_status'])
 
 "Execute command from docker container
 "To make it work, removed de t option from command

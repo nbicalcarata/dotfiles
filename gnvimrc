@@ -15,7 +15,9 @@ set visualbell t_vb=            " turn off error beep/flash
 "GuiFont Roboto Mono Nerd Font:h12
 "Guifont DejaVu Sans Mono:h11
 if WINDOWS()
-  Guifont! Consolas:h12
+  "Guifont! Consolas:h12
+  GuiFont! Hack NF:h11
+  GuiFont! Iosevka NF:h12
 endif
 "colorscheme base16-darktooth
 "call rpcnotify(1, 'Gui', 'Font', 'Iosevka Term 13')
