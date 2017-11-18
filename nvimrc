@@ -1580,7 +1580,7 @@ endif
 
 if WINDOWS()
   "let g:asyncrun_exit = 'silent !start playwav.exe "C:/Windows/Media/Windows Error.wav" 200'
-   let g:asyncrun_exit = 'silent !start C:\Users\adrian\dotfiles\notification.exe'
+   let g:asyncrun_exit = 'silent !start '.$HOME.'\dotfiles\notification.exe'
 
 "[void] [System.Reflection.Assembly]::LoadWithPartialName("System.Windows.Forms")
 "$objNotifyIcon = New-Object System.Windows.Forms.NotifyIcon
