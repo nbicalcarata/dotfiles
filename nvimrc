@@ -512,7 +512,7 @@ augroup OverrideColor
     ""autocmd ColorScheme * hi ALEWarningSign guibg=NONE ctermbg=none
     ""autocmd ColorScheme * hi TermCursor ctermfg=green guifg=green
     ""autocmd ColorScheme * hi link deniteMatched Type
-    
+
     ""autocmd ColorScheme * hi! StatusLine guibg=NONE
 
     "" Background statusline
@@ -1311,6 +1311,26 @@ let g:ale_linters = {
   \ 'vue': ['eslint']
 \}
 
+let g:ft = ''
+function! NERDCommenter_before()
+  if &ft == 'vue'
+    let g:ft = 'vue'
+    let stack = synstack(line('.'), col('.'))
+    if len(stack) > 0
+      let syn = synIDattr((stack)[0], 'name')
+      if len(syn) > 0
+        exe 'setf ' . substitute(tolower(syn), '^vue_', '', '')
+      endif
+    endif
+  endif
+endfunction
+function! NERDCommenter_after()
+  if g:ft == 'vue'
+    setf vue
+    let g:ft = ''
+  endif
+endfunction
+
 " }}}
 " vim-gtfo {{{
 
@@ -1454,7 +1474,7 @@ let g:colorscheme_switcher_keep_background = 1
 let g:colorscheme_switcher_exclude_builtins = 1
 let g:colorscheme_manager_global_last = 1
 let g:colorscheme_switcher_exclude = ['base16-atelier-cave-light', 'base16-atelier-dune-light', 'base16-atelier-estuary-light', 'base16-atelier-forest-light', 'base16-atelier-heath-light', 'base16-atelier-lakeside-light', 'base16-atelier-plateau-light', 'base16-atelier-savanna-light', 'base16-atelier-seaside-light', 'base16-atelier-sulphurpool-light', 'base16-classic-light', 'base16-default-light',  'base16-google-light', 'base16-grayscale-light', 'base16-gruvbox-light-hard', 'base16-gruvbox-light-medium', 'base16-gruvbox-light-soft', 'base16-harmonic-light', 'base16-mexico-light', 'base16-one-light', 'base16-solarized-light', 'base16-summerfruit-light', 'base16-unikitty-light', 'base16-material-lighter', 'base16-brushtrees', 'base16-cupcake', 'base16-cupertino', 'base16-brushtrees-dark', 'base16-tomorrow', 'base16-shapeshifter']
-   
+
 let g:alduin_Shout_Fire_Breath = 1
 
 " }}}
@@ -1497,7 +1517,7 @@ nnoremap <leader>gc :Gcommit<cr>
 noremap <leader>ta :call asyncrun#quickfix_toggle(8)<cr>
 
 augroup QuickfixStatus
-	au! BufWinEnter quickfix setlocal 
+	au! BufWinEnter quickfix setlocal
 		\ statusline=%t\ [%{g:asyncrun_status}]\ %{exists('w:quickfix_title')?\ '\ '.w:quickfix_title\ :\ ''}\ %=%-15(%l,%c%V%)\ %P
 augroup END
 
@@ -1553,6 +1573,27 @@ endfunction
 
 call airline#parts#define_function('asyncrun_status', 'Get_asyncrun_running')
 let g:airline_section_x = airline#section#create(['asyncrun_status'])
+
+if LINUX()
+   "let g:asyncrun_exit = "silent call system('afplay ~/.vim/notify.wav &')"
+endif
+
+if WINDOWS()
+  "let g:asyncrun_exit = 'silent !start playwav.exe "C:/Windows/Media/Windows Error.wav" 200'
+   let g:asyncrun_exit = 'silent !start C:\Users\adrian\dotfiles\notification.exe'
+
+"[void] [System.Reflection.Assembly]::LoadWithPartialName("System.Windows.Forms")
+"$objNotifyIcon = New-Object System.Windows.Forms.NotifyIcon
+"$objNotifyIcon.Icon = "C:\Program Files (x86)\Zim Desktop Wiki\zim.ico"
+"$objNotifyIcon.BalloonTipIcon = "Info"
+"$objNotifyIcon.BalloonTipText = "Proceso completado"
+"$objNotifyIcon.BalloonTipTitle = "Async Run"
+"$objNotifyIcon.Visible = $True
+"$objNotifyIcon.ShowBalloonTip(10000)
+"[void][System.Threading.Thread]::Sleep(10000)
+"$objNotifyIcon.Dispose()
+
+endif
 
 "Execute command from docker container
 "To make it work, removed de t option from command
