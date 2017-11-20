@@ -36,10 +36,10 @@ Plug 'mbbill/undotree'
 Plug 'Harenome/vim-neatfoldtext'
 Plug 'Shougo/neomru.vim'
 Plug 'kassio/neoterm'
-"Plug 'Shougo/denite.nvim'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'sgur/ctrlp-extensions.vim'
-Plug 'FelikZ/ctrlp-py-matcher'
+Plug 'Shougo/denite.nvim'
+"Plug 'ctrlpvim/ctrlp.vim'
+"Plug 'sgur/ctrlp-extensions.vim'
+"Plug 'FelikZ/ctrlp-py-matcher'
 "Plug 'metakirby5/codi.vim'
 Plug 'nbicalcarata/vim-zim'
 Plug 'joanrivera/vim-zimwiki-syntax'
@@ -954,80 +954,82 @@ augroup END
 " }}}
 " CtrlP {{{
 "let g:ctrlp_map = '<leader>j'
-nnoremap <leader>z :CtrlP ~/Documentos/Apuntes/<cr>
-if WINDOWS()
-  nnoremap <leader>z :CtrlP ~/Documents/Apuntes/<cr>
-endif
-nnoremap <leader>f :CtrlPLine<cr>
-nnoremap <leader>r :CtrlPYankring<cr>
-nnoremap <leader>j :CtrlPBuffer<cr>
-nnoremap <leader>m :CtrlPMRUFiles<cr>
-nnoremap <leader>D :CtrlP
-nnoremap <leader>T :CtrlPTag<CR>
+"nnoremap <leader>z :CtrlP ~/Documentos/Apuntes/<cr>
+"if WINDOWS()
+  "nnoremap <leader>z :CtrlP ~/Documents/Apuntes/<cr>
+"endif
+"nnoremap <leader>f :CtrlPLine<cr>
+"nnoremap <leader>r :CtrlPYankring<cr>
+"nnoremap <leader>j :CtrlPBuffer<cr>
+"nnoremap <leader>m :CtrlPMRUFiles<cr>
+"nnoremap <leader>D :CtrlP
+"nnoremap <leader>T :CtrlPTag<CR>
 ""let g:ctrlp_cmd = 'CtrlPMixed"'
-let g:ctrlp_working_path_mode = 0
-let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
-let g:ctrlp_use_caching = 0
-
-
+"let g:ctrlp_working_path_mode = 0
+"let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
+"let g:ctrlp_use_caching = 0
 
 " Set delay to prevent extra search
-let g:ctrlp_lazy_update = 1
+"let g:ctrlp_lazy_update = 1
 
 " Do not clear filenames cache, to improve CtrlP startup
 " You can manualy clear it by <F5>
 "let g:ctrlp_clear_cache_on_exit = 0
 
 " Set no file limit, we are building a big project
-let g:ctrlp_max_files = 0
+"let g:ctrlp_max_files = 0
 
 " If ag is available use it as filename list generator instead of 'find'
 if executable("ag")
    set grepprg=ag\ --nogroup\ --nocolor
-   let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --ignore ''.git'' --ignore ''.DS_Store'' --ignore ''node_modules'' --hidden -g ""'
+   "let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --ignore ''.git'' --ignore ''.DS_Store'' --ignore ''node_modules'' --hidden -g ""'
 endif
 
 " }}}
 " Denite {{{
 
 " Change mappings.
-"nnoremap <C-P> :Denite buffer file_rec<CR>
-"nnoremap <leader>j :Denite buffer file_rec<CR>
+nnoremap <C-P> :Denite buffer file_rec<CR>
+nnoremap <leader>j :Denite buffer<CR>
 "nnoremap <C-P> :Denite file_rec<CR>
-"nnoremap <leader>D :Denite
-"nnoremap <leader>m :Denite file_mru<cr>
-"unnoremap <leader>f :Denite line<cr>
-"nnoremap <leader>o :Denite outline<cr>
-"nnoremap <leader>r :Denite register<cr>
-""nnoremap <leader>az :Denite grep -path=~/Documentos/Apuntes/<cr>
-"nnoremap <leader>z :Denite file_rec -path=~/Documentos/Apuntes/<cr>
+nnoremap <leader>D :Denite 
+nnoremap <leader>m :Denite file_mru<cr>
+nnoremap <leader>f :Denite line<cr>
+nnoremap <leader>o :Denite outline<cr>
+nnoremap <leader>r :Denite register<cr>
+nnoremap <leader>az :Denite grep -path=~/Documentos/Apuntes/<cr>
+nnoremap <leader>z :Denite file_rec -path=~/Documentos/Apuntes/<cr>
+
+if WINDOWS()
+  nnoremap <leader>z :Denite file_rec -path=~/Documents/Apuntes/<cr>
+endif
 
 "call denite#custom#alias('source', 'file_rec/git', 'file_rec')
 "call denite#custom#var('file_rec/git', 'command',
 "\ ['git', 'ls-files', '-co', '--exclude-standard'])
-"nnoremap <silent> <leader>j :<C-u>Denite buffer
+"nnoremap <silent> <C-p> :<C-u>Denite buffer
 "\ `finddir('.git', ';') != '' ? 'file_rec/git' : 'file_rec'`<CR>
 
-"if executable('ag')
-   "call denite#custom#var('file_rec', 'command',
-   "\ ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
-"endif
+if executable('ag')
+   call denite#custom#var('file_rec', 'command',
+   \ ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
+endif
 
 " Change mappings
-"call denite#custom#map(
-"     \ 'insert',
-"     \ '<C-j>',
-"     \ '<denite:move_to_next_line>',
-"     \ 'noremap'
-"     \)
-"call denite#custom#map(
-"     \ 'insert',
-"     \ '<C-k>',
-"     \ '<denite:move_to_previous_line>',
-"     \ 'noremap'
-"     \)
+call denite#custom#map(
+     \ 'insert',
+     \ '<C-j>',
+     \ '<denite:move_to_next_line>',
+     \ 'noremap'
+     \)
+call denite#custom#map(
+     \ 'insert',
+     \ '<C-k>',
+     \ '<denite:move_to_previous_line>',
+     \ 'noremap'
+     \)
 
-"call denite#custom#option('default', 'prompt', '❯')
+call denite#custom#option('default', 'prompt', '❯')
 "call denite#custom#option('default', 'auto_resize', 1)
 
 " }}}
