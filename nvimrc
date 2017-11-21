@@ -21,10 +21,6 @@ if dein#load_state($HOME . '/.cache/dein')
   " Required:
   call dein#add($HOME . '/.cache/dein/repos/github.com/Shougo/dein.vim')
 
-  " Add or remove your plugins here:
-  call dein#add('Shougo/neosnippet.vim')
-  call dein#add('Shougo/neosnippet-snippets')
-
   "Plug 'rliang/nvim-pygtk3', {'do': 'make install'}
   "Plug 'equalsraf/neovim-gui-shim'
   call dein#add('scrooloose/nerdtree')
