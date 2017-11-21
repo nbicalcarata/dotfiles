@@ -22,13 +22,16 @@ if dein#load_state($HOME . '/.cache/dein')
   call dein#add($HOME . '/.cache/dein/repos/github.com/Shougo/dein.vim')
 
   " Add or remove your plugins here:
+  call dein#add('Shougo/neosnippet.vim')
+  call dein#add('Shougo/neosnippet-snippets')
+
   "Plug 'rliang/nvim-pygtk3', {'do': 'make install'}
   "Plug 'equalsraf/neovim-gui-shim'
   call dein#add('scrooloose/nerdtree')
   "Plug 'eiginn/netrw'
   "Plug 'tpope/vim-vinegar'
   call dein#add('dhruvasagar/vim-vinegar')
-  call dein#add('scrooloose/nerdcommenter') 
+  call dein#add('scrooloose/nerdcommenter')
   call dein#add('justinmk/vim-gtfo')
   call dein#add('mbbill/undotree')
   call dein#add('Harenome/vim-neatfoldtext')
