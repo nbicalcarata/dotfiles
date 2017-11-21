@@ -1,4 +1,4 @@
-" Plug core {{{
+" Dein {{{
 
 " Identify plataform
 silent function! OSX()
@@ -11,147 +11,153 @@ silent function! WINDOWS()
     return  (has('win16') || has('win32') || has('win64'))
 endfunction
 
-" Plug automatic installation
+let g:dein#cache_directory = $HOME . '/.cache/dein'
+set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
 
-"let basedir = '.config/nvim'
+if dein#load_state($HOME . '/.cache/dein')
+  call dein#begin($HOME . '/.cache/dein')
 
-if WINDOWS()
-    let g:basedir = 'vimfiles'
+  " Let dein manage dein
+  " Required:
+  call dein#add($HOME . '/.cache/dein/repos/github.com/Shougo/dein.vim')
+
+  " Add or remove your plugins here:
+  "Plug 'rliang/nvim-pygtk3', {'do': 'make install'}
+  "Plug 'equalsraf/neovim-gui-shim'
+  call dein#add('scrooloose/nerdtree')
+  "Plug 'eiginn/netrw'
+  "Plug 'tpope/vim-vinegar'
+  call dein#add('dhruvasagar/vim-vinegar')
+  call dein#add('scrooloose/nerdcommenter') 
+  call dein#add('justinmk/vim-gtfo')
+  call dein#add('mbbill/undotree')
+  call dein#add('Harenome/vim-neatfoldtext')
+  call dein#add('Shougo/neomru.vim')
+  call dein#add('kassio/neoterm')
+  call dein#add('Shougo/denite.nvim')
+  "Plug 'ctrlpvim/ctrlp.vim'
+  "Plug 'sgur/ctrlp-extensions.vim'
+  "Plug 'FelikZ/ctrlp-py-matcher'
+  "Plug 'metakirby5/codi.vim'
+  call dein#add('nbicalcarata/vim-zim')
+  call dein#add('joanrivera/vim-zimwiki-syntax')
+  "Plug 'coxjc/VimSearch'
+  call dein#add('wesQ3/vim-windowswap')
+  "Plug 'tmhedberg/SimpylFold'
+  call dein#add('pseewald/vim-anyfold')
+  call dein#add('bling/vim-airline')
+  call dein#add('vim-airline/vim-airline-themes')
+  call dein#add('kevinkjt2000/tmuxline.vim')
+  call dein#add('christoomey/vim-tmux-navigator')
+  call dein#add('mhinz/vim-startify')
+  call dein#add('frace/vim-unsurpriseme')
+  call dein#add('mhinz/vim-grepper')
+  "Plug 'Yggdroot/indentLine'
+  "Plug 'roman/golden-ratio'
+  call dein#add('mklabs/split-term.vim')
+  call dein#add('drzel/vim-line-no-indicator')
+  "Plug 'severin-lemaignan/vim-minimap'
+  call dein#add('enricobacis/vim-airline-clock')
+  call dein#add('skywind3000/asyncrun.vim')
+
+  "}}}
+  " Colorschemes {{{
+
+  "Plug 'ujihisa/unite-colorscheme'
+  "Plug 'nbicalcarata/vim-womprat'
+  "Plug 'nbicalcarata/vim-airline-womprat'
+  "Plug 'nbicalcarata/vim-airline-dieciseis'
+  "Plug 'nbicalcarata/vim-airline-darktooth'
+  "Plug 'nanotech/jellybeans.vim'
+  call dein#add('chriskempson/base16-vim')
+  call dein#add('AlessandroYorba/Alduin')
+  call dein#add('whatyouhide/vim-gotham')
+  "Plug 'w0ng/vim-hybrid'
+  "Plug 'ayu-theme/ayu-vim'
+  "Plug 'jacoborus/tender'
+  "Plug 'MaxSt/FlatColor'
+  call dein#add('protesilaos/prot16-vim')
+  call dein#add('protesilaos/prot16-vim-airline')
+  call dein#add('miyakogi/seiya.vim')
+  call dein#add('xolox/vim-colorscheme-switcher')
+  call dein#add('Taverius/vim-colorscheme-manager')
+  call dein#add('xolox/vim-misc')
+
+  " }}}
+  " Git {{{
+
+  "Plug 'mattn/webapi-vim'
+  "Plug 'mattn/gist-vim'
+  call dein#add('tpope/vim-fugitive')
+  call dein#add('airblade/vim-gitgutter')
+  call dein#add('cohama/agit.vim')
+  "Plug 'jreybert/vimagit'
+  " }}}
+  " Html {{{
+
+  call dein#add('Valloric/MatchTagAlways')
+  call dein#add('chrisgillis/vim-bootstrap3-snippets')
+  call dein#add('mattn/emmet-vim')
+  call dein#add('alvan/vim-closetag')
+
+  " }}}
+  " Snippets & AutoComplete {{{
+  call dein#add('Shougo/deoplete.nvim')
+  call dein#add('Shougo/echodoc.vim')
+  "Plug 'padawan-php/deoplete-padawan', { 'do': 'composer install' }
+  "Plug 'wellle/tmux-complete.vim'
+  call dein#add('w0rp/ale')
+  "call dein#add( 'roxma/nvim-completion-manager')
+  " requires phpactor
+  "Plug 'phpactor/phpactor' ,  {'do': 'composer install'}
+  "Plug 'roxma/ncm-phpactor'
+  "Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
+  "Plug 'roxma/nvim-cm-tern',  {'do': 'npm install'}
+  "Plug 'roxma/LanguageServer-php-neovim',  {'do': 'composer install && composer run-script parse-stubs'}
+  "Plug 'ajh17/VimCompletesMe'
+  call dein#add('SirVer/ultisnips')
+  call dein#add('honza/vim-snippets')
+  call dein#add('jiangmiao/auto-pairs')
+  "Plug 'shawncplus/phpcomplete.vim'
+  "Plug 'lvht/phpcd.vim', { 'for': 'php', 'do': 'composer install' }
+  "Plug 'rafaelndev/deoplete-laravel-plugin', {'for': 'php', 'do': 'composer install'}
+  "Plug 'jsfaint/gen_tags.vim'
+  call dein#add('ludovicchabant/vim-gutentags')
+  "Plug 'majutsushi/tagbar'
+  call dein#add('carlitux/deoplete-ternjs', { 'build': 'npm install -g tern' })
+  " ES2015 code snippets (Optional)
+  call dein#add('epilande/vim-es2015-snippets')
+  " React code snippets
+  call dein#add('epilande/vim-react-snippets')
+
+  " }}}
+  " Syntax highlighting{{{
+
+  "Plug 'dominikduda/vim_current_word'
+  "Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+  call dein#add('sheerun/vim-polyglot')
+  "Plug 'ryanoasis/vim-devicons'
+  "Plug 'tweekmonster/django-plus.vim'
+  "Plug 'reedes/vim-pencil'
+  "Plug 'majutsushi/tagbar'
+  call dein#add('janko-m/vim-test')
+  call dein#add('StanAngeloff/php.vim')
+  call dein#add('mxw/vim-jsx')
+  call dein#add('posva/vim-vue')
+
+  " Required:
+  call dein#end()
+  call dein#save_state()
 endif
 
-call plug#begin('~/.config/nvim/plugged')
+" Required:
+filetype plugin indent on
+syntax enable
 
-" }}}
-
-" General {{{
-"Plug 'rliang/nvim-pygtk3', {'do': 'make install'}
-"Plug 'equalsraf/neovim-gui-shim'
-Plug 'scrooloose/nerdtree'
-"Plug 'eiginn/netrw'
-"Plug 'tpope/vim-vinegar'
-Plug 'dhruvasagar/vim-vinegar'
-Plug 'scrooloose/nerdcommenter'
-Plug 'justinmk/vim-gtfo'
-Plug 'mbbill/undotree'
-Plug 'Harenome/vim-neatfoldtext'
-Plug 'Shougo/neomru.vim'
-Plug 'kassio/neoterm'
-Plug 'Shougo/denite.nvim'
-"Plug 'ctrlpvim/ctrlp.vim'
-"Plug 'sgur/ctrlp-extensions.vim'
-"Plug 'FelikZ/ctrlp-py-matcher'
-"Plug 'metakirby5/codi.vim'
-Plug 'nbicalcarata/vim-zim'
-Plug 'joanrivera/vim-zimwiki-syntax'
-"Plug 'coxjc/VimSearch'
-Plug 'wesQ3/vim-windowswap'
-"Plug 'tmhedberg/SimpylFold'
-Plug 'pseewald/vim-anyfold'
-Plug 'bling/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'kevinkjt2000/tmuxline.vim'
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'mhinz/vim-startify'
-Plug 'frace/vim-unsurpriseme'
-Plug 'mhinz/vim-grepper'
-"Plug 'Yggdroot/indentLine'
-"Plug 'roman/golden-ratio'
-Plug 'mklabs/split-term.vim'
-Plug 'drzel/vim-line-no-indicator'
-"Plug 'severin-lemaignan/vim-minimap'
-Plug 'enricobacis/vim-airline-clock'
-Plug 'skywind3000/asyncrun.vim'
-
-"}}}
-" Colorschemes {{{
-
-"Plug 'ujihisa/unite-colorscheme'
-"Plug 'nbicalcarata/vim-womprat'
-"Plug 'nbicalcarata/vim-airline-womprat'
-"Plug 'nbicalcarata/vim-airline-dieciseis'
-"Plug 'nbicalcarata/vim-airline-darktooth'
-"Plug 'nanotech/jellybeans.vim'
-Plug 'chriskempson/base16-vim'
-Plug 'AlessandroYorba/Alduin'
-Plug 'whatyouhide/vim-gotham'
-"Plug 'w0ng/vim-hybrid'
-"Plug 'ayu-theme/ayu-vim'
-"Plug 'jacoborus/tender'
-"Plug 'MaxSt/FlatColor'
-Plug 'protesilaos/prot16-vim'
-Plug 'protesilaos/prot16-vim-airline'
-Plug 'miyakogi/seiya.vim'
-Plug 'xolox/vim-colorscheme-switcher'
-Plug 'Taverius/vim-colorscheme-manager'
-Plug 'xolox/vim-misc'
-
-" }}}
-" Git {{{
-
-"Plug 'mattn/webapi-vim'
-"Plug 'mattn/gist-vim'
-Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
-Plug 'cohama/agit.vim'
-"Plug 'jreybert/vimagit'
-" }}}
-" Html {{{
-
-Plug 'Valloric/MatchTagAlways'
-Plug 'chrisgillis/vim-bootstrap3-snippets'
-Plug 'mattn/emmet-vim'
-Plug 'alvan/vim-closetag'
-
-" }}}
-" Snippets & AutoComplete {{{
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'Shougo/echodoc.vim'
-"Plug 'padawan-php/deoplete-padawan', { 'do': 'composer install' }
-"Plug 'wellle/tmux-complete.vim'
-Plug 'w0rp/ale'
-"Plug 'roxma/nvim-completion-manager'
-" requires phpactor
-"Plug 'phpactor/phpactor' ,  {'do': 'composer install'}
-"Plug 'roxma/ncm-phpactor'
-"Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
-"Plug 'roxma/nvim-cm-tern',  {'do': 'npm install'}
-"Plug 'roxma/LanguageServer-php-neovim',  {'do': 'composer install && composer run-script parse-stubs'}
-"Plug 'ajh17/VimCompletesMe'
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
-Plug 'jiangmiao/auto-pairs'
-"Plug 'shawncplus/phpcomplete.vim'
-"Plug 'lvht/phpcd.vim', { 'for': 'php', 'do': 'composer install' }
-"Plug 'rafaelndev/deoplete-laravel-plugin', {'for': 'php', 'do': 'composer install'}
-"Plug 'jsfaint/gen_tags.vim'
-Plug 'ludovicchabant/vim-gutentags'
-"Plug 'majutsushi/tagbar'
-Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
-" ES2015 code snippets (Optional)
-Plug 'epilande/vim-es2015-snippets'
-" React code snippets
-Plug 'epilande/vim-react-snippets'
-
-" }}}
-" Syntax highlighting{{{
-
-"Plug 'dominikduda/vim_current_word'
-"Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-Plug 'sheerun/vim-polyglot'
-"Plug 'ryanoasis/vim-devicons'
-"Plug 'tweekmonster/django-plus.vim'
-"Plug 'reedes/vim-pencil'
-"Plug 'majutsushi/tagbar'
-Plug 'janko-m/vim-test'
-Plug 'StanAngeloff/php.vim'
-Plug 'mxw/vim-jsx'
-Plug 'posva/vim-vue'
-
-" }}}
-
-" Plug end {{{
-
-call plug#end()
+" Install not installed plugins on startup.
+if dein#check_install()
+  call dein#install()
+endif
 
 " }}}
 
@@ -992,7 +998,7 @@ endif
 nnoremap <C-P> :Denite buffer file_rec<CR>
 nnoremap <leader>j :Denite buffer<CR>
 "nnoremap <C-P> :Denite file_rec<CR>
-nnoremap <leader>D :Denite 
+nnoremap <leader>D :Denite
 nnoremap <leader>m :Denite file_mru<cr>
 nnoremap <leader>f :Denite line<cr>
 nnoremap <leader>o :Denite outline<cr>
