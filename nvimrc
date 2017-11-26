@@ -135,7 +135,7 @@ if dein#load_state($HOME . '/.cache/dein')
   "Plug 'dominikduda/vim_current_word'
   "Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
   call dein#add('sheerun/vim-polyglot')
-  "Plug 'ryanoasis/vim-devicons'
+  call dein#add('ryanoasis/vim-devicons')
   "Plug 'tweekmonster/django-plus.vim'
   "Plug 'reedes/vim-pencil'
   "Plug 'majutsushi/tagbar'
@@ -154,9 +154,9 @@ filetype plugin indent on
 syntax enable
 
 " Install not installed plugins on startup.
-if dein#check_install()
-  call dein#install()
-endif
+"if dein#check_install()
+  "call dein#install()
+"endif
 
 " }}}
 
@@ -175,8 +175,8 @@ set clipboard=unnamedplus
 if WINDOWS()
     set clipboard=unnamed
 endif
-"set shortmess+=cafilmnrxoOtT                     " Abbrev. of messages (avoids 'hit enter')
-set shortmess+=c                     " Abbrev. of messages (avoids 'hit enter')
+set shortmess+=cafilmnrxoOtT                     " Abbrev. of messages (avoids 'hit enter')
+"set shortmess+=c                     " Abbrev. of messages (avoids 'hit enter')
 set viewoptions=folds,options,cursor,unix,slash " Unix / Windows compatibility
 set virtualedit=onemore                         " Allow for cursor beyond last character
 set nospell                                     " Spell checking off
@@ -1540,46 +1540,46 @@ augroup END
 
 "let g:airline_section_error = airline#section#create_right(['%{g:asyncrun_status}'])
 
-" Define new accents
-function! AirlineThemePatch(palette)
-  " [ guifg, guibg, ctermfg, ctermbg, opts ].
-  " See "help attr-list" for valid values for the "opt" value.
-  " http://vim.wikia.com/wiki/Xterm256_color_names_for_console_Vim
-  let a:palette.accents.running = [ '', '', '', '', '' ]
-  let a:palette.accents.success = [ '#00ff00', '' , 'green', '', '' ]
-  let a:palette.accents.failure = [ '#ff0000', '' , 'red', '', '' ]
-endfunction
-let g:airline_theme_patch_func = 'AirlineThemePatch'
+"" Define new accents
+"function! AirlineThemePatch(palette)
+  "" [ guifg, guibg, ctermfg, ctermbg, opts ].
+  "" See "help attr-list" for valid values for the "opt" value.
+  "" http://vim.wikia.com/wiki/Xterm256_color_names_for_console_Vim
+  "let a:palette.accents.running = [ '', '', '', '', '' ]
+  "let a:palette.accents.success = [ '#00ff00', '' , 'green', '', '' ]
+  "let a:palette.accents.failure = [ '#ff0000', '' , 'red', '', '' ]
+"endfunction
+"let g:airline_theme_patch_func = 'AirlineThemePatch'
 
 
-" Change color of the relevant section according to g:asyncrun_status, a global variable exposed by AsyncRun
-" 'running': default, 'success': green, 'failure': red
-let g:async_status_old = ''
-function! Get_asyncrun_running()
+"" Change color of the relevant section according to g:asyncrun_status, a global variable exposed by AsyncRun
+"" 'running': default, 'success': green, 'failure': red
+"let g:async_status_old = ''
+"function! Get_asyncrun_running()
 
-  let async_status = g:asyncrun_status
-  if async_status != g:async_status_old
+  "let async_status = g:asyncrun_status
+  "if async_status != g:async_status_old
 
-    if async_status == 'running'
-      call airline#parts#define_accent('asyncrun_status', 'running')
-    elseif async_status == 'success'
-      call airline#parts#define_accent('asyncrun_status', 'success')
-    elseif async_status == 'failure'
-      call airline#parts#define_accent('asyncrun_status', 'failure')
-    endif
+    "if async_status == 'running'
+      "call airline#parts#define_accent('asyncrun_status', 'running')
+    "elseif async_status == 'success'
+      "call airline#parts#define_accent('asyncrun_status', 'success')
+    "elseif async_status == 'failure'
+      "call airline#parts#define_accent('asyncrun_status', 'failure')
+    "endif
 
-    let g:airline_section_x = airline#section#create(['asyncrun_status'])
-    AirlineRefresh
-    let g:async_status_old = async_status
+    "let g:airline_section_x = airline#section#create(['asyncrun_status'])
+    "AirlineRefresh
+    "let g:async_status_old = async_status
 
-  endif
+  "endif
 
-  return async_status
+  "return async_status
 
-endfunction
+"endfunction
 
-call airline#parts#define_function('asyncrun_status', 'Get_asyncrun_running')
-let g:airline_section_x = airline#section#create(['asyncrun_status'])
+"call airline#parts#define_function('asyncrun_status', 'Get_asyncrun_running')
+"let g:airline_section_x = airline#section#create(['asyncrun_status'])
 
 if LINUX()
    "let g:asyncrun_exit = "silent call system('afplay ~/.vim/notify.wav &')"
