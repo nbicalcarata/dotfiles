@@ -1300,7 +1300,7 @@ let g:startify_session_remove_lines = ['neoterm']
 
 "let g:tagbar_left = 1
 let g:tagbar_width = 31
-nmap <leader>T :TagbarToggle<CR>
+"nmap <leader>T :TagbarToggle<CR>
 
 " }}}
 " Magit {{{
@@ -1488,6 +1488,7 @@ let g:alduin_Shout_Fire_Breath = 1
 " split-term {{{
 
 let g:disable_key_mappings = 1
+nnoremap <leader>T :Term<cr>
 
 " }}}
 " vim-line-noindicator {{{
