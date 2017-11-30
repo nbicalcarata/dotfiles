@@ -1601,5 +1601,6 @@ endif
 "docker exec -i --user=laradock laradock_workspace_1 sh -c "cd interpos; ./vendor/bin/behat features/order.feature
 
 "docker exec -i --user=laradock laradock_workspace_1 sh -lc "cd interpos; npm run dev
+nnoremap <leader>A :AsyncRun docker exec -i --user=laradock laradock_workspace_1 sh -lc "cd interpos; "<left>
 
 "  }}}
