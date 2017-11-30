@@ -373,6 +373,7 @@ augroup phpLaravel
     autocmd!
     autocmd BufRead,BufNewFile *.blade.php UltiSnipsAddFiletypes php.php-laravel.html
     autocmd BufRead,BufNewFile *.js UltiSnipsAddFiletypes js.html
+    autocmd FileType vue syntax sync fromstart
 augroup END
 
 " }}}
