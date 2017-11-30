@@ -3,7 +3,7 @@ set visualbell t_vb=            " turn off error beep/flash
 " Gui font
 " fc-list | grep iosevka
 "GuiFont Iosevka Term:h12
-"GuiFont! Iosevka Nerd Font:h13
+"GuiFont! Iosevka Nerd Font:h12
 "GuiFont FantasqueSansMono Nerd Font Mono:h13
 "GuiFont DejaVuSansMono Nerd Font:h12
 "GuiFont DejaVuSansMonoForPowerline Nerd Font:h11
@@ -16,7 +16,7 @@ set visualbell t_vb=            " turn off error beep/flash
 "Guifont DejaVu Sans Mono:h11
 if WINDOWS()
   "Guifont! Consolas:h12
-  GuiFont! Hack NF:h11
+  "GuiFont! Hack NF:h11
   GuiFont! Iosevka NF:h12
 endif
 "colorscheme base16-darktooth
