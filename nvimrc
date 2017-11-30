@@ -81,6 +81,7 @@ if dein#load_state($HOME . '/.cache/dein')
   call dein#add('xolox/vim-colorscheme-switcher')
   call dein#add('Taverius/vim-colorscheme-manager')
   call dein#add('xolox/vim-misc')
+  call dein#add('equalsraf/neovim-gui-shim')
 
   " }}}
   " Git {{{
@@ -1206,10 +1207,10 @@ endif
 "let g:airline_right_alt_sep = "\uE0B7"
 
 "Edge down
-let g:airline_left_sep = "\uE0B8"
-let g:airline_left_alt_sep = "\uE0B9"
-let g:airline_right_sep = "\uE0BA"
-let g:airline_right_alt_sep = "\uE0BB"
+"let g:airline_left_sep = "\uE0B8"
+"let g:airline_left_alt_sep = "\uE0B9"
+"let g:airline_right_sep = "\uE0BA"
+"let g:airline_right_alt_sep = "\uE0BB"
 
 "let g:tmuxline_separators = {
     "\ 'left' : '',
@@ -1410,8 +1411,10 @@ nnoremap <leader>co :colorscheme  <bar>:call SetTermBackground()<C-Left><C-Left>
 " }}}
 " Seiya {{{
 
-"let g:seiya_auto_enable=0
-"let g:seiya_target_groups = has('nvim') ? ['guibg'] : ['ctermbg']
+if LINUX()
+  let g:seiya_auto_enable=1
+  let g:seiya_target_groups = has('nvim') ? ['guibg'] : ['ctermbg']
+endif
 
 " }}}
 " Hilight current word {{{
@@ -1588,18 +1591,6 @@ endif
 if WINDOWS()
   "let g:asyncrun_exit = 'silent !start playwav.exe "C:/Windows/Media/Windows Error.wav" 200'
    let g:asyncrun_exit = 'silent !start '.$HOME.'\dotfiles\notification.exe'
-
-"[void] [System.Reflection.Assembly]::LoadWithPartialName("System.Windows.Forms")
-"$objNotifyIcon = New-Object System.Windows.Forms.NotifyIcon
-"$objNotifyIcon.Icon = "C:\Program Files (x86)\Zim Desktop Wiki\zim.ico"
-"$objNotifyIcon.BalloonTipIcon = "Info"
-"$objNotifyIcon.BalloonTipText = "Proceso completado"
-"$objNotifyIcon.BalloonTipTitle = "Async Run"
-"$objNotifyIcon.Visible = $True
-"$objNotifyIcon.ShowBalloonTip(10000)
-"[void][System.Threading.Thread]::Sleep(10000)
-"$objNotifyIcon.Dispose()
-
 endif
 
 "Execute command from docker container
