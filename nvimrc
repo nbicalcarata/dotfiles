@@ -136,7 +136,7 @@ if dein#load_state($HOME . '/.cache/dein')
   "Plug 'dominikduda/vim_current_word'
   "Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
   call dein#add('sheerun/vim-polyglot')
-  call dein#add('ryanoasis/vim-devicons')
+  "call dein#add('ryanoasis/vim-devicons')
   "Plug 'tweekmonster/django-plus.vim'
   "Plug 'reedes/vim-pencil'
   "Plug 'majutsushi/tagbar'
