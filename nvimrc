@@ -1,6 +1,6 @@
 " Dein {{{
 
-" Identify plataform
+" Identify plataform {{{
 silent function! OSX()
     return has('macunix')
 endfunction
@@ -10,17 +10,17 @@ endfunction
 silent function! WINDOWS()
     return  (has('win16') || has('win32') || has('win64'))
 endfunction
-
+" }}}
+" Setup directories {{{
 let g:dein#cache_directory = $HOME . '/.cache/dein'
 set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
 
 if dein#load_state($HOME . '/.cache/dein')
   call dein#begin($HOME . '/.cache/dein')
-
-  " Let dein manage dein
-  " Required:
   call dein#add($HOME . '/.cache/dein/repos/github.com/Shougo/dein.vim')
+" }}}
 
+  " General {{{
   "Plug 'rliang/nvim-pygtk3', {'do': 'make install'}
   "Plug 'equalsraf/neovim-gui-shim'
   call dein#add('scrooloose/nerdtree')
@@ -58,8 +58,7 @@ if dein#load_state($HOME . '/.cache/dein')
   "Plug 'severin-lemaignan/vim-minimap'
   call dein#add('enricobacis/vim-airline-clock')
   call dein#add('skywind3000/asyncrun.vim')
-
-  "}}}
+" }}}
   " Colorschemes {{{
 
   "Plug 'ujihisa/unite-colorscheme'
@@ -82,6 +81,7 @@ if dein#load_state($HOME . '/.cache/dein')
   call dein#add('Taverius/vim-colorscheme-manager')
   call dein#add('xolox/vim-misc')
   call dein#add('equalsraf/neovim-gui-shim')
+  call dein#add('metalelf0/base16-black-metal-scheme')
 
   " }}}
   " Git {{{
@@ -158,6 +158,8 @@ syntax enable
 "if dein#check_install()
   "call dein#install()
 "endif
+
+" }}}
 
 " }}}
 
@@ -793,7 +795,6 @@ if WINDOWS()
 endif
 
 " }}}
-
 " UltiSnips {{{
 let g:UltiSnipsExpandTrigger='<c-e>'
 let g:UltiSnipsListSnippets='<c-l>'
@@ -1094,6 +1095,14 @@ if WINDOWS()
   "let g:airline_right_alt_sep = '┃'
 endif
 
+function! Render_Only_File(...)
+  let builder = a:1
+  let context = a:2
+  call builder.add_section('file','%F')
+  return 1
+endfunction
+call airline#add_inactive_statusline_func('Render_Only_File')
+
 "if !exists('g:airline_symbols')
   "let g:airline_symbols = {}
 "endif
@@ -1119,32 +1128,23 @@ endif
 "augroup END
 
 
-"" Short names
-"let g:airline_mode_map = {
-    "\ '__' : '-',
-    "\ 'n'  : 'N',
-    "\ 'i'  : 'I',
-    "\ 'R'  : 'R',
-    "\ 'c'  : 'C',
-    "\ 'v'  : 'V',
-    "\ 'V'  : 'V',
-    "\ '' : 'V',
-    "\ 's'  : 'S',
-    "\ 'S'  : 'S',
-    "\ '' : 'S',
-    "\ }
+" Short names
+let g:airline_mode_map = {
+    \ '__' : '-',
+    \ 'n'  : 'N',
+    \ 'i'  : 'I',
+    \ 'R'  : 'R',
+    \ 'c'  : 'C',
+    \ 'v'  : 'V',
+    \ 'V'  : 'V',
+    \ '' : 'V',
+    \ 's'  : 'S',
+    \ 'S'  : 'S',
+    \ '' : 'S',
+    \ }
 
-"let g:airline#extensions#tabline#buffers_label = 'B'
-"let g:airline#extensions#tabline#tabs_label = 'T'
-
-"let g:airline#extensions#default#section_truncate_width = {
-      "\ 'b': 79,
-      "\ 'x': 60,
-      "\ 'y': 20,
-      "\ 'z': 45,
-      "\ 'warning': 80,
-      "\ 'error': 80,
-      "\ }
+let g:airline#extensions#tabline#buffers_label = 'B'
+let g:airline#extensions#tabline#tabs_label = 'T'
 
 "" Remove separators
 "if get(g:, 'replace_separators', 1)
@@ -1172,34 +1172,8 @@ endif
 "endif
 
 " }}}
-" Unthemed vert split char in airline {{{
-
-"augroup ThemedChar
-    "autocmd!
-    "au User AirlineAfterInit,AirlineAfterTheme call FixSplitColours()
-"augroup END
-
-"fun! FixSplitColours()
-    "let l:theme = get(g:, 'airline_theme', g:colors_name)
-    ""let l:focusedColour = g:airline#themes#{l:theme}#palette['inactive']['airline_c'][1]
-    "let l:focusedColour = g:airline#themes#{l:theme}#palette['inactive']['airline_a'][1]
-    "let l:inactiveColour = g:airline#themes#{l:theme}#palette['inactive']['airline_a'][1]
-    "exec 'hi StatusLine guibg=' . l:focusedColour
-    "exec 'hi StatusLineNC guibg=' . l:inactiveColour
-"endfun
-
-" }}}
 " NerdFonts {{{
-" It's a matter of going to the Font Awesome page, clicking on the icon and getting the Unicode code, then in Vim (in insert mode):
-" Ctrl+V u <FA unicode number >
-" testing extra-powerline-symbols
-
-" set font:
-" for now must grab this specific one:
-" https://github.com/ryanoasis/powerline-extra-symbols/blob/master/patched-fonts/DroidSansMonoForPowerlinePlusNerdFileTypesMono.otf
-"set guifont=Droid\ Sans\ Mono\ for\ Powerline\ Plus\ Nerd\ File\ Types\ Mono\ 12
-
-" testing rounded separators (extra-powerline-symbols):
+" Ctrl+V u <FA unicode number>
 
 " Rounded
 "let g:airline_left_sep = "\uE0B4"
@@ -1239,13 +1213,6 @@ endif
 
 " set the CN (column number) symbol:
 "let g:airline_section_z = airline#section#create(["\uE0A1" . '%{line(".")}' . " \uE0A3" . '%{col(".")}'])
-
-"Improves the contrast for the inactive statusline. To enable it: >
-let g:airline_base16_improved_contrast = 1
-
-"Uses a predefined colorpalette for defining the colors, instead of guessing
-"the values from other highlight groups. To enable it: >
-let g:airline#themes#base16#constant = 1
 
 " }}}
 " Startify {{{
@@ -1604,3 +1571,5 @@ endif
 nnoremap <leader>A :AsyncRun docker exec -i --user=laradock laradock_workspace_1 sh -lc "cd interpos; "<left>
 
 "  }}}
+
+" }}}
