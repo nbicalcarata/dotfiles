@@ -997,8 +997,8 @@ endif
 " Denite {{{
 
 " Change mappings.
-nnoremap <C-P> :Denite buffer file_rec<CR>
-nnoremap <leader>j :Denite buffer<CR>
+"nnoremap <C-P> :Denite buffer file_rec<CR>
+nnoremap <leader>j :Denite buffer file_rec<CR>
 "nnoremap <C-P> :Denite file_rec<CR>
 nnoremap <leader>D :Denite
 nnoremap <leader>m :Denite file_mru<cr>
