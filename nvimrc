@@ -1473,6 +1473,7 @@ nnoremap <leader>T :Term<cr>
 " fugitive {{{
 
 nnoremap <leader>gc :Gcommit<cr>
+nnoremap <leader>G :Gstatus<cr>
 
 " }}}
 "  Macros {{{
