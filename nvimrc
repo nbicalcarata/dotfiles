@@ -998,7 +998,7 @@ endif
 
 " Change mappings.
 "nnoremap <C-P> :Denite buffer file_rec<CR>
-nnoremap <leader>j :Denite buffer file_rec<CR>
+"nnoremap <leader>j :Denite buffer file_rec<CR>
 "nnoremap <C-P> :Denite file_rec<CR>
 nnoremap <leader>D :Denite
 nnoremap <leader>m :Denite file_mru<cr>
@@ -1012,11 +1012,11 @@ if WINDOWS()
   nnoremap <leader>z :Denite file_rec -path=~/Documents/Apuntes/<cr>
 endif
 
-"call denite#custom#alias('source', 'file_rec/git', 'file_rec')
-"call denite#custom#var('file_rec/git', 'command',
-"\ ['git', 'ls-files', '-co', '--exclude-standard'])
-"nnoremap <silent> <C-p> :<C-u>Denite buffer
-"\ `finddir('.git', ';') != '' ? 'file_rec/git' : 'file_rec'`<CR>
+call denite#custom#alias('source', 'file_rec/git', 'file_rec')
+call denite#custom#var('file_rec/git', 'command',
+\ ['git', 'ls-files', '-co', '--exclude-standard'])
+nnoremap <silent> <leader>j :<C-u>Denite buffer
+\ `finddir('.git', ';') != '' ? 'file_rec/git' : 'file_rec'`<CR>
 
 if executable('ag')
    call denite#custom#var('file_rec', 'command',
