@@ -1082,8 +1082,8 @@ let g:airline#extensions#tabline#enabled = 1            " Activar tabline
 ""let g:airline#extensions#tabline#switch_buffers_and_tabs = 1
 let g:airline#extensions#tabline#show_buffers = 1
 "let g:airline#extensions#tabline#tab_min_count = 2
-""let g:airline#extensions#tabline#formatter = 'unique_tail'
-"let g:airline#extensions#tabline#fnamemod = ':t'
+"let g:airline#extensions#tabline#formatter = 'unique_tail'
+let g:airline#extensions#tabline#fnamemod = ':t'
 "let g:airline#extensions#tmuxline#snapshot_file = "~/.config/snapshot_tmuxline"
 
 if WINDOWS()
