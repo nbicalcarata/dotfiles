@@ -307,7 +307,9 @@ augroup END
 augroup CursorLineOnlyInActiveWindow
     autocmd!
     autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+    autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorcolumn
     autocmd WinLeave * setlocal nocursorline
+    autocmd WinLeave * setlocal nocursorcolumn
 augroup END
 
 " }}}
@@ -441,7 +443,10 @@ set termguicolors
 " Cursor line {{{
 
 set cursorline
-set guicursor=n-v-c:block-Cursor/lCursor-blinkon0,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor
+set guicursor=n-v-c:hor20,i-ci-ve:ver25,r-cr:hor20,o:hor50
+		  \,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
+		  \,sm:block-blinkwait175-blinkoff150-blinkon175
+
 "let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 " }}}
 " Ruler {{{
@@ -519,7 +524,6 @@ augroup OverrideColor
     autocmd ColorScheme * hi GitGutterDelete guibg=NONE ctermbg=none
     autocmd ColorScheme * hi GitGutterChangeDelete guibg=NONE ctermbg=none
     autocmd Colorscheme * hi EndOfBuffer ctermfg=black guifg=black
-
     ""autocmd ColorScheme * hi! link TabLineSel CursorLine
     ""autocmd ColorScheme * hi FoldColumn    guibg=NONE guifg=bg ctermbg=none ctermfg=bg
     ""autocmd ColorScheme * hi ALEErrorSign guibg=NONE ctermbg=none
