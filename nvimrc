@@ -21,11 +21,8 @@ if dein#load_state($HOME . '/.cache/dein')
 " }}}
 
   " General {{{
-  "Plug 'rliang/nvim-pygtk3', {'do': 'make install'}
-  "Plug 'equalsraf/neovim-gui-shim'
+  "call dein#add('equalsraf/neovim-gui-shim')
   call dein#add('scrooloose/nerdtree')
-  "Plug 'eiginn/netrw'
-  "Plug 'tpope/vim-vinegar'
   call dein#add('dhruvasagar/vim-vinegar')
   call dein#add('scrooloose/nerdcommenter')
   call dein#add('justinmk/vim-gtfo')
@@ -34,48 +31,25 @@ if dein#load_state($HOME . '/.cache/dein')
   call dein#add('Shougo/neomru.vim')
   call dein#add('kassio/neoterm')
   call dein#add('Shougo/denite.nvim')
-  "Plug 'ctrlpvim/ctrlp.vim'
-  "Plug 'sgur/ctrlp-extensions.vim'
-  "Plug 'FelikZ/ctrlp-py-matcher'
-  "Plug 'metakirby5/codi.vim'
   call dein#add('nbicalcarata/vim-zim')
   call dein#add('joanrivera/vim-zimwiki-syntax')
-  "Plug 'coxjc/VimSearch'
   call dein#add('wesQ3/vim-windowswap')
-  "Plug 'tmhedberg/SimpylFold'
   call dein#add('pseewald/vim-anyfold')
-  call dein#add('bling/vim-airline')
-  call dein#add('vim-airline/vim-airline-themes')
   call dein#add('kevinkjt2000/tmuxline.vim')
   call dein#add('christoomey/vim-tmux-navigator')
   call dein#add('mhinz/vim-startify')
-  call dein#add('frace/vim-unsurpriseme')
   call dein#add('mhinz/vim-grepper')
-  "Plug 'Yggdroot/indentLine'
-  "Plug 'roman/golden-ratio'
   call dein#add('mklabs/split-term.vim')
   call dein#add('drzel/vim-line-no-indicator')
-  "Plug 'severin-lemaignan/vim-minimap'
-  call dein#add('enricobacis/vim-airline-clock')
   call dein#add('skywind3000/asyncrun.vim')
+  call dein#add('tpope/vim-surround')
 " }}}
   " Colorschemes {{{
 
-  "Plug 'ujihisa/unite-colorscheme'
-  "Plug 'nbicalcarata/vim-womprat'
-  "Plug 'nbicalcarata/vim-airline-womprat'
-  "Plug 'nbicalcarata/vim-airline-dieciseis'
-  "Plug 'nbicalcarata/vim-airline-darktooth'
-  "Plug 'nanotech/jellybeans.vim'
   call dein#add('chriskempson/base16-vim')
   call dein#add('AlessandroYorba/Alduin')
   call dein#add('whatyouhide/vim-gotham')
-  "Plug 'w0ng/vim-hybrid'
-  "Plug 'ayu-theme/ayu-vim'
-  "Plug 'jacoborus/tender'
-  "Plug 'MaxSt/FlatColor'
   call dein#add('protesilaos/prot16-vim')
-  call dein#add('protesilaos/prot16-vim-airline')
   call dein#add('miyakogi/seiya.vim')
   call dein#add('xolox/vim-colorscheme-switcher')
   call dein#add('Taverius/vim-colorscheme-manager')
@@ -86,12 +60,9 @@ if dein#load_state($HOME . '/.cache/dein')
   " }}}
   " Git {{{
 
-  "Plug 'mattn/webapi-vim'
-  "Plug 'mattn/gist-vim'
   call dein#add('tpope/vim-fugitive')
   call dein#add('airblade/vim-gitgutter')
   call dein#add('cohama/agit.vim')
-  "Plug 'jreybert/vimagit'
   " }}}
   " Html {{{
 
@@ -102,55 +73,33 @@ if dein#load_state($HOME . '/.cache/dein')
 
   " }}}
   " Snippets & AutoComplete {{{
+  
   call dein#add('Shougo/deoplete.nvim')
-  call dein#add('Shougo/echodoc.vim')
-  "Plug 'padawan-php/deoplete-padawan', { 'do': 'composer install' }
-  "Plug 'wellle/tmux-complete.vim'
   call dein#add('w0rp/ale')
-  "call dein#add( 'roxma/nvim-completion-manager')
-  " requires phpactor
-  "Plug 'phpactor/phpactor' ,  {'do': 'composer install'}
-  "Plug 'roxma/ncm-phpactor'
-  "Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
-  "Plug 'roxma/nvim-cm-tern',  {'do': 'npm install'}
-  "Plug 'roxma/LanguageServer-php-neovim',  {'do': 'composer install && composer run-script parse-stubs'}
-  "Plug 'ajh17/VimCompletesMe'
   call dein#add('SirVer/ultisnips')
   call dein#add('honza/vim-snippets')
   call dein#add('jiangmiao/auto-pairs')
-  "Plug 'shawncplus/phpcomplete.vim'
-  "Plug 'lvht/phpcd.vim', { 'for': 'php', 'do': 'composer install' }
-  "Plug 'rafaelndev/deoplete-laravel-plugin', {'for': 'php', 'do': 'composer install'}
-  "Plug 'jsfaint/gen_tags.vim'
   call dein#add('ludovicchabant/vim-gutentags')
-  "Plug 'majutsushi/tagbar'
+  call dein#add('majutsushi/tagbar')
   call dein#add('carlitux/deoplete-ternjs', { 'build': 'npm install -g tern' })
-  " ES2015 code snippets (Optional)
   call dein#add('epilande/vim-es2015-snippets')
-  " React code snippets
   call dein#add('epilande/vim-react-snippets')
 
   " }}}
   " Syntax highlighting{{{
 
-  "Plug 'dominikduda/vim_current_word'
-  "Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
   call dein#add('sheerun/vim-polyglot')
-  "call dein#add('ryanoasis/vim-devicons')
-  "Plug 'tweekmonster/django-plus.vim'
-  "Plug 'reedes/vim-pencil'
-  "Plug 'majutsushi/tagbar'
   call dein#add('janko-m/vim-test')
   call dein#add('StanAngeloff/php.vim')
-  call dein#add('mxw/vim-jsx')
+  "call dein#add('mxw/vim-jsx')
   call dein#add('posva/vim-vue')
 
-  " Required:
+  " }}}
+
   call dein#end()
   call dein#save_state()
 endif
 
-" Required:
 filetype plugin indent on
 syntax enable
 
@@ -257,27 +206,6 @@ set wildignore+=*/node_modules/*,*/vendor/*
 " }}}
 " Autocmd rules {{{
 
-" Running code with ,r {{{
-
-"augroup RunningCode
-    "autocmd!
-    "autocmd FileType python map <leader>e :w<CR>:!python %<CR>
-    "autocmd FileType php map <leader>e :w<CR>:!php %<CR>
-    "autocmd FileType bash map <leader>e :w<CR>:!./%<CR>
-    "autocmd FileType java map <leader>c :w<CR>:!javac %<CR>
-    "autocmd FileType java map <leader>e :w<CR>:!java %:r<CR>
-"augroup END
-
-" }}}
-" Whitespace settings per filetype {{{
-"augroup WhitespaceSettings
-    "autocmd!
-    "autocmd BufRead,BufNewFile,Filetype html,blade,php setlocal ts=2 sts=2 sw=2
-    ""autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
-    "autocmd BufRead,BufNewFile,Filetype javascript,jsx setlocal ts=2 sts=2 sw=2
-"augroup END
-
-" }}}
 " Omnicompletion {{{
 
 augroup OmniCompletion
@@ -307,9 +235,9 @@ augroup END
 augroup CursorLineOnlyInActiveWindow
     autocmd!
     autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
-    autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorcolumn
+    "autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorcolumn
     autocmd WinLeave * setlocal nocursorline
-    autocmd WinLeave * setlocal nocursorcolumn
+    "autocmd WinLeave * setlocal nocursorcolumn
 augroup END
 
 " }}}
@@ -357,20 +285,6 @@ augroup NerdTreeExit
 augroup END
 
 " }}}
-" Detect django files {{{
-
-"augroup DjangoFiles
-    "autocmd!
-    "au BufNewFile,BufRead admin.py     setlocal filetype=python.django
-    "au BufNewFile,BufRead urls.py      setlocal filetype=python.django
-    "au BufNewFile,BufRead models.py    setlocal filetype=python.django
-    "au BufNewFile,BufRead views.py     setlocal filetype=python.django
-    "au BufNewFile,BufRead settings.py  setlocal filetype=python.django
-    "au BufNewFile,BufRead forms.py     setlocal filetype=python.django
-    "au BufNewFile,BufRead *.html       setlocal filetype=htmldjango
-"augroup END
-
-" }}}
 " PHP with html syntax {{{
 
 augroup phpLaravel
@@ -381,10 +295,12 @@ augroup END
 
 " }}}
 " Sync syntax from start to all buffers {{{
+
 augroup syncSyntax
   autocmd!
   autocmd BufEnter * :syntax sync fromstart
 augroup END
+
 " }}}
 " Term settings {{{
 
@@ -407,7 +323,7 @@ set visualbell t_vb=            " turn off error beep/flash
 set novisualbell                " turn off visual bell
 set equalalways
 set lazyredraw
-set noshowmode                  " Dont display the current mode
+"set noshowmode                  " Dont display the current mode
 "set nohlsearch                  " Highlight search matches
 set showmatch                   " show matching brackets/parenthesis
 set ignorecase                  " Case insensitive search
@@ -451,27 +367,44 @@ set guicursor=n-v-c:hor20,i-ci-ve:ver25,r-cr:hor20,o:hor50
 " }}}
 " Ruler {{{
 
-"set rulerformat=%40(%{&filetype}\⎼⎼%{fugitive#head()}\⎼⎼%05l⎼%(%02v\⎼⎼%P%)%)
-"set rulerformat=%75(%{&filetype}\⎼⎼%{fugitive#head()}\⎼⎼%{strftime('%a\⎼%b\⎼%e\⎼%H:%M\⎼%p')}\⎼%05l,%-6(%c%V%)\⎼⎼%P%)
-"set rulerformat=%50(%{&filetype}\⎼⎼%{fugitive#head()}\⎼⎼%{strftime('%H:%M\⎼')}\⎼%05l,%(%03v%)\⎼⎼%P%)
-set rulerformat=%40(%{&filetype}\──%{fugitive#head()}\──%{strftime('%H:%M\')}\─┤%{LineNoIndicator()}\├─%03c%%\─%{LinterStatus()}%)
+"set rulerformat=%40(%{&filetype}\──%{fugitive#head()}\──%{strftime('%H:%M\')}\─┤%{LineNoIndicator()}\├─%03c%%\─%{LinterStatus()}%)
+"set rulerformat=%50(\\ %{fugitive#head()}\ %3p%%\ ☰\ \ %04l/%L\ \ :%03c\ %(\\ %{LinterStatus()}\ \%)%)
 
 " }}}
 " Statusline {{{
-"
+
 set laststatus=2
 "set statusline+=\ %{strftime(\"%H:%M\ \")}
 "set statusline+=\ %{LinterStatus()}
-"
-function! Relative_Path_CWD()
-    let l:path = fnamemodify(getcwd(),":t")
-    return l:path
-endfunction
 
-"let timer = timer_start(4000, 'UpdateStatusBar',{'repeat':-1})
-"let timer = timer_start(30000, 'UpdateStatusBar',{'repeat':-1})
-"function! UpdateStatusBar(timer)
-  "execute 'let &ro = &ro'
+let g:mode ={
+        \ '__' : '-', 'n'  : 'N',
+        \ 'i'  : 'I', 'R'  : 'R',
+        \ 'v'  : 'V', 'V'  : 'V',
+        \ 'c'  : 'C', '' : 'V',
+        \ 's'  : 'S', 'S'  : 'S',
+        \ '' : 'S', 't'  : 'T',
+    \}
+
+set statusline=
+set statusline+=%(\ %{g:mode[mode()]}%)
+set statusline+=%(%{&paste?'\ p\ ':''}%)
+set statusline+=%(\ \ %{fugitive#head()}%)
+set statusline+=%(\ %<%F%)
+set statusline+=\ %h%m%r%w
+set statusline+=%=
+set statusline+=%(\ %{&filetype}%)
+set statusline+=%(%<\ %3p%%\ \ %4l/%L\ \ %3c%)
+set statusline+=%(\ \\ %{LinterStatus()}%)
+set statusline+=%(\ %{strftime(\"%H:%M\")}%)
+set statusline+=%(\ %{g:asyncrun_status}%)
+set statusline+=\ 
+
+"set statusline+=%
+
+"function! Relative_Path_CWD()
+    "let l:path = fnamemodify(getcwd(),":t")
+    "return l:path
 "endfunction
 
 function! LinterStatus() abort
@@ -490,10 +423,12 @@ endfunction
 " }}}
 " Styling vertical splits {{{
 if LINUX()
-    set fillchars=vert:│,fold:۰,diff:·,stl:─,stlnc:─
+    "set fillchars=vert:│,fold:۰,diff:·,stl:─,stlnc:─
+    set fillchars=vert:│,fold:۰,diff:·,stlnc:-
     "set fillchars=vert:┃,diff:⎼,fold:⎼
     "set fillchars=""
 endif
+
 if WINDOWS()
     set fillchars=vert:│,fold:۰,diff:·,stl:─,stlnc:─
 endif
@@ -506,13 +441,15 @@ augroup OverrideColor
     autocmd ColorScheme * hi link deniteMatchedChar Statement
 
     " No background
-    autocmd ColorScheme * hi! StatusLineNC guibg=NONE
-    autocmd ColorScheme * hi! link StatusLine LineNr
+    autocmd ColorScheme * hi! StatusLine guibg=NONE
+    autocmd ColorScheme * hi! link StatusLineNC LineNr
+    "autocmd ColorScheme * hi! link StatusLine LineNr
 
     autocmd ColorScheme * hi! link TabLineFill FoldColumn
     autocmd ColorScheme * hi! link TabLine LineNr
     autocmd ColorScheme * hi! link FoldColumn LineNr
     autocmd ColorScheme * hi! link CursorLineNr CursorLine
+    autocmd ColorScheme * hi! link CursorColumn CursorLine
     autocmd ColorScheme * hi! link ALEErrorSign ErrorMsg
     autocmd ColorScheme * hi! link ALEWarningSign WarningMsg
     autocmd ColorScheme * hi! link Folded LineNr
@@ -531,10 +468,8 @@ augroup OverrideColor
     ""autocmd ColorScheme * hi TermCursor ctermfg=green guifg=green
     ""autocmd ColorScheme * hi link deniteMatched Type
 
-    ""autocmd ColorScheme * hi! StatusLine guibg=NONE
-
     "" Background statusline
-    ""autocmd ColorScheme * hi! link StatusLine CursorLine
+    "autocmd ColorScheme * hi! link StatusLine CursorLine
 augroup END
 
 "exec 'hi SyntasticErrorSign guifg=red ctermfg=red' .
@@ -582,6 +517,7 @@ nnoremap <space> za
 nnoremap <leader>ev :e ~/.config/nvim/init.vim<cr>
 nnoremap <leader>sv :source ~/.config/nvim/init.vim<cr>
 nnoremap <leader>sg :source ~/.config/nvim/ginit.vim<cr>
+
 if WINDOWS()
   nnoremap <leader>ev :e ~\AppData\Local\nvim\init.vim<cr>
   nnoremap <leader>sv :source ~\AppData\Local\nvim\init.vim<cr>
@@ -610,16 +546,16 @@ vnoremap <leader>s :s///g<left><left><left>
 " Select current line (no indentation)
 nnoremap vv ^vg_
 
-" Wrapped lines goes down/up to next row, rather than next line in file.
-noremap j gj
-noremap k gk
+"Wrapped lines goes down/up to next row, rather than next line in file.
+"noremap j gj
+"noremap k gk
 
-" Same for 0, home, end, etc
-noremap $ g$
-noremap <End> g<End>
-noremap 0 g0
-noremap <Home> g<Home>
-noremap ^ g^
+"Same for 0, home, end, etc
+"noremap $ g$
+"noremap <End> g<End>
+"noremap 0 g0
+"noremap <Home> g<Home>
+"noremap ^ g^
 
 " Shortcuts
 " Visual shifting (does not exit Visual mode)
@@ -662,10 +598,6 @@ tnoremap <C-k> <C-\><C-n><C-w>k
 tnoremap <C-l> <C-\><C-n><C-w>l
 "tnoremap <C-w> <C-\><C-n><C-w>c
 
-" Esc alternative
-"inoremap kj <Esc>
-"tnoremap kj <Esc>
-
 "set working directory to current file
 nnoremap <leader>cd :cd %:p:h<CR>:pwd<CR>
 nnoremap <leader>td :tc %:p:h<CR>:pwd<CR>
@@ -673,36 +605,12 @@ nnoremap <leader>td :tc %:p:h<CR>:pwd<CR>
 " Save as sudo
 "cmap w!! w !gksudo tee > /dev/null %
 
-"Focus term
-"nnoremap <leader>te :buf term<CR>
 "Rename buffer
 nnoremap <leader>bn :keepalt file<space>
+
 " }}}
 " Functions {{{
 
-" Highlight word under cursor {{{
-
-"set updatetime=10
-
-"function! HighlightWordUnderCursor()
-    "if getline(".")[col(".")-1] !~# '[[:punct:][:blank:]]'
-        "exec 'match' 'Visual' '/\V\<'.expand('<cword>').'\>/'
-    "else
-        "match none
-    "endif
-"endfunction
-
-"autocmd! CursorHold,CursorHoldI * call HighlightWordUnderCursor()
-
-" }}}
-" Set airline and colorscheme color {{{
-
-function! Base16(scheme)
-    execute 'colorscheme base16-' . a:scheme
-    let g:airline_theme = 'base16_' . a:scheme
-endfunction
-
-" }}}
 " Toggle between relative and absolute line numbers {{{
 
 function! NumberToggle()
@@ -739,21 +647,6 @@ function! ToggleColorColumn()
 endfunction
 
 "nnoremap <silent> <leader>co :call ToggleColorColumn()<CR>
-
-" }}}
-" Initialize NERDTree as needed {{{
-
-function! NERDTreeInitAsNeeded()
-    redir => l:bufoutput
-    buffers!
-    redir END
-    let l:idx = stridx(l:bufoutput, 'NERD_tree')
-    if l:idx > -1
-        NERDTreeMirror
-        NERDTreeFind
-        wincmd l
-    endif
-endfunction
 
 " }}}
 " Move cursor to last position on file {{{
@@ -794,10 +687,10 @@ let g:NERDTreeAutoDeleteBuffer = 1
 let g:NERDTreeCascadeSingleChildDir = 0
 nnoremap <silent> <leader>e :NERDTreeFind<cr>
 map <silent> <C-e> :NERDTreeToggle<CR>
-let g:NERDTreeWinPos="left"
+let g:NERDTreeWinPos='left'
 let g:NERDTreeQuitOnOpen=0
-let g:NERDTreeStatusline="⎼%{Relative_Path_CWD()}"
-"let g:NERDTreeStatusline="⎼%{Relative_Path_CWD()}⎼⎼%{strftime(\"%H:%M\")}"
+"let g:NERDTreeStatusline="⎼%{Relative_Path_CWD()}"
+
 if WINDOWS()
   let g:NERDTreeDirArrowExpandable = '▸'
   let g:NERDTreeDirArrowCollapsible = '▾'
@@ -830,7 +723,8 @@ let g:mta_filetypes = {
     \ 'jinja' : 1,
     \ 'blade' : 1,
     \ 'php' : 1,
-    \ 'javascript.jsx' : 1,
+    \ 'javascript' : 1,
+    \ 'vue' : 1,
     \}
 
 " }}}
@@ -864,13 +758,6 @@ if WINDOWS()
   let g:gitgutter_sign_removed_first_line = '▔'
   let g:gitgutter_sign_removed = '▁'
 endif
-
-" }}}
-" Preview file on browser {{{
-
-nnoremap <F2>f :!firefox %<CR>
-nnoremap <F2>c :!chromium-browser %<CR>
-nnoremap <F2>g :!google-chrome %<CR>
 
 " }}}
 " Vimtest {{{
@@ -944,9 +831,7 @@ endif
 
 "let g:WebDevIconsUnicodeDecorateFolderNodes = 0
 "let g:DevIconsEnableFoldersOpenClose = 0
-""let g:WebDevIconsNerdTreeAfterGlyphPadding = ' '
-"let g:webdevicons_enable_airline_statusline = 0
-
+"let g:WebDevIconsNerdTreeAfterGlyphPadding = ' '
 
 " }}}
 " AnyFold {{{
@@ -969,47 +854,13 @@ augroup FileTypeFolds
 augroup END
 
 " }}}
-" CtrlP {{{
-"let g:ctrlp_map = '<leader>j'
-"nnoremap <leader>z :CtrlP ~/Documentos/Apuntes/<cr>
-"if WINDOWS()
-  "nnoremap <leader>z :CtrlP ~/Documents/Apuntes/<cr>
-"endif
-"nnoremap <leader>f :CtrlPLine<cr>
-"nnoremap <leader>r :CtrlPYankring<cr>
-"nnoremap <leader>j :CtrlPBuffer<cr>
-"nnoremap <leader>m :CtrlPMRUFiles<cr>
-"nnoremap <leader>D :CtrlP
-"nnoremap <leader>T :CtrlPTag<CR>
-""let g:ctrlp_cmd = 'CtrlPMixed"'
-"let g:ctrlp_working_path_mode = 0
-"let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
-"let g:ctrlp_use_caching = 0
-
-" Set delay to prevent extra search
-"let g:ctrlp_lazy_update = 1
-
-" Do not clear filenames cache, to improve CtrlP startup
-" You can manualy clear it by <F5>
-"let g:ctrlp_clear_cache_on_exit = 0
-
-" Set no file limit, we are building a big project
-"let g:ctrlp_max_files = 0
-
-" If ag is available use it as filename list generator instead of 'find'
-if executable("ag")
-   set grepprg=ag\ --nogroup\ --nocolor
-   "let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --ignore ''.git'' --ignore ''.DS_Store'' --ignore ''node_modules'' --hidden -g ""'
-endif
-
-" }}}
 " Denite {{{
 
 " Change mappings.
 "nnoremap <C-P> :Denite buffer file_rec<CR>
 "nnoremap <leader>j :Denite buffer file_rec<CR>
 "nnoremap <C-P> :Denite file_rec<CR>
-nnoremap <leader>D :Denite
+nnoremap <leader>D :Denite 
 nnoremap <leader>m :Denite file_mru<cr>
 nnoremap <leader>f :Denite line<cr>
 nnoremap <leader>o :Denite outline<cr>
@@ -1028,6 +879,7 @@ nnoremap <silent> <leader>j :<C-u>Denite buffer
 \ `finddir('.git', ';') != '' ? 'file_rec/git' : 'file_rec'`<CR>
 
 if executable('ag')
+   set grepprg=ag\ --nogroup\ --nocolor
    call denite#custom#var('file_rec', 'command',
    \ ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
 endif
@@ -1046,7 +898,12 @@ call denite#custom#map(
      \ 'noremap'
      \)
 
-call denite#custom#option('default', 'prompt', '❯')
+call denite#custom#option('default', {
+      \ 'prompt': '❯',
+      \ 'auto_resize': 1,
+      \ 'reversed': 1
+      \ })
+
 "call denite#custom#option('default', 'auto_resize', 1)
 
 " }}}
@@ -1076,152 +933,6 @@ xmap as  <plug>(GrepperOperator)
 
 "Start searching the word under the cursor:
 nnoremap <leader>x :Grepper -tool ag -cword -noprompt<cr>
-
-" }}}
-" Airline {{{
-
-"let g:replace_separators = 0
-let g:airline_powerline_fonts = 1
-"let g:tmuxline_preset = 'full'
-let g:airline_skip_empty_sections = 1
-""let g:airline#extensions#branch#empty_message = '*'
-let g:airline#extensions#whitespace#enabled = 0
-""let g:airline#extensions#whitespace#symbol = '!'
-let g:airline#extensions#tabline#enabled = 1            " Activar tabline
-""let g:airline#extensions#tabline#switch_buffers_and_tabs = 1
-let g:airline#extensions#tabline#show_buffers = 1
-"let g:airline#extensions#tabline#tab_min_count = 2
-"let g:airline#extensions#tabline#formatter = 'unique_tail'
-let g:airline#extensions#tabline#fnamemod = ':t'
-"let g:airline#extensions#tmuxline#snapshot_file = "~/.config/snapshot_tmuxline"
-
-if WINDOWS()
-  "let g:airline_left_alt_sep = '│'
-  let g:airline_left_alt_sep = ''
-  "let g:airline_right_alt_sep = '│'
-  let g:airline_right_alt_sep = ''
-  "let g:airline_left_alt_sep = '┃'
-  "let g:airline_right_alt_sep = '┃'
-endif
-
-function! Render_Only_File(...)
-  let builder = a:1
-  let context = a:2
-  call builder.add_section('file','%F')
-  return 1
-endfunction
-call airline#add_inactive_statusline_func('Render_Only_File')
-
-"if !exists('g:airline_symbols')
-  "let g:airline_symbols = {}
-"endif
-
-"let g:airline_symbols.branch = 'Ψ'
-
-"Remove percentage
-""let g:airline_section_z = '%3p%% %{g:airline_symbols.linenr}%#__accent_bold#%4l%#__restore__#:%3v'
-"let g:airline_section_c = airline#section#create(['%<%F'])
-"let g:airline_section_z = '%#__accent_bold#%4l%#__restore__#/%L%/:%3v'
-
-"""Add clock
-"function! AirlineInit()
-  ""let g:airline_section_y = airline#section#create(['ffenc', ' %{strftime("%H:%M")}'])
-  ""let g:airline_section_y = airline#section#create([' %{Relative_Path_CWD()}', '   %{strftime("%H:%M")}'])
-  ""let g:airline_section_y = airline#section#create([' %{fnamemodify(getcwd(),":t")}', '   %{strftime("%H:%M")}'])
-  "let g:airline_section_y = airline#section#create([' %{fnamemodify(getcwd(),":t")}'])
-"endfunction
-
-"augroup AirlineClock
-    "autocmd!
-    "autocmd VimEnter * call AirlineInit()
-"augroup END
-
-
-" Short names
-let g:airline_mode_map = {
-    \ '__' : '-',
-    \ 'n'  : 'N',
-    \ 'i'  : 'I',
-    \ 'R'  : 'R',
-    \ 'c'  : 'C',
-    \ 'v'  : 'V',
-    \ 'V'  : 'V',
-    \ '' : 'V',
-    \ 's'  : 'S',
-    \ 'S'  : 'S',
-    \ '' : 'S',
-    \ }
-
-let g:airline#extensions#tabline#buffers_label = 'B'
-let g:airline#extensions#tabline#tabs_label = 'T'
-
-"" Remove separators
-"if get(g:, 'replace_separators', 1)
-
-    "if !exists('g:airline_symbols')
-      "let g:airline_symbols = {}
-    "endif
-
-    "let g:airline_left_sep = ''
-    "let g:airline_right_sep = ''
-    "if LINUX()
-        ""let g:airline_left_alt_sep = '│'
-        ""let g:airline_right_alt_sep = '│'
-        "let g:airline_left_alt_sep = '┃'
-        "let g:airline_right_alt_sep = '┃'
-    "endif
-    "let g:tmuxline_powerline_separators = 0
-
-    "let g:tmuxline_separators = {
-          "\ 'left' : '',
-          "\ 'left_alt': ':',
-          "\ 'right' : '',
-          "\ 'right_alt' : '│',
-          "\ 'space' : ' '}
-"endif
-
-" }}}
-" NerdFonts {{{
-" Ctrl+V u <FA unicode number>
-
-" Rounded
-"let g:airline_left_sep = "\uE0B4"
-"let g:airline_left_alt_sep = "\uE0B5"
-"let g:airline_right_sep = "\uE0B6"
-"let g:airline_right_alt_sep = "\uE0B7"
-
-"Edge down
-"let g:airline_left_sep = "\uE0B8"
-"let g:airline_left_alt_sep = "\uE0B9"
-"let g:airline_right_sep = "\uE0BA"
-"let g:airline_right_alt_sep = "\uE0BB"
-
-"let g:tmuxline_separators = {
-    "\ 'left' : '',
-    "\ 'left_alt': '',
-    "\ 'right' : '',
-    "\ 'right_alt' : '',
-    "\ 'space' : ' '}
-"Edge up
-"let g:airline_left_sep = "\uE0BC"
-"let g:airline_left_alt_sep = "\uE0BD"
-"let g:airline_right_sep = "\uE0BE"
-"let g:airline_right_alt_sep = "\uE0BF"
-
-"Flames
-"let g:airline_left_sep = "\uE0C0"
-"let g:airline_left_alt_sep = "\uE0C1"
-"let g:airline_right_sep = "\uE0C2"
-"let g:airline_right_alt_sep = "\uE0C3"
-
-"Matrix
-"let g:airline_left_sep = "\uE0C4"
-"let g:airline_left_alt_sep = "\uE0C6"
-"let g:airline_right_sep = "\uE0C5"
-"let g:airline_right_alt_sep = "\uE0C7"
-
-" set the CN (column number) symbol:
-"let g:airline_section_z = airline#section#create(["\uE0A1" . '%{line(".")}' . " \uE0A3" . '%{col(".")}'])
 
 " }}}
 " Startify {{{
@@ -1261,9 +972,9 @@ function! CleanNoNameEmptyBuffers()
     endif
 endfunction
 
-nnoremap <silent> ,C :call CleanNoNameEmptyBuffers()<CR>
-nnoremap <leader>kt :call KillTerm()<cr>
-nnoremap <leader>S :SSave<cr>
+"nnoremap <silent> ,C :call CleanNoNameEmptyBuffers()<CR>
+"nnoremap <leader>kt :call KillTerm()<cr>
+"nnoremap <leader>S :SSave<cr>
 
 
 let g:startify_session_before_save = [
@@ -1278,12 +989,7 @@ let g:startify_session_remove_lines = ['neoterm']
 
 "let g:tagbar_left = 1
 let g:tagbar_width = 31
-"nmap <leader>T :TagbarToggle<CR>
-
-" }}}
-" Magit {{{
-
-"let g:magit_show_help=0
+nmap <leader>tb :TagbarToggle<CR>
 
 " }}}
 " ale {{{
@@ -1292,11 +998,12 @@ nmap <silent> <C-s>k <Plug>(ale_previous_wrap)
 nmap <silent> <C-s>j <Plug>(ale_next_wrap)
 
 let g:ale_javascript_eslint_use_global = 1
-
+"let g:ale_open_list = 1
+"let g:ale_sign_column_always = 1
 let g:ale_linters = {
-  \ 'javascript': ['eslint'],
-  \ 'vue': ['eslint']
-\}
+      \ 'javascript': ['eslint'],
+      \ 'vue': ['eslint']
+      \}
 
 let g:ft = ''
 function! NERDCommenter_before()
@@ -1382,11 +1089,6 @@ nnoremap <leader>2 :call TermTransparency(2)<cr>
 "nnoremap <leader>co :colorscheme  <bar>:call SetTermBackground()<bar>:Tmuxline vim_statusline_3<C-Left><C-Left><C-Left><left>
 nnoremap <leader>co :colorscheme  <bar>:call SetTermBackground()<C-Left><C-Left><left>
 
-"augroup TermBackground
-    "autocmd!
-    "autocmd ColorScheme * call SetTermBackground()
-"augroup END
-
 " }}}
 " Seiya {{{
 
@@ -1394,20 +1096,6 @@ if LINUX()
   let g:seiya_auto_enable=1
   let g:seiya_target_groups = has('nvim') ? ['guibg'] : ['ctermbg']
 endif
-
-" }}}
-" Hilight current word {{{
-
-"hi! link CurrentWordTwins Visual
-"let g:vim_current_word#highlight_current_word = 0
-
-" }}}
-" gentags {{{
-
-"let g:loaded_gentags#gtags = 1
-"let g:gen_tags#ctags_auto_gen = 1
-"let g:gen_tags#verbose = 1
-"let g:gen_tags#ctags_opts = "--exclude=.git --exclude=node_modules --exclude=db --exclude=log"
 
 " }}}
 " gutentags {{{
@@ -1422,33 +1110,18 @@ let g:deoplete#enable_at_startup = 1
 call deoplete#custom#set('ultisnips', 'matchers', ['matcher_fuzzy'])
 let g:deoplete#ignore_sources = get(g:, 'deoplete#ignore_sources', {})
 let g:deoplete#ignore_sources.php = ['omni']
-let g:echodoc_enable_at_startup = 1
+"let g:echodoc_enable_at_startup = 1
 let g:deoplete#omni#input_patterns = {}
 let g:deoplete#omni#input_patterns.php = '\w*|[^. \t]->\w*|\w*::\w*'
 let g:deoplete#sources#ternjs#filetypes = [
                 \ 'jsx',
-                \ 'javascript.jsx',
+                \ 'javascript',
                 \ 'vue'
                 \ ]
 " }}}
 " vim-jsx {{{
 
-let g:jsx_ext_required = 0
-
-" }}}
-" language-server {{{
-
-"let g:LanguageClient_autoStart = 1
-
-"nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
-"nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
-"nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
-
-"if WINDOWS()
-  "let g:LanguageClient_serverCommands = {
-      "\ 'php': ['php','~\.config\nvim\plugged\LanguageServer-php-neovim\vendor\felixfbecker\language-server\bin\php-language-server.php'],
-      "\ }
-"endif
+"let g:jsx_ext_required = 0
 
 " }}}
 " nvim-completion-manager and deoplete {{{
@@ -1473,12 +1146,6 @@ let g:disable_key_mappings = 1
 nnoremap <leader>T :Term<cr>
 
 " }}}
-" vim-line-noindicator {{{
-
-"let g:line_no_indicator_chars = ['⎼', '▁', '▂', '▃', '▄', '▅', '▆', '▇', '█']
-"let g:line_no_indicator_chars = ['⎼⎼', '░⎼', '▒⎼', '▓⎼', '█⎼', '█░', '█▒', '█▓', '██']
-
-" }}}
 " fugitive {{{
 
 nnoremap <leader>gc :Gcommit<cr>
@@ -1491,17 +1158,6 @@ nnoremap <leader>G :Gstatus<cr>
 "  Prices table csv, public price must be removed first
 "  kyypf"di"lf"di"lf"di"0jwvf,hxkf"pj0wxvf,hxkf"f"f"pj0wxvf,hxk$hhhhpjdd
 "
-"  }}}
-"  Padawan {{{
-
-"command! PadawanStart call deoplete#sources#padawan#StartServer()
-"command! PadawanStop call deoplete#sources#padawan#StopServer()
-"command! PadawanRestart call deoplete#sources#padawan#RestartServer()
-"command! PadawanInstall call deoplete#sources#padawan#InstallServer()
-"command! PadawanUpdate call deoplete#sources#padawan#UpdatePadawan()
-"command! -bang PadawanGenerate call deoplete#sources#padawan#Generate(<bang>0)
-"let g:deoplete#sources#padawan#add_parentheses = 0
-
 "  }}}
 "  AsyncRun {{{
 
@@ -1522,57 +1178,14 @@ au! User AsyncRunStop
             \ endif
 augroup END
 
-"let g:airline_section_error = airline#section#create_right(['%{g:asyncrun_status}'])
+"if LINUX()
+   ""let g:asyncrun_exit = "silent call system('afplay ~/.vim/notify.wav &')"
+"endif
 
-"" Define new accents
-"function! AirlineThemePatch(palette)
-  "" [ guifg, guibg, ctermfg, ctermbg, opts ].
-  "" See "help attr-list" for valid values for the "opt" value.
-  "" http://vim.wikia.com/wiki/Xterm256_color_names_for_console_Vim
-  "let a:palette.accents.running = [ '', '', '', '', '' ]
-  "let a:palette.accents.success = [ '#00ff00', '' , 'green', '', '' ]
-  "let a:palette.accents.failure = [ '#ff0000', '' , 'red', '', '' ]
-"endfunction
-"let g:airline_theme_patch_func = 'AirlineThemePatch'
-
-
-"" Change color of the relevant section according to g:asyncrun_status, a global variable exposed by AsyncRun
-"" 'running': default, 'success': green, 'failure': red
-"let g:async_status_old = ''
-"function! Get_asyncrun_running()
-
-  "let async_status = g:asyncrun_status
-  "if async_status != g:async_status_old
-
-    "if async_status == 'running'
-      "call airline#parts#define_accent('asyncrun_status', 'running')
-    "elseif async_status == 'success'
-      "call airline#parts#define_accent('asyncrun_status', 'success')
-    "elseif async_status == 'failure'
-      "call airline#parts#define_accent('asyncrun_status', 'failure')
-    "endif
-
-    "let g:airline_section_x = airline#section#create(['asyncrun_status'])
-    "AirlineRefresh
-    "let g:async_status_old = async_status
-
-  "endif
-
-  "return async_status
-
-"endfunction
-
-"call airline#parts#define_function('asyncrun_status', 'Get_asyncrun_running')
-"let g:airline_section_x = airline#section#create(['asyncrun_status'])
-
-if LINUX()
-   "let g:asyncrun_exit = "silent call system('afplay ~/.vim/notify.wav &')"
-endif
-
-if WINDOWS()
-  "let g:asyncrun_exit = 'silent !start playwav.exe "C:/Windows/Media/Windows Error.wav" 200'
-   let g:asyncrun_exit = 'silent !start '.$HOME.'\dotfiles\notification.exe'
-endif
+"if WINDOWS()
+  ""let g:asyncrun_exit = 'silent !start playwav.exe "C:/Windows/Media/Windows Error.wav" 200'
+   "let g:asyncrun_exit = 'silent !start '.$HOME.'\dotfiles\notification.exe'
+"endif
 
 "Execute command from docker container
 "To make it work, removed de t option from command
@@ -1583,5 +1196,4 @@ endif
 nnoremap <leader>A :AsyncRun docker exec -i --user=laradock laradock_workspace_1 sh -lc "cd interpos; "<left>
 
 "  }}}
-
 " }}}
