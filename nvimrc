@@ -1,6 +1,5 @@
-" Dein {{{
-
 " Identify plataform {{{
+
 silent function! OSX()
     return has('macunix')
 endfunction
@@ -10,14 +9,20 @@ endfunction
 silent function! WINDOWS()
     return  (has('win16') || has('win32') || has('win64'))
 endfunction
+
 " }}}
+
+" Dein {{{
+
 " Setup directories {{{
+
 let g:dein#cache_directory = $HOME . '/.cache/dein'
 set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
 
 if dein#load_state($HOME . '/.cache/dein')
   call dein#begin($HOME . '/.cache/dein')
   call dein#add($HOME . '/.cache/dein/repos/github.com/Shougo/dein.vim')
+
 " }}}
 
   " General {{{
@@ -27,7 +32,7 @@ if dein#load_state($HOME . '/.cache/dein')
   call dein#add('scrooloose/nerdcommenter')
   call dein#add('justinmk/vim-gtfo')
   call dein#add('mbbill/undotree')
-  call dein#add('Harenome/vim-neatfoldtext')
+  "call dein#add('Harenome/vim-neatfoldtext')
   call dein#add('Shougo/neomru.vim')
   call dein#add('kassio/neoterm')
   call dein#add('Shougo/denite.nvim')
@@ -40,15 +45,14 @@ if dein#load_state($HOME . '/.cache/dein')
   call dein#add('mhinz/vim-startify')
   call dein#add('mhinz/vim-grepper')
   call dein#add('mklabs/split-term.vim')
-  call dein#add('drzel/vim-line-no-indicator')
   call dein#add('skywind3000/asyncrun.vim')
   call dein#add('tpope/vim-surround')
+  "call dein#add('ShirajG/golden-ratio')
 " }}}
   " Colorschemes {{{
 
   call dein#add('chriskempson/base16-vim')
   call dein#add('AlessandroYorba/Alduin')
-  call dein#add('whatyouhide/vim-gotham')
   call dein#add('protesilaos/prot16-vim')
   call dein#add('miyakogi/seiya.vim')
   call dein#add('xolox/vim-colorscheme-switcher')
@@ -69,7 +73,6 @@ if dein#load_state($HOME . '/.cache/dein')
   call dein#add('Valloric/MatchTagAlways')
   call dein#add('chrisgillis/vim-bootstrap3-snippets')
   call dein#add('mattn/emmet-vim')
-  call dein#add('alvan/vim-closetag')
 
   " }}}
   " Snippets & AutoComplete {{{
@@ -96,6 +99,8 @@ if dein#load_state($HOME . '/.cache/dein')
 
   " }}}
 
+" Dein end {{{
+
   call dein#end()
   call dein#save_state()
 endif
@@ -103,12 +108,12 @@ endif
 filetype plugin indent on
 syntax enable
 
+" }}}
+
 " Install not installed plugins on startup.
 "if dein#check_install()
   "call dein#install()
 "endif
-
-" }}}
 
 " }}}
 
@@ -135,7 +140,7 @@ set nospell                                     " Spell checking off
 set hidden                                      " Allow buffer switching without saving
 set foldenable                                  " Enable folding
 set foldmethod=marker
-set foldcolumn=0
+set foldcolumn=4
 set foldlevel=99                                " Folds open at start
 set timeoutlen=1000 ttimeoutlen=0               " Eliminar retardo de Insert a Normal
 set conceallevel=2
@@ -221,15 +226,6 @@ augroup OmniCompletion
 augroup END
 
 " }}}
-" No delay between Insert and Normal mode {{{
-
-augroup FastEscape
-    autocmd!
-    au InsertEnter * set timeoutlen=0
-    au InsertLeave * set timeoutlen=1000
-augroup END
-
-" }}}
 " Only show cursorline in the current window {{{
 
 augroup CursorLineOnlyInActiveWindow
@@ -291,6 +287,7 @@ augroup phpLaravel
     autocmd!
     autocmd BufRead,BufNewFile *.blade.php UltiSnipsAddFiletypes php.php-laravel.html
     autocmd BufRead,BufNewFile *.js UltiSnipsAddFiletypes js.html
+    autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
 augroup END
 
 " }}}
@@ -315,6 +312,7 @@ augroup END
 
 " General {{{
 set number
+"set numberwidth=10
 set background=dark
 set wrap
 set linebreak
@@ -322,9 +320,9 @@ set title
 set visualbell t_vb=            " turn off error beep/flash
 set novisualbell                " turn off visual bell
 set equalalways
-set lazyredraw
+"set lazyredraw
 "set noshowmode                  " Dont display the current mode
-"set nohlsearch                  " Highlight search matches
+set nohlsearch                  " Highlight search matches
 set showmatch                   " show matching brackets/parenthesis
 set ignorecase                  " Case insensitive search
 set smartcase                   " Case sensitive when uc present
@@ -372,35 +370,97 @@ set guicursor=n-v-c:hor20,i-ci-ve:ver25,r-cr:hor20,o:hor50
 
 " }}}
 " Statusline {{{
-
 set laststatus=2
-"set statusline+=\ %{strftime(\"%H:%M\ \")}
-"set statusline+=\ %{LinterStatus()}
 
-let g:mode ={
-        \ '__' : '-', 'n'  : 'N',
-        \ 'i'  : 'I', 'R'  : 'R',
-        \ 'v'  : 'V', 'V'  : 'V',
-        \ 'c'  : 'C', '' : 'V',
-        \ 's'  : 'S', 'S'  : 'S',
-        \ '' : 'S', 't'  : 'T',
-    \}
+"let g:mode ={
+        "\ '__' : '-', 'n'  : 'N',
+        "\ 'i'  : 'I', 'R'  : 'R',
+        "\ 'v'  : 'V', 'V'  : 'V',
+        "\ 'c'  : 'C', '' : 'V',
+        "\ 's'  : 'S', 'S'  : 'S',
+        "\ '' : 'S', 't'  : 'T',
+    "\}
+    
+set statusline=%!ActiveStatus()
 
-set statusline=
-set statusline+=%(\ %{g:mode[mode()]}%)
-set statusline+=%(%{&paste?'\ p\ ':''}%)
-set statusline+=%(\ \ %{fugitive#head()}%)
-set statusline+=%(\ %<%F%)
-set statusline+=\ %h%m%r%w
-set statusline+=%=
-set statusline+=%(\ %{&filetype}%)
-set statusline+=%(%<\ %3p%%\ \ %4l/%L\ \ %3c%)
-set statusline+=%(\ \\ %{LinterStatus()}%)
-set statusline+=%(\ %{strftime(\"%H:%M\")}%)
-set statusline+=%(\ %{g:asyncrun_status}%)
-set statusline+=\ 
+function! ActiveStatus()
+  let statusline=""
+  let statusline.="%1*"
+  let statusline.="%(%{'help'!=&filetype?'\ \ '.bufnr('%'):''}\ %)"
+  let statusline.="%2*"
+  let statusline.=""
+  let statusline.="%{fugitive#head()!=''?'\ \ '.fugitive#head().'\ ':''}"
+  let statusline.="%3*"
+  let statusline.=""
+  let statusline.="%4*"
+  let statusline.="\ %<"
+  let statusline.="%f"
+  let statusline.="%{&modified?'\ \ +':''}"
+  let statusline.="%{&readonly?'\ \ ':''}"
+  let statusline.="%="
+  let statusline.="\ %{''!=#&filetype?&filetype:'none'}"
+  let statusline.="%(\ %{(&bomb\|\|'^$\|utf-8'!~#&fileencoding?'\ '.&fileencoding.(&bomb?'-bom':''):'').('unix'!=#&fileformat?'\ '.&fileformat:'')}%)"
+  let statusline.="%(\ \ %{&modifiable?(&expandtab?'et\ ':'noet\ ').&shiftwidth:''}%)"
+  let statusline.="%3*"
+  let statusline.="\ "
+  let statusline.="%2*"
+  let statusline.=""
+  let statusline.="%1*"
+  let statusline.="\ %2v"
+  let statusline.="\ %3p%%\ "
+  return statusline
+endfunction
 
-"set statusline+=%
+function! InactiveStatus()
+  let statusline=""
+  let statusline.="%(%{'help'!=&filetype?'\ \ '.bufnr('%').'\ \ ':'\ '}%)"
+  let statusline.="%{fugitive#head()!=''?'\ \ '.fugitive#head().'\ ':'\ '}"
+  let statusline.="\ %<"
+  let statusline.="%f"
+  let statusline.="%{&modified?'\ \ +':''}"
+  let statusline.="%{&readonly?'\ \ ':''}"
+  let statusline.="%="
+  let statusline.="\ %{''!=#&filetype?&filetype:'none'}"
+  let statusline.="%(\ %{(&bomb\|\|'^$\|utf-8'!~#&fileencoding?'\ '.&fileencoding.(&bomb?'-bom':''):'').('unix'!=#&fileformat?'\ '.&fileformat:'')}%)"
+  let statusline.="%(\ \ %{&modifiable?(&expandtab?'et\ ':'noet\ ').&shiftwidth:''}%)"
+  let statusline.="\ \ "
+  let statusline.="\ %2v"
+  let statusline.="\ %3p%%\ "
+  return statusline
+endfunction
+
+augroup status
+  autocmd!
+  autocmd WinEnter * setlocal statusline=%!ActiveStatus()
+  autocmd WinLeave * setlocal statusline=%!InactiveStatus()
+  "autocmd ColorScheme kalisi if(&background=="dark") | hi User1 guibg=#afd700 guifg=#005f00 | endif
+  "autocmd ColorScheme kalisi if(&background=="dark") | hi User2 guibg=#005f00 guifg=#afd700 | endif
+  "autocmd ColorScheme kalisi if(&background=="dark") | hi User3 guibg=#222222 guifg=#005f00 | endif
+  "autocmd ColorScheme kalisi if(&background=="dark") | hi User4 guibg=#222222 guifg=#d0d0d0 | endif
+  "autocmd ColorScheme kalisi if(&background=="light") | hi User1 guibg=#afd700 guifg=#005f00 | endif
+  "autocmd ColorScheme kalisi if(&background=="light") | hi User2 guibg=#005f00 guifg=#afd700 | endif
+  "autocmd ColorScheme kalisi if(&background=="light") | hi User3 guibg=#707070 guifg=#005f00 | endif
+  "autocmd ColorScheme kalisi if(&background=="light") | hi User4 guibg=#707070 guifg=#d0d0d0 | endif
+augroup END
+
+"set statusline=
+"set statusline+=%(\ %{g:mode[mode()]}%)
+"set statusline+=%(%{&paste?'\ p\ ':''}%)
+"set statusline+=%(\ \ %{fugitive#head()}%)
+"set statusline+=%#keyword#
+"set statusline+=%(\ %<%F%)
+"set statusline+=%#warningmsg#
+"set statusline+=\ %h%m%r%w
+"set statusline+=%=
+"set statusline+=%#comment#
+"set statusline+=%(\ \ %{&filetype}%)
+"set statusline+=%(%<\ %4l\,%3c%)
+"set statusline+=%#function#
+"set statusline+=%(\ \ %{LinterStatus()}%)
+"set statusline+=%#comment#
+"set statusline+=%(\ \ %{strftime(\"%H:%M\")}%)
+"set statusline+=%(\ %{g:asyncrun_status}%)
+"set statusline+=\ 
 
 "function! Relative_Path_CWD()
     "let l:path = fnamemodify(getcwd(),":t")
@@ -424,52 +484,46 @@ endfunction
 " Styling vertical splits {{{
 if LINUX()
     "set fillchars=vert:│,fold:۰,diff:·,stl:─,stlnc:─
-    set fillchars=vert:│,fold:۰,diff:·,stlnc:-
+    set fillchars=vert:│,fold:۰,diff:·
     "set fillchars=vert:┃,diff:⎼,fold:⎼
     "set fillchars=""
 endif
 
 if WINDOWS()
-    set fillchars=vert:│,fold:۰,diff:·,stl:─,stlnc:─
+    "set fillchars=vert:│,fold:۰,diff:·,stl:─,stlnc:─
+    set fillchars=vert:│,fold:۰,diff:·
 endif
 
 " }}}
 " Override color au {{{
 augroup OverrideColor
     autocmd!
-    autocmd ColorScheme * hi! link VertSplit LineNr
-    autocmd ColorScheme * hi link deniteMatchedChar Statement
-
-    " No background
-    autocmd ColorScheme * hi! StatusLine guibg=NONE
-    autocmd ColorScheme * hi! link StatusLineNC LineNr
-    "autocmd ColorScheme * hi! link StatusLine LineNr
-
-    autocmd ColorScheme * hi! link TabLineFill FoldColumn
-    autocmd ColorScheme * hi! link TabLine LineNr
-    autocmd ColorScheme * hi! link FoldColumn LineNr
-    autocmd ColorScheme * hi! link CursorLineNr CursorLine
-    autocmd ColorScheme * hi! link CursorColumn CursorLine
-    autocmd ColorScheme * hi! link ALEErrorSign ErrorMsg
-    autocmd ColorScheme * hi! link ALEWarningSign WarningMsg
-    autocmd ColorScheme * hi! link Folded LineNr
-    autocmd ColorScheme * hi! link Comment LineNr
-    autocmd ColorScheme * hi LineNr        guibg=NONE ctermbg=none
-    autocmd ColorScheme * hi SignColumn        guibg=NONE ctermbg=none
-    autocmd ColorScheme * hi GitGutterAdd guibg=NONE ctermbg=none
-    autocmd ColorScheme * hi GitGutterChange guibg=NONE ctermbg=none
-    autocmd ColorScheme * hi GitGutterDelete guibg=NONE ctermbg=none
-    autocmd ColorScheme * hi GitGutterChangeDelete guibg=NONE ctermbg=none
-    autocmd Colorscheme * hi EndOfBuffer ctermfg=black guifg=black
-    ""autocmd ColorScheme * hi! link TabLineSel CursorLine
-    ""autocmd ColorScheme * hi FoldColumn    guibg=NONE guifg=bg ctermbg=none ctermfg=bg
-    ""autocmd ColorScheme * hi ALEErrorSign guibg=NONE ctermbg=none
-    ""autocmd ColorScheme * hi ALEWarningSign guibg=NONE ctermbg=none
-    ""autocmd ColorScheme * hi TermCursor ctermfg=green guifg=green
-    ""autocmd ColorScheme * hi link deniteMatched Type
-
-    "" Background statusline
+    "autocmd ColorScheme * hi! link VertSplit LineNr
+    "autocmd ColorScheme * hi! link StatusLineNC VertSplit
+    "autocmd Colorscheme * hi! link EndOfBuffer LineNr
+    "autocmd ColorScheme * hi! link TabLineFill FoldColumn
+    "autocmd ColorScheme * hi! link TabLine LineNr
+    "autocmd ColorScheme * hi! link CursorLineNr CursorLine
+    "autocmd ColorScheme * hi! link CursorColumn CursorLine
+    "autocmd ColorScheme * hi! link Folded LineNr
+    "autocmd ColorScheme * hi! link Comment LineNr
     "autocmd ColorScheme * hi! link StatusLine CursorLine
+    "autocmd ColorScheme * hi FoldColumn             guibg=black ctermbg=black
+    "autocmd ColorScheme * hi SignColumn             guibg=black ctermbg=black
+    "autocmd ColorScheme * hi GitGutterAdd           guibg=black ctermbg=black
+    "autocmd ColorScheme * hi GitGutterChange        guibg=black ctermbg=black
+    "autocmd ColorScheme * hi GitGutterDelete        guibg=black ctermbg=black
+    "autocmd ColorScheme * hi GitGutterChangeDelete  guibg=black ctermbg=black
+    "autocmd ColorScheme * hi ALEErrorSign           guibg=black ctermbg=black
+    "autocmd ColorScheme * hi ALEWarningSign         guibg=black ctermbg=black
+    "autocmd ColorScheme * hi LineNr                 guibg=black ctermbg=black
+    autocmd ColorScheme * hi VertSplit                 guibg=none ctermbg=none
+    autocmd ColorScheme * hi StatusLine gui=none,bold cterm=none,bold ctermbg=NONE guibg=NONE
+    autocmd ColorScheme * hi User1 guibg=black guifg=grey
+    autocmd ColorScheme * hi User2 guibg=grey guifg=black
+    autocmd ColorScheme * hi User3 guibg=none guifg=grey
+    autocmd ColorScheme * hi user4 guibg=none guifg=white
+    "autocmd ColorScheme * hi StatusLineNC gui=none,bold cterm=none,bold ctermbg=NONE guibg=NONE
 augroup END
 
 "exec 'hi SyntasticErrorSign guifg=red ctermfg=red' .
@@ -547,15 +601,15 @@ vnoremap <leader>s :s///g<left><left><left>
 nnoremap vv ^vg_
 
 "Wrapped lines goes down/up to next row, rather than next line in file.
-"noremap j gj
-"noremap k gk
+noremap j gj
+noremap k gk
 
 "Same for 0, home, end, etc
-"noremap $ g$
-"noremap <End> g<End>
-"noremap 0 g0
-"noremap <Home> g<Home>
-"noremap ^ g^
+noremap $ g$
+noremap <End> g<End>
+noremap 0 g0
+noremap <Home> g<Home>
+noremap ^ g^
 
 " Shortcuts
 " Visual shifting (does not exit Visual mode)
@@ -568,6 +622,10 @@ map <Leader>= <C-w>=
 " Easier horizontal scrolling
 map zl zL
 map zh zH
+
+" Center cursor on search results
+noremap n nzz  
+noremap N Nzz
 
 " Fullscreen mode for neovim-qt
 map <silent> <F11> :call ToggleFullScreen()<CR>
@@ -641,10 +699,16 @@ function! ToggleColorColumn()
   if &colorcolumn != ''
     set colorcolumn&
   else
+    "let &colorcolumn=80
     "let &colorcolumn='80,'.join(range(120,999),',')
-    let &colorcolumn=80
+    let &colorcolumn=join(range(120,999), ',')
   endif
 endfunction
+
+call ToggleColorColumn()
+
+"Deactivate per filetype
+"autocmd FileType markdown let &colorcolumn=""
 
 "nnoremap <silent> <leader>co :call ToggleColorColumn()<CR>
 
@@ -685,8 +749,8 @@ let g:NERDTreeMinimalUI = 1
 let g:NERDTreeRespectWildIgnore = 1
 let g:NERDTreeAutoDeleteBuffer = 1
 let g:NERDTreeCascadeSingleChildDir = 0
-nnoremap <silent> <leader>e :NERDTreeFind<cr>
-map <silent> <C-e> :NERDTreeToggle<CR>
+"nnoremap <silent> <leader>e :NERDTreeFind<cr>
+"map <silent> <C-e> :NERDTreeToggle<CR>
 let g:NERDTreeWinPos='left'
 let g:NERDTreeQuitOnOpen=0
 "let g:NERDTreeStatusline="⎼%{Relative_Path_CWD()}"
@@ -739,15 +803,11 @@ nmap <Leader>gc :Gcommit<cr>
 
 "Box Drawings Heavy Vertical U+25e3
 if LINUX()
-  let g:gitgutter_sign_added = '┃'
-  "let g:gitgutter_sign_added = '╂'
-  let g:gitgutter_sign_modified = '┃'
-  "let g:gitgutter_sign_modified = '┣'
+  let g:gitgutter_sign_added = '│'
+  let g:gitgutter_sign_modified = '│'
   let g:gitgutter_sign_removed_first_line = '▔'
   "let g:gitgutter_sign_removed_first_line = '^'
-  "let g:gitgutter_sign_removed = '┻'
-  let g:gitgutter_sign_removed = '▁'
-  let g:gitgutter_sign_modified_removed = '┗'
+  "let g:gitgutter_sign_removed = '▁'
   "http://www.utf8-chartable.de/unicode-utf8-table.pl?start=9472&unicodeinhtml=dec
 endif
 if WINDOWS()
@@ -756,7 +816,7 @@ if WINDOWS()
   "let g:gitgutter_sign_modified = '▶'
   "let g:gitgutter_sign_modified = '●'
   let g:gitgutter_sign_removed_first_line = '▔'
-  let g:gitgutter_sign_removed = '▁'
+  "let g:gitgutter_sign_removed = '▁'
 endif
 
 " }}}
@@ -850,7 +910,8 @@ augroup FileTypeFolds
     autocmd Filetype java let b:anyfold_activate=1
     autocmd Filetype cs let b:anyfold_activate=1
     autocmd Filetype html let b:anyfold_activate=1
-    "autocmd Filetype html,blade setlocal foldcolumn=0
+    autocmd Filetype vue let b:anyfold_activate=1
+    autocmd Filetype html,blade,vue,help setlocal foldcolumn=0
 augroup END
 
 " }}}
@@ -865,7 +926,7 @@ nnoremap <leader>m :Denite file_mru<cr>
 nnoremap <leader>f :Denite line<cr>
 nnoremap <leader>o :Denite outline<cr>
 nnoremap <leader>r :Denite register<cr>
-nnoremap <leader>az :Denite grep -path=~/Documentos/Apuntes/<cr>
+nnoremap <leader>zz :Denite grep -path=~/Documentos/Apuntes/<cr>
 nnoremap <leader>z :Denite file_rec -path=~/Documentos/Apuntes/<cr>
 
 if WINDOWS()
@@ -904,22 +965,16 @@ call denite#custom#option('default', {
       \ 'reversed': 1
       \ })
 
-"call denite#custom#option('default', 'auto_resize', 1)
+call denite#custom#var('buffer', 'date_format', '')
 
 " }}}
 " Neoterm {{{
 let g:neoterm_position = 'vertical'
-"let g:neoterm_size = 75
 let g:neoterm_size = 55
-""let g:neoterm_position = 'vertical'
-""let g:neoterm_size = 80
 let g:neoterm_automap_keys = ',tt'
 let g:neoterm_autoscroll = 1
-" hide/close terminal
 nnoremap <silent> ,tj :Ttoggle<cr>
-" clear terminal
 nnoremap <silent> ,tc :call neoterm#clear()<cr>
-" kills the current job (send a <c-c>)
 nnoremap <silent> ,tk :call neoterm#kill()<cr>
 
 " }}}
@@ -974,7 +1029,7 @@ endfunction
 
 "nnoremap <silent> ,C :call CleanNoNameEmptyBuffers()<CR>
 "nnoremap <leader>kt :call KillTerm()<cr>
-"nnoremap <leader>S :SSave<cr>
+nnoremap <leader>S :SSave<cr>
 
 
 let g:startify_session_before_save = [
@@ -999,7 +1054,6 @@ nmap <silent> <C-s>j <Plug>(ale_next_wrap)
 
 let g:ale_javascript_eslint_use_global = 1
 "let g:ale_open_list = 1
-"let g:ale_sign_column_always = 1
 let g:ale_linters = {
       \ 'javascript': ['eslint'],
       \ 'vue': ['eslint']
@@ -1024,6 +1078,11 @@ function! NERDCommenter_after()
     let g:ft = ''
   endif
 endfunction
+
+" }}}
+" vim-vue {{{
+
+let g:vue_disable_pre_processors = 1
 
 " }}}
 " vim-gtfo {{{
@@ -1059,7 +1118,7 @@ function! SetTermBackground()
     let l:foreground = GetNvimForegroundColor()
     silent exec system('dconf write /org/gnome/terminal/legacy/profiles:/:' . g:profile_id . '/background-color ' . "'".'"' . l:background . '"'."'")
     silent exec system('dconf write /org/gnome/terminal/legacy/profiles:/:' . g:profile_id . '/foreground-color ' . "'".'"' . l:foreground . '"'."'")
-    silent! SeiyaEnable
+    "silent! SeiyaEnable
 endfunction
 
 function! TermTransparency(order)
@@ -1093,7 +1152,7 @@ nnoremap <leader>co :colorscheme  <bar>:call SetTermBackground()<C-Left><C-Left>
 " Seiya {{{
 
 if LINUX()
-  let g:seiya_auto_enable=1
+  "let g:seiya_auto_enable=1
   let g:seiya_target_groups = has('nvim') ? ['guibg'] : ['ctermbg']
 endif
 
@@ -1114,7 +1173,6 @@ let g:deoplete#ignore_sources.php = ['omni']
 let g:deoplete#omni#input_patterns = {}
 let g:deoplete#omni#input_patterns.php = '\w*|[^. \t]->\w*|\w*::\w*'
 let g:deoplete#sources#ternjs#filetypes = [
-                \ 'jsx',
                 \ 'javascript',
                 \ 'vue'
                 \ ]
@@ -1194,6 +1252,11 @@ augroup END
 
 "docker exec -i --user=laradock laradock_workspace_1 sh -lc "cd interpos; npm run dev
 nnoremap <leader>A :AsyncRun docker exec -i --user=laradock laradock_workspace_1 sh -lc "cd interpos; "<left>
+
+"  }}}
+"  golden-ratio {{{
+
+let g:golden_ratio_constant = 1.3
 
 "  }}}
 " }}}
