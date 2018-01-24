@@ -372,23 +372,24 @@ set guicursor=n-v-c:hor20,i-ci-ve:ver25,r-cr:hor20,o:hor50
 " Statusline {{{
 set laststatus=2
 
-"let g:mode ={
-        "\ '__' : '-', 'n'  : 'N',
-        "\ 'i'  : 'I', 'R'  : 'R',
-        "\ 'v'  : 'V', 'V'  : 'V',
-        "\ 'c'  : 'C', '' : 'V',
-        "\ 's'  : 'S', 'S'  : 'S',
-        "\ '' : 'S', 't'  : 'T',
-    "\}
+let g:mode ={
+        \ '__' : '-', 'n'  : 'N',
+        \ 'i'  : 'I', 'R'  : 'R',
+        \ 'v'  : 'V', 'V'  : 'V',
+        \ 'c'  : 'C', '' : 'V',
+        \ 's'  : 'S', 'S'  : 'S',
+        \ '' : 'S', 't'  : 'T',
+    \}
     
 set statusline=%!ActiveStatus()
 
 function! ActiveStatus()
   let statusline=""
   let statusline.="%1*"
-  let statusline.="%(%{'help'!=&filetype?'\ \ '.bufnr('%'):''}\ %)"
+  let statusline.="%(\ %{g:mode[mode()]}\ %)"
   let statusline.="%2*"
   let statusline.=""
+  let statusline.="%(%{&paste?'\ p\ ':''}%)"
   let statusline.="%{fugitive#head()!=''?'\ \ '.fugitive#head().'\ ':''}"
   let statusline.="%3*"
   let statusline.=""
@@ -404,16 +405,19 @@ function! ActiveStatus()
   let statusline.="%3*"
   let statusline.="\ "
   let statusline.="%2*"
+  let statusline.="%(\ %{LinterStatus()}%)\ "
+  let statusline.="%(%{g:asyncrun_status}%)\ "
   let statusline.=""
   let statusline.="%1*"
-  let statusline.="\ %2v"
-  let statusline.="\ %3p%%\ "
+  let statusline.="%(%<\ %4l\,%3c%)\ "
+  let statusline.="%(\ %{strftime(\"%H:%M\")}%)\ "
   return statusline
 endfunction
 
 function! InactiveStatus()
   let statusline=""
-  let statusline.="%(%{'help'!=&filetype?'\ \ '.bufnr('%').'\ \ ':'\ '}%)"
+  let statusline.="%(\ %{g:mode[mode()]}\ %)"
+  let statusline.=""
   let statusline.="%{fugitive#head()!=''?'\ \ '.fugitive#head().'\ ':'\ '}"
   let statusline.="\ %<"
   let statusline.="%f"
@@ -423,9 +427,12 @@ function! InactiveStatus()
   let statusline.="\ %{''!=#&filetype?&filetype:'none'}"
   let statusline.="%(\ %{(&bomb\|\|'^$\|utf-8'!~#&fileencoding?'\ '.&fileencoding.(&bomb?'-bom':''):'').('unix'!=#&fileformat?'\ '.&fileformat:'')}%)"
   let statusline.="%(\ \ %{&modifiable?(&expandtab?'et\ ':'noet\ ').&shiftwidth:''}%)"
-  let statusline.="\ \ "
-  let statusline.="\ %2v"
-  let statusline.="\ %3p%%\ "
+  let statusline.="\ "
+  let statusline.="%(\ %{LinterStatus()}%)\ "
+  let statusline.="%(%{g:asyncrun_status}%)\ "
+  let statusline.=" "
+  let statusline.="%(%<\ %4l\,%3c%)\ "
+  let statusline.="%(\ %{strftime(\"%H:%M\")}%)\ "
   return statusline
 endfunction
 
@@ -433,14 +440,6 @@ augroup status
   autocmd!
   autocmd WinEnter * setlocal statusline=%!ActiveStatus()
   autocmd WinLeave * setlocal statusline=%!InactiveStatus()
-  "autocmd ColorScheme kalisi if(&background=="dark") | hi User1 guibg=#afd700 guifg=#005f00 | endif
-  "autocmd ColorScheme kalisi if(&background=="dark") | hi User2 guibg=#005f00 guifg=#afd700 | endif
-  "autocmd ColorScheme kalisi if(&background=="dark") | hi User3 guibg=#222222 guifg=#005f00 | endif
-  "autocmd ColorScheme kalisi if(&background=="dark") | hi User4 guibg=#222222 guifg=#d0d0d0 | endif
-  "autocmd ColorScheme kalisi if(&background=="light") | hi User1 guibg=#afd700 guifg=#005f00 | endif
-  "autocmd ColorScheme kalisi if(&background=="light") | hi User2 guibg=#005f00 guifg=#afd700 | endif
-  "autocmd ColorScheme kalisi if(&background=="light") | hi User3 guibg=#707070 guifg=#005f00 | endif
-  "autocmd ColorScheme kalisi if(&background=="light") | hi User4 guibg=#707070 guifg=#d0d0d0 | endif
 augroup END
 
 "set statusline=
@@ -458,7 +457,6 @@ augroup END
 "set statusline+=%#function#
 "set statusline+=%(\ \ %{LinterStatus()}%)
 "set statusline+=%#comment#
-"set statusline+=%(\ \ %{strftime(\"%H:%M\")}%)
 "set statusline+=%(\ %{g:asyncrun_status}%)
 "set statusline+=\ 
 
@@ -498,32 +496,19 @@ endif
 " Override color au {{{
 augroup OverrideColor
     autocmd!
-    "autocmd ColorScheme * hi! link VertSplit LineNr
-    "autocmd ColorScheme * hi! link StatusLineNC VertSplit
-    "autocmd Colorscheme * hi! link EndOfBuffer LineNr
-    "autocmd ColorScheme * hi! link TabLineFill FoldColumn
-    "autocmd ColorScheme * hi! link TabLine LineNr
-    "autocmd ColorScheme * hi! link CursorLineNr CursorLine
-    "autocmd ColorScheme * hi! link CursorColumn CursorLine
-    "autocmd ColorScheme * hi! link Folded LineNr
-    "autocmd ColorScheme * hi! link Comment LineNr
-    "autocmd ColorScheme * hi! link StatusLine CursorLine
-    "autocmd ColorScheme * hi FoldColumn             guibg=black ctermbg=black
-    "autocmd ColorScheme * hi SignColumn             guibg=black ctermbg=black
-    "autocmd ColorScheme * hi GitGutterAdd           guibg=black ctermbg=black
-    "autocmd ColorScheme * hi GitGutterChange        guibg=black ctermbg=black
-    "autocmd ColorScheme * hi GitGutterDelete        guibg=black ctermbg=black
-    "autocmd ColorScheme * hi GitGutterChangeDelete  guibg=black ctermbg=black
-    "autocmd ColorScheme * hi ALEErrorSign           guibg=black ctermbg=black
-    "autocmd ColorScheme * hi ALEWarningSign         guibg=black ctermbg=black
-    "autocmd ColorScheme * hi LineNr                 guibg=black ctermbg=black
-    autocmd ColorScheme * hi VertSplit                 guibg=none ctermbg=none
-    autocmd ColorScheme * hi StatusLine gui=none,bold cterm=none,bold ctermbg=NONE guibg=NONE
-    autocmd ColorScheme * hi User1 guibg=black guifg=grey
-    autocmd ColorScheme * hi User2 guibg=grey guifg=black
-    autocmd ColorScheme * hi User3 guibg=none guifg=grey
-    autocmd ColorScheme * hi user4 guibg=none guifg=white
-    "autocmd ColorScheme * hi StatusLineNC gui=none,bold cterm=none,bold ctermbg=NONE guibg=NONE
+    autocmd ColorScheme * hi! link LineNr TabLine
+    autocmd ColorScheme * hi VertSplit guibg=none ctermbg=none
+    autocmd ColorScheme * exec 'hi User1 gui=bold' .
+            \' guibg=' . synIDattr(synIDtrans(hlID('Normal')), 'bg', 'gui') .
+            \' guifg=' . synIDattr(synIDtrans(hlID('Normal')), 'fg', 'gui')
+    autocmd ColorScheme * exec 'hi User2' .
+            \' guibg=' . synIDattr(synIDtrans(hlID('Function')), 'fg', 'gui') .
+            \' guifg=' . synIDattr(synIDtrans(hlID('Normal')), 'bg', 'gui')
+    autocmd ColorScheme * exec 'hi User3 guibg=none' .
+            \' guifg=' . synIDattr(synIDtrans(hlID('Function')), 'fg', 'gui')
+    autocmd ColorScheme * hi! link User4 StatusLine
+    autocmd ColorScheme * hi StatusLine gui=none cterm=none ctermbg=NONE guibg=NONE
+    autocmd ColorScheme * hi StatusLineNC gui=none cterm=none ctermbg=NONE guibg=NONE
 augroup END
 
 "exec 'hi SyntasticErrorSign guifg=red ctermfg=red' .
