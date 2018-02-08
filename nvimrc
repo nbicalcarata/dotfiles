@@ -1,120 +1,109 @@
 " Identify plataform {{{
 
 silent function! OSX()
-    return has('macunix')
+  return has('macunix')
 endfunction
 silent function! LINUX()
-    return has('unix') && !has('macunix') && !has('win32unix')
+  return has('unix') && !has('macunix') && !has('win32unix')
 endfunction
 silent function! WINDOWS()
-    return  (has('win16') || has('win32') || has('win64'))
+  return  (has('win16') || has('win32') || has('win64'))
 endfunction
 
 " }}}
 
-" Dein {{{
+" Plug {{{
 
-" Setup directories {{{
+" Setup directory {{{
 
-let g:dein#cache_directory = $HOME . '/.cache/dein'
-set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
-
-if dein#load_state($HOME . '/.cache/dein')
-  call dein#begin($HOME . '/.cache/dein')
-  call dein#add($HOME . '/.cache/dein/repos/github.com/Shougo/dein.vim')
+call plug#begin('~/.local/share/nvim/plugged')
 
 " }}}
 
   " General {{{
-  "call dein#add('equalsraf/neovim-gui-shim')
-  call dein#add('scrooloose/nerdtree')
-  call dein#add('dhruvasagar/vim-vinegar')
-  call dein#add('scrooloose/nerdcommenter')
-  call dein#add('justinmk/vim-gtfo')
-  call dein#add('mbbill/undotree')
-  "call dein#add('Harenome/vim-neatfoldtext')
-  call dein#add('Shougo/neomru.vim')
-  call dein#add('kassio/neoterm')
-  call dein#add('Shougo/denite.nvim')
-  call dein#add('nbicalcarata/vim-zim')
-  call dein#add('joanrivera/vim-zimwiki-syntax')
-  call dein#add('wesQ3/vim-windowswap')
-  call dein#add('pseewald/vim-anyfold')
-  call dein#add('kevinkjt2000/tmuxline.vim')
-  call dein#add('christoomey/vim-tmux-navigator')
-  call dein#add('mhinz/vim-startify')
-  call dein#add('mhinz/vim-grepper')
-  call dein#add('mklabs/split-term.vim')
-  call dein#add('skywind3000/asyncrun.vim')
-  call dein#add('tpope/vim-surround')
-  "call dein#add('ShirajG/golden-ratio')
+  "Plug 'equalsraf/neovim-gui-shim'
+  Plug 'scrooloose/nerdtree'
+  Plug 'dhruvasagar/vim-vinegar'
+  Plug 'scrooloose/nerdcommenter'
+  Plug 'justinmk/vim-gtfo'
+  Plug 'mbbill/undotree'
+  "Plug 'Harenome/vim-neatfoldtext'
+  Plug 'Shougo/neomru.vim'
+  "Plug 'kassio/neoterm'
+  Plug 'Shougo/denite.nvim'
+  Plug 'nbicalcarata/vim-zim'
+  Plug 'joanrivera/vim-zimwiki-syntax'
+  Plug 'wesQ3/vim-windowswap'
+  Plug 'pseewald/vim-anyfold'
+  Plug 'kevinkjt2000/tmuxline.vim'
+  Plug 'christoomey/vim-tmux-navigator'
+  Plug 'mhinz/vim-startify'
+  Plug 'mhinz/vim-grepper'
+  Plug 'mklabs/split-term.vim'
+  Plug 'skywind3000/asyncrun.vim'
+  Plug 'tpope/vim-surround'
+  Plug 'Yggdroot/indentLine'
+  "Plug 'ShirajG/golden-ratio'
 " }}}
   " Colorschemes {{{
 
-  call dein#add('chriskempson/base16-vim')
-  call dein#add('AlessandroYorba/Alduin')
-  call dein#add('protesilaos/prot16-vim')
-  call dein#add('miyakogi/seiya.vim')
-  call dein#add('xolox/vim-colorscheme-switcher')
-  call dein#add('Taverius/vim-colorscheme-manager')
-  call dein#add('xolox/vim-misc')
-  call dein#add('equalsraf/neovim-gui-shim')
-  call dein#add('metalelf0/base16-black-metal-scheme')
+  Plug 'chriskempson/base16-vim'
+  Plug 'AlessandroYorba/Alduin'
+  Plug 'protesilaos/prot16-vim'
+  Plug 'miyakogi/seiya.vim'
+  Plug 'xolox/vim-colorscheme-switcher'
+  Plug 'Taverius/vim-colorscheme-manager'
+  Plug 'xolox/vim-misc'
+  Plug 'equalsraf/neovim-gui-shim'
+  Plug 'metalelf0/base16-black-metal-scheme'
 
   " }}}
   " Git {{{
 
-  call dein#add('tpope/vim-fugitive')
-  call dein#add('airblade/vim-gitgutter')
-  call dein#add('cohama/agit.vim')
+  Plug 'tpope/vim-fugitive'
+  Plug 'airblade/vim-gitgutter'
+  Plug 'cohama/agit.vim'
   " }}}
   " Html {{{
 
-  call dein#add('Valloric/MatchTagAlways')
-  call dein#add('chrisgillis/vim-bootstrap3-snippets')
-  call dein#add('mattn/emmet-vim')
+  Plug 'Valloric/MatchTagAlways'
+  Plug 'chrisgillis/vim-bootstrap3-snippets'
+  Plug 'mattn/emmet-vim'
+  Plug 'alvan/vim-closetag'
 
   " }}}
   " Snippets & AutoComplete {{{
   
-  call dein#add('Shougo/deoplete.nvim')
-  call dein#add('w0rp/ale')
-  call dein#add('SirVer/ultisnips')
-  call dein#add('honza/vim-snippets')
-  call dein#add('jiangmiao/auto-pairs')
-  call dein#add('ludovicchabant/vim-gutentags')
-  call dein#add('majutsushi/tagbar')
-  call dein#add('carlitux/deoplete-ternjs', { 'build': 'npm install -g tern' })
-  call dein#add('epilande/vim-es2015-snippets')
-  call dein#add('epilande/vim-react-snippets')
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'w0rp/ale'
+  Plug 'SirVer/ultisnips'
+  Plug 'honza/vim-snippets'
+  Plug 'jiangmiao/auto-pairs'
+  Plug 'ludovicchabant/vim-gutentags'
+  Plug 'majutsushi/tagbar'
+  Plug 'carlitux/deoplete-ternjs', { 'do': 'sudo npm install -g tern' }
+  "Plug 'epilande/vim-es2015-snippets'
+  "Plug 'epilande/vim-react-snippets'
 
   " }}}
   " Syntax highlighting{{{
 
-  call dein#add('sheerun/vim-polyglot')
-  call dein#add('janko-m/vim-test')
-  call dein#add('StanAngeloff/php.vim')
-  "call dein#add('mxw/vim-jsx')
-  call dein#add('posva/vim-vue')
+  Plug 'sheerun/vim-polyglot'
+  Plug 'janko-m/vim-test'
+  Plug 'StanAngeloff/php.vim'
+  "Plug 'mxw/vim-jsx'
+  Plug 'posva/vim-vue'
 
   " }}}
 
-" Dein end {{{
+" Plug end {{{
 
-  call dein#end()
-  call dein#save_state()
-endif
+call plug#end()
 
 filetype plugin indent on
 syntax enable
 
 " }}}
-
-" Install not installed plugins on startup.
-"if dein#check_install()
-  "call dein#install()
-"endif
-
 " }}}
 
 " Basics {{{
@@ -140,9 +129,9 @@ set nospell                                     " Spell checking off
 set hidden                                      " Allow buffer switching without saving
 set foldenable                                  " Enable folding
 set foldmethod=marker
-set foldcolumn=4
+set foldcolumn=0
 set foldlevel=99                                " Folds open at start
-set timeoutlen=1000 ttimeoutlen=0               " Eliminar retardo de Insert a Normal
+"set timeoutlen=1000 ttimeoutlen=0               " Eliminar retardo de Insert a Normal
 set conceallevel=2
 
 " }}}
@@ -248,10 +237,12 @@ augroup END
 " }}}
 " Disable list on preview window {{{
 
-augroup DisableListPreviewWindow
+augroup DisableThingsFromWindows
     autocmd!
-    autocmd WinEnter * if &previewwindow | setlocal nolist | endif
+    autocmd WinEnter * if &previewwindow | setlocal nolist | setlocal colorcolumn= | endif
+    autocmd FileType qf,help setlocal nonumber colorcolumn=
 augroup END
+
 
 " }}}
 " Zim rules {{{
@@ -287,7 +278,7 @@ augroup phpLaravel
     autocmd!
     autocmd BufRead,BufNewFile *.blade.php UltiSnipsAddFiletypes php.php-laravel.html
     autocmd BufRead,BufNewFile *.js UltiSnipsAddFiletypes js.html
-    autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
+    autocmd BufRead,BufNewFile *.vue UltiSnipsAddFiletypes js.html
 augroup END
 
 " }}}
@@ -322,16 +313,13 @@ set novisualbell                " turn off visual bell
 set equalalways
 "set lazyredraw
 "set noshowmode                  " Dont display the current mode
-set nohlsearch                  " Highlight search matches
+set hlsearch                  " Highlight search matches
 set showmatch                   " show matching brackets/parenthesis
 set ignorecase                  " Case insensitive search
 set smartcase                   " Case sensitive when uc present
 set scrolloff=5                 " Minimum lines to keep above and below cursor
 set inccommand=split            " live sustitution
-
-if LINUX()
-    set listchars=tab:▸\ ,eol:¬,extends:»,precedes:«,trail:•
-endif
+set listchars=tab:▸\ ,eol:¬,extends:»,precedes:«,trail:•
 
 " }}}
 " Formatting {{{
@@ -357,17 +345,12 @@ set termguicolors
 " Cursor line {{{
 
 set cursorline
-set guicursor=n-v-c:hor20,i-ci-ve:ver25,r-cr:hor20,o:hor50
+"set guicursor=n-v-c:hor20,i-ci-ve:ver25,r-cr:hor20,o:hor50
+set guicursor=i-ci-ve:ver25
 		  \,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
 		  \,sm:block-blinkwait175-blinkoff150-blinkon175
 
 "let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
-" }}}
-" Ruler {{{
-
-"set rulerformat=%40(%{&filetype}\──%{fugitive#head()}\──%{strftime('%H:%M\')}\─┤%{LineNoIndicator()}\├─%03c%%\─%{LinterStatus()}%)
-"set rulerformat=%50(\\ %{fugitive#head()}\ %3p%%\ ☰\ \ %04l/%L\ \ :%03c\ %(\\ %{LinterStatus()}\ \%)%)
-
 " }}}
 " Statusline {{{
 set laststatus=2
@@ -389,50 +372,44 @@ function! ActiveStatus()
   let statusline.="%(\ %{g:mode[mode()]}\ %)"
   let statusline.="%2*"
   let statusline.=""
+  "let statusline.=" "
   let statusline.="%(%{&paste?'\ p\ ':''}%)"
   let statusline.="%{fugitive#head()!=''?'\ \ '.fugitive#head().'\ ':''}"
+  "let statusline.="%{fugitive#head()!=''?'\ '.fugitive#head().'\ ':''}"
   let statusline.="%3*"
   let statusline.=""
+  "let statusline.=" "
   let statusline.="%4*"
   let statusline.="\ %<"
   let statusline.="%f"
-  let statusline.="%{&modified?'\ \ +':''}"
-  let statusline.="%{&readonly?'\ \ ':''}"
+  let statusline.="\ "
+  let statusline.="%#warningmsg#"
+  let statusline.="%{&modified?'\ [+]':''}"
+  let statusline.="%{&readonly?'\ ':''}"
+  let statusline.="%4*"
   let statusline.="%="
   let statusline.="\ %{''!=#&filetype?&filetype:'none'}"
   let statusline.="%(\ %{(&bomb\|\|'^$\|utf-8'!~#&fileencoding?'\ '.&fileencoding.(&bomb?'-bom':''):'').('unix'!=#&fileformat?'\ '.&fileformat:'')}%)"
+  "let statusline.="%(\ │%{(&bomb\|\|'^$\|utf-8'!~#&fileencoding?'\ '.&fileencoding.(&bomb?'-bom':''):'').('unix'!=#&fileformat?'\ '.&fileformat:'')}%)"
   let statusline.="%(\ \ %{&modifiable?(&expandtab?'et\ ':'noet\ ').&shiftwidth:''}%)"
+  "let statusline.="%(\ │\ %{&modifiable?(&expandtab?'et\ ':'noet\ ').&shiftwidth:''}%)"
   let statusline.="%3*"
   let statusline.="\ "
+  "let statusline.="\ "
   let statusline.="%2*"
-  let statusline.="%(\ %{LinterStatus()}%)\ "
-  let statusline.="%(%{g:asyncrun_status}%)\ "
-  let statusline.=""
+  let statusline.="%(\ %{LinterStatus()}%)"
+  let statusline.="%{g:asyncrun_status!=''?'\ \ \ '.asyncrun_status:''}"
+  let statusline.="\ "
+  "let statusline.=" "
   let statusline.="%1*"
   let statusline.="%(%<\ %4l\,%3c%)\ "
-  let statusline.="%(\ %{strftime(\"%H:%M\")}%)\ "
+  "let statusline.="%(\ %{strftime(\"%H:%M\")}%)\ "
   return statusline
 endfunction
 
 function! InactiveStatus()
   let statusline=""
-  let statusline.="%(\ %{g:mode[mode()]}\ %)"
-  let statusline.=""
-  let statusline.="%{fugitive#head()!=''?'\ \ '.fugitive#head().'\ ':'\ '}"
-  let statusline.="\ %<"
-  let statusline.="%f"
-  let statusline.="%{&modified?'\ \ +':''}"
-  let statusline.="%{&readonly?'\ \ ':''}"
-  let statusline.="%="
-  let statusline.="\ %{''!=#&filetype?&filetype:'none'}"
-  let statusline.="%(\ %{(&bomb\|\|'^$\|utf-8'!~#&fileencoding?'\ '.&fileencoding.(&bomb?'-bom':''):'').('unix'!=#&fileformat?'\ '.&fileformat:'')}%)"
-  let statusline.="%(\ \ %{&modifiable?(&expandtab?'et\ ':'noet\ ').&shiftwidth:''}%)"
-  let statusline.="\ "
-  let statusline.="%(\ %{LinterStatus()}%)\ "
-  let statusline.="%(%{g:asyncrun_status}%)\ "
-  let statusline.=" "
-  let statusline.="%(%<\ %4l\,%3c%)\ "
-  let statusline.="%(\ %{strftime(\"%H:%M\")}%)\ "
+  let statusline.="\ %f\ "
   return statusline
 endfunction
 
@@ -442,28 +419,10 @@ augroup status
   autocmd WinLeave * setlocal statusline=%!InactiveStatus()
 augroup END
 
-"set statusline=
-"set statusline+=%(\ %{g:mode[mode()]}%)
-"set statusline+=%(%{&paste?'\ p\ ':''}%)
-"set statusline+=%(\ \ %{fugitive#head()}%)
-"set statusline+=%#keyword#
-"set statusline+=%(\ %<%F%)
-"set statusline+=%#warningmsg#
-"set statusline+=\ %h%m%r%w
-"set statusline+=%=
-"set statusline+=%#comment#
-"set statusline+=%(\ \ %{&filetype}%)
-"set statusline+=%(%<\ %4l\,%3c%)
-"set statusline+=%#function#
-"set statusline+=%(\ \ %{LinterStatus()}%)
-"set statusline+=%#comment#
-"set statusline+=%(\ %{g:asyncrun_status}%)
-"set statusline+=\ 
-
-"function! Relative_Path_CWD()
-    "let l:path = fnamemodify(getcwd(),":t")
-    "return l:path
-"endfunction
+function! Relative_Path_CWD()
+    let l:path = fnamemodify(getcwd(),":t")
+    return l:path
+endfunction
 
 function! LinterStatus() abort
     let l:counts = ale#statusline#Count(bufnr(''))
@@ -480,24 +439,15 @@ endfunction
 
 " }}}
 " Styling vertical splits {{{
-if LINUX()
-    "set fillchars=vert:│,fold:۰,diff:·,stl:─,stlnc:─
-    set fillchars=vert:│,fold:۰,diff:·
-    "set fillchars=vert:┃,diff:⎼,fold:⎼
-    "set fillchars=""
-endif
-
-if WINDOWS()
-    "set fillchars=vert:│,fold:۰,diff:·,stl:─,stlnc:─
-    set fillchars=vert:│,fold:۰,diff:·
-endif
+set fillchars=vert:│,fold:۰,diff:·,stlnc:─
 
 " }}}
 " Override color au {{{
 augroup OverrideColor
     autocmd!
     autocmd ColorScheme * hi! link LineNr TabLine
-    autocmd ColorScheme * hi VertSplit guibg=none ctermbg=none
+    autocmd ColorScheme * hi! link ColorColumn CursorLine
+    autocmd ColorScheme * hi! link VertSplit StatusLineNC
     autocmd ColorScheme * exec 'hi User1 gui=bold' .
             \' guibg=' . synIDattr(synIDtrans(hlID('Normal')), 'bg', 'gui') .
             \' guifg=' . synIDattr(synIDtrans(hlID('Normal')), 'fg', 'gui')
@@ -511,10 +461,6 @@ augroup OverrideColor
     autocmd ColorScheme * hi StatusLineNC gui=none cterm=none ctermbg=NONE guibg=NONE
 augroup END
 
-"exec 'hi SyntasticErrorSign guifg=red ctermfg=red' .
-            "\' guibg=' . synIDattr(synIDtrans(hlID('SignColumn')), 'bg', 'gui') .
-            "\' ctermbg=' . synIDattr(synIDtrans(hlID('SignColumn')), 'bg', 'cterm')
-
 " }}}
 " Colorscheme {{{
 
@@ -526,14 +472,6 @@ augroup END
 
 " }}}
 " Mappings {{{
-
-" During insert, kj escapes, `^ is so that the cursor doesn't move
-"inoremap kj <Esc>`^
-"inoremap jk <Esc>`^
-
-" Escape from command line using jk and kj
-"cmap jk <C-c>
-"cmap kj <C-c>
 
 let g:mapleader = ','
 
@@ -734,11 +672,12 @@ let g:NERDTreeMinimalUI = 1
 let g:NERDTreeRespectWildIgnore = 1
 let g:NERDTreeAutoDeleteBuffer = 1
 let g:NERDTreeCascadeSingleChildDir = 0
-"nnoremap <silent> <leader>e :NERDTreeFind<cr>
+nnoremap <silent> <leader>e :NERDTreeFind<cr>
 "map <silent> <C-e> :NERDTreeToggle<CR>
+map <silent> <C-e> :TreeViewToggle<CR>
 let g:NERDTreeWinPos='left'
 let g:NERDTreeQuitOnOpen=0
-"let g:NERDTreeStatusline="⎼%{Relative_Path_CWD()}"
+"let g:NERDTreeStatusline="%{Relative_Path_CWD()}"
 
 if WINDOWS()
   let g:NERDTreeDirArrowExpandable = '▸'
@@ -845,7 +784,7 @@ let g:test#transformation = 'docker'
 " Undotree {{{
 
 nnoremap <Leader>u :UndotreeToggle<cr>
-let g:undotree_WindowLayout = 2
+let g:undotree_WindowLayout = 3
 let g:undotree_SetFocusWhenToggle = 1
 
 " }}}
@@ -952,6 +891,9 @@ call denite#custom#option('default', {
 
 call denite#custom#var('buffer', 'date_format', '')
 
+call denite#custom#option('_', 'highlight_matched_range', 'None')
+call denite#custom#option('_', 'highlight_matched_char', 'Character')
+
 " }}}
 " Neoterm {{{
 let g:neoterm_position = 'vertical'
@@ -1022,7 +964,7 @@ let g:startify_session_before_save = [
         \ 'silent! NERDTreeClose'
         \ ]
 
-let g:startify_session_remove_lines = ['neoterm']
+"let g:startify_session_remove_lines = ['neoterm']
 
 " }}}
 " Tagbar {{{
@@ -1150,6 +1092,9 @@ let g:gutentags_cache_dir = '~/.cache/gutentags'
 " }}}
 " Deoplete {{{
 
+if WINDOWS()
+  let g:python3_host_prog = 'C:\Python36\python'
+endif
 let g:deoplete#enable_at_startup = 1
 call deoplete#custom#set('ultisnips', 'matchers', ['matcher_fuzzy'])
 let g:deoplete#ignore_sources = get(g:, 'deoplete#ignore_sources', {})
@@ -1186,7 +1131,7 @@ let g:alduin_Shout_Fire_Breath = 1
 " split-term {{{
 
 let g:disable_key_mappings = 1
-nnoremap <leader>T :Term<cr>
+nnoremap <leader>T :10Term<cr>
 
 " }}}
 " fugitive {{{
@@ -1242,6 +1187,24 @@ nnoremap <leader>A :AsyncRun docker exec -i --user=laradock laradock_workspace_1
 "  golden-ratio {{{
 
 let g:golden_ratio_constant = 1.3
+
+"  }}}
+"  vim-closetag {{{
+
+let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.vue,*.blade.php'
+
+"  }}}
+"  emmet {{{
+
+let g:user_emmet_leader_key = '<C-y>'
+
+"  }}}
+"  indentline {{{
+
+let g:indentLine_concealcursor=0
+"let g:indentLine_char='│'
+let g:indentLine_char = '┊'
+let g:indentLine_fileTypeExclude = ['text', 'help', 'startify', 'nerdtree']
 
 "  }}}
 " }}}
