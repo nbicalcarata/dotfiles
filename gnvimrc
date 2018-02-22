@@ -6,7 +6,7 @@ if LINUX()
   "GuiFont Iosevka Term:h12
   "GuiFont! Iosevka Nerd Font:h12
   "GuiFont FantasqueSansMono Nerd Font Mono:h13
-  GuiFont LiterationMono Nerd Font Mono:h11
+  "GuiFont LiterationMono Nerd Font Mono:h11
   "GuiFont DejaVuSansMono Nerd Font:h12
   "GuiFont DejaVuSansMonoForPowerline Nerd Font:h11
   "GuiFont! InconsolataForPowerline Nerd Font:h13
@@ -29,9 +29,9 @@ endif
 "let g:airline_theme = 'raven'
 "let g:airline_theme = 'minimalist'
 call GuiWindowMaximized(1)
+
 "if exists('g:GtkGuiLoaded')
-  "NVIM_GTK_PREFER_DARK_THEME=1
-  "NVIM_GTK_NO_HEADERBAR=1
+  "call rpcnotify(1, 'Gui', 'Option', 'Popupmenu', 0)
 "endif
 
 augroup guiau
