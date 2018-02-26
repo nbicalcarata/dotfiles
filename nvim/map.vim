@@ -2,6 +2,25 @@
 
 let g:mapleader = ','
 
+" edit file in current directory
+"nnoremap <leader>e :e %
+
+" create directory
+nnoremap <leader>m :!mkdir %
+
+" Jump to previous edited buffer
+nnoremap <BS> <C-^>
+
+" Substitution on visual selection
+xnoremap <leader>vs y:%s/<C-r>"//g<Left><Left>
+
+" Find files
+nnoremap <leader>f :find *
+
+" Find buffer
+"nnoremap <leader>b :buffer *
+nnoremap <leader>b :ls<CR>:b<Space>
+
 " Copy to clipboard
 vnoremap <leader>y "+y
 nnoremap <leader>Y "+yg_
@@ -15,7 +34,7 @@ vnoremap <leader>p "+p
 vnoremap <leader>P "+P
 
 " Space to fold
-nnoremap <space> za
+"nnoremap <space> za
 
 " Quick edit vimrc
 nnoremap <leader>ev :e ~/.config/nvim/init.vim<cr>
@@ -87,7 +106,7 @@ map <leader>q :bp<bar>sp<bar>bn<bar>bd<CR>
 nnoremap <Leader>n :call NumberToggle()<cr>
 
 " Toggle between invisible chars
-nmap <leader>l :set list!<CR>
+nmap <leader>c :set list!<CR>
 
 " Ag
 "nnoremap <leader>a :Ag
@@ -114,12 +133,5 @@ nnoremap <leader>td :tc %:p:h<CR>:pwd<CR>
 "cmap w!! w !gksudo tee > /dev/null %
 
 "Rename buffer
-nnoremap <leader>bn :keepalt file<space>
-
-" Jump to previous edited buffer
-nnoremap <BS> <C-^>
-
-" Find files
-"nnoremap ,f :find *
-
+"nnoremap <leader>bn :keepalt file<space>
 " }}}

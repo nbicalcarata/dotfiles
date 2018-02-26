@@ -1,26 +1,65 @@
-" Plugins settings {{{
+" Plugins settings
 
-" NERDTree {{{
+" Bufferline {{{
 
-let g:NERDTreeMinimalUI = 1
-let g:NERDTreeRespectWildIgnore = 1
-let g:NERDTreeAutoDeleteBuffer = 1
-let g:NERDTreeCascadeSingleChildDir = 0
-nnoremap <silent> <leader>e :NERDTreeFind<cr>
-map <silent> <C-e> :NERDTreeToggle<CR>
-if LINUX()
-  map <silent> <C-e> :TreeViewToggle<CR>
-endif
-let g:NERDTreeWinPos='left'
-let g:NERDTreeQuitOnOpen=0
-"let g:NERDTreeStatusline="%{Relative_Path_CWD()}"
-
-if WINDOWS()
-  let g:NERDTreeDirArrowExpandable = '▸'
-  let g:NERDTreeDirArrowCollapsible = '▾'
-endif
+let g:bufferline_separator = ' '
 
 " }}}
+" dirvish {{{
+
+" Folders on top
+let g:dirvish_mode = ':sort ,^.*[\/],'
+
+" }}}
+" Denite {{{
+
+" Change mappings.
+"nnoremap <C-P> :Denite file_rec<CR>
+nnoremap <leader>d :Denite 
+nnoremap <leader>B :Denite buffer<cr>
+"nnoremap <leader>m :Denite file_mru<cr>
+nnoremap <leader>l :Denite line<cr>
+"nnoremap <leader>o :Denite outline<cr>
+nnoremap <leader>r :Denite register<cr>
+nnoremap <leader>zz :Denite grep -path=~/Documentos/Apuntes/<cr>
+nnoremap <leader>z :Denite file_rec -path=~/Documentos/Apuntes/<cr>
+
+if WINDOWS()
+  nnoremap <leader>z :Denite file_rec -path=~/Documents/Apuntes/<cr>
+endif
+
+call denite#custom#alias('source', 'file_rec/git', 'file_rec')
+
+call denite#custom#var('file_rec/git', 'command',
+	\ ['git', 'ls-files', '-co', '--exclude-standard'])
+nnoremap <silent> <leader>F :<C-u>Denite
+	\ `finddir('.git', ';') != '' ? 'file_rec/git' : 'file_rec'`<CR>
+
+" Change mappings
+call denite#custom#map(
+     \ 'insert',
+     \ '<C-j>',
+     \ '<denite:move_to_next_line>',
+     \ 'noremap'
+     \)
+call denite#custom#map(
+     \ 'insert',
+     \ '<C-k>',
+     \ '<denite:move_to_previous_line>',
+     \ 'noremap'
+     \)
+
+call denite#custom#option('default', {
+      \ 'prompt': '❯'
+      \ })
+
+call denite#custom#var('buffer', 'date_format', '')
+
+call denite#custom#option('_', 'highlight_matched_range', 'None')
+call denite#custom#option('_', 'highlight_matched_char', 'Character')
+
+" }}}
+
 " UltiSnips {{{
 let g:UltiSnipsExpandTrigger='<c-e>'
 let g:UltiSnipsListSnippets='<c-l>'
@@ -125,12 +164,6 @@ let g:undotree_SetFocusWhenToggle = 1
 let g:undotree_ShortIndicators = 1
 
 " }}}
-" NeatFoldText {{{
-
-let g:NeatFoldTextFancy = 1
-let g:NeatFoldTextShowLineCount = 0
-
-" }}}
 " Zim {{{
 
 nnoremap <leader>gz :GrepperAg  ~/Documentos/Apuntes/<C-Left><Left>
@@ -146,13 +179,6 @@ endif
 ",ws   Strikw a range
 ",wh   Header 1 to 5
 "<f8>  Change * to *
-
-" }}}
-" Devicons {{{
-
-"let g:WebDevIconsUnicodeDecorateFolderNodes = 0
-"let g:DevIconsEnableFoldersOpenClose = 0
-"let g:WebDevIconsNerdTreeAfterGlyphPadding = ' '
 
 " }}}
 " AnyFold {{{
@@ -175,79 +201,6 @@ augroup FileTypeFolds
     autocmd Filetype html,blade,vue,help setlocal foldcolumn=0
 augroup END
 
-" }}}
-" Denite {{{
-
-" Change mappings.
-"nnoremap <C-P> :Denite buffer file_rec<CR>
-"nnoremap <leader>j :Denite buffer file_rec<CR>
-"nnoremap <C-P> :Denite file_rec<CR>
-nnoremap <leader>D :Denite 
-nnoremap <leader>v :Denite buffer<cr>
-nnoremap <leader>m :Denite file_mru<cr>
-nnoremap <leader>f :Denite line<cr>
-nnoremap <leader>o :Denite outline<cr>
-nnoremap <leader>r :Denite register<cr>
-nnoremap <leader>zz :Denite grep -path=~/Documentos/Apuntes/<cr>
-nnoremap <leader>z :Denite file_rec -path=~/Documentos/Apuntes/<cr>
-
-if WINDOWS()
-  nnoremap <leader>z :Denite file_rec -path=~/Documents/Apuntes/<cr>
-endif
-
-call denite#custom#alias('source', 'file_rec/git', 'file_rec')
-call denite#custom#var('file_rec/git', 'command',
-\ ['git', 'ls-files', '-co', '--exclude-standard'])
-nnoremap <silent> <leader>j :<C-u>Denite 
-\ `finddir('.git', ';') != '' ? 'file_rec/git' : 'file_rec'`<CR>
-
-if executable('ag')
-   set grepprg=ag\ --nogroup\ --nocolor
-   call denite#custom#var('file_rec', 'command',
-   \ ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
-endif
-
-" Change mappings
-call denite#custom#map(
-     \ 'insert',
-     \ '<C-j>',
-     \ '<denite:move_to_next_line>',
-     \ 'noremap'
-     \)
-call denite#custom#map(
-     \ 'insert',
-     \ '<C-k>',
-     \ '<denite:move_to_previous_line>',
-     \ 'noremap'
-     \)
-
-call denite#custom#option('default', {
-      \ 'prompt': '❯'
-      \ })
-
-      "\ 'statusline' : 0
-call denite#custom#var('buffer', 'date_format', '')
-
-call denite#custom#option('_', 'highlight_matched_range', 'None')
-call denite#custom#option('_', 'highlight_matched_char', 'Character')
-
-" }}}
-" Neoterm {{{
-"let g:neoterm_position = 'vertical'
-let g:neoterm_size = 8
-let g:neoterm_automap_keys = ',tt'
-let g:neoterm_autoscroll = 1
-nnoremap <silent> ,tj :Ttoggle<cr>
-nnoremap <silent> ,tc :call neoterm#clear()<cr>
-nnoremap <silent> ,tk :call neoterm#kill()<cr>
-
-"function! Run(cmd)
-   "call neoterm#open() " Opens the neoterm window
-   "call neoterm#normal('G') " Scroll to the end of the neoterm window
-   "exec a:cmd
-"endfunction
-
-"nnoremap ,A :call Run('docker exec -i --user=laradock laradock_workspace_1 sh -lc "cd interpos; "')<left><left><left>
 " }}}
 " Grepper {{{
 
@@ -302,21 +255,6 @@ endfunction
 "nnoremap <leader>kt :call KillTerm()<cr>
 nnoremap <leader>S :SSave<cr>
 
-
-let g:startify_session_before_save = [
-        \ 'echo "Cleaning up before saving.."',
-        \ 'silent! NERDTreeClose'
-        \ ]
-
-"let g:startify_session_remove_lines = ['neoterm']
-
-" }}}
-" Tagbar {{{
-
-"let g:tagbar_left = 1
-let g:tagbar_width = 31
-nmap <leader>tb :TagbarToggle<CR>
-
 " }}}
 " ale {{{
 
@@ -361,73 +299,6 @@ let g:vue_disable_pre_processors = 1
 "let g:gtfo#terminals = { 'unix': 'tilix' }
 
 " }}}
-" Set gnome-terminal color with dconf-cli, linux mint 18.1 {{{
-" Based on https://antonioshadji.github.io/switch-terminal-colors-at-night/
-" To make it work enable  transparency in terminal settings.
-" Install https://github.com/miyakogi/seiya.vim
-
-let g:profile_id = system('dconf read /org/gnome/terminal/legacy/profiles:/default')
-" Remove new line and quotes from dconf key
-let g:profile_id = substitute(g:profile_id, "\n", "", "g")
-let g:profile_id = substitute(g:profile_id, "'", "", "g")
-let g:trans_level = system('dconf read /org/gnome/terminal/legacy/profiles:/:' . g:profile_id . '/background-transparency-percent')
-let previous_exists = 0
-
-function! GetNvimBackgroundColor()
-    let l:nvim_background = synIDattr(synIDtrans(hlID('Normal')), 'bg', 'gui')
-    return l:nvim_background
-endfunction
-
-function! GetNvimForegroundColor()
-    let l:nvim_foreground = synIDattr(synIDtrans(hlID('Normal')), 'fg', 'gui')
-    return l:nvim_foreground
-endfunction
-
-function! SetTermBackground()
-    silent! SeiyaDisable
-    let l:background = GetNvimBackgroundColor()
-    let l:foreground = GetNvimForegroundColor()
-    silent exec system('dconf write /org/gnome/terminal/legacy/profiles:/:' . g:profile_id . '/background-color ' . "'".'"' . l:background . '"'."'")
-    silent exec system('dconf write /org/gnome/terminal/legacy/profiles:/:' . g:profile_id . '/foreground-color ' . "'".'"' . l:foreground . '"'."'")
-    "silent! SeiyaEnable
-endfunction
-
-function! TermTransparency(order)
-    if g:previous_exists == 1
-        let g:trans_level = g:previous_level
-        let g:previous_exists = 0
-    elseif a:order == 0
-        let g:previous_level = g:trans_level
-        let g:previous_exists = 1
-        let g:trans_level = 0
-    elseif g:trans_level <= 40 && a:order == 2
-        let g:trans_level += 5
-    elseif g:trans_level >= 5 && a:order == 1
-        let g:trans_level -= 5
-    endif
-    silent exec system('dconf write /org/gnome/terminal/legacy/profiles:/:' . g:profile_id . '/background-transparency-percent ' . g:trans_level)
-    echom g:trans_level
-endfunction
-
-"Reset to opaque
-nnoremap <leader><Space> :call TermTransparency(0)<cr>
-"Decrease transparency
-nnoremap <leader>1 :call TermTransparency(1)<cr>
-"Increase transparency
-nnoremap <leader>2 :call TermTransparency(2)<cr>
-",co to set colorscheme and terminal background
-"nnoremap <leader>co :colorscheme  <bar>:call SetTermBackground()<bar>:Tmuxline vim_statusline_3<C-Left><C-Left><C-Left><left>
-nnoremap <leader>co :colorscheme  <bar>:call SetTermBackground()<C-Left><C-Left><left>
-
-" }}}
-" Seiya {{{
-
-if LINUX()
-  "let g:seiya_auto_enable=1
-  let g:seiya_target_groups = has('nvim') ? ['guibg'] : ['ctermbg']
-endif
-
-" }}}
 " gutentags {{{
 
 let g:gutentags_cache_dir = '~/.cache/gutentags'
@@ -450,11 +321,6 @@ let g:deoplete#sources#ternjs#filetypes = [
                 \ 'javascript',
                 \ 'vue'
                 \ ]
-" }}}
-" vim-jsx {{{
-
-"let g:jsx_ext_required = 0
-
 " }}}
 " nvim-completion-manager and deoplete {{{
 
@@ -538,17 +404,16 @@ let g:golden_ratio_constant = 1.3
 let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.vue,*.blade.php'
 
 "  }}}
-"  emmet {{{
+" emmet {{{
 
 let g:user_emmet_leader_key = '<C-y>'
 
-"  }}}
-"  indentline {{{
+" }}}
+" indentline {{{
 
 let g:indentLine_concealcursor=0
 "let g:indentLine_char='│'
 let g:indentLine_char = '┊'
-let g:indentLine_fileTypeExclude = ['text', 'help', 'startify', 'nerdtree']
+let g:indentLine_fileTypeExclude = ['text', 'help', 'startify']
 
-"  }}}
 " }}}

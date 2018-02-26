@@ -3,8 +3,10 @@ syntax enable
 
 " General {{{
 set path+=**
+if executable('ag')
+   set grepprg=ag\ --nogroup\ --nocolor
+endif
 set number
-"set numberwidth=10
 set background=dark
 set wrap
 set linebreak
@@ -12,8 +14,6 @@ set title
 set visualbell t_vb=            " turn off error beep/flash
 set novisualbell                " turn off visual bell
 set equalalways
-"set lazyredraw
-"set noshowmode                  " Dont display the current mode
 set hlsearch                  " Highlight search matches
 set showmatch                   " show matching brackets/parenthesis
 set ignorecase                  " Case insensitive search
@@ -36,8 +36,6 @@ set pastetoggle=<F12>           " pastetoggle (sane indentation on pastes)
 
 " }}}
 
-"set shell=/bin/sh
-"cd ~/Dropbox/Workspace
 "set spell spelllang=es
 "set spellfile=~/.local/share/nvim/site/spell/es.utf-8.add
 set completeopt-=preview
@@ -58,7 +56,6 @@ set foldenable                                  " Enable folding
 set foldmethod=marker
 set foldcolumn=0
 set foldlevel=99                                " Folds open at start
-"set timeoutlen=1000 ttimeoutlen=0               " Eliminar retardo de Insert a Normal
 set conceallevel=2
 
 " }}}
@@ -76,6 +73,7 @@ set wildignore+=*.pyc                                    " Python byte code
 set wildignore+=*.class                                  " Java byte code
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.rar           " MacOSX/Linux
 set wildignore+=*/node_modules/*,*/vendor/*
+set wildignore+=tags
 
 " }}}
 " True color {{{

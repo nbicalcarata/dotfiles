@@ -74,14 +74,6 @@ augroup RstRules
 augroup END
 
 " }}}
-" NerdTreeExit {{{
-
-augroup NerdTreeExit
-    autocmd!
-    autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-augroup END
-
-" }}}
 " PHP with html syntax {{{
 
 augroup phpLaravel
