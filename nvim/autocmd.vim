@@ -1,5 +1,30 @@
 " Autocmd rules {{{
 
+" Term start in insert mode {{{
+" https://vi.stackexchange.com/a/3765/10344
+
+"augroup TermInsert
+    "autocmd!
+    "autocmd BufEnter * if &buftype == 'terminal' | :startinsert | endif
+"augroup END
+
+" }}}
+" Quickfix below everything {{{
+
+augroup QfBl
+    autocmd!
+    autocmd FileType qf wincmd J
+augroup END
+
+" }}}
+" Diff settings {{{
+
+augroup DiffSettings
+    autocmd!
+    autocmd FilterWritePre * if &diff | setlocal fdc=0 | endif
+augroup END
+
+" }}}
 " Move cursor to last position on file {{{
 
 " Instead of reverting the cursor to the last position in the buffer, we
@@ -16,7 +41,7 @@ augroup OmniCompletion
     autocmd!
     autocmd FileType css set omnifunc=csscomplete#CompleteCSS
     autocmd FileType html,markdown set omnifunc=htmlcomplete#CompleteTags
-    autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+    autocmd FileType javascript,vue set omnifunc=javascriptcomplete#CompleteJS
     autocmd FileType python set omnifunc=pythoncomplete#Complete
     autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
     autocmd FileType ruby set omnifunc=rubycomplete#Complete

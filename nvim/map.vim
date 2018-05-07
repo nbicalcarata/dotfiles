@@ -2,11 +2,17 @@
 
 let g:mapleader = ','
 
+" To edit on tab :-tabedit %
+" Toggle 'default' terminal
+nnoremap <leader>ta :call ChooseTerm("terminal", 1)<CR>
+" Start terminal in current pane
+nnoremap <leader>tc :call ChooseTerm("term-pane", 0)<CR>
+
 " edit file in current directory
 "nnoremap <leader>e :e %
 
 " create directory
-nnoremap <leader>m :!mkdir %
+"nnoremap <leader>m :!mkdir %
 
 " Jump to previous edited buffer
 nnoremap <BS> <C-^>
@@ -15,7 +21,7 @@ nnoremap <BS> <C-^>
 xnoremap <leader>vs y:%s/<C-r>"//g<Left><Left>
 
 " Find files
-nnoremap <leader>f :find *
+"nnoremap <leader>f :find *
 
 " Find buffer
 "nnoremap <leader>b :buffer *
@@ -37,12 +43,26 @@ vnoremap <leader>P "+P
 "nnoremap <space> za
 
 " Quick edit vimrc
-nnoremap <leader>ev :e ~/.config/nvim/init.vim<cr>
+nnoremap <leader>ev :e ~/dotfiles/nvimrc<cr>
+nnoremap <leader>en :e ~/dotfiles/nvim/nplug.vim<cr>
+nnoremap <leader>eg :e ~/dotfiles/nvim/general.vim<cr>
+nnoremap <leader>ea :e ~/dotfiles/nvim/autocmd.vim<cr>
+nnoremap <leader>es :e ~/dotfiles/nvim/statusline.vim<cr>
+nnoremap <leader>ec :e ~/dotfiles/nvim/color.vim<cr>
+nnoremap <leader>em :e ~/dotfiles/nvim/map.vim<cr>
+nnoremap <leader>ep :e ~/dotfiles/nvim/plugins.vim<cr>
 nnoremap <leader>sv :source ~/.config/nvim/init.vim<cr>
 nnoremap <leader>sg :source ~/.config/nvim/ginit.vim<cr>
 
 if WINDOWS()
   nnoremap <leader>ev :e ~\AppData\Local\nvim\init.vim<cr>
+  nnoremap <leader>en :e ~\AppData\Local\nvim\nplug.vim<cr>
+  nnoremap <leader>eg :e ~\AppData\Local\nvim\general.vim<cr>
+  nnoremap <leader>ea :e ~\AppData\Local\nvim\autocmd.vim<cr>
+  nnoremap <leader>es :e ~\AppData\Local\nvim\statusline.vim<cr>
+  nnoremap <leader>ec :e ~\AppData\Local\nvim\color.vim<cr>
+  nnoremap <leader>em :e ~\AppData\Local\nvim\map.vim<cr>
+  nnoremap <leader>ep :e ~\AppData\Local\nvim\plugins.vim<cr>
   nnoremap <leader>sv :source ~\AppData\Local\nvim\init.vim<cr>
   nnoremap <leader>sg :source ~\AppData\Local\nvim\ginit.vim<cr>
 endif
@@ -52,9 +72,9 @@ nnoremap Q <nop>
 
 " Bind nohl
 " Removes highlight of your last search
-noremap <C-n> :nohl<CR>
-vnoremap <C-n> :nohl<CR>
-inoremap <C-n> :nohl<CR>
+"noremap <C-n> :nohl<CR>
+"vnoremap <C-n> :nohl<CR>
+"inoremap <C-n> :nohl<CR>
 
 " Resizing windows
 nnoremap <C-up> <C-W>-

@@ -10,6 +10,7 @@
     ~/.i3: i3/
     ~/.tmux.conf: tmux.conf
     ~/.vimrc: vimrc
+    ~/.gvimrc: gvimrc
     ~/.bashrc: bashrc
     ~/.eslintrc: eslintrc
     ~/.zshrc: zshrc

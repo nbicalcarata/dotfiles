@@ -1,14 +1,49 @@
 " Plugins settings
 
-" Bufferline {{{
+" phpcd {{{
 
-let g:bufferline_separator = ' '
+let g:phpcd_autoload_path = '.autoload.php'
 
 " }}}
-" dirvish {{{
+" YouCompleteMe {{{
 
-" Folders on top
-let g:dirvish_mode = ':sort ,^.*[\/],'
+let g:EclimCompletionMethod = 'omnifunc'
+let g:ycm_autoclose_preview_window_after_insertion = 1
+let g:EclimPhpValidate = 0
+
+" }}}
+" tmuxline {{{
+
+"let g:tmuxline_powerline_separators = 0
+"let g:tmuxline_separators = {
+"    \ 'left' : '▚',
+"    \ 'left_alt': '▖',
+"    \ 'right' : '▞',
+"    \ 'right_alt' : '▗',
+"    \ 'space' : ' '}
+
+" }}}
+" vim-cool {{{
+
+let g:CoolTotalMatches = 1
+
+" }}}
+" Bufferline {{{
+
+let g:bufferline_echo = 0
+let g:bufferline_separator = ' '
+let g:bufferline_rotate = 1
+
+" }}}
+" NERDTree {{{
+
+let NERDTreeMinimalUI = 1
+let NERDTreeRespectWildIgnore = 1 
+let NERDTreeAutoDeleteBuffer = 1
+let NERDTreeShowHidden=1
+let NERDTreeStatusline = ' '
+nnoremap <silent> <leader>e :NERDTreeFind<cr>
+map <C-e> :NERDTreeToggle<CR>
 
 " }}}
 " Denite {{{
@@ -17,7 +52,7 @@ let g:dirvish_mode = ':sort ,^.*[\/],'
 "nnoremap <C-P> :Denite file_rec<CR>
 nnoremap <leader>d :Denite 
 nnoremap <leader>B :Denite buffer<cr>
-"nnoremap <leader>m :Denite file_mru<cr>
+nnoremap <leader>m :Denite file_old<cr>
 nnoremap <leader>l :Denite line<cr>
 "nnoremap <leader>o :Denite outline<cr>
 nnoremap <leader>r :Denite register<cr>
@@ -25,34 +60,38 @@ nnoremap <leader>zz :Denite grep -path=~/Documentos/Apuntes/<cr>
 nnoremap <leader>z :Denite file_rec -path=~/Documentos/Apuntes/<cr>
 
 if WINDOWS()
-  nnoremap <leader>z :Denite file_rec -path=~/Documents/Apuntes/<cr>
+    nnoremap <leader>z :Denite file_rec -path=~/Documents/Apuntes/<cr>
 endif
 
 call denite#custom#alias('source', 'file_rec/git', 'file_rec')
 
 call denite#custom#var('file_rec/git', 'command',
-	\ ['git', 'ls-files', '-co', '--exclude-standard'])
-nnoremap <silent> <leader>F :<C-u>Denite
-	\ `finddir('.git', ';') != '' ? 'file_rec/git' : 'file_rec'`<CR>
+            \ ['git', 'ls-files', '-co', '--exclude-standard'])
+nnoremap <silent> <leader>f :<C-u>Denite
+            \ `finddir('.git', ';') != '' ? 'file_rec/git' : 'file_rec'`<CR>
 
 " Change mappings
 call denite#custom#map(
-     \ 'insert',
-     \ '<C-j>',
-     \ '<denite:move_to_next_line>',
-     \ 'noremap'
-     \)
+            \ 'insert',
+            \ '<C-j>',
+            \ '<denite:move_to_next_line>',
+            \ 'noremap'
+            \)
 call denite#custom#map(
-     \ 'insert',
-     \ '<C-k>',
-     \ '<denite:move_to_previous_line>',
-     \ 'noremap'
-     \)
+            \ 'insert',
+            \ '<C-k>',
+            \ '<denite:move_to_previous_line>',
+            \ 'noremap'
+            \)
 
 call denite#custom#option('default', {
-      \ 'prompt': '❯'
-      \ })
+            \ 'prompt': '❯',
+            \ 'reversed': 1 ,
+            \ 'auto_resize': 1 
+            \ })
 
+            "\ 'statusline': 0
+            "\ 'split': 'no'
 call denite#custom#var('buffer', 'date_format', '')
 
 call denite#custom#option('_', 'highlight_matched_range', 'None')
@@ -80,15 +119,15 @@ let g:UltiSnipsSnippetDirectories = ['UltiSnips']
 " Custom MatchTag syntax group with a default highlight color
 "let g:mta_use_matchparen_group = 0
 let g:mta_filetypes = {
-    \ 'html' : 1,
-    \ 'xhtml' : 1,
-    \ 'xml' : 1,
-    \ 'jinja' : 1,
-    \ 'blade' : 1,
-    \ 'php' : 1,
-    \ 'javascript' : 1,
-    \ 'vue' : 1,
-    \}
+            \ 'html' : 1,
+            \ 'xhtml' : 1,
+            \ 'xml' : 1,
+            \ 'jinja' : 1,
+            \ 'blade' : 1,
+            \ 'php' : 1,
+            \ 'javascript' : 1,
+            \ 'vue' : 1,
+            \}
 
 " }}}
 " Git gutter {{{
@@ -98,24 +137,26 @@ nmap <leader>gp <Plug>GitGutterPrevHunk
 nmap <Leader>gs <Plug>GitGutterStageHunk
 nmap <Leader>gr <Plug>GitGutterRevertHunk
 nmap <Leader>gc :Gcommit<cr>
+nmap <Leader>gP :Term git push<cr>
+nmap <Leader>gd :Gvdiff<cr>
 "let g:gitgutter_max_signs = 800  " default value 500
 
 "Box Drawings Heavy Vertical U+25e3
 if LINUX()
-  let g:gitgutter_sign_added = '│'
-  let g:gitgutter_sign_modified = '│'
-  let g:gitgutter_sign_removed_first_line = '▔'
-  "let g:gitgutter_sign_removed_first_line = '^'
-  "let g:gitgutter_sign_removed = '▁'
-  "http://www.utf8-chartable.de/unicode-utf8-table.pl?start=9472&unicodeinhtml=dec
+    let g:gitgutter_sign_added = '│'
+    let g:gitgutter_sign_modified = '│'
+    let g:gitgutter_sign_removed_first_line = '▔'
+    "let g:gitgutter_sign_removed_first_line = '^'
+    "let g:gitgutter_sign_removed = '▁'
+    "http://www.utf8-chartable.de/unicode-utf8-table.pl?start=9472&unicodeinhtml=dec
 endif
 if WINDOWS()
-  let g:gitgutter_sign_added = '│'
-  let g:gitgutter_sign_modified = '│'
-  "let g:gitgutter_sign_modified = '▶'
-  "let g:gitgutter_sign_modified = '●'
-  let g:gitgutter_sign_removed_first_line = '▔'
-  "let g:gitgutter_sign_removed = '▁'
+    let g:gitgutter_sign_added = '│'
+    let g:gitgutter_sign_modified = '│'
+    "let g:gitgutter_sign_modified = '▶'
+    "let g:gitgutter_sign_modified = '●'
+    let g:gitgutter_sign_removed_first_line = '▔'
+    "let g:gitgutter_sign_removed = '▁'
 endif
 
 " }}}
@@ -131,14 +172,14 @@ nmap <silent> <leader>ts :TestSuite<CR>
 nmap <silent> <leader>tl :TestLast<CR>
 nmap <silent> <leader>tv :TestVisit<CR>
 
-let g:test#strategy = 'asyncrun'
+let g:test#strategy = 'neovim'
 
 function! DockerTransform(cmd) abort
-  let l:docker_project = fnamemodify(getcwd(),":t")
-  let l:forward_slashes = a:cmd
-  let l:forward_slashes = substitute(l:forward_slashes, "\\", "\/", "g")
-  "docker exec -it containerName sh -c "cd /var/www && /bin/bash"
-  return "docker exec -it --user=laradock laradock_workspace_1 sh -c ".shellescape('cd '.docker_project.'; '.forward_slashes)
+    let l:docker_project = fnamemodify(getcwd(),":t")
+    let l:forward_slashes = a:cmd
+    let l:forward_slashes = substitute(l:forward_slashes, "\\", "\/", "g")
+    "docker exec -it containerName sh -c "cd /var/www && /bin/bash"
+    return "docker exec -it --user=laradock laradock_workspace_1 sh -c ".shellescape('cd '.docker_project.'; '.forward_slashes)
 endfunction
 
 let g:test#custom_transformations = {'docker': function('DockerTransform')}
@@ -148,9 +189,9 @@ let g:test#transformation = 'docker'
 "vagrant ssh --command "cd /home/vagrant/project; ./vendor/bin/phpunit
 
 "function! VagrantTransform(cmd) abort
-  "let l:vagrant_project = fnamemodify(getcwd(),":t")
-  "return "cd ~/Homestead && ssh -tt $(vagrant ssh-config | awk 'NR>1 {print \" -o \"$1\"=\"$2}') localhost ".shellescape('cd /home/vagrant/sitios/'.vagrant_project.'; '.a:cmd)
-  "return "cd ~/Homestead && ssh -tt vagrant@192.168.10.10 ".shellescape('cd /home/vagrant/sitios/'.vagrant_project.'; '.a:cmd)
+"let l:vagrant_project = fnamemodify(getcwd(),":t")
+"return "cd ~/Homestead && ssh -tt $(vagrant ssh-config | awk 'NR>1 {print \" -o \"$1\"=\"$2}') localhost ".shellescape('cd /home/vagrant/sitios/'.vagrant_project.'; '.a:cmd)
+"return "cd ~/Homestead && ssh -tt vagrant@192.168.10.10 ".shellescape('cd /home/vagrant/sitios/'.vagrant_project.'; '.a:cmd)
 "endfunction
 "let g:test#custom_transformations = {'vagrant': function('VagrantTransform')}
 "let g:test#transformation = 'vagrant'
@@ -168,7 +209,7 @@ let g:undotree_ShortIndicators = 1
 
 nnoremap <leader>gz :GrepperAg  ~/Documentos/Apuntes/<C-Left><Left>
 if WINDOWS()
-  nnoremap <leader>gz :GrepperAg  ~\Documentos\Apuntes\<C-Left><Left>
+    nnoremap <leader>gz :GrepperAg  ~\Documentos\Apuntes\<C-Left><Left>
 endif
 
 "Zim files keymaps
@@ -216,14 +257,22 @@ nnoremap <leader>x :Grepper -tool ag -cword -noprompt<cr>
 " }}}
 " Startify {{{
 
+let g:startify_lists = [
+      \ { 'type': 'sessions',  'header': [   '   Sessions']       },
+      \ { 'type': 'files',     'header': [   '   MRU']            },
+      \ { 'type': 'dir',       'header': [   '   MRU '. getcwd()] },
+      \ { 'type': 'bookmarks', 'header': [   '   Bookmarks']      },
+      \ { 'type': 'commands',  'header': [   '   Commands']       },
+      \ ]
+
 set sessionoptions-=help,blank,folds
 "set sessionoptions=blank,curdir,folds,help,tabpages,winpos
 
 let g:startify_custom_header = [
-             \ '                       █▀▀▄ █▀▀ █▀▀█ ▀█░█▀ ░▀░ █▀▄▀█',
-             \ '                       █░░█ █▀▀ █░░█ ░█▄█░ ▀█▀ █░▀░█',
-             \ '                       ▀░░▀ ▀▀▀ ▀▀▀▀ ░░▀░░ ▀▀▀ ▀░░░▀',
-             \ ]
+            \ '                       █▀▀▄ █▀▀ █▀▀█ ▀█░█▀ ░▀░ █▀▄▀█',
+            \ '                       █░░█ █▀▀ █░░█ ░█▄█░ ▀█▀ █░▀░█',
+            \ '                       ▀░░▀ ▀▀▀ ▀▀▀▀ ░░▀░░ ▀▀▀ ▀░░░▀',
+            \ ]
 
 augroup StartifyAu
     autocmd!
@@ -236,7 +285,7 @@ let g:startify_session_autoload = 1
 
 function! KillTerm()
     bufdo if bufname("%")=~"term://*" | bd! | endif
-    "bufdo if bufname("%")=~"neoterm-1$" | bd! | endif
+"bufdo if bufname("%")=~"neoterm-1$" | bd! | endif
 endfunction
 
 "bufdo if bufname("%")=~?'.exe$' | bdel | endif
@@ -264,28 +313,28 @@ nmap <silent> <C-s>j <Plug>(ale_next_wrap)
 let g:ale_javascript_eslint_use_global = 1
 "let g:ale_open_list = 1
 let g:ale_linters = {
-      \ 'javascript': ['eslint'],
-      \ 'vue': ['eslint']
-      \}
+            \ 'javascript': ['eslint'],
+            \ 'vue': ['eslint']
+            \}
 
 let g:ft = ''
 function! NERDCommenter_before()
-  if &ft == 'vue'
-    let g:ft = 'vue'
-    let stack = synstack(line('.'), col('.'))
-    if len(stack) > 0
-      let syn = synIDattr((stack)[0], 'name')
-      if len(syn) > 0
-        exe 'setf ' . substitute(tolower(syn), '^vue_', '', '')
-      endif
+    if &ft == 'vue'
+        let g:ft = 'vue'
+        let stack = synstack(line('.'), col('.'))
+        if len(stack) > 0
+            let syn = synIDattr((stack)[0], 'name')
+            if len(syn) > 0
+                exe 'setf ' . substitute(tolower(syn), '^vue_', '', '')
+            endif
+        endif
     endif
-  endif
 endfunction
 function! NERDCommenter_after()
-  if g:ft == 'vue'
-    setf vue
-    let g:ft = ''
-  endif
+    if g:ft == 'vue'
+        setf vue
+        let g:ft = ''
+    endif
 endfunction
 
 " }}}
@@ -305,27 +354,39 @@ let g:gutentags_cache_dir = '~/.cache/gutentags'
 "let g:gutentags_ctags_exclude = ["*.min.js", "*.min.css", "build", ".git", "node_modules", "db", "log"]
 
 " }}}
+" mucomplete {{{
+
+"let g:mucomplete#enable_auto_at_startup = 1
+"let g:AutoPairsMapCR = 0
+"imap <Plug>MyCR <Plug>(MUcompleteCR)<Plug>AutoPairsReturn
+"imap <cr> <Plug>MyCR
+"let g:mucomplete#chains = {
+        "\ 'default' : ['path', 'keyn', 'ulti', 'omni'],
+        "\ 'vim'     : ['path', 'cmd', 'keyn']
+        "\ }
+
+" }}}
 " Deoplete {{{
 
 if WINDOWS()
-  let g:python3_host_prog = 'C:\Python36\python'
+    let g:python3_host_prog = 'C:\Python36\python'
 endif
-let g:deoplete#enable_at_startup = 1
-call deoplete#custom#set('ultisnips', 'matchers', ['matcher_fuzzy'])
-let g:deoplete#ignore_sources = get(g:, 'deoplete#ignore_sources', {})
-let g:deoplete#ignore_sources.php = ['omni']
-"let g:echodoc_enable_at_startup = 1
-let g:deoplete#omni#input_patterns = {}
-let g:deoplete#omni#input_patterns.php = '\w*|[^. \t]->\w*|\w*::\w*'
-let g:deoplete#sources#ternjs#filetypes = [
-                \ 'javascript',
-                \ 'vue'
-                \ ]
+"let g:deoplete#enable_at_startup = 1
+"call deoplete#custom#set('ultisnips', 'matchers', ['matcher_fuzzy'])
+"let g:deoplete#ignore_sources = get(g:, 'deoplete#ignore_sources', {})
+"let g:deoplete#ignore_sources.php = ['omni']
+""let g:echodoc_enable_at_startup = 1
+"let g:deoplete#omni#input_patterns = {}
+"let g:deoplete#omni#input_patterns.php = '\w*|[^. \t]->\w*|\w*::\w*'
+"let g:deoplete#sources#ternjs#filetypes = [
+            "\ 'javascript',
+            "\ 'vue'
+            "\ ]
 " }}}
 " nvim-completion-manager and deoplete {{{
 
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+"inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+"inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 " }}}
 " color-switcher {{{
@@ -342,6 +403,13 @@ let g:alduin_Shout_Fire_Breath = 1
 
 let g:disable_key_mappings = 1
 nnoremap <leader>T :10Term<cr>
+"Execute command from docker container
+"To make it work, removed de t option from command
+
+"docker exec -i --user=laradock laradock_workspace_1 sh -c "cd interpos; ./vendor/bin/behat features/order.feature
+
+"docker exec -i --user=laradock laradock_workspace_1 sh -lc "cd interpos; npm run dev
+nnoremap <leader>A :Term docker exec -it --user=laradock laradock_workspace_1 sh -lc ""<left>
 
 " }}}
 " fugitive {{{
@@ -357,46 +425,10 @@ nnoremap <leader>G :Gstatus<cr>
 "  kyypf"di"lf"di"lf"di"0jwvf,hxkf"pj0wxvf,hxkf"f"f"pj0wxvf,hxk$hhhhpjdd
 "
 " }}}
-" AsyncRun {{{
-
-noremap <leader>ta :call asyncrun#quickfix_toggle(8)<cr>
-
-augroup QuickfixStatus
-	au! BufWinEnter quickfix setlocal
-		\ statusline=%t\ [%{g:asyncrun_status}]\ %{exists('w:quickfix_title')?\ '\ '.w:quickfix_title\ :\ ''}\ %=%-15(%l,%c%V%)\ %P
-augroup END
-
-" Auto toggle the quickfix window
-augroup AutoToggleQFWindow
-au! User AsyncRunStop
-            \ if g:asyncrun_status=='failure' |
-            \   execute('call asyncrun#quickfix_toggle(8, 1)') |
-            \ else |
-            \   execute('call asyncrun#quickfix_toggle(8, 0)') |
-            \ endif
-augroup END
-
-"if LINUX()
-   ""let g:asyncrun_exit = "silent call system('afplay ~/.vim/notify.wav &')"
-"endif
-
-"if WINDOWS()
-  ""let g:asyncrun_exit = 'silent !start playwav.exe "C:/Windows/Media/Windows Error.wav" 200'
-   "let g:asyncrun_exit = 'silent !start '.$HOME.'\dotfiles\notification.exe'
-"endif
-
-"Execute command from docker container
-"To make it work, removed de t option from command
-
-"docker exec -i --user=laradock laradock_workspace_1 sh -c "cd interpos; ./vendor/bin/behat features/order.feature
-
-"docker exec -i --user=laradock laradock_workspace_1 sh -lc "cd interpos; npm run dev
-nnoremap <leader>A :AsyncRun docker exec -i --user=laradock laradock_workspace_1 sh -lc "cd interpos; "<left>
-
-"  }}}
 "  golden-ratio {{{
 
-let g:golden_ratio_constant = 1.3
+let g:loaded_golden_ratio = 0
+"let g:golden_ratio_constant = 1.3
 
 "  }}}
 "  vim-closetag {{{
@@ -411,9 +443,9 @@ let g:user_emmet_leader_key = '<C-y>'
 " }}}
 " indentline {{{
 
-let g:indentLine_concealcursor=0
-"let g:indentLine_char='│'
-let g:indentLine_char = '┊'
-let g:indentLine_fileTypeExclude = ['text', 'help', 'startify']
+"let g:indentLine_concealcursor=0
+""let g:indentLine_char='│'
+"let g:indentLine_char = '┊'
+"let g:indentLine_fileTypeExclude = ['text', 'help', 'startify']
 
 " }}}

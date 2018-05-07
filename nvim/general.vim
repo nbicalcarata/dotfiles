@@ -2,32 +2,39 @@ filetype plugin indent on
 syntax enable
 
 " General {{{
-set path+=**
+"set path+=**
 if executable('ag')
    set grepprg=ag\ --nogroup\ --nocolor
 endif
 set number
-set background=dark
+"set background=dark
 set wrap
 set linebreak
 set title
 set visualbell t_vb=            " turn off error beep/flash
 set novisualbell                " turn off visual bell
 set equalalways
+"set noequalalways
 set hlsearch                  " Highlight search matches
 set showmatch                   " show matching brackets/parenthesis
 set ignorecase                  " Case insensitive search
 set smartcase                   " Case sensitive when uc present
-set scrolloff=5                 " Minimum lines to keep above and below cursor
+"set scrolloff=5                 " Minimum lines to keep above and below cursor
 set inccommand=split            " live sustitution
 set listchars=tab:▸\ ,eol:¬,extends:»,precedes:«,trail:•
 
 " Formatting {{{
 set autoindent
-set shiftwidth=2                " Use indents of 2 spaces
-set expandtab                   " Tabs are spaces, not tabs
-set tabstop=2                   " An indentation every four columns
-set softtabstop=2               " Let backspace delete indent
+set tabstop=8
+set softtabstop=4
+set shiftwidth=4
+augroup IndentSettings
+    autocmd!
+    autocmd Filetype html setlocal ts=2 sw=2
+    autocmd Filetype vue setlocal ts=2 sw=2
+    autocmd Filetype blade setlocal ts=2 sw=2
+augroup END
+set expandtab
 set nojoinspaces                " Prevents inserting two spaces after
 set splitright                  " Puts new vsplit windows to the right
 set splitbelow                  " Puts new split windows to the bottom
@@ -38,7 +45,9 @@ set pastetoggle=<F12>           " pastetoggle (sane indentation on pastes)
 
 "set spell spelllang=es
 "set spellfile=~/.local/share/nvim/site/spell/es.utf-8.add
-set completeopt-=preview
+"set completeopt-=preview
+set completeopt+=menuone
+set completeopt+=noselect
 set completeopt+=noinsert
 set mouse=a                                     " Automatically enable mouse usage
 set mousehide                                   " Hide the mouse cursor while typing
@@ -92,8 +101,8 @@ set guicursor=i-ci-ve:ver25
 "let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 " }}}
 " Styling vertical splits {{{
-set fillchars=vert:│,fold:۰,diff:·,stlnc:─
-
+"set fillchars=vert:│,fold:۰,diff:·,stlnc:─
+set fillchars=vert:│,fold:۰,diff:· 
 " }}}
 " Backup and undo {{{
 
@@ -143,7 +152,41 @@ call InitializeDirectories()
 
 " }}}
 " Functions {{{
+" Terminal-toggle https://pastebin.com/FjdkegRH {{{
 
+function! ChooseTerm(termname, slider)
+    let pane = bufwinnr(a:termname)
+    let buf = bufexists(a:termname)
+    if pane > 0
+        " pane is visible
+        if a:slider > 0
+            :exe pane . "wincmd c"
+        else
+            :exe "e #"
+        endif
+    elseif buf > 0
+        " buffer is not in pane
+        if a:slider
+        " Top split size 10, botright splits on bottom
+        " topleft splits on top
+            :exe "botright 10split"
+        endif
+        :exe "buffer " . a:termname
+        :startinsert
+    else
+        " buffer is not loaded, create
+        if a:slider
+        " Top split size 10, botright splits on bottom
+            :exe "botright 10split"
+        endif
+        :terminal
+        :exe "f " a:termname
+        :startinsert
+        set nobuflisted
+    endif
+endfunction
+
+" }}}
 " Toggle between relative and absolute line numbers {{{
 
 function! NumberToggle()
@@ -204,4 +247,34 @@ augroup resCur
 augroup END
 
 " }}}
+
+function! Relative_Path_CWD()
+    let l:path = fnamemodify(getcwd(),":t")
+    return l:path
+endfunction
+
+function! LinterStatus() abort
+    let l:counts = ale#statusline#Count(bufnr(''))
+
+    let l:all_errors = l:counts.error + l:counts.style_error
+    let l:all_non_errors = l:counts.total - l:all_errors
+
+    return l:counts.total == 0 ? '' : printf(
+    \   '%dW %dE',
+    \   all_non_errors,
+    \   all_errors
+    \)
+endfunction
+
+" }}}
+" Vinegar alternative {{{
+
+function! s:vinegar()
+  let fname = expand('%:t')
+  edit %:h
+  normal! gg
+  call search('\<'.fname.'\>')
+endfunction
+nnoremap - :<C-U>call <SID>vinegar()<CR>
+
 " }}}

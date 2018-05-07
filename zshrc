@@ -7,7 +7,7 @@ export ZSH=$HOME/.oh-my-zsh
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
 #ZSH_THEME="robbyrussell"
-ZSH_THEME="gnzh"
+#ZSH_THEME="gnzh"
 #ZSH_THEME="bira"
 #ZSH_THEME="nanotech"
 #ZSH_THEME="fox"
@@ -17,6 +17,7 @@ ZSH_THEME="gnzh"
 #ZSH_THEME="steeef"
 #ZSH_THEME="wezm"
 #ZSH_THEME="darkblood"
+#ZSH_THEME="agnoster"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"

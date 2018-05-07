@@ -1,97 +1,82 @@
 " Statusline {{{
 
 set laststatus=2
-"let left_sep='▓▒░'
-"let right_sep='░▒▓'
-let left_sep='▚'
-let left_second_sep='▖'
-let right_sep='▞'
-let right_second_sep='▗'
-let right_alt_sep=''
 
-"let left_sep = '▶'
-"let right_sep = '◀'
-"let right_alt_sep = '«'
+" Simple {{{
 
-let g:mode ={
-        \ '__' : '-', 'n'  : 'N',
-        \ 'i'  : 'I', 'R'  : 'R',
-        \ 'v'  : 'V', 'V'  : 'V',
-        \ 'c'  : 'C', '' : 'V',
-        \ 's'  : 'S', 'S'  : 'S',
-        \ '' : 'S', 't'  : 'T',
-    \}
+set statusline=
+set statusline+=%3* 
+set statusline+=\ %n\  
+set statusline+=%5* 
+set statusline+=\ %f
+set statusline+=\ %h%m%r
+set statusline+=%<
+set statusline+=%=
+set statusline+=%(\ %{LinterStatus()}\ %)
+set statusline+=%1* 
+set statusline+=\ %{''!=#&filetype?&filetype.'\ •\ ':''}
+set statusline+=%{fugitive#head()!=''?'\ \ '.fugitive#head().'\ •\ ':''}
+set statusline+=%(%4l\,%3c%)\ 
 
-set statusline=%!ActiveStatus()
+" }}}
+" Separators {{{
 
-function! ActiveStatus()
-  let l:statusline=""
-  let l:statusline.="%1*"
-  let l:statusline.="%(\ %{g:mode[mode()]}\ %)"
-  let l:statusline.="%5*"
-  let l:statusline.="%{left_sep}"
-  let l:statusline.="%2*"
-  let l:statusline.="%(%{&paste?'\ p\ ':''}%)"
-  let l:statusline.="%{fugitive#head()!=''?'\ \ ⎇\ '.fugitive#head().'\ ':''}"
-  let l:statusline.="%3*"
-  let l:statusline.="%{left_second_sep}"
-  let l:statusline.="%4*"
-  let l:statusline.="\ %<"
-  let l:statusline.="%f"
-  let l:statusline.="\ "
-  let l:statusline.="%#warningmsg#"
-  let l:statusline.="%{&modified?'[+]':''}"
-  let l:statusline.="%{&readonly?'':''}"
-  let l:statusline.="%4*"
-  let l:statusline.="%="
-  let l:statusline.="\ %{''!=#&filetype?&filetype:'none'}"
-  "let l:statusline.="\ "
-  let l:statusline.="%{right_alt_sep}"
-  let l:statusline.="%(%{(&bomb\|\|'^$\|utf-8'!~#&fileencoding?'\ '.&fileencoding.(&bomb?'-bom':''):'').('unix'!=#&fileformat?'\ '.&fileformat:'')}%)"
-  "let l:statusline.="%(\ %{&modifiable?(&expandtab?'et\ ':'noet\ ').&shiftwidth:''}%)"
-  let l:statusline.="%{g:asyncrun_status!=''?'\ \ │\ '.asyncrun_status:''}"
-  let l:statusline.="\ "
-  let l:statusline.="%3*"
-  let l:statusline.="%{right_second_sep}"
-  let l:statusline.="%2*"
-  let l:statusline.="%(\ %{LinterStatus()}%)"
-  let l:statusline.="\ "
-  let l:statusline.="%5*"
-  let l:statusline.="%{right_sep}"
-  let l:statusline.="%1*"
-  let l:statusline.="%(%<\ %4l\,%3c%)\ "
-  "let statusline.="%(\ %{strftime(\'%H:%M\')}%)\ "
-  return statusline
-endfunction
+let left_sep=''
+let right_sep=''
 
-function! InactiveStatus()
-  let statusline=""
-  let statusline.="%f\ "
-  return statusline
-endfunction
+" powerline symbols
+"let g:airline_left_sep = ''
+"let g:airline_left_alt_sep = ''
+"let g:airline_right_sep = ''
+"let g:airline_right_alt_sep = ''
+"let g:airline_symbols.branch = ''
+"let g:airline_symbols.readonly = ''
+"let g:airline_symbols.linenr = '☰'
+"let g:airline_symbols.maxlinenr = ''
 
-augroup status
-  autocmd!
-  autocmd WinEnter * setlocal statusline=%!ActiveStatus()
-  autocmd WinLeave * setlocal statusline=%!InactiveStatus()
-augroup END
+" }}}
+" Airline style {{{
 
-function! Relative_Path_CWD()
-    let l:path = fnamemodify(getcwd(),":t")
-    return l:path
-endfunction
+""https://www.reddit.com/r/vim/comments/6b7b08/my_custom_statusline/
 
-function! LinterStatus() abort
-    let l:counts = ale#statusline#Count(bufnr(''))
+"let g:mode ={
+        "\ '__' : '-', 'n'  : 'N',
+        "\ 'i'  : 'I', 'R'  : 'R',
+        "\ 'v'  : 'V', 'V'  : 'V',
+        "\ 'c'  : 'C', '' : 'V',
+        "\ 's'  : 'S', 'S'  : 'S',
+        "\ '' : 'S', 't'  : 'T',
+    "\}
 
-    let l:all_errors = l:counts.error + l:counts.style_error
-    let l:all_non_errors = l:counts.total - l:all_errors
+"set statusline=
+"set statusline+=%1*
+"set statusline+=%(\ %{g:mode[mode()]}\ %)
+"set statusline+=%(%{&paste?'P\ ':''}%)
+"set statusline+=%2*
+"set statusline+=%{left_sep}
+"set statusline+=%3*
+"set statusline+=%{fugitive#head()!=''?'\ \ \ '.fugitive#head().'\ ':''}
+"set statusline+=%4*
+"set statusline+=%{left_sep}
+"set statusline+=%5*
+"set statusline+=\ %<
+"set statusline+=%t
+"set statusline+=\ 
+"set statusline+=%{&modified?'[+]':''}
+"set statusline+=%{&readonly?'':''}
+"set statusline+=%=
+"set statusline+=\ %{''!=#&filetype?&filetype:''}
+"set statusline+=%{right_alt_sep}
+"set statusline+=\ 
+"set statusline+=%4*
+"set statusline+=%{right_sep}
+"set statusline+=%3*
+"set statusline+=%(\ %{LinterStatus()}%)
+"set statusline+=\ 
+"set statusline+=%2*
+"set statusline+=%{right_sep}
+"set statusline+=%1*
+"set statusline+=%(%<\ %4l\,%3c%)\ 
 
-    return l:counts.total == 0 ? '✔' : printf(
-    \   '%dW %dE',
-    \   all_non_errors,
-    \   all_errors
-    \)
-endfunction
-
+" }}}
 " }}}

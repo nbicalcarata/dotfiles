@@ -1,467 +1,65 @@
-" Plug core {{{
-
-set nocompatible              " be iMproved
-set modelines=0
-
-" Identify plataform
 silent function! OSX()
-    return has('macunix')
+  return has('macunix')
 endfunction
 silent function! LINUX()
-    return has('unix') && !has('macunix') && !has('win32unix')
+  return has('unix') && !has('macunix') && !has('win32unix')
 endfunction
 silent function! WINDOWS()
-    return  (has('win16') || has('win32') || has('win64'))
+  return  (has('win16') || has('win32') || has('win64'))
 endfunction
 
-" Plug automatic installation
+filetype plugin indent on
+syntax on
 
-let basedir = '.vim'
+set nocompatible
+set noswapfile
+set laststatus=2
+set tabstop=8
+set shiftwidth=4
+set softtabstop=4      
+set cursorline
+set number
+set wrap
+set hlsearch
+set showmatch
+set ignorecase
+set smartcase
+set noerrorbells visualbell t_vb=
+set belloff=all
+set completeopt+=menuone
+set completeopt+=noselect
+set completeopt+=noinsert
+set completeopt-=preview
+set wildignorecase
+set wildmode=list:longest,full
 
-if WINDOWS()
-    let basedir = 'vimfiles'
-endif
+call plug#begin('~/.vim/plugged')
 
-if empty(glob('~/' . basedir . '/autoload/plug.vim'))
-    silent !mkdir -p '~/' . basedir . '/autoload'
-    silent !curl -fLo '~/' . basedir . '/autoload/plug.vim'
-        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    autocmd VimEnter * PlugInstall
-endif
-call plug#begin('~/' . basedir . '/plugged')
-
-" }}}
-" Plug install packages {{{
-
-" General {{{
-
-Plug 'MarcWeber/vim-addon-mw-utils'
-Plug 'tomtom/tlib_vim'
-Plug 'Shougo/vimfiler.vim'
-Plug 'scrooloose/nerdcommenter'
-"Plug 'majutsushi/tagbar'
-Plug 'bling/vim-airline'
-Plug 'mklabs/vim-fetch'
-Plug 'justinmk/vim-gtfo'
-"Plug 'edkolev/tmuxline.vim'
-Plug 'scrooloose/syntastic'
-Plug 'severin-lemaignan/vim-minimap'
-Plug 'benmills/vimux'
-"Plug 'christoomey/vim-tmux-navigator'
-Plug 'xolox/vim-misc'
-Plug 'xolox/vim-notes'
-"Plug '907th/vim-auto-save'
-Plug 'mbbill/undotree'
-Plug 'Harenome/vim-neatfoldtext'
-Plug 'ConradIrwin/vim-bracketed-paste'
-Plug 'Shougo/unite.vim'
-Plug 'Shougo/neomru.vim'
-Plug 'Shougo/vimproc.vim', { 'do': 'make' }
-Plug 'Shougo/neoyank.vim'
-Plug 'Shougo/vimshell.vim'
-"Plug 'ryanoasis/vim-webdevicons'
-
-"}}}
-" Colorschemes {{{
-
-Plug 'nbicalcarata/vim-womprat'
-Plug 'nbicalcarata/vim-airline-womprat'
-Plug 'nbicalcarata/vim-airline-dieciseis'
-Plug 'nanotech/jellybeans.vim'
-Plug 'sickill/vim-monokai'
-Plug 'tomasr/molokai'
-Plug 'nbicalcarata/Muon'
-Plug 'vim-scripts/lilypink'
+Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'chriskempson/base16-vim'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'morhetz/gruvbox'
-Plug 'AlessandroYorba/Alduin'
-Plug 'whatyouhide/vim-gotham'
-Plug 'AlessandroYorba/Sierra'
-
-" }}}
-" Git {{{
-
-Plug 'mattn/webapi-vim'
-Plug 'mattn/gist-vim'
-Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
-Plug 'cohama/agit.vim'
-Plug 'chemzqm/unite-git-log'
-Plug 'chemzqm/vim-easygit'
-
-" }}}
-" Html {{{
-
-Plug 'Valloric/MatchTagAlways'
-Plug 'chrisgillis/vim-bootstrap3-snippets'
-Plug 'mattn/emmet-vim'
-Plug 'jaxbot/browserlink.vim'
-Plug 'alvan/vim-closetag'
-
-" }}}
-" Snippets & AutoComplete {{{
-
-if has('lua') && (version >= 704 || version == 703 && has('patch885'))
-    Plug 'Shougo/neocomplete.vim'
-    let g:completionEngine = 'neocomplete'
-else
-    Plug 'Valloric/YouCompleteMe'
-    let g:completionEngine = 'YouCompleteMe'
-endif
-
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
+Plug '~/.vim/plugged/eclim'
 Plug 'jiangmiao/auto-pairs'
+Plug 'romainl/vim-cool'
+Plug 'Shougo/denite.nvim'
+Plug 'scrooloose/nerdcommenter'
 
-" }}}
-" Python {{{
+function! BuildYCM(info)
+  if a:info.status == 'installed' || a:info.force
+    !./install.py --js-completer
+  endif
+endfunction
 
-Plug 'klen/python-mode'
-Plug 'python_match.vim'
-Plug 'jmcantrell/vim-virtualenv'
-Plug 'alfredodeza/pytest.vim'
-
-" }}}
-" Syntax highlighting{{{
-
-Plug 'sheerun/vim-polyglot'
-
-" }}}
-
-" }}}
-" Plug end {{{
+Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
 
 call plug#end()
 
-" }}}
+let g:mapleader = ','
 
-" Basic setup {{{
-
-" Basics {
-
-if !WINDOWS()
-    set shell=/bin/sh
-endif
-
-scriptencoding utf-8
-set background=dark                             " Assume a dark background
-set mouse=a                                     " Automatically enable mouse usage
-set mousehide                                   " Hide the mouse cursor while typing
-
-if has('clipboard')
-    if has('unnamedplus')  " When possible use + register for copy-paste
-        set clipboard=unnamed,unnamedplus
-    else         " On mac and Windows, use * register for copy-paste
-        set clipboard=unnamed
-    endif
-endif
-
-set shortmess+=afilmnrxoOtT                     " Abbrev. of messages (avoids 'hit enter')
-set viewoptions=folds,options,cursor,unix,slash " Unix / Windows compatibility
-set virtualedit=onemore                         " Allow for cursor beyond last character
-set history=1000                                " Store a ton of history (default is 20)
-set nospell                                     " Spell checking off
-set hidden                                      " Allow buffer switching without saving
-set foldenable                                  " Enable folding
-set foldlevel=99                                " Folds open at start"
-set timeoutlen=1000 ttimeoutlen=0               " Eliminar retardo de Insert a Normal
-
-" Setting up the directories {{{
-
-"cd ~/Codigo/                                   " Default directory
-set noswapfile
-set backup                                     " Backups are nice ...
-if has('persistent_undo')
-    set undofile                                " So is persistent undo ...
-    set undolevels=10000                        " Maximum number of changes that can be undone
-    set undoreload=10000                        " Maximum number lines to save for undo
-endif
-
-" }}}
-" Wild menu options {{{
-
-set wildmenu                                             " cmd line completion ala zsh
-set wildmode=list:longest                                " matches mimic bash or zsh
-set wildignore+=node_modules                             " node_modules dir
-set wildignore+=.ropeproject                             " py rope cache dir
-set wildignore+=.hg,.git,.svn                            " Version control
-set wildignore+=*.aux,*.out,*.toc                        " LaTeX intermediate files
-set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg,*.ico     " binary images
-set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest         " compiled object files
-set wildignore+=*.spl                                    " compiled spelling word lists
-set wildignore+=*.sw?                                    " Vim swap files
-set wildignore+=migrations                               " Django migrations
-set wildignore+=*.pyc                                    " Python byte code
-set wildignore+=*.class                                  " Java byte code
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.rar           " MacOSX/Linux
-
-" }}}
-
-" }}}
-" Autocmd rules {{{
-
-" Always switch to the current file directory {{{
-
-augroup SwitchCurrentFile
-    autocmd!
-    autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | lcd %:p:h | endif
-    autocmd FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
-augroup END
-
-" }}}
-" Running code with ,r {{{
-
-augroup RunningCode
-    autocmd!
-    autocmd FileType python map <leader>e :w<CR>:!python %<CR>
-    autocmd FileType php map <leader>e :w<CR>:!php %<CR>
-    autocmd FileType bash map <leader>e :w<CR>:!./%<CR>
-    autocmd FileType java map <leader>c :w<CR>:!javac %<CR>
-    autocmd FileType java map <leader>e :w<CR>:!java %:r<CR>
-augroup END
-
-" }}}
-" Restore cursor to file position in previous editing session {{{
-
-"function! ResCur()
-    "if line("'\"") <= line("$")
-        "normal! g`"
-        "return 1
-    "endif
-"endfunction
-"augroup resCur
-    "autocmd!
-    "autocmd BufWinEnter * call ResCur()
-"augroup END
-
-" }}}
-"Omnicompletion {{{
-
-augroup OmniCompletion
-    autocmd!
-    autocmd FileType css set omnifunc=csscomplete#CompleteCSS
-    autocmd FileType html,markdown set omnifunc=htmlcomplete#CompleteTags
-    autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
-    autocmd FileType python set omnifunc=pythoncomplete#Complete
-    autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
-    autocmd FileType ruby set omnifunc=rubycomplete#Complete
-    autocmd FileType htmldjango set omnifunc=htmldjangocomplete#CompleteDjango
-    autocmd FileType php set omnifunc=phpcomplete#CompletePHP
-augroup END
-" }}}
-"No delay between Insert and Normal mode {{{
-
-augroup FastEscape
-    autocmd!
-    au InsertEnter * set timeoutlen=0
-    au InsertLeave * set timeoutlen=1000
-augroup END
-
-" }}}
-" Only show cursorline in the current window {{{
-
-augroup CursorLineOnlyInActiveWindow
-    autocmd!
-    autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
-    autocmd WinLeave * setlocal nocursorline
-augroup END
-
-" }}}
-" Open help files in right side {{{
-
-augroup HelpFilesRightSide
-    autocmd!
-    autocmd FileType help :wincmd L
-    autocmd FileType help set bufhidden=unload
-augroup END
-
-" }}}
-" Disable colorcolumn on specific files {{{
-
-augroup DisableColorcolumn
-    autocmd!
-    au BufNewFile,BufRead *.html setlocal colorcolumn=
-    au BufNewFile,BufRead *.php setlocal colorcolumn=
-    autocmd FileType vim-plug setl colorcolumn=
-augroup END
-
-" }}}
-" Disable list on preview window {{{
-
-augroup DisableListPreviewWindow
-    autocmd!
-    autocmd WinEnter * if &previewwindow | setlocal nolist | endif
-augroup END
-
-" }}}
-" Vimfiler rules {{{
-
-augroup VimfilerRules
-    autocmd!
-    autocmd FileType vimfiler setlocal nonumber     " no line number
-augroup END
-
-" }}}
-" Detect django files {{{
-
-augroup DjangoFiles
-    autocmd!
-    au BufNewFile,BufRead admin.py     setlocal filetype=python.django
-    au BufNewFile,BufRead urls.py      setlocal filetype=python.django
-    au BufNewFile,BufRead models.py    setlocal filetype=python.django
-    au BufNewFile,BufRead views.py     setlocal filetype=python.django
-    au BufNewFile,BufRead settings.py  setlocal filetype=python.django
-    au BufNewFile,BufRead forms.py     setlocal filetype=python.django
-    "au BufNewFile,BufRead *.html       setlocal filetype=htmldjango
-augroup END
-
-" }}}
-" Enable minimap at start {{{
-
-"autocmd! VimEnter * Minimap
-"let g:minimap_highlight='LineNr'
-
-" }}}
-" }}}
-" PHP with html syntax {{{
-  
-augroup phpLaravel
-    autocmd!
-    autocmd BufRead,BufNewFile *.php set filetype=php.laravel.html
-    autocmd BufRead,BufNewFile *.blade.php set filetype=blade.html
-augroup END
-
-" }}}
-
-" Visual settings {{{
-
-" General {{{
-
-set ttyfast
-set foldmethod=marker
-set number
-set nowrap
-set linebreak
-set title
-set visualbell t_vb=            " turn off error beep/flash
-set novisualbell                " turn off visual bell
-set noea
-set t_Co=256                    " Enable 256 colors
-set lazyredraw
-set noshowmode                  " Dont display the current mode
-"set hlsearch                   " Highlight search matches
-set showmatch                   " show matching brackets/parenthesis
-set incsearch                   " Find as you type search
-set ignorecase                  " Case insensitive search
-set smartcase                   " Case sensitive when uc present
-set scrolloff=5                 " Minimum lines to keep above and below cursor
-
-if LINUX()
-    set listchars=tab:▸\ ,eol:¬,extends:»,precedes:«,trail:•
-endif
-
-" }}}
-" Formatting {{{
-
-set autoindent                  " Indent at the same level of the previous line
-filetype plugin indent on
-set shiftwidth=4                " Use indents of 4 spaces
-set expandtab                   " Tabs are spaces, not tabs
-set tabstop=4                   " An indentation every four columns
-set softtabstop=4               " Let backspace delete indent
-set nojoinspaces                " Prevents inserting two spaces after
-set splitright                  " Puts new vsplit windows to the right
-set splitbelow                  " Puts new split windows to the bottom
-let loaded_matchparen = 1
-set pastetoggle=<F12>           " pastetoggle (sane indentation on pastes)
-
-" }}}
-" Colorschemes {{{
-
-let g:alduin_Shout_Fire_Breath = 1
-colorscheme alduin
-"let g:jellybeans_use_lowcolor_black = 0
-
-" }}}
-" Cursor line {{{
-
-set cursorline
-hi Search cterm=NONE ctermfg=black
-"hi CursorLineNr   cterm=bold
-
-" }}}
-" Statusline {{{
-
-if has('statusline')
-    set laststatus=2
-    set statusline=%<%f\                     " Filename
-    set statusline+=%w%h%m%r                 " Options
-    set statusline+=%{fugitive#statusline()} " Git Hotness
-    set statusline+=\ [%{&ff}/%Y]            " Filetype
-    set statusline+=\ [%{getcwd()}]          " Current dir
-    set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info
-endif
-
-" }}}
-" Styling vertical splits {{{
-if LINUX()
-    set fillchars=vert:│,diff:⎼,fold:⎼
-    "set fillchars=vert:┃,diff:⎼,fold:⎼
-endif
-
-augroup OverrideColor
-    autocmd!
-    autocmd ColorScheme * highlight VertSplit guibg=NONE cterm=NONE ctermbg=NONE
-    "autocmd ColorScheme * highlight Folded    guibg=NONE ctermbg=none
-    "autocmd ColorScheme * highlight Number    guibg=NONE ctermbg=none
-    "autocmd ColorScheme * highlight LineNr    guibg=NONE ctermbg=none
-    autocmd ColorScheme * highlight GitGutterAdd guibg=NONE ctermbg=none
-    autocmd ColorScheme * highlight GitGutterChange guibg=NONE ctermbg=none
-    autocmd ColorScheme * highlight GitGutterDelete guibg=NONE ctermbg=none
-    autocmd ColorScheme * highlight GitGutterChangeDelete guibg=NONE ctermbg=none
-augroup END
-
-" }}}
-
-" }}}
-
-" Mappings {{{
-
-let mapleader = ","
-" Space to fold
-nnoremap <space> za
-" Quick edit vimrc
-nnoremap <leader>ev :vsplit ~/dotfiles/vimrc<cr>
-nnoremap <leader>sv :source ~/dotfiles/vimrc<cr>
-
-nnoremap <F1> <nop>
-nnoremap Q <nop>
-nnoremap K <nop>
-
-" Bind nohl
-" Removes highlight of your last search
-noremap <C-n> :nohl<CR>
-vnoremap <C-n> :nohl<CR>
-inoremap <C-n> :nohl<CR>
-
-" Resizing windows
-nnoremap <C-up> <C-W>-
-nnoremap <C-down> <C-W>+
-nnoremap <C-right> 5<C-W><
-nnoremap <C-left> 5<C-W>>
-
-" Substitute
-nnoremap <leader>s :%s//<left>
-
-" Select current line (no indentation)
-nnoremap vv ^vg_
-
-" Wrapped lines goes down/up to next row, rather than next line in file.
+"Wrapped lines goes down/up to next row, rather than next line in file.
 noremap j gj
 noremap k gk
 
-" Same for 0, home, end, etc
+"Same for 0, home, end, etc
 noremap $ g$
 noremap <End> g<End>
 noremap 0 g0
@@ -476,530 +74,156 @@ vnoremap > >gv
 " Adjust viewports to the same size
 map <Leader>= <C-w>=
 
-" Map <Leader>ff to display all lines with keyword under cursor
-" and ask which one to jump to
-nmap <Leader>ff [I:let nr = input("Which one: ")<Bar>exe "normal " . nr ."[\t"<CR>
-
 " Easier horizontal scrolling
 map zl zL
 map zh zH
 
-" fullscreen mode for GVIM and Terminal, need 'wmctrl' in you PATH
-map <silent> <F11> :call system("wmctrl -ir " . v:windowid . " -b toggle,fullscreen")<CR>
+" Center cursor on search results
+noremap n nzz
+noremap N Nzz
 
-"<leader>q to close buffer without closing the window
-map <leader>q :bp<bar>sp<bar>bn<bar>bd<CR>
+" Move between splits
+nnoremap <C-H> <C-W><C-H>
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
 
-" Toggle between absolute and relative line numbers
-nnoremap <Leader>n :call NumberToggle()<cr>
+" Term move between splits
+tnoremap <Esc> <C-\><C-n>
+tnoremap <C-h> <C-\><C-n><C-w>h
+tnoremap <C-j> <C-\><C-n><C-w>j
+tnoremap <C-k> <C-\><C-n><C-w>k
+tnoremap <C-l> <C-\><C-n><C-w>l
 
-" Toggle between invisible chars
-nmap <leader>l :set list!<CR>
+set shortmess+=c   " Shut off completion messages
 
-" Ag
-"nnoremap <leader>a :Ag 
+let g:CoolTotalMatches = 1
 
-" Tmux + vim special keys compatibility {{{
+" Denite {{{
 
-if &term =~ '^screen' && exists('$TMUX')
-    set mouse+=a
-    " tmux knows the extended mouse mode
-    set ttymouse=xterm2
-    " tmux will send xterm-style keys when xterm-keys is on
-    execute "set <xUp>=\e[1;*A"
-    execute "set <xDown>=\e[1;*B"
-    execute "set <xRight>=\e[1;*C"
-    execute "set <xLeft>=\e[1;*D"
-    execute "set <xHome>=\e[1;*H"
-    execute "set <xEnd>=\e[1;*F"
-    execute "set <Insert>=\e[2;*~"
-    execute "set <Delete>=\e[3;*~"
-    execute "set <PageUp>=\e[5;*~"
-    execute "set <PageDown>=\e[6;*~"
-    execute "set <xF1>=\e[1;*P"
-    execute "set <xF2>=\e[1;*Q"
-    execute "set <xF3>=\e[1;*R"
-    execute "set <xF4>=\e[1;*S"
-    execute "set <F5>=\e[15;*~"
-    execute "set <F6>=\e[17;*~"
-    execute "set <F7>=\e[18;*~"
-    execute "set <F8>=\e[19;*~"
-    execute "set <F9>=\e[20;*~"
-    execute "set <F10>=\e[21;*~"
-    execute "set <F11>=\e[23;*~"
-    execute "set <F12>=\e[24;*~"
-endif
-
-" }}}
-
-" }}}
-" Functions {{{
-
-" Initialize directories {{{
-
-function! InitializeDirectories()
-    let parent = $HOME
-    let prefix = 'vim'
-    let dir_list = {
-                \ 'backup': 'backupdir',
-                \ 'views': 'viewdir', }
-
-    if has('persistent_undo')
-        let dir_list['undo'] = 'undodir'
-    endif
-
-    " To specify a different directory in which to place the vimbackup,
-    " vimviews, vimundo, and vimswap files/directories, add the following to
-    " your .vimrc.before.local file:
-    "directory = $HOME . '/.vim/'
-
-    let common_dir = parent . '/.' . prefix
-
-    for [dirname, settingname] in items(dir_list)
-        let directory = common_dir . dirname . '/'
-        if exists("*mkdir")
-            if !isdirectory(directory)
-                call mkdir(directory)
-            endif
-        endif
-        if !isdirectory(directory)
-            echo "Warning: Unable to create backup directory: " . directory
-            echo "Try: mkdir -p " . directory
-        else
-            let directory = substitute(directory, " ", "\\\\ ", "g")
-            exec "set " . settingname . "=" . directory
-        endif
-    endfor
-endfunction
-call InitializeDirectories()
-
-" }}}
-
-" }}}
-" Change status on tmux {{{
-
-"function! AddTmuxline()
-"  if exists(':Tmuxline')
-""   augroup airline_tmuxline
-""      au!
-""      au InsertEnter * Tmuxline airline_insert
-""      au InsertLeave * Tmuxline airline
-""    augroup END
-""  endif
-"endfunction
-"au VimEnter * :call AddTmuxline()
-
-" }}}
-" Jump to CSS definition {{{
-
-function! JumpToCSS()
-  let id_pos = searchpos("id", "nb", line('.'))[1]
-  let class_pos = searchpos("class", "nb", line('.'))[1]
-
-  if class_pos > 0 || id_pos > 0
-    if class_pos < id_pos
-      execute ":vim '#".expand('<cword>')."' **/*.css"
-    elseif class_pos > id_pos
-      execute ":vim '.".expand('<cword>')."' **/*.css"
-    endif
-  endif
-endfunction
-
-nnoremap <F9> :call JumpToCSS()<CR>
-
-" source http://stackoverflow.com/a/12835224
-" }}}
-" Set airline and colorscheme color {{{
-
-function! Base16(scheme)
-    execute 'colorscheme base16-' . a:scheme
-    let g:airline_theme = 'base16_' . a:scheme
-endfunction
-
-" }}}
-
-" Toggle between relative and absolute line numbers {{{
-
-function! NumberToggle()
-    if(&relativenumber == 1)
-        set norelativenumber
-        set number!
-    else
-        set relativenumber
-    endif
-endfunc
-
-" }}}
-" Toggle colorcolumn {{{
-
-function! g:ToggleColorColumn()
-  if &colorcolumn != ''
-    set colorcolumn&
-  else
-    let &colorcolumn="80,".join(range(120,999),",")
-  endif
-endfunction
-
-nnoremap <silent> <leader>co :call g:ToggleColorColumn()<CR>
-
-" }}}
-
-" Plugin settings {{{
-
-" Syntastic {{{
-
-let g:syntastic_javascript_checkers = ['jshint']
-let g:syntastic_html_checkers = ['w3']
-let g:syntastic_java_checkers = ['javac']
-let g:syntastic_java_javac_classpath = "./lib/*.jar\n./src"
-"let g:EclimFileTypeValidate = 0
-let g:syntastic_mode_map = {'mode': 'passive'}
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
-if LINUX()
-    let g:syntastic_error_symbol = "✗"
-    let g:syntastic_warning_symbol = "⚠"
-endif
-let g:syntastic_loc_list_= 5
-
-" }}}
-" Vimfiler {{{
-let g:vimfiler_as_default_explorer = 1
-"nnoremap <C-e> :VimFilerBufferDir -explorer<CR>
-nnoremap <silent> - :<c-u>VimFilerBufferDir -simple<CR>
-
-" Like Textmate icons.
-let g:vimfiler_tree_leaf_icon = ' '
-let g:vimfiler_tree_opened_icon = '▾'
-let g:vimfiler_tree_closed_icon = '▸'
-let g:vimfiler_file_icon = '-'
-let g:vimfiler_marked_file_icon = '*'
-
-" }}}
-" Airline {{{
-let g:replace_separators = 0
-let g:airline_powerline_fonts = 1
-let g:tmuxline_preset = 'full'
-let g:airline#extensions#tmuxline#snapshot_file = "~/dotfiles/snapshot_tmuxline"
-let g:airline_theme = 'tomorrow'
-let g:airline#extensions#tabline#enabled = 1            " Activar tabline
-let g:airline#extensions#tabline#show_buffers = 0
-let g:airline#extensions#tabline#tab_min_count = 2
-let g:airline#extensions#branch#empty_message = '*'
-let g:airline#extensions#whitespace#enabled = 0
-
-"Remove percentage
-"let g:airline_section_z = '%3p%% %{g:airline_symbols.linenr}%#__accent_bold#%4l%#__restore__#:%3v'
-let g:airline_section_c = airline#section#create(['%<%F'])
-let g:airline_section_z = ' %{g:airline_symbols.linenr}%#__accent_bold#%4l%#__restore__#/%L%/:%3v'
-
-" Short names
-let g:airline_mode_map = {
-    \ '__' : '-',
-    \ 'n'  : 'N',
-    \ 'i'  : 'I',
-    \ 'R'  : 'R',
-    \ 'c'  : 'C',
-    \ 'v'  : 'V',
-    \ 'V'  : 'V',
-    \ '' : 'V',
-    \ 's'  : 'S',
-    \ 'S'  : 'S',
-    \ '' : 'S',
-    \ }
-
-let g:airline#extensions#default#section_truncate_width = {
-      \ 'b': 79,
-      \ 'x': 60,
-      \ 'y': 88,
-      \ 'z': 45,
-      \ 'warning': 80,
-      \ 'error': 80,
-      \ }
-
-" Remove separators
-if get(g:, 'replace_separators', 1)
-
-    if !exists('g:airline_symbols')
-      let g:airline_symbols = {}
-    endif
-
-    let g:airline_left_sep = ''
-    let g:airline_right_sep = ''
-    if LINUX()
-        let g:airline_left_alt_sep = '│'
-        let g:airline_right_alt_sep = '│'
-    endif
-    let g:tmuxline_powerline_separators = 0
-
-    let g:tmuxline_separators = {
-          \ 'left' : '',
-          \ 'left_alt': ':',
-          \ 'right' : '',
-          \ 'right_alt' : '│',
-          \ 'space' : ' '}
-endif
-
-" }}}
-" Unite {{{
-
-nnoremap <C-Space> :<C-u>Unite<CR>
-nnoremap <leader>f :<C-u>Unite -buffer-name=files file<CR>
-nnoremap <leader>a :<C-u>Unite -buffer-name=files_rec file_rec/async:!<CR>
-nnoremap <silent> <leader>b :<C-u>Unite -buffer-name=buffers buffer bookmark<CR>
-nnoremap <leader>r :<C-u>Unite -buffer-name=mru file_mru<cr>
-nnoremap <leader>y :<C-u>Unite -buffer-name=yank history/yank<cr>
-nnoremap <leader>/ :<C-u>Unite -buffer-name=line line <cr>
-let g:unite_source_codesearch_ignore_case = 1
-let g:unite_prompt='> '
-call unite#filters#matcher_default#use(['matcher_fuzzy'])
-call unite#filters#sorter_default#use(['sorter_rank'])
-"call unite#custom#source('file,file/new,file_mru,buffer,file_rec',
-    "\ 'matchers', 'matcher_fuzzy')
-let g:unite_data_directory='~/.vim/.cache/unite'
-let g:unite_source_history_yank_enable=1
-if executable('ag')
-    let g:unite_source_grep_command = 'ag'
-    let g:unite_source_grep_default_opts='-i -r --line-numbers --nocolor --nogroup -S'
-    let g:unite_source_grep_recursive_opt = ''
-endif
-
-call unite#custom#profile('default', 'context', {
-\   'start_insert': 1,
-\   'silent': 1
-\ })
-
-" settings for neomru
-let g:neomru#file_mru_limit = 10
-let g:neomru#file_mru_ignore_pattern = 'COMMIT_EDITMSG'
+" Change mappings.
+"nnoremap <C-P> :Denite file_rec<CR>
+nnoremap <leader>d :Denite 
+nnoremap <leader>B :Denite buffer<cr>
+nnoremap <leader>m :Denite file_old<cr>
+nnoremap <leader>l :Denite line<cr>
+"nnoremap <leader>o :Denite outline<cr>
+nnoremap <leader>r :Denite register<cr>
+nnoremap <leader>zz :Denite grep -path=~/Documentos/Apuntes/<cr>
+nnoremap <leader>z :Denite file_rec -path=~/Documentos/Apuntes/<cr>
 
 if WINDOWS()
+    nnoremap <leader>z :Denite file_rec -path=~/Documents/Apuntes/<cr>
 endif
 
-" }}}
-" PythonMode {{{
+call denite#custom#alias('source', 'file_rec/git', 'file_rec')
 
-" Disable if python support not present
-if !has('python')
-    let g:pymode = 1
-endif
+call denite#custom#var('file_rec/git', 'command',
+            \ ['git', 'ls-files', '-co', '--exclude-standard'])
+nnoremap <silent> <leader>f :<C-u>Denite
+            \ `finddir('.git', ';') != '' ? 'file_rec/git' : 'file_rec'`<CR>
 
-" Automatic virtualenv detection
-let g:pymode_virtualenv = 1
+" Change mappings
+call denite#custom#map(
+            \ 'insert',
+            \ '<C-j>',
+            \ '<denite:move_to_next_line>',
+            \ 'noremap'
+            \)
+call denite#custom#map(
+            \ 'insert',
+            \ '<C-k>',
+            \ '<denite:move_to_previous_line>',
+            \ 'noremap'
+            \)
 
-" Turn off the run code script
-let g:pymode_run = 0
-let g:pymode_lint_checker = "pyflakes"
-let g:pymode_utils_whitespaces = 0
-let g:pymode_options = 0
-let g:pymode_lint_on_write = 0
-let g:pymode_rope_lookup_project = 0
-let g:pymode_rope = 0
-let g:pydoc_open_cmd = 'vsplit'
+call denite#custom#option('default', {
+            \ 'prompt': '❯',
+            \ 'reversed': 1,
+            \ 'auto_resize': 1,
+	    \ 'statusline': v:false
+            \ })
 
-" }}}
-" YouCompleteMe and Neocomplete {{{
-if g:completionEngine == 'YouCompleteMe'
-	" Cerrar la ventana de previsualizacion despues del completado semantico
-    let g:ycm_autoclose_preview_window_after_completion = 1
-
-    " Cerrar la ventana de previsualizacion despues de salir del modo Insert
-    " Default 0
-    let g:ycm_autoclose_preview_window_after_insertion = 0
-
-    " Compatibilidad con python mode (autocompletado correcto despues de .)
-    let g:pymode_rope_complete_on_dot = 0
-
-    " Youcompleteme eclim
-    " let g:EclimCompletionMethod = 'omnifunc'
-
-elseif exists('g:completionEngine')
-	let g:acp_enableAtStartup=0
-	let g:{g:completionEngine}#enable_at_startup=1
-	let g:{g:completionEngine}#enable_smart_case=1
-	let g:{g:completionEngine}#sources#syntax#min_keyword_length=3
-	let g:{g:completionEngine}#max_list=10
-	let g:{g:completionEngine}#auto_completion_start_length=3
-	let g:{g:completionEngine}#sources#dictionary#dictionaries={  'default' : '' }
-	let g:{g:completionEngine}#sources#omni#input_patterns={}
-	let g:{g:completionEngine}#keyword_patterns={ 'default': '\h\w*' }
-	let g:{g:completionEngine}#data_directory="~/.cache/neocomplete"
-	inoremap <expr><C-g>     {g:completionEngine}#undo_completion()
-	inoremap <expr><C-l>     {g:completionEngine}#complete_common_string()
-	inoremap <expr><BS>      {g:completionEngine}#smart_close_popup()."\<C-h>"
-	inoremap <expr><TAB>     pumvisible() ? "\<C-n>" : "\<TAB>"
-    set completeopt-=preview
-endif
+            "\ 'statusline': 0
+            "\ 'split': 'no'
+call denite#custom#var('buffer', 'date_format', '')
+call denite#custom#option('_', 'highlight_matched_range', 'None')
+call denite#custom#option('_', 'highlight_matched_char', 'Character')
 " }}}
 " UltiSnips {{{
+let g:UltiSnipsExpandTrigger='<c-e>'
+let g:UltiSnipsListSnippets='<c-l>'
+let g:UltiSnipsJumpForwardTrigger='<c-j>'
+let g:UltiSnipsJumpBackwardTrigger='<c-k>'
+inoremap <c-x><c-k> <c-x><c-k>
+let g:UltiSnipsSnippetDirectories = ['UltiSnips']
 
-let g:UltiSnipsExpandTrigger="<c-j>"
-let g:UltiSnipsJumpForwardTrigger="<c-j>"
-let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+" youcompleteme
 
-" }}}
-" Matchtag always {{{
+let g:EclimCompletionMethod = 'omnifunc'
+let g:ycm_autoclose_preview_window_after_insertion = 1
 
-" Custom MatchTag syntax group with a default highlight color
-"let g:mta_use_matchparen_group = 0
+"set fillchars=vert:│,fold:۰,diff:· 
 
-" }}}
-" Vim notes {{{
+" Statusline
+set statusline=
+set statusline+=%3* 
+set statusline+=\ %n\  
+set statusline+=%5* 
+set statusline+=\ %f
+set statusline+=\ %h%m%r
+set statusline+=%<
+set statusline+=%=
+set statusline+=%1* 
+set statusline+=\ %{''!=#&filetype?&filetype.'\ •\ ':''}
+"set statusline+=%{fugitive#head()!=''?'\ \ '.fugitive#head().'\ •\ ':''}
+set statusline+=%(%4l\,%3c%)\ 
 
-let g:notes_directories = ['~/Documentos/Notas']
+augroup OverrideColor
+    autocmd!
+    autocmd ColorScheme * hi! link LineNr TabLine
+    autocmd ColorScheme * hi! link ColorColumn CursorLine
+    autocmd ColorScheme * hi! link CursorColumn CursorLine
+    "autocmd ColorScheme * hi! link VertSplit CursorLine
+    autocmd ColorScheme * hi! link StatusLineNC VertSplit
+    autocmd ColorScheme * exec 'hi User1' .
+            \' guibg=' . synIDattr(synIDtrans(hlID('Normal')), 'fg', 'gui') .
+            \' guifg=' . synIDattr(synIDtrans(hlID('Normal')), 'bg', 'gui')
+    autocmd ColorScheme * exec 'hi User2' .
+            \' guibg=' . synIDattr(synIDtrans(hlID('Function')), 'fg', 'gui') .
+            \' guifg=' . synIDattr(synIDtrans(hlID('Normal')), 'fg', 'gui')
+    autocmd ColorScheme * exec 'hi User3' .
+            \' guibg=' . synIDattr(synIDtrans(hlID('Function')), 'fg', 'gui') .
+            \' guifg=' . synIDattr(synIDtrans(hlID('Normal')), 'bg', 'gui')
+    autocmd ColorScheme * exec 'hi User4' .
+            \' guibg=' . synIDattr(synIDtrans(hlID('CursorLine')), 'bg', 'gui')
+            \' guifg=' . synIDattr(synIDtrans(hlID('Function')), 'fg', 'gui')
+    autocmd ColorScheme * exec 'hi User5' .
+            \' guibg=' . synIDattr(synIDtrans(hlID('CursorLine')), 'bg', 'gui')
+            \' guifg=' . synIDattr(synIDtrans(hlID('Normal')), 'fg', 'gui')
+    autocmd ColorScheme * exec 'hi User6' .
+            \' guibg=' . synIDattr(synIDtrans(hlID('Normal')), 'bg', 'gui') .
+            \' guifg=' . synIDattr(synIDtrans(hlID('StatusLine')), 'fg', 'gui')
+    autocmd ColorScheme * hi StatusLine cterm=NONE ctermbg=NONE guibg=#2C3135
+    "autocmd ColorScheme * hi Folded     gui=none cterm=none ctermbg=none guibg=none
+    autocmd ColorScheme * hi LineNr                 guibg=NONE ctermbg=NONE
+    autocmd ColorScheme * hi SignColumn             guibg=NONE ctermbg=NONE
+    autocmd ColorScheme * hi VertSplit              guifg=#2C3135 guibg=#2C3135
+    "autocmd ColorScheme * hi GitGutterAdd           guibg=NONE ctermbg=NONE
+    "autocmd ColorScheme * hi GitGutterChange        guibg=NONE ctermbg=NONE
+    "autocmd ColorScheme * hi GitGutterDelete        guibg=NONE ctermbg=NONE
+    "autocmd ColorScheme * hi GitGutterChangeDelete  guibg=NONE ctermbg=NONE
+    "autocmd ColorScheme * hi ALEErrorSign           guibg=NONE ctermbg=NONE
+    "autocmd ColorScheme * hi ALEWarningSign         guibg=NONE ctermbg=NONE
+augroup END
 
-" }}}
-" Git gutter {{{
+" Only show cursorline in the current window {{{
 
-nmap <leader>gn <Plug>GitGutterNextHunk
-nmap <leader>gp <Plug>GitGutterPrevHunk
-nmap <Leader>gs <Plug>GitGutterStageHunk
-nmap <Leader>gr <Plug>GitGutterRevertHunk
+augroup CursorLineOnlyInActiveWindow
+    autocmd!
+    autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+    "autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorcolumn
+    autocmd WinLeave * setlocal nocursorline
+    "autocmd WinLeave * setlocal nocursorcolumn
+augroup END
 
-"Box Drawings Heavy Vertical U+25e3
-if LINUX()
-    let g:gitgutter_sign_added = '┃'
-    let g:gitgutter_sign_modified = '┃'
-    let g:gitgutter_sign_removed_first_line = '^'
-    "let g:gitgutter_sign_removed = '┃'
-    "let g:gitgutter_sign_modified_removed = '┃'
-endif
-" }}}
-" Vimux {{{
-
-" Prompt for a command to run map
-map <Leader>vp :VimuxPromptCommand<CR>
-" Run last command executed by VimuxRunCommand
-map <Leader>vl :VimuxRunLastCommand<CR>
-" Inspect runner pane map
-map <Leader>vi :VimuxInspectRunner<CR>
-" Close vim tmux runner opened by VimuxRunCommand
-map <Leader>vq :VimuxCloseRunner<CR>
-" Interrupt any command running in the runner pane map
-map <Leader>vx :VimuxInterruptRunner<CR>
-" Clear the tmux history of the runner pane
-map <Leader>vc :VimuxClearRunnerHistory<CR>
-
-" }}}
-" Preview file on browser {{{
-
-nnoremap <F2>f :!firefox %<CR>
-nnoremap <F2>c :!chromium-browser %<CR>
-nnoremap <F2>g :!google-chrome %<CR>
-
-" }}}
-" Tagbar {{{
-
-nmap <Leader>tt :TagbarToggle<CR>
-
-let g:tagbar_type_css = {
-    \ 'ctagstype' : 'Css',
-    \ 'kinds'     : [
-    \ 'c:classes',
-    \ 's:selectors',
-    \ 'i:identities'
-    \ ]
-    \ }
-
-" }}}
-" Pytest {{{
-
-nmap <silent><Leader>tf <Esc>:Pytest file<CR>
-nmap <silent><Leader>tc <Esc>:Pytest class<CR>
-nmap <silent><Leader>tm <Esc>:Pytest method<CR>
-
-" }}}
-" Autosave {{{
-
-let g:auto_save = 1                                     " Enable AutoSave on Vim startup
-let g:auto_save_no_updatetime = 1                       " Do not change the 'updatetime' option
-let g:auto_save_in_insert_mode = 0                      " Do not save while in insert mode
-let g:auto_save_silent = 0                              " Do not display the auto-save notification
-let g:auto_save_events = ["InsertLeave", "TextChanged"] " Default: [CursorHold,InsertLeave]
-
-" }}}
-" Undotree {{{
-
-nnoremap <Leader>u :UndotreeToggle<cr>
-let g:undotree_WindowLayout = 3
-let g:undotree_SetFocusWhenToggle = 1
-
-" }}}
-" NeatFoldText {{{
-
-let g:NeatFoldTextFancy = 1
-
-" }}}
-" Webdevicons {{{
-
-"let g:WebDevIconsUnicodeDecorateFolderNodes = 0
-
-" }}}
-" Vimshell {{{
- 
-let g:vimshell_prompt_expr ='escape(fnamemodify(getcwd(), ":~").">", "\\[]()?! ")." "'
-let g:vimshell_prompt_pattern = '^\%(\f\|\\.\)\+> '
-
-" }}}
-
-" }}}
-" GUI Settings {{{
-if LINUX()
-    augroup TransparentGVIM autocmd!
-        autocmd GuiEnter * silent exec "!transset -a 0.97"
-    augroup END
-    nnoremap <F4> :!transset -a -t 0.97<CR>
-endif
-
-if has('gui_running')
-    set guioptions-=T           " Remove the toolbar
-    set guioptions-=m           " Remove the menubar
-    set guioptions-=L           " Remove nerdtree scroll
-    set guioptions-=r           " Remove the scroll bar
-    nnoremap <F1> :if &go=~#'m'<Bar>set go-=m<Bar>else<Bar>set go+=m<Bar>endif<CR>
-    nnoremap <F2> :if &go=~#'T'<Bar>set go-=T<Bar>else<Bar>set go+=T<Bar>endif<CR>
-    nnoremap <F3> :if &go=~#'r'<Bar>set go-=r<Bar>else<Bar>set go+=r<Bar>endif<CR>
-    set wrap
-    set lines=999 columns=999    " Start maximized
-    set lazyredraw
-    " Dark Version of Alduin
-    "let g:alduin_Shout_Become_Ethereal = 1
-    "Starts at 5pm - Ends at 7am
-    "let g:alduin_Contract_Vampirism = 1
-    "let g:alduin_Shout_Aura_Whisper = 1
-    let g:alduin_Shout_Fire_Breath = 1
-    colorscheme alduin
-    let g:airline_theme = 'tomorrow'
-    "call Base16("railscasts")
-    set guifont=Hack\ Regular\ 11
-    "set guifont=Knack\ Nerd\ Font\ Regular\ 11
-    "set guifont=Ubuntu\ Mono\ Nerd\ Font\ Regular\ 13
-    "set guifont=Iosevka\ Regular\ 12
-    "set guifont=Ubuntu\ Mono\ derivative\ Powerline\ Plus\ Nerd\ File\ Types\ 12
-    "set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ Plus\ Nerd\ File\ Types\ 11
-endif
-
-if has('gui_gtk') && has('gui_running') && LINUX()
-    let s:border = synIDattr(synIDtrans(hlID('Normal')), 'bg', 'gui')
-    exe 'silent !echo ''style "vimfix" { bg[NORMAL] = "' . escape(s:border, '#') . '" }'''.
-                \' > ~/.gtkrc-2.0'
-    exe 'silent !echo ''widget "vim-main-window.*GtkForm" style "vimfix"'''.
-                \' >> ~/.gtkrc-2.0'
-endif
-
-" }}}
-" Windows gvim settings {{{
-  
-if WINDOWS()
-    let g:airline_powerline_fonts = 0
-    let g:webdevicons_enable = 0
-    let g:webdevicons_enable_ctrlp = 0
-    let g:NeatFoldTextFancy = 0
-    set guifont=Consolas:h11:cANSI
-    colorscheme base16-flat
-    let g:airline_theme = 'base16'
-endif
-
-" }}}
