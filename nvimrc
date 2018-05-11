@@ -1275,7 +1275,7 @@ set visualbell t_vb=            " turn off error beep/flash
 " fc-list | grep iosevka
 " Neovim-qt
 if LINUX()
-  GuiFont Iosevka Term:h12
+  "GuiFont Iosevka Term:h12
   "GuiFont! Iosevka Nerd Font:h12
   "GuiFont FantasqueSansMono Nerd Font Mono:h13
   "GuiFont LiterationMono Nerd Font Mono:h11
@@ -1298,7 +1298,7 @@ if WINDOWS()
   "GuiFont! Iosevka NF:h12
 endif
 
-call GuiWindowMaximized(1)
+" call GuiWindowMaximized(1)
 
 " Neovim-gtk
 if exists('g:GtkGuiLoaded')
