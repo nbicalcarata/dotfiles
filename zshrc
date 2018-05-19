@@ -17,7 +17,6 @@ ZSH_THEME="gnzh"
 #ZSH_THEME="steeef"
 #ZSH_THEME="wezm"
 #ZSH_THEME="darkblood"
-#ZSH_THEME="agnoster"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -96,7 +95,6 @@ export NO_AT_BRIDGE=1
 export TERM="xterm-256color"
 export PATH="$PATH:$HOME/.config/composer/vendor/bin"
 export NVIM_GTK_PREFER_DARK_THEME=1
-
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 alias gtypist=gtypist esp.typ
