@@ -1,0 +1,31 @@
+Quick repo sync
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# On branch master
+# Your branch is up-to-date with 'origin/master'.
+#
+# Changes to be committed:
+#	modified:   gnvimrc
+#	new file:   gvimrc
+#	modified:   install.conf.yaml
+#	modified:   nvim/autocmd.vim
+#	modified:   nvim/color.vim
+#	modified:   nvim/general.vim
+#	modified:   nvim/map.vim
+#	modified:   nvim/nplug.vim
+#	modified:   nvim/plugins.vim
+#	modified:   nvim/statusline.vim
+#	modified:   nvimrc
+#	new file:   snapshot_tmuxline
+#	modified:   tmux.conf
+#	modified:   vimrc
+#	modified:   zshrc
+#
+# Changes not staged for commit:
+#	modified:   dotbot (modified content)
+#
+# Untracked files:
+#	.debris/
+#	tags
+#

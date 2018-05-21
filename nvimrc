@@ -141,7 +141,9 @@ set ignorecase                  " Case insensitive search
 set smartcase                   " Case sensitive when uc present
 "set scrolloff=5                 " Minimum lines to keep above and below cursor
 set inccommand=split            " live sustitution
-set listchars=tab:▸\ ,eol:¬,extends:»,precedes:«,trail:•
+if LINUX()
+    set listchars=tab:▸\ ,eol:¬,extends:»,precedes:«,trail:•
+endif
 
 " Formatting {{{
 set autoindent
@@ -1267,59 +1269,4 @@ let g:user_emmet_leader_key = '<C-y>'
 "let g:indentLine_fileTypeExclude = ['text', 'help', 'startify']
 
 " }}}
-" UI settings {{{
 
-set visualbell t_vb=            " turn off error beep/flash
-
-" Gui font
-" fc-list | grep iosevka
-" Neovim-qt
-if LINUX()
-  "GuiFont Iosevka Term:h12
-  "GuiFont! Iosevka Nerd Font:h12
-  "GuiFont FantasqueSansMono Nerd Font Mono:h13
-  "GuiFont LiterationMono Nerd Font Mono:h11
-  "GuiFont DejaVuSansMono Nerd Font:h12
-  "GuiFont DejaVuSansMonoForPowerline Nerd Font:h11
-  "GuiFont! InconsolataForPowerline Nerd Font:h13
-  "GuiFont Knack Nerd Font:h11
-  "GuiFont TerminessTTF Nerd Font:h13
-  "GuiFont UbuntuMono Nerd Font:h13
-  "GuiFont FuraMonoForPowerline Nerd Font:h12
-  "GuiFont Roboto Mono Nerd Font:h12
-  "Guifont DejaVu Sans Mono:h11
-endif
-
-if WINDOWS()
-  "Guifont! Consolas:h12
-  "GuiFont! Hack NF:h11
-  "call rpcnotify(1, 'Gui', 'Font', 'Iosevka NF 12')
-  call rpcnotify(1, 'Gui', 'Font', 'Iosevka 12')
-  "GuiFont! Iosevka NF:h12
-endif
-
-" call GuiWindowMaximized(1)
-
-" Neovim-gtk
-if exists('g:GtkGuiLoaded')
-  "call rpcnotify(1, 'Gui', 'Option', 'Popupmenu', 0)
-  "call rpcnotify(1, 'Gui', 'Font', 'Iosevka Regular 12')
-  "call rpcnotify(1, 'Gui', 'Font', 'Hasklig Regular 11')
-  "call rpcnotify(1, 'Gui', 'Font', 'Fira Code Regular 11')
-  "https://github.com/ToxicFrog/Ligaturizer
-  "call rpcnotify(1, 'Gui', 'Font', 'LigaHack Regular 11')
-  nnoremap <silent> <C-E> :NGToggleSidebar<cr>
-endif
-
-augroup guiau
-  autocmd!
-  autocmd DirChanged * call rpcnotify(0, 'Dir', getcwd())
-  autocmd WinEnter * call rpcnotify(0, 'Dir', getcwd())
-augroup END
-
-command! TreeViewShow call rpcnotify(0, 'TreeView', 'ShowHide', 1)
-command! TreeViewHide call rpcnotify(0, 'TreeView', 'ShowHide', 0)
-command! TreeViewToggle call rpcnotify(0, 'TreeView', 'Toggle')
-command! NGToggleSidebar call rpcnotify(1, 'Gui', 'Command', 'ToggleSidebar')
-
-" }}}

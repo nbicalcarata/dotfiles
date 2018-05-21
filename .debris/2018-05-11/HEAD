@@ -1,0 +1,143 @@
+0000000000000000000000000000000000000000 a6294e71da8bdb01737c3612518f339e8f91ff99 Adrian Martinez <adrian@localhost.localdomain> 1464629629 -0500	clone: from git@github.com:nbicalcarata/dotfiles.git
+a6294e71da8bdb01737c3612518f339e8f91ff99 a6294e71da8bdb01737c3612518f339e8f91ff99 Adrian Martinez <adrian@nova.(none)> 1467575968 -0500	checkout: moving from master to tmuxlatest
+a6294e71da8bdb01737c3612518f339e8f91ff99 be51e7b79e65caf5c8cb0781002a1a08597d68ad Adrian Martinez <n.bicalcarata@gmail.com> 1467580424 -0500	commit: Add tmuxline fork
+be51e7b79e65caf5c8cb0781002a1a08597d68ad ed569c19bf685d06d6e5589c4b8ae5e7ac1bb214 Adrian Martinez <n.bicalcarata@gmail.com> 1467580440 -0500	commit: Add one dark
+ed569c19bf685d06d6e5589c4b8ae5e7ac1bb214 34a25cc217df2bd3f64e6eeee69672944105c8b4 Adrian Martinez <n.bicalcarata@gmail.com> 1467580488 -0500	commit: Enable neovim true color
+34a25cc217df2bd3f64e6eeee69672944105c8b4 1401e86baaa34a982a56d44ef536fd934bfe7302 Adrian Martinez <n.bicalcarata@gmail.com> 1467580515 -0500	commit: Arrow separators on statusline
+1401e86baaa34a982a56d44ef536fd934bfe7302 5e82dfd36aeba59efa38ef8199bf4ee48f2ba403 Adrian Martinez <n.bicalcarata@gmail.com> 1467580539 -0500	commit: Disable custom vertsplit chars
+5e82dfd36aeba59efa38ef8199bf4ee48f2ba403 eec97f7df6ac3714e9bb745a2aa7a6af49a9802c Adrian Martinez <n.bicalcarata@gmail.com> 1467581654 -0500	commit: VertSplit bg=none
+eec97f7df6ac3714e9bb745a2aa7a6af49a9802c 655b5a04516a390f4ed8956fdd1b7e00f9453bc6 Adrian Martinez <n.bicalcarata@gmail.com> 1467581716 -0500	commit: AirlineTheme behelit
+655b5a04516a390f4ed8956fdd1b7e00f9453bc6 9209023b23977f9c59eaa858c1dfdee9a2e9da80 Adrian Martinez <n.bicalcarata@gmail.com> 1467596738 -0500	commit: Tmux true color
+9209023b23977f9c59eaa858c1dfdee9a2e9da80 70201feb212a6727307f24f314b036004eeced91 Adrian Martinez <n.bicalcarata@gmail.com> 1467596967 -0500	commit: Composer and vagrant path
+70201feb212a6727307f24f314b036004eeced91 51b2a47e734364ec0b44a67b52ae12c9357d353e Adrian Martinez <n.bicalcarata@gmail.com> 1467597014 -0500	commit: Behelit theme snapshot
+51b2a47e734364ec0b44a67b52ae12c9357d353e a6294e71da8bdb01737c3612518f339e8f91ff99 Adrian Martinez <n.bicalcarata@gmail.com> 1467597031 -0500	checkout: moving from tmuxlatest to master
+a6294e71da8bdb01737c3612518f339e8f91ff99 51b2a47e734364ec0b44a67b52ae12c9357d353e Adrian Martinez <n.bicalcarata@gmail.com> 1467599344 -0500	checkout: moving from master to tmuxlatest
+51b2a47e734364ec0b44a67b52ae12c9357d353e a6294e71da8bdb01737c3612518f339e8f91ff99 Adrian Martinez <n.bicalcarata@gmail.com> 1467599478 -0500	checkout: moving from tmuxlatest to master
+a6294e71da8bdb01737c3612518f339e8f91ff99 51b2a47e734364ec0b44a67b52ae12c9357d353e Adrian Martinez <n.bicalcarata@gmail.com> 1467599635 -0500	checkout: moving from master to tmuxlatest
+51b2a47e734364ec0b44a67b52ae12c9357d353e a5a87a14312ef1eca6667e50b20e4783b83f7288 Adrian Martinez <n.bicalcarata@gmail.com> 1467599667 -0500	commit: add tmux.conf from backup
+a5a87a14312ef1eca6667e50b20e4783b83f7288 a6294e71da8bdb01737c3612518f339e8f91ff99 Adrian Martinez <n.bicalcarata@gmail.com> 1467600208 -0500	checkout: moving from tmuxlatest to master
+a6294e71da8bdb01737c3612518f339e8f91ff99 a5a87a14312ef1eca6667e50b20e4783b83f7288 Adrian Martinez <n.bicalcarata@gmail.com> 1467600265 -0500	checkout: moving from master to tmuxlatest
+a5a87a14312ef1eca6667e50b20e4783b83f7288 a6294e71da8bdb01737c3612518f339e8f91ff99 Adrian Martinez <n.bicalcarata@gmail.com> 1467600274 -0500	checkout: moving from tmuxlatest to master
+a6294e71da8bdb01737c3612518f339e8f91ff99 a5a87a14312ef1eca6667e50b20e4783b83f7288 Adrian Martinez <n.bicalcarata@gmail.com> 1467600286 -0500	merge tmuxlatest: Fast-forward
+a5a87a14312ef1eca6667e50b20e4783b83f7288 4c42747f93dcc895b6b498e3afa4e3e13876acc0 Adrian Martinez <n.bicalcarata@gmail.com> 1467600413 -0500	commit: Add tmux.conf from backup due to corrupted transaction
+4c42747f93dcc895b6b498e3afa4e3e13876acc0 8463599ae4cc248f28f270a4d94ff66809e90d9d Adrian Martinez <n.bicalcarata@gmail.com> 1467601223 -0500	commit: Remove ugly triangle separator from airline
+8463599ae4cc248f28f270a4d94ff66809e90d9d fe106bb89cef5ab8c6711c4ac819dd06799cdc43 Adrian Martinez <n.bicalcarata@gmail.com> 1467742380 -0500	commit: Group colorschemes with compatible airline themes inside tmux
+fe106bb89cef5ab8c6711c4ac819dd06799cdc43 d0662a090356288e8967a0ef909c0d803ea28fa4 Adrian Martinez <n.bicalcarata@gmail.com> 1481492112 -0600	commit: basedir variable doesn't work as espected
+d0662a090356288e8967a0ef909c0d803ea28fa4 fb9de66eb3b3c9134babc772f6a609ce3ca5a7c9 Adrian Martinez <n.bicalcarata@gmail.com> 1481492253 -0600	commit: Add neovim-qt options
+fb9de66eb3b3c9134babc772f6a609ce3ca5a7c9 33809fe28d1fe64c4ad72cae011845b5488225df Adrian Martinez <n.bicalcarata@gmail.com> 1481492307 -0600	commit: disable unused plugins
+33809fe28d1fe64c4ad72cae011845b5488225df f0a4861d9c79c96b4790e2be7bcf1a3ad7dbd2c0 Adrian Martinez <n.bicalcarata@gmail.com> 1481492563 -0600	commit (amend): disable unused plugins
+f0a4861d9c79c96b4790e2be7bcf1a3ad7dbd2c0 78cefcba9bf2aa76ce59d44e7c46cc37741aa334 Adrian Martinez <n.bicalcarata@gmail.com> 1481492616 -0600	commit: Add hybrid, ayu and tender colorschemes
+78cefcba9bf2aa76ce59d44e7c46cc37741aa334 16d656cbd914994352096a9ce10c463893e95c6e Adrian Martinez <n.bicalcarata@gmail.com> 1481492705 -0600	commit: Disable more plugins
+16d656cbd914994352096a9ce10c463893e95c6e aa1519f329fc77c374c58b5b28108ef9bee32b87 Adrian Martinez <n.bicalcarata@gmail.com> 1481492741 -0600	commit: set shell to zsh
+aa1519f329fc77c374c58b5b28108ef9bee32b87 18b91d0b7bd9c9b0567da2d2648903828b6f4bdc Adrian Martinez <n.bicalcarata@gmail.com> 1481492774 -0600	commit: Set default directory
+18b91d0b7bd9c9b0567da2d2648903828b6f4bdc d770da46010546575b93c63d666f9a75b568b804 Adrian Martinez <n.bicalcarata@gmail.com> 1481492800 -0600	commit: Set conceallevel 2
+d770da46010546575b93c63d666f9a75b568b804 b2e047b58cffcc340254fd7c85337240b750a44c Adrian Martinez <n.bicalcarata@gmail.com> 1481492871 -0600	commit: Add function to initialize directories
+b2e047b58cffcc340254fd7c85337240b750a44c efdb8a78c782a98ed1f02e6bfb2bca305daabf73 Adrian Martinez <n.bicalcarata@gmail.com> 1481492914 -0600	commit: Remove :
+efdb8a78c782a98ed1f02e6bfb2bca305daabf73 84c7ac69bda23942b3321abfefa41bf02e1f54d0 Adrian Martinez <n.bicalcarata@gmail.com> 1481492971 -0600	commit: Disable au to colorcolumn on speciic files
+84c7ac69bda23942b3321abfefa41bf02e1f54d0 90fdcfbe032e5247bfbb273a39147f9ee44092df Adrian Martinez <n.bicalcarata@gmail.com> 1481492998 -0600	commit: Add au rules to zimwiki files
+90fdcfbe032e5247bfbb273a39147f9ee44092df fdb59282b160a171ade760d115738c9c5e79a01d Adrian Martinez <n.bicalcarata@gmail.com> 1481493052 -0600	commit: Close nvim if last open window is nerdtree
+fdb59282b160a171ade760d115738c9c5e79a01d 7123e50e9682dd92ccbd2c6f6bd532f6d0fad4a8 Adrian Martinez <n.bicalcarata@gmail.com> 1481493094 -0600	commit: disable unused autocommands group
+7123e50e9682dd92ccbd2c6f6bd532f6d0fad4a8 3206b8a1992f3006b7dd40818b89ae3cb7b04663 Adrian Martinez <n.bicalcarata@gmail.com> 1481493489 -0600	commit: Add enable_cursor_shape
+3206b8a1992f3006b7dd40818b89ae3cb7b04663 57db2b8927e1076965f633d903a308f4edf74e19 Adrian Martinez <n.bicalcarata@gmail.com> 1481493528 -0600	commit: Add true color
+57db2b8927e1076965f633d903a308f4edf74e19 f84bf69a890aca97b429919ba41165b0a72342f1 Adrian Martinez <n.bicalcarata@gmail.com> 1481508482 -0600	commit: Standard status line
+f84bf69a890aca97b429919ba41165b0a72342f1 fb7e0aa5d4d30fc1faa981277185663c6513aa8c Adrian Martinez <n.bicalcarata@gmail.com> 1481508509 -0600	commit: Disable custom vert split char
+fb7e0aa5d4d30fc1faa981277185663c6513aa8c 7f79a68b6a8de2fbdb54aabb9718f69f49f08f48 Adrian Martinez <n.bicalcarata@gmail.com> 1481508579 -0600	commit: No background in vertical splits
+7f79a68b6a8de2fbdb54aabb9718f69f49f08f48 bed19dbc68fe8d10fe4f32020b1c9078354986b3 Adrian Martinez <n.bicalcarata@gmail.com> 1481508696 -0600	commit: Set terminal colorscheme
+bed19dbc68fe8d10fe4f32020b1c9078354986b3 9bc8ff224f4d63d5c0176730df18d4bf1b904f04 Adrian Martinez <n.bicalcarata@gmail.com> 1481508758 -0600	commit: Copy and paste from clipboard mappings
+9bc8ff224f4d63d5c0176730df18d4bf1b904f04 ad359ccdc8a100c06c1437d68ad8575655f70c9b Adrian Martinez <n.bicalcarata@gmail.com> 1481508800 -0600	commit: ,ev to quick edir nvimrc
+ad359ccdc8a100c06c1437d68ad8575655f70c9b ad8cb750051e8000e2e5236be8c1fc6f3912b66c Adrian Martinez <n.bicalcarata@gmail.com> 1481508825 -0600	commit: Remove unused map
+ad8cb750051e8000e2e5236be8c1fc6f3912b66c 0a1f45e2b879181e08097ddf8d8a776378fb65ca Adrian Martinez <n.bicalcarata@gmail.com> 1481508863 -0600	commit: F11 to toggle fullscreen in gnvim
+0a1f45e2b879181e08097ddf8d8a776378fb65ca 1b722468e2302ce13865bf0f11580d8ab57f2343 Adrian Martinez <n.bicalcarata@gmail.com> 1481508946 -0600	commit: Remove function to autoswitch working directory
+1b722468e2302ce13865bf0f11580d8ab57f2343 6aa63725aca603c8b2c937c416e222cce268a036 Adrian Martinez <n.bicalcarata@gmail.com> 1481509033 -0600	commit: Mapping to move between term splits
+6aa63725aca603c8b2c937c416e222cce268a036 d60aaac9a9e196384000e61c0cda508eee4165a8 Adrian Martinez <n.bicalcarata@gmail.com> 1481509056 -0600	commit: Mapping to move between term splits
+d60aaac9a9e196384000e61c0cda508eee4165a8 3ca0c5add5e89777d84586fb83d2beffe3476211 Adrian Martinez <n.bicalcarata@gmail.com> 1481509088 -0600	commit: ,cd to set working directory to current file
+3ca0c5add5e89777d84586fb83d2beffe3476211 849d431d9240bcc3553a26324d6fda54a137e47f Adrian Martinez <n.bicalcarata@gmail.com> 1481509113 -0600	commit: Add ToggleFullScreen function
+849d431d9240bcc3553a26324d6fda54a137e47f c7a6b72b53a25b9d7bcd32147b36c17f88bf031c Adrian Martinez <n.bicalcarata@gmail.com> 1481509167 -0600	commit: Edit ToggleColorColumn variable name
+c7a6b72b53a25b9d7bcd32147b36c17f88bf031c e91f3b3866a028095ef36ca5302a33fe99c30894 Adrian Martinez <n.bicalcarata@gmail.com> 1481509206 -0600	commit: Add initialize nerdtree as needed function
+e91f3b3866a028095ef36ca5302a33fe99c30894 848d2833be914a81c8bae0fef1129d542d44cae1 Adrian Martinez <n.bicalcarata@gmail.com> 1481509229 -0600	commit: Add nerdtree settings
+848d2833be914a81c8bae0fef1129d542d44cae1 adffc156ab181c5fca70073fbe07f687be755bb7 Adrian Martinez <n.bicalcarata@gmail.com> 1481509259 -0600	commit: Comment vimfiles options
+adffc156ab181c5fca70073fbe07f687be755bb7 7a85ece06e6a48ff6bbe71cc16876b9e244c7e48 Adrian Martinez <n.bicalcarata@gmail.com> 1481509298 -0600	commit: Edit airline options
+7a85ece06e6a48ff6bbe71cc16876b9e244c7e48 d847adaf3834c6fc063ac0640ae26adbe6be6a1f Adrian Martinez <n.bicalcarata@gmail.com> 1481509383 -0600	commit: Comment unite options
+d847adaf3834c6fc063ac0640ae26adbe6be6a1f 393cec5e1e9c0389e2b61aa979fe94516d05dd86 Adrian Martinez <n.bicalcarata@gmail.com> 1481509408 -0600	commit: Comment fzf options
+393cec5e1e9c0389e2b61aa979fe94516d05dd86 d93a39f66e7d4703b2508875b2711234ba723290 Adrian Martinez <n.bicalcarata@gmail.com> 1481509443 -0600	commit: Add matchtagalways filetypes
+d93a39f66e7d4703b2508875b2711234ba723290 2a33ffbc931cd36afad4fa293feab7993d41e512 Adrian Martinez <n.bicalcarata@gmail.com> 1481509511 -0600	commit: Increase gigutter max signs
+2a33ffbc931cd36afad4fa293feab7993d41e512 34a82c1a0a439bc0a775e6b7ce4fe9967121bf30 Adrian Martinez <n.bicalcarata@gmail.com> 1481509532 -0600	commit: Undotree to the left side
+34a82c1a0a439bc0a775e6b7ce4fe9967121bf30 2fc521b882a685d0f2129ad251f377dda181295a Adrian Martinez <n.bicalcarata@gmail.com> 1481509569 -0600	commit: Ack to find text in zim folder
+2fc521b882a685d0f2129ad251f377dda181295a 6353a1b36269958d48b989a7fc797d0c1eb93e59 Adrian Martinez <n.bicalcarata@gmail.com> 1481593231 -0600	commit: Fix unthemed char in airline
+6353a1b36269958d48b989a7fc797d0c1eb93e59 02aedc4fe2f078fe576c68fac518acfb5730dc38 Adrian Martinez <n.bicalcarata@gmail.com> 1482302639 -0600	pull: Fast-forward
+02aedc4fe2f078fe576c68fac518acfb5730dc38 a6605f4dc43dffae49d80c9344d36831c2eb4d9c Adrian Martinez <n.bicalcarata@gmail.com> 1482302781 -0600	commit: Remove more plugins
+a6605f4dc43dffae49d80c9344d36831c2eb4d9c 3b83556091c09331e7fd2bc6276657bf7aeaf73d Adrian Martinez <n.bicalcarata@gmail.com> 1482302917 -0600	commit: Add vim-windowswap
+3b83556091c09331e7fd2bc6276657bf7aeaf73d 21b724654bea214c3bb9240e178d8831e7738666 Adrian Martinez <n.bicalcarata@gmail.com> 1482302951 -0600	commit: Rename default folder to Workspace
+21b724654bea214c3bb9240e178d8831e7738666 597ac088f839721476877b7888a3e3a2a2b6ca3e Adrian Martinez <n.bicalcarata@gmail.com> 1482303000 -0600	commit: Comment augroup fast escape
+597ac088f839721476877b7888a3e3a2a2b6ca3e 82bab163620c2d3f706a50306709a36ba08ad44e Adrian Martinez <n.bicalcarata@gmail.com> 1482303042 -0600	commit: Remove augroup DisableColorColumn
+82bab163620c2d3f706a50306709a36ba08ad44e 68acdf30bc26d5b60addabf831a9904bbd059d21 Adrian Martinez <n.bicalcarata@gmail.com> 1482303119 -0600	commit: Comment zim rule to vert split size 60
+68acdf30bc26d5b60addabf831a9904bbd059d21 7e3647a3af52a912ce54c95643c950e02760a663 Adrian Martinez <n.bicalcarata@gmail.com> 1482303171 -0600	commit: Remove autocmd to start nerdtree
+7e3647a3af52a912ce54c95643c950e02760a663 cbbf99c09c73c9e8f55f95ce60fe83c464d77fb0 Adrian Martinez <n.bicalcarata@gmail.com> 1482303194 -0600	commit: Set equalalways
+cbbf99c09c73c9e8f55f95ce60fe83c464d77fb0 c372619f365cabc735c8b7824ca3a80b1ab51719 Adrian Martinez <n.bicalcarata@gmail.com> 1482303204 -0600	commit: Set autoindent
+c372619f365cabc735c8b7824ca3a80b1ab51719 2eb9e06acb2ddf54911cd3c3c42ac1f75b1fa1ab Adrian Martinez <n.bicalcarata@gmail.com> 1482303240 -0600	commit: Simple statusline with powerline arrows
+2eb9e06acb2ddf54911cd3c3c42ac1f75b1fa1ab 69383bf4515b682ba6fe4ddc59982aab08658eb3 Adrian Martinez <n.bicalcarata@gmail.com> 1482303266 -0600	commit: Enable fillchars to vertsplits
+69383bf4515b682ba6fe4ddc59982aab08658eb3 bc488db0792079bda8b28aab985066b41fa9711c Adrian Martinez <n.bicalcarata@gmail.com> 1482303316 -0600	commit: Fix ugly colors
+bc488db0792079bda8b28aab985066b41fa9711c 1d7892ae8282a2825f8697aca1fbe5f77b150d9d Adrian Martinez <n.bicalcarata@gmail.com> 1482303350 -0600	commit: Add example snippet to extract colors from colorscheme
+1d7892ae8282a2825f8697aca1fbe5f77b150d9d 5bded357f1cd6e2859181a3678106bc96c82e21c Adrian Martinez <n.bicalcarata@gmail.com> 1482303457 -0600	commit: Add kj as escape alternative
+5bded357f1cd6e2859181a3678106bc96c82e21c 178ca05f49d1eb23788666feb251b4f6525e9e3e Adrian Martinez <n.bicalcarata@gmail.com> 1482303535 -0600	commit: Add map to save as sudo (feature still missing in neovim)
+178ca05f49d1eb23788666feb251b4f6525e9e3e 9bae0c896aec7e6012af9f08f861a16fdc63fc7e Adrian Martinez <n.bicalcarata@gmail.com> 1482303592 -0600	commit: Restore cursor to last position
+9bae0c896aec7e6012af9f08f861a16fdc63fc7e 3ddf83b0f39bcc60969ef2a044220070647bded0 Adrian Martinez <n.bicalcarata@gmail.com> 1482303656 -0600	commit: Remove options from deleted plugins
+3ddf83b0f39bcc60969ef2a044220070647bded0 af79dad177265e79bbb45e438c0bde039513b047 Adrian Martinez <n.bicalcarata@gmail.com> 1482303749 -0600	commit: Remove options from deleted plugins
+af79dad177265e79bbb45e438c0bde039513b047 4a052c0978de8d6062e8072d6533e896a09619f2 Adrian Martinez <n.bicalcarata@gmail.com> 1482303791 -0600	commit: Denite custom prompt
+4a052c0978de8d6062e8072d6533e896a09619f2 65f898eb9c53876a2bca869a8b93c9b5bfd3c44c Adrian Martinez <n.bicalcarata@gmail.com> 1482303864 -0600	commit: Disable visualbell
+65f898eb9c53876a2bca869a8b93c9b5bfd3c44c f6be15dfff2fb19d56e0901ff7af573278a0d906 Adrian Martinez <n.bicalcarata@gmail.com> 1482303926 -0600	commit: Remove airline options
+f6be15dfff2fb19d56e0901ff7af573278a0d906 b9c7ad75a0ec434fdfbc7d5da581fd601643a746 Adrian Martinez <n.bicalcarata@gmail.com> 1482304124 -0600	commit: Add fed alias
+b9c7ad75a0ec434fdfbc7d5da581fd601643a746 9cf705aa8f0540bc4fa0fcf0f31eccff34c3fb1d Adrian Martinez <n.bicalcarata@gmail.com> 1482304141 -0600	commit: Add gtypist alias
+9cf705aa8f0540bc4fa0fcf0f31eccff34c3fb1d c1089d166b911027eef121646905dd1f73d37772 Adrian Martinez <n.bicalcarata@gmail.com> 1482304200 -0600	commit: Deleted snapshot_tmuxline
+c1089d166b911027eef121646905dd1f73d37772 4e99677d18e8d51365fb97b02d560ad2c38ba582 Adrian Martinez <n.bicalcarata@gmail.com> 1482304261 -0600	commit: Add fzf
+4e99677d18e8d51365fb97b02d560ad2c38ba582 301d588b046034b8958e600a36746c1e85779959 Adrian Martinez <n.bicalcarata@gmail.com> 1482304475 -0600	commit: Add tmux vim navigator
+301d588b046034b8958e600a36746c1e85779959 458f5b726339f894fb670483b621241732230914 Adrian Martinez <n.bicalcarata@gmail.com> 1482305218 -0600	commit: Edit denite mappings
+458f5b726339f894fb670483b621241732230914 d87e6504c0aa5ecd5f0dd1305efe3ac81c860657 Adrian Martinez <n.bicalcarata@gmail.com> 1482309999 -0600	pull: Fast-forward
+d87e6504c0aa5ecd5f0dd1305efe3ac81c860657 8ffb69617272829a380fcc16f2020f2cfde0f362 Adrian Martinez <n.bicalcarata@gmail.com> 1482394749 -0600	pull: Fast-forward
+8ffb69617272829a380fcc16f2020f2cfde0f362 0355e3ebaed4afde5abe18a2d3204537b3d0c9be Adrian Martinez <n.bicalcarata@gmail.com> 1486137324 -0600	commit: Add extra fonts
+0355e3ebaed4afde5abe18a2d3204537b3d0c9be f2170935710861cc2fb7cb0d173850285ea8ba5a Adrian Martinez <n.bicalcarata@gmail.com> 1486137592 -0600	commit: Disable ctrlp
+f2170935710861cc2fb7cb0d173850285ea8ba5a f2170935710861cc2fb7cb0d173850285ea8ba5a Adrian Martinez <n.bicalcarata@gmail.com> 1494172391 -0500	checkout: moving from master to language_client
+f2170935710861cc2fb7cb0d173850285ea8ba5a f2170935710861cc2fb7cb0d173850285ea8ba5a Adrian Martinez <n.bicalcarata@gmail.com> 1494172437 -0500	checkout: moving from language_client to master
+f2170935710861cc2fb7cb0d173850285ea8ba5a 49b808df4206b402ce8eba8a1851e405b04b1971 Adrian Martinez <n.bicalcarata@gmail.com> 1494173581 -0500	commit: More GuiFont options
+49b808df4206b402ce8eba8a1851e405b04b1971 56f77f1e696e5c869688fc80efa9361a0d83423b Adrian Martinez <n.bicalcarata@gmail.com> 1494173795 -0500	commit: Turn off error beep/flash
+56f77f1e696e5c869688fc80efa9361a0d83423b a3b7374a926153a8363fbba29da12ed284e5c1a5 Adrian Martinez <n.bicalcarata@gmail.com> 1494173852 -0500	commit: Set base16-twilight colorscheme as default
+a3b7374a926153a8363fbba29da12ed284e5c1a5 0c5db45aa5069adbbdcddc4540c84696622c289e Adrian Martinez <n.bicalcarata@gmail.com> 1494173974 -0500	commit: Remove virtualenvwrapper
+0c5db45aa5069adbbdcddc4540c84696622c289e c8a1872df52ef9c7eebe4533efe8d316ebc7f101 Adrian Martinez <n.bicalcarata@gmail.com> 1494174040 -0500	commit: Remove tmuxinator
+c8a1872df52ef9c7eebe4533efe8d316ebc7f101 9db41e579eb552b8e7fb1ba3267b3581f38b199f Adrian Martinez <n.bicalcarata@gmail.com> 1494174064 -0500	commit: Add homestead
+9db41e579eb552b8e7fb1ba3267b3581f38b199f bce8d30c4186777849ae6396b5228d09d8e883b7 Adrian Martinez <n.bicalcarata@gmail.com> 1494175615 -0500	commit: Minor tweaks
+bce8d30c4186777849ae6396b5228d09d8e883b7 b4ee3d9513dd14896ae31fefdf69eefcbd0c6037 Adrian Martinez <n.bicalcarata@gmail.com> 1494175819 -0500	commit: minor tweaks
+b4ee3d9513dd14896ae31fefdf69eefcbd0c6037 050b91ef1bd5398271db3857b49c4ea645cdea80 Adrian Martinez <n.bicalcarata@gmail.com> 1494175841 -0500	commit: minor tweaks
+050b91ef1bd5398271db3857b49c4ea645cdea80 f2170935710861cc2fb7cb0d173850285ea8ba5a Adrian Martinez <n.bicalcarata@gmail.com> 1494175860 -0500	checkout: moving from master to language_client
+f2170935710861cc2fb7cb0d173850285ea8ba5a 050b91ef1bd5398271db3857b49c4ea645cdea80 Adrian Martinez <n.bicalcarata@gmail.com> 1494176089 -0500	checkout: moving from language_client to master
+050b91ef1bd5398271db3857b49c4ea645cdea80 050b91ef1bd5398271db3857b49c4ea645cdea80 Adrian Martinez <n.bicalcarata@gmail.com> 1494176271 -0500	checkout: moving from master to language_client
+050b91ef1bd5398271db3857b49c4ea645cdea80 050b91ef1bd5398271db3857b49c4ea645cdea80 Adrian Martinez <n.bicalcarata@gmail.com> 1494737799 -0500	checkout: moving from language_client to master
+050b91ef1bd5398271db3857b49c4ea645cdea80 51b6c2c95e488a78d268fc32d6f9aed58c95c3de Adrian Martinez <n.bicalcarata@gmail.com> 1496210114 -0500	commit: Update latest changes
+51b6c2c95e488a78d268fc32d6f9aed58c95c3de e2bbb395607ce23f4a7f8e53dd68432f071a304b Adrian Martinez <n.bicalcarata@gmail.com> 1498140181 -0500	pull: Fast-forward
+e2bbb395607ce23f4a7f8e53dd68432f071a304b 6208ce4c1f4a420d858ccee0b94cc8078fc3cdb9 Adrian Martinez <n.bicalcarata@gmail.com> 1498845565 -0500	pull: Fast-forward
+6208ce4c1f4a420d858ccee0b94cc8078fc3cdb9 c05d47387cf750f21fd7ce0fde79978c0bf6bc93 Adrian Martinez <n.bicalcarata@gmail.com> 1499184928 -0500	commit: Add react support
+c05d47387cf750f21fd7ce0fde79978c0bf6bc93 93ee4b37d6002dad188d3c0056faa07f941a440a Adrian Martinez <n.bicalcarata@gmail.com> 1509417731 -0600	commit: sync latest changes
+93ee4b37d6002dad188d3c0056faa07f941a440a 160035705588cef01a58b230fb7e2c05a9631733 Adrian Martinez <n.bicalcarata@gmail.com> 1509417758 -0600	pull: Merge made by the 'recursive' strategy.
+160035705588cef01a58b230fb7e2c05a9631733 05bb9aace9cc87e53dab525d9813e78a453bb373 Adrian Martinez <n.bicalcarata@gmail.com> 1509909376 -0600	commit: ,j replaces ctrl+p because w10 term doesn't capture the shortcut
+05bb9aace9cc87e53dab525d9813e78a453bb373 bf06170fc03a1d568843b83c16cae2993133e19b Adrian Martinez <n.bicalcarata@gmail.com> 1509909634 -0600	commit: Fix fillchars and ruler
+bf06170fc03a1d568843b83c16cae2993133e19b f65e994fae4a82e0e561ea73dc08c0ea74777d29 Adrian Martinez <n.bicalcarata@gmail.com> 1509911514 -0600	commit: Disable file-rec/git function
+f65e994fae4a82e0e561ea73dc08c0ea74777d29 9a4455c3e1c9eb63c9e6815e4eedf38fd4fd31b3 Adrian Martinez <n.bicalcarata@gmail.com> 1511698936 -0600	pull: Fast-forward
+9a4455c3e1c9eb63c9e6815e4eedf38fd4fd31b3 8fdb5eb0c22d2453fadfa233063f943a156ab2a4 Adrian Martinez <n.bicalcarata@gmail.com> 1511795983 -0600	pull: Fast-forward
+8fdb5eb0c22d2453fadfa233063f943a156ab2a4 586b7414ee9fed5980af5a968ff906d751d7545d Adrian Martinez <n.bicalcarata@gmail.com> 1512005122 -0600	commit: Tweaks for gnome terminal
+586b7414ee9fed5980af5a968ff906d751d7545d 51cbc991156c1612c4089d7fbb4dc1dd1a7bfc93 Adrian Martinez <n.bicalcarata@gmail.com> 1512044805 -0600	pull: Fast-forward
+51cbc991156c1612c4089d7fbb4dc1dd1a7bfc93 55a37116e867eb70be11a7fcc8503e90aad9d16c Adrian Martinez <n.bicalcarata@gmail.com> 1512143367 -0600	commit: disable devicons
+55a37116e867eb70be11a7fcc8503e90aad9d16c 0a116d9b07f9094c874c1ccdb1212442fe682fb3 Adrian Martinez <n.bicalcarata@gmail.com> 1512328524 -0600	commit: Quick repo sync
+0a116d9b07f9094c874c1ccdb1212442fe682fb3 4a9bd65c97a1f8189826186981ebbf2bce80bd18 Adrian Martinez <n.bicalcarata@gmail.com> 1512407446 -0600	pull: Fast-forward
+4a9bd65c97a1f8189826186981ebbf2bce80bd18 52ce75514f02e0ceeeffb43be4ee888ecc715402 Adrian Martinez <n.bicalcarata@gmail.com> 1512408047 -0600	commit: ,j replaces ctrl+p
+52ce75514f02e0ceeeffb43be4ee888ecc715402 e77f6fdcee8554f3399d920b12cf4a9bc9427f5e Adrian Martinez <n.bicalcarata@gmail.com> 1512508652 -0600	pull: Fast-forward
+e77f6fdcee8554f3399d920b12cf4a9bc9427f5e 1bdc03cf9ea3fbca1f8af944177be2c5c063517b Adrian Martinez <n.bicalcarata@gmail.com> 1512774799 -0600	commit: Enable syntax sync from start
+1bdc03cf9ea3fbca1f8af944177be2c5c063517b 8ede9f1d5bd358ff92df892201eaad965235d23f Adrian Martinez <n.bicalcarata@gmail.com> 1512774837 -0600	commit: Add cursor column
+8ede9f1d5bd358ff92df892201eaad965235d23f 5869fd57a5c1eb25cb419751e45153870bd4961c Adrian Martinez <n.bicalcarata@gmail.com> 1513402256 -0600	commit: Quick sync
+5869fd57a5c1eb25cb419751e45153870bd4961c 36b0bd83cbced79b2d0f879a1e410714e4b57ed7 Adrian Martinez <n.bicalcarata@gmail.com> 1516731454 -0600	commit: quick sync
+36b0bd83cbced79b2d0f879a1e410714e4b57ed7 92aa76e1c63fadb1638364860b32c143f794abb7 Adrian Martinez <n.bicalcarata@gmail.com> 1516774480 -0600	commit: quick sync again
+92aa76e1c63fadb1638364860b32c143f794abb7 58710e401483bf2161b8498285327b3b557b1993 Adrian Martinez <n.bicalcarata@gmail.com> 1518122510 -0600	commit: Back to plug
+58710e401483bf2161b8498285327b3b557b1993 e39d213cd1011d3c4cf89166b49c8a666b68f2e8 Adrian Martinez <n.bicalcarata@gmail.com> 1519272147 -0600	commit: Extracted settings to individual files
+e39d213cd1011d3c4cf89166b49c8a666b68f2e8 e39d213cd1011d3c4cf89166b49c8a666b68f2e8 Adrian Martinez <n.bicalcarata@gmail.com> 1519275431 -0600	checkout: moving from master to basics
+e39d213cd1011d3c4cf89166b49c8a666b68f2e8 1a6ca1203e0e26d5f7a93e22ecdd23296c78df5f Adrian Martinez <n.bicalcarata@gmail.com> 1519624017 -0600	commit: Sync
+1a6ca1203e0e26d5f7a93e22ecdd23296c78df5f e39d213cd1011d3c4cf89166b49c8a666b68f2e8 Adrian Martinez <n.bicalcarata@gmail.com> 1519624161 -0600	checkout: moving from basics to master
+e39d213cd1011d3c4cf89166b49c8a666b68f2e8 1a6ca1203e0e26d5f7a93e22ecdd23296c78df5f Adrian Martinez <n.bicalcarata@gmail.com> 1519624214 -0600	merge basics: Fast-forward
+1a6ca1203e0e26d5f7a93e22ecdd23296c78df5f d53e1061a408bcef7387362fde3e82214152c14d Adrian Martinez <n.bicalcarata@gmail.com> 1525669384 -0500	commit: Quick repo sync
