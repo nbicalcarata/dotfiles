@@ -15,6 +15,7 @@
     ~/.eslintrc: eslintrc
     ~/.zshrc: zshrc
     ~/.zprofile: zprofile
+    ~/.ctags.d/typescript.ctags: ctags
     ~/.bash_profile: bash_profile
     ~/.config/nvim/init.vim: nvimrc
     ~/.config/nvim/nplug.vim: nvim/nplug.vim
