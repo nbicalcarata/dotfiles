@@ -48,6 +48,7 @@ if exists('g:GtkGuiLoaded')
   "https://github.com/ToxicFrog/Ligaturizer
   " call rpcnotify(1, 'Gui', 'Font', 'LigaHack Regular 9')
   call rpcnotify(1, 'Gui', 'Font', 'monospace 12')
+  " call rpcnotify(1, 'Gui', 'Font', 'Source Code Pro 12')
   call rpcnotify(1, 'Gui', 'Command', 'PreferDarkTheme', 'on')
   nnoremap <silent> <C-E> :NGToggleSidebar<cr>
 endif
