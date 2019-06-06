@@ -6,19 +6,19 @@ export ZSH=$HOME/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-# ZSH_THEME="robbyrussell"
+ZSH_THEME="robbyrussell"
 # ZSH_THEME="powerlevel9k/powerlevel9k"
-#ZSH_THEME="gnzh"
-#ZSH_THEME="bira"
-#ZSH_THEME="nanotech"
-#ZSH_THEME="fox"
+# ZSH_THEME="gnzh"
+# ZSH_THEME="bira"
+# ZSH_THEME="nanotech"
+# ZSH_THEME="fox"
 #ZSH_THEME="jonathan"
 #ZSH_THEME="juanghurtado"
 #ZSH_THEME="mortalscumbag"
 #ZSH_THEME="steeef"
 #ZSH_THEME="wezm"
 #ZSH_THEME="darkblood"
-ZSH_THEME="agnoster"
+#ZSH_THEME="agnoster"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -98,7 +98,7 @@ export TERM="xterm-256color"
 export PATH="$PATH:$HOME/.config/composer/vendor/bin"
 # export NVIM_GTK_PREFER_DARK_THEME=1
 # export NVIM_GTK_NO_HEADERBAR=1
-
+export NVIM_QT_RUNTIME_PATH="~/neovim-qt/src/gui/runtime"
 # added by Anaconda3 installer
 export PATH="/home/adrian/anaconda3/bin:$PATH"
 

@@ -4,10 +4,12 @@ set visualbell t_vb=            " turn off error beep/flash
 " fc-list | grep iosevka
 " Neovim-qt
 if LINUX()
-  " GuiFont Iosevka Term:h12
+  " GuiFont monospace:h10
+   GuiFont Iosevka Term:h12
   "GuiFont! Iosevka Nerd Font:h12
   " GuiFont FantasqueSansMono Nerd Font Mono:h13
-  GuiFont Fantasque Sans Mono:h12
+  " GuiFont Fantasque Sans Mono:h12
+  " GuiFont 3270 Medium Nerd Font Mono:h12
   "GuiFont LiterationMono Nerd Font Mono:h11
   "GuiFont DejaVuSansMono Nerd Font:h12
   "GuiFont DejaVuSansMonoForPowerline Nerd Font:h11
@@ -18,6 +20,8 @@ if LINUX()
   "GuiFont FuraMonoForPowerline Nerd Font:h12
   "GuiFont Roboto Mono Nerd Font:h12
   "Guifont DejaVu Sans Mono:h11
+  GuiTabline 0
+   let g:airline_theme='base16'
 endif
 
 if WINDOWS()
@@ -42,17 +46,24 @@ if exists('g:GtkGuiLoaded')
   "call rpcnotify(1, 'Gui', 'Font', 'Hasklig Regular 11')
   "call rpcnotify(1, 'Gui', 'Font', 'Fira Code Regular 11')
   "https://github.com/ToxicFrog/Ligaturizer
-  call rpcnotify(1, 'Gui', 'Font', 'LigaHack Regular 10')
+  " call rpcnotify(1, 'Gui', 'Font', 'LigaHack Regular 9')
+  call rpcnotify(1, 'Gui', 'Font', 'monospace 12')
+  call rpcnotify(1, 'Gui', 'Command', 'PreferDarkTheme', 'on')
   nnoremap <silent> <C-E> :NGToggleSidebar<cr>
 endif
 
-augroup guiau
-  autocmd!
-  autocmd DirChanged * call rpcnotify(0, 'Dir', getcwd())
-  autocmd WinEnter * call rpcnotify(0, 'Dir', getcwd())
-augroup END
+if exists('g:gonvim_running')
+   let g:airline_theme='base16'
+endif
+" augroup guiau
+"   autocmd!
+"   autocmd DirChanged * call rpcnotify(0, 'Dir', getcwd())
+"   autocmd WinEnter * call rpcnotify(0, 'Dir', getcwd())
+" augroup END
 
-command! TreeViewShow call rpcnotify(0, 'TreeView', 'ShowHide', 1)
-command! TreeViewHide call rpcnotify(0, 'TreeView', 'ShowHide', 0)
-command! TreeViewToggle call rpcnotify(0, 'TreeView', 'Toggle')
+" command! TreeViewShow call rpcnotify(0, 'TreeView', 'ShowHide', 1)
+" command! TreeViewHide call rpcnotify(0, 'TreeView', 'ShowHide', 0)
+" command! TreeViewToggle call rpcnotify(0, 'TreeView', 'Toggle')
 command! NGToggleSidebar call rpcnotify(1, 'Gui', 'Command', 'ToggleSidebar')
+command! -nargs=+ NGTransparency call rpcnotify(1, 'Gui', 'Command', 'Transparency', <f-args>)
+command! -nargs=1 NGPreferDarkTheme call rpcnotify(1, 'Gui', 'Command', 'PreferDarkTheme', <q-args>)

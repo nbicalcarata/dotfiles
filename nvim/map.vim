@@ -132,10 +132,10 @@ nmap <leader>c :set list!<CR>
 "nnoremap <leader>a :Ag
 
 " Move between splits
-"nnoremap <C-H> <C-W><C-H>
-"nnoremap <C-J> <C-W><C-J>
-"nnoremap <C-K> <C-W><C-K>
-"nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
 
 " Term move between splits
 tnoremap <Esc> <C-\><C-n>

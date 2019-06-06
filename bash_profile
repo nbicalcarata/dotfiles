@@ -13,3 +13,5 @@ export PATH
 
 #Android sdk
 export PATH=${PATH}:/Android/sdk/tools
+
+export PATH="$HOME/.cargo/bin:$PATH"

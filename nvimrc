@@ -1,4 +1,4 @@
-" Imentify plataform {{{
+" Identify plataform {{{
 
 silent function! OSX()
   return has('macunix')
@@ -26,13 +26,15 @@ endif
 " }}}
 
 " General {{{
+Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
 Plug 'plytophogy/vim-virtualenv'
 " Plug 'lvht/phpcd.vim', { 'for': 'php', 'do': 'composer install' }
 Plug 'romainl/vim-cool'
-Plug 'justinmk/vim-sneak'
+" Plug 'justinmk/vim-sneak'
 Plug 'yssl/QFEnter'
 " Plug 'scrooloose/nerdtree'
-Plug 'Shougo/denite.nvim'
+" Plug 'Shougo/denite.nvim'
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'tpope/vim-commentary'
 Plug 'justinmk/vim-gtfo'
 Plug 'mbbill/undotree'
@@ -46,7 +48,7 @@ Plug 'mhinz/vim-startify'
 Plug 'mhinz/vim-grepper'
 "Plug 'skywind3000/asyncrun.vim'
 Plug 'tpope/vim-surround'
-"Plug 'Yggdroot/indentLine'
+" Plug 'Yggdroot/indentLine'
 "Plug 'NovaDev94/vim-bufferline'
 "Plug 'ShirajG/golden-ratio'
 "Plug 'yuttie/comfortable-motion.vim'
@@ -54,11 +56,11 @@ Plug 'kshenoy/vim-signature'
 Plug 'majutsushi/tagbar'
 Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'chrisbra/Colorizer'
+" Plug 'chrisbra/Colorizer'
 Plug 'dyng/ctrlsf.vim'
 Plug 'tpope/vim-vinegar'
 Plug 'gcmt/taboo.vim'
-Plug 'raghur/fruzzy', {'do': { -> fruzzy#install()}}
+" Plug 'raghur/fruzzy', {'do': { -> fruzzy#install()}}
 " Plug 'davidhalter/jedi-vim'
 
 " Javascript
@@ -85,6 +87,7 @@ Plug 'protesilaos/prot16-vim'
 Plug 'xolox/vim-misc'
 Plug 'equalsraf/neovim-gui-shim'
 " Plug 'metalelf0/base16-black-metal-scheme'
+" Plug 'UncleBill/prism.vim'
 
 " }}}
 " Git {{{
@@ -97,14 +100,14 @@ Plug 'junegunn/gv.vim'
 
 Plug 'Valloric/MatchTagAlways'
 Plug 'chrisgillis/vim-bootstrap3-snippets'
-Plug 'mattn/emmet-vim'
+" Plug 'mattn/emmet-vim'
 Plug 'alvan/vim-closetag'
 
 " }}}
 " Snippets & AutoComplete {{{
 
 " Plug 'Shougo/deoplete.nvim'
-Plug 'lifepillar/vim-mucomplete'
+" Plug 'lifepillar/vim-mucomplete'
 
 function! BuildYCM(info)
   " info is a dictionary with 3 fields
@@ -148,6 +151,7 @@ syntax enable
 
 " General {{{
 "set path+=**
+set runtimepath+=~/neovim-qt/src/gui/runtime
 if executable('ag')
    set grepprg=ag\ --nogroup\ --nocolor
 endif
@@ -172,7 +176,8 @@ set nofixendofline
 set noshowcmd noruler
 set lazyredraw
 set regexpengine=1
-" set diffopt+=vertical
+set diffopt+=vertical
+set autoread
 
 set autoindent
 " set tabstop=8
@@ -180,12 +185,15 @@ set autoindent
 " set shiftwidth=4
 augroup IndentSettings
     autocmd!
-    autocmd Filetype html setlocal ts=4 sw=4
+    autocmd Filetype html setlocal ts=2 sw=2
+    autocmd Filetype htmldjango setlocal ts=2 sw=2
     autocmd Filetype php setlocal ts=4 sw=4
     autocmd Filetype vue setlocal ts=2 sw=2
     autocmd Filetype blade setlocal ts=2 sw=2
     autocmd Filetype typescript setlocal ts=4 sw=4
     autocmd Filetype scss setlocal ts=4 sw=4
+    autocmd Filetype vim setlocal ts=4 sw=4
+    autocmd Filetype css setlocal ts=4 sw=4
     autocmd Filetype cucumber setlocal ts=2 sw=2
 augroup END
 set expandtab
@@ -200,6 +208,7 @@ set pastetoggle=<F12>           " pastetoggle (sane indentation on pastes)
 "set spell spelllang=es
 "set spellfile=~/.local/share/nvim/site/spell/es.utf-8.add
 "set completeopt-=preview
+set t_md=
 set completeopt+=menuone
 set completeopt+=noselect
 set completeopt+=noinsert
@@ -215,7 +224,7 @@ set viewoptions=folds,options,cursor,unix,slash " Unix / Windows compatibility
 set virtualedit=onemore                         " Allow for cursor beyond last character
 set nospell                                     " Spell checking off
 set hidden                                      " Allow buffer switching without saving
-set list
+" set list
 set foldenable                                  " Enable folding
 set foldmethod=marker
 set foldcolumn=0
@@ -641,23 +650,26 @@ augroup OverrideColor
     " autocmd ColorScheme * hi DiffText   term=reverse cterm=bold ctermfg=0 ctermbg=4 gui=bold guifg=#2b2b2b guibg=#6d9cbe
 
 
-    if exists('g:GtkGuiLoaded')
-       autocmd ColorScheme * hi Statement  gui=none
-       autocmd ColorScheme * hi Type  gui=none
-       autocmd ColorScheme * hi NonText  gui=none
-       autocmd ColorScheme * hi DiffDelete  gui=none
-       autocmd ColorScheme * hi DiffText  gui=none
-       autocmd ColorScheme * hi Bold gui=none
-    endif
-    autocmd ColorScheme * hi LineNr                 guibg=none ctermbg=none
-    autocmd ColorScheme * hi SignColumn             guibg=none ctermbg=none
-    autocmd ColorScheme * hi GitGutterAdd           guibg=none ctermbg=none
-    autocmd ColorScheme * hi GitGutterChange        guibg=none ctermbg=none
-    autocmd ColorScheme * hi GitGutterDelete        guibg=none ctermbg=none
-    autocmd ColorScheme * hi GitGutterChangeDelete  guibg=none ctermbg=none
-    autocmd ColorScheme * hi ALEErrorSign           guifg=red guibg=none ctermbg=none
-    autocmd ColorScheme * hi ALEWarningSign         guifg=yellow guibg=none ctermbg=none
+    " if exists('g:GtkGuiLoaded')
+    "    autocmd ColorScheme * hi Statement  gui=none
+    "    autocmd ColorScheme * hi Type  gui=none
+    "    autocmd ColorScheme * hi NonText  gui=none
+    "    autocmd ColorScheme * hi DiffDelete  gui=none
+    "    autocmd ColorScheme * hi DiffText  gui=none
+    "    autocmd ColorScheme * hi Bold gui=none
+    " endif
+
+    " autocmd ColorScheme * hi LineNr                 guibg=none ctermbg=none
+    " autocmd ColorScheme * hi SignColumn             guibg=none ctermbg=none
+    " autocmd ColorScheme * hi GitGutterAdd           guibg=none ctermbg=none
+    " autocmd ColorScheme * hi GitGutterChange        guibg=none ctermbg=none
+    " autocmd ColorScheme * hi GitGutterDelete        guibg=none ctermbg=none
+    " autocmd ColorScheme * hi GitGutterChangeDelete  guibg=none ctermbg=none
+    " autocmd ColorScheme * hi ALEErrorSign           guifg=red guibg=none ctermbg=none
+    " autocmd ColorScheme * hi ALEWarningSign         guifg=yellow guibg=none ctermbg=none
 augroup END
+
+let g:gonvim_draw_split = 0
 
 " }}}
 " Colorscheme {{{
@@ -668,7 +680,11 @@ let g:jellybeans_overrides = {
 
 let g:alduin_Shout_Fire_Breath = 1
 if LINUX()
-  colorscheme base16-material
+  colorscheme base16-default-dark
+  " colorscheme base16-ia-dark
+  " colorscheme base16-atlas
+  " colorscheme base16-material-palenight
+  " colorscheme Base2Tone_DrawbridgeDark
 endif
 
 " }}}
@@ -680,7 +696,7 @@ command! -nargs=* T split | terminal <args>
 command! -nargs=* VT vsplit | terminal <args>
 
 " Insert source bin/activate
-tnoremap <leader>va source bin/activate<cr>
+tnoremap <leader>va source venv/bin/activate<cr>
 
 " Jump to tag
 nnoremap <leader>T <C-]>
@@ -705,6 +721,18 @@ xnoremap <leader>vs y:%s/<C-r>"//g<Left><Left>
 " Find buffer
 "nnoremap <leader>b :buffer *
 nnoremap <leader>B :ls<CR>:b<Space>
+
+" Go to tab by number
+noremap <leader>1 1gt
+noremap <leader>2 2gt
+noremap <leader>3 3gt
+noremap <leader>4 4gt
+noremap <leader>5 5gt
+noremap <leader>6 6gt
+noremap <leader>7 7gt
+noremap <leader>8 8gt
+noremap <leader>9 9gt
+noremap <leader>0 :tablast<cr>
 
 " Copy to clipboard
 vnoremap <leader>y "+y
@@ -832,7 +860,8 @@ nnoremap <leader>td :tc %:p:h<CR>:pwd<CR>
 "cmap w!! w !gksudo tee > /dev/null %
 
 "Rename buffer
-"nnoremap <leader>bn :keepalt file<space>
+nnoremap <leader>en :keepalt file<space>
+
 " }}}
 " Plugins settings
 
@@ -886,61 +915,75 @@ let g:NERDTreeQuitOnOpen=1
 " netrw {{{
 
 let g:netrw_altfile = 1
+" Use the NERDtree style
+let g:netrw_banner = 0
+" let g:netrw_liststyle = 3
+" let g:netrw_altv = 1
+" let g:netrw_winsize = 15
+" nmap <C-E> :Lexplore<CR>
 
 " }}}
 " Denite {{{
 
 " Change mappings.
 "nnoremap <C-P> :Denite file_rec<CR>
-nnoremap <leader>d :Denite 
-nnoremap <leader>b :Denite buffer<cr>
-nnoremap <leader>m :Denite file_old<cr>
-nnoremap <leader>l :Denite line<cr>
-nnoremap <leader>r :Denite register<cr>
-nnoremap <leader>zz :Denite grep -path=~/Documentos/Apuntes/<cr>
-nnoremap <leader>z :Denite file_rec -path=~/Documentos/Apuntes/<cr>
+" nnoremap <leader>d :Denite 
+" nnoremap <leader>b :Denite buffer<cr>
+" nnoremap <leader>m :Denite file_old<cr>
+" nnoremap <leader>l :Denite line<cr>
+" nnoremap <leader>r :Denite register<cr>
+" nnoremap <leader>zz :Denite grep -path=~/Documentos/Apuntes/<cr>
+" nnoremap <leader>z :Denite file_rec -path=~/Documentos/Apuntes/<cr>
 
-if WINDOWS()
-    nnoremap <leader>z :Denite file_rec -path=~/Documents/Apuntes/<cr>
-endif
+" if WINDOWS()
+"     nnoremap <leader>z :Denite file_rec -path=~/Documents/Apuntes/<cr>
+" endif
 
-call denite#custom#alias('source', 'file_rec/git', 'file_rec')
+" call denite#custom#alias('source', 'file_rec/git', 'file_rec')
 
-call denite#custom#var('file_rec/git', 'command',
+" call denite#custom#var('file_rec/git', 'command',
             \ ['git', 'ls-files', '-co', '--exclude-standard'])
-nnoremap <silent> <leader>f :<C-u>Denite 
-            \ `finddir('.git', ';') != '' ? 'file_rec/git' : 'file_rec'`<CR>
+" nnoremap <silent> <leader>f :<C-u>Denite 
+"             \ `finddir('.git', ';') != '' ? 'file_rec/git' : 'file_rec'`<CR>
 
 " Change mappings
-call denite#custom#map(
-            \ 'insert',
-            \ '<C-j>',
-            \ '<denite:move_to_next_line>',
-            \ 'noremap'
-            \)
-call denite#custom#map(
-            \ 'insert',
-            \ '<C-k>',
-            \ '<denite:move_to_previous_line>',
-            \ 'noremap'
-            \)
+" call denite#custom#map(
+"             \ 'insert',
+"             \ '<C-j>',
+"             \ '<denite:move_to_next_line>',
+"             \ 'noremap'
+"             \)
+" call denite#custom#map(
+"             \ 'insert',
+"             \ '<C-k>',
+"             \ '<denite:move_to_previous_line>',
+"             \ 'noremap'
+"             \)
 
-call denite#custom#option('default', {
-            \ 'prompt': '❯',
-            \ 'reversed': 1,
-            \ 'auto_resize': 1,
-            \ 'highlight-mode-insert': 'Search'
-            \ })
+" call denite#custom#option('default', {
+"             \ 'prompt': '❯',
+"             \ 'reversed': 1,
+"             \ 'auto_resize': 1,
+"             \ 'highlight-mode-insert': 'Search'
+"             \ })
 
-"            "\ 'statusline': 0
-"            "\ 'split': 'no'
-call denite#custom#var('buffer', 'date_format', '')
+" "            "\ 'statusline': 0
+" "            "\ 'split': 'no'
+" call denite#custom#var('buffer', 'date_format', '')
 
-call denite#custom#option('_', 'highlight_matched_range', 'None')
-call denite#custom#option('_', 'highlight_matched_char', 'Character')
+" call denite#custom#option('_', 'highlight_matched_range', 'None')
+" call denite#custom#option('_', 'highlight_matched_char', 'Character')
 
 " }}}
+" ctrlp {{{
 
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+let g:ctrlp_map = '<leader>f'
+let g:ctrlp_switch_buffer = ''
+nnoremap <leader>b :CtrlPBuffer<enter>
+nnoremap <leader>l :CtrlPLine<enter>
+
+" }}}
 " UltiSnips {{{
 let g:UltiSnipsExpandTrigger='<c-e>'
 let g:UltiSnipsListSnippets='<c-l>'
@@ -984,6 +1027,8 @@ nmap <Leader>gc :T git checkout
 nmap <Leader>gS :T git push --set-upstream origin 
 nmap <Leader>gP :T git push<cr>
 nmap <Leader>gd :Gdiff<cr>
+nmap <Leader>g+ :T git stash<CR>
+nmap <Leader>g- :T git stash pop<CR>
 "let g:gitgutter_max_signs = 800  " default value 500
 
 "Box Drawings Heavy Vertical U+25e3
@@ -1075,15 +1120,15 @@ let g:anyfold_fold_comments=1
 
 augroup FileTypeFolds
     autocmd!
-    autocmd Filetype python let b:anyfold_activate=1
-    autocmd Filetype javascript let b:anyfold_activate=0
-    autocmd Filetype jsx let b:anyfold_activate=0
-    autocmd Filetype php let b:anyfold_activate=1
-    autocmd Filetype bash let b:anyfold_activate=1
-    autocmd Filetype java let b:anyfold_activate=1
-    autocmd Filetype cs let b:anyfold_activate=1
-    autocmd Filetype html let b:anyfold_activate=1
-    autocmd Filetype vue let b:anyfold_activate=1
+    autocmd Filetype python AnyFoldActivate
+    " autocmd Filetype javascript let b:anyfold_activate=0
+    " autocmd Filetype jsx let b:anyfold_activate=0
+    autocmd Filetype php AnyFoldActivate
+    autocmd Filetype bash AnyFoldActivate
+    autocmd Filetype java AnyFoldActivate
+    autocmd Filetype cs AnyFoldActivate
+    autocmd Filetype html AnyFoldActivate
+    autocmd Filetype vue AnyFoldActivate
     autocmd Filetype html,blade,vue,help setlocal foldcolumn=0
 augroup END
 
@@ -1095,15 +1140,14 @@ nnoremap <Leader>F :CtrlSF
 " }}}
 " Grepper {{{
 
-nnoremap <Leader>a :Grepper<cr>
+nnoremap <Leader>a :GrepperAg 
 
 " gsW, gsi', motions
 " nmap as  <plug>(GrepperOperator)
 " xmap as  <plug>(GrepperOperator)
 
 "Start searching the word under the cursor:
-nnoremap <leader>x :Grepper -tool ag -cword -noprompt<cr>
-
+nnoremap <leader>* :Grepper -tool ag -cword -noprompt<cr>
 " }}}
 " Startify {{{
 
@@ -1157,10 +1201,11 @@ nnoremap <leader>S :SSave<cr>
 " }}}
 " ale {{{
 
-nmap <silent> <C-s>k <Plug>(ale_previous_wrap)
-nmap <silent> <C-s>j <Plug>(ale_next_wrap)
+nmap <leader>e <Plug>(ale_next_wrap)
+nmap <leader>E <Plug>(ale_previous_wrap)
 
 let g:ale_enabled = 1
+let g:ale_set_signs = 0
 let g:ale_sign_error = '>'
 let g:ale_sign_warning = '-'
 let g:ale_pattern_options = {'\.min.js$': {'ale_enabled': 0}}
@@ -1173,10 +1218,11 @@ let g:ale_python_mypy_options = '--ignore-missing-imports'
 
 let g:ale_javascript_eslint_use_global = 1
 "let g:ale_open_list = 1
-let g:ale_linters = {
-            \ 'javascript': ['eslint'],
-            \ 'vue': ['eslint']
-            \}
+" let g:ale_linters = {
+"             \ 'javascript': ['eslint'],
+"             \ 'typescript': ['tslint'],
+"             \ 'vue': ['eslint']
+"             \}
 
 " }}}
 " vim-vue {{{
@@ -1223,17 +1269,17 @@ EOF
 if WINDOWS()
     let g:python3_host_prog = 'C:\Python36\python'
 endif
-"let g:deoplete#enable_at_startup = 1
-"call deoplete#custom#source('ultisnips', 'matchers', ['matcher_fuzzy'])
-"let g:deoplete#ignore_sources = get(g:, 'deoplete#ignore_sources', {})
-"let g:deoplete#ignore_sources.php = ['omni']
-""let g:echodoc_enable_at_startup = 1
-"let g:deoplete#omni#input_patterns = {}
-"let g:deoplete#omni#input_patterns.php = '\w*|[^. \t]->\w*|\w*::\w*'
-"let g:deoplete#sources#ternjs#filetypes = [
-"            \ 'javascript',
-"            \ 'vue'
-"            \ ]
+let g:deoplete#enable_at_startup = 1
+" call deoplete#custom#source('ultisnips', 'matchers', ['matcher_fuzzy'])
+let g:deoplete#ignore_sources = get(g:, 'deoplete#ignore_sources', {})
+let g:deoplete#ignore_sources.php = ['omni']
+"let g:echodoc_enable_at_startup = 1
+let g:deoplete#omni#input_patterns = {}
+let g:deoplete#omni#input_patterns.php = '\w*|[^. \t]->\w*|\w*::\w*'
+let g:deoplete#sources#ternjs#filetypes = [
+            \ 'javascript',
+            \ 'vue'
+            \ ]
 " }}}
 " nvim-completion-manager and deoplete {{{
 
@@ -1241,12 +1287,35 @@ endif
 " inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 " }}}
+" coc {{{
+let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
+let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
+let g:coc_global_extensions = [ 'coc-tsserver', 'coc-tslint', 'coc-tslint-plugin', 'coc-css', 'coc-json', 'coc-python', 'coc-highlight', 'coc-emmet' ] 
+
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" }}}
 " sneak {{{
 
-let g:sneak#label = 1
+" let g:sneak#label = 1
 
-map f <Plug>Sneak_s
-map F <Plug>Sneak_S
+" map f <Plug>Sneak_s
+" map F <Plug>Sneak_S
 
 " }}}
 " color-switcher {{{
@@ -1272,7 +1341,13 @@ nnoremap <leader>A :T docker exec -it --user=laradock laradock_workspace_1 sh -l
 " }}}
 " fugitive {{{
 
-nnoremap <leader>G :Gstatus<cr>
+" nnoremap <leader>G :Gstatus<cr>
+nnoremap <Leader>G :belowright :20Gstatus<CR>
+
+augroup quickfix
+    autocmd!
+    autocmd QuickFixCmdPost *grep* cwindow
+augroup END
 
 " }}}
 "  Macros {{{
@@ -1295,7 +1370,13 @@ let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.vue,*.blade.php'
 "  }}}
 " emmet {{{
 
-let g:user_emmet_leader_key = '<C-y>'
+let g:user_emmet_install_global = 0
+
+" augroup EmmetExpansion
+"     autocmd!
+"     autocmd FileType htmldjango,html,blade,vue EmmetInstall |
+"                 \ imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
+" augroup END
 
 " }}}
 " indentline {{{
@@ -1324,8 +1405,8 @@ let g:nrrw_rgn_wdth = 40
 " }}}
 " Fruzzy {{{
 
-let g:fruzzy#usenative = 1
-call denite#custom#source('_', 'matchers', ['matcher/fruzzy'])
+" let g:fruzzy#usenative = 1
+" call denite#custom#source('_', 'matchers', ['matcher/fruzzy'])
 
 " }}}
 " Airline {{{
@@ -1334,6 +1415,10 @@ let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1 
 let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline#extensions#whitespace#enabled = 0
+let g:airline#extensions#tabline#show_buffers = 0
+let g:airline#extensions#tabline#show_splits = 0
+let g:airline#extensions#tabline#tabs_label = 'T'
+let g:airline#extensions#tabline#show_close_button = 0
 " let g:airline#themes#base16#constant = 1
 " let g:airline_base16_improved_contrast = 1
 
@@ -1382,5 +1467,33 @@ call airline#add_inactive_statusline_func('Render_Only_File')
 
 " autocmd VimEnter * call AirlineInit()
 " autocmd User AirlineAfterInit call AirlineInit()
+
+" }}}
+" Prism {{{
+
+let g:prism_count_tab = 1
+let g:prism_dir_changed_pattern = ['window', 'global']
+
+" }}}
+" terminal color {{{
+
+" let g:terminal_color_0  = '#000000'
+" let g:terminal_color_1  = '#cc0000'
+" let g:terminal_color_2  = '#4e9a06'
+" let g:terminal_color_3  = '#c4a000'
+" let g:terminal_color_4  = '#3465a4'
+" let g:terminal_color_5  = '#75507b'
+" let g:terminal_color_6  = '#0b939b'
+" let g:terminal_color_7  = '#d3d7cf'
+" let g:terminal_color_8  = '#555753'
+" let g:terminal_color_9  = '#ef2929'
+" let g:terminal_color_10 = '#8ae234'
+" let g:terminal_color_11 = '#fce94f'
+" let g:terminal_color_12 = '#729fcf'
+" let g:terminal_color_13 = '#ad7fa8'
+" let g:terminal_color_14 = '#00f5e9'
+" let g:terminal_color_15 = '#eeeeec'
+" let g:terminal_color_background = g:terminal_color_0
+" let g:terminal_color_foreground = g:terminal_color_7
 
 " }}}
