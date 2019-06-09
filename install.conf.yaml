@@ -26,6 +26,7 @@
     ~/.config/nvim/map.vim: nvim/map.vim
     ~/.config/nvim/plugins.vim: nvim/plugins.vim
     ~/.config/nvim/ginit.vim: gnvimrc
+    ~/.config/nvim/coc-settings.json: coc-settings.json
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]
