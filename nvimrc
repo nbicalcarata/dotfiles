@@ -1288,8 +1288,7 @@ let g:deoplete#sources#ternjs#filetypes = [
 
 " }}}
 " coc {{{
-let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
-let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
+let g:airline#extensions#coc#enabled = 1
 let g:coc_global_extensions = [ 'coc-tsserver', 'coc-tslint', 'coc-tslint-plugin', 'coc-css', 'coc-json', 'coc-python', 'coc-highlight', 'coc-emmet', 'coc-ultisnips' ] 
 
 inoremap <silent><expr> <TAB>
