@@ -824,7 +824,7 @@ noremap n nzz
 noremap N Nzz
 
 " Fullscreen mode for neovim-qt
-map <silent> <F11> :call ToggleFullScreen()<CR>
+" map <silent> <F11> :call ToggleFullScreen()<CR>
 
 "<leader>q to close buffer without closing the window
 map <leader>q :bp<bar>sp<bar>bn<bar>bd<CR>
