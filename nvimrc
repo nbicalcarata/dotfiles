@@ -695,6 +695,8 @@ let g:mapleader = ','
 command! -nargs=* T split | terminal <args>
 command! -nargs=* VT vsplit | terminal <args>
 
+nnoremap <leader>m :below 12sp term://$SHELL<cr>
+
 " Insert source bin/activate
 tnoremap <leader>va source venv/bin/activate<cr>
 
