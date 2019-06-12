@@ -5,5 +5,8 @@
         "python.linting.flake8Enabled": true,
         "python.linting.pylintArgs": [
                 "--load-plugins pylint_django"
-        ]
+        ],
+        "emmet.includeLanguages": {
+                "htmldjango": "html"
+        }
 }
