@@ -123,7 +123,7 @@ endfunction
 Plug 'w0rp/ale'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
-Plug 'jiangmiao/auto-pairs'
+" Plug 'jiangmiao/auto-pairs'
 Plug 'ludovicchabant/vim-gutentags'
 " Plug 'carlitux/deoplete-ternjs', { 'do': 'sudo npm install -g tern' }
 " Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
@@ -1297,8 +1297,8 @@ inoremap <silent><expr> <TAB>
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 " Expand with enter (conflicts with auto-pairs)
-" inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : 
-"                                            \"\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : 
+                                           \"\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 function! s:check_back_space() abort
   let col = col('.') - 1
