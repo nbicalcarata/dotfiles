@@ -42,7 +42,7 @@ if exists('g:GtkGuiLoaded')
   " call rpcnotify(1, 'Gui', 'Font', 'Hack 11')
   " call rpcnotify(1, 'Gui', 'Font', 'Iosevka Regular 11')
   call rpcnotify(1, 'Gui', 'Option', 'Popupmenu', 0)
-  call rpcnotify(1, 'Gui', 'Option', 'Tabline', 1)
+  call rpcnotify(1, 'Gui', 'Option', 'Tabline', 0)
   "call rpcnotify(1, 'Gui', 'Font', 'Hasklig Regular 11')
   "call rpcnotify(1, 'Gui', 'Font', 'Fira Code Regular 11')
   "https://github.com/ToxicFrog/Ligaturizer

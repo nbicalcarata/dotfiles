@@ -528,12 +528,15 @@ augroup END
 " }}}
 " }}}
 " Statusline {{{
-
+set showtabline=0
 set laststatus=2
 
 " Simple {{{
 
 set statusline=
+set statusline+=%5* 
+set statusline+=\ %{tabpagenr()}/
+set statusline+=%{tabpagenr('$').'\ '}
 set statusline+=%3* 
 " set statusline+=\ %n\  
 set statusline+=\ %{Relative_Path_CWD()}\ 
@@ -1288,7 +1291,7 @@ let g:deoplete#sources#ternjs#filetypes = [
 " }}}
 " coc {{{
 let g:airline#extensions#coc#enabled = 1
-let g:coc_global_extensions = [ 'coc-tsserver', 'coc-tslint', 'coc-tslint-plugin', 'coc-css', 'coc-json', 'coc-python', 'coc-highlight', 'coc-emmet', 'coc-ultisnips' ] 
+let g:coc_global_extensions = [ 'coc-tsserver', 'coc-tslint', 'coc-tslint-plugin', 'coc-css', 'coc-json', 'coc-python', 'coc-highlight', 'coc-emmet', 'coc-ultisnips' ]
 
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
@@ -1415,7 +1418,7 @@ let g:nrrw_rgn_wdth = 40
 " Airline {{{
 
 let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#enabled = 1 
+" let g:airline#extensions#tabline#enabled = 1 
 let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline#extensions#whitespace#enabled = 0
 let g:airline#extensions#tabline#show_buffers = 0
@@ -1467,6 +1470,15 @@ function! Render_Only_File(...)
 endfunction
 
 call airline#add_inactive_statusline_func('Render_Only_File')
+
+function! TabNumber(...)
+    let builder = a:1
+    let context = a:2
+    call builder.add_section('airline_b', printf(' %d/%d ', tabpagenr(), tabpagenr('$')))
+    return 0
+endfunction
+
+call airline#add_statusline_func('TabNumber')
 
 " autocmd VimEnter * call AirlineInit()
 " autocmd User AirlineAfterInit call AirlineInit()
