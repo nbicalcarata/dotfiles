@@ -47,7 +47,7 @@ if exists('g:GtkGuiLoaded')
   "call rpcnotify(1, 'Gui', 'Font', 'Fira Code Regular 11')
   "https://github.com/ToxicFrog/Ligaturizer
   " call rpcnotify(1, 'Gui', 'Font', 'LigaHack Regular 9')
-  call rpcnotify(1, 'Gui', 'Font', 'monospace 12')
+  call rpcnotify(1, 'Gui', 'Font', 'monospace 11')
   " call rpcnotify(1, 'Gui', 'Font', 'Source Code Pro 12')
   call rpcnotify(1, 'Gui', 'Command', 'PreferDarkTheme', 'on')
   nnoremap <silent> <C-E> :NGToggleSidebar<cr>
