@@ -257,10 +257,7 @@ set termguicolors
 " Cursor line {{{
 
 set cursorline
-"set guicursor=n-v-c:hor20,i-ci-ve:ver25,r-cr:hor20,o:hor50
-set guicursor=i-ci-ve:ver25
-		  \,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
-		  \,sm:block-blinkwait175-blinkoff150-blinkon175
+set guicursor=n-v-c:hor10,i-ci-ve:ver25,r-cr:hor20,o:hor50
 
 "let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 " }}}
@@ -456,9 +453,9 @@ augroup END
 augroup CursorLineOnlyInActiveWindow
     autocmd!
     autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
-    " autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorcolumn
+    autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorcolumn
     autocmd WinLeave * setlocal nocursorline
-    " autocmd WinLeave * setlocal nocursorcolumn
+    autocmd WinLeave * setlocal nocursorcolumn
 augroup END
 
 " }}}
