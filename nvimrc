@@ -448,6 +448,15 @@ augroup OmniCompletion
 augroup END
 
 " }}}
+" PDB {{{
+
+augroup SetBreakpoints
+    autocmd!
+    autocmd FileType python map <silent> <leader>x oimport pdb; pdb.set_trace()<esc>
+    autocmd FileType python map <silent> <leader>X Oimport pdb; pdb.set_trace()<esc>
+augroup END
+
+" }}}
 " Only show cursorline in the current window {{{
 
 augroup CursorLineOnlyInActiveWindow
