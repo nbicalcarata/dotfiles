@@ -36,21 +36,25 @@ call GuiWindowMaximized(1)
 
 " Neovim-gtk
 if exists('g:GtkGuiLoaded')
-  "call rpcnotify(1, 'Gui', 'Option', 'Popupmenu', 0)
-  " call rpcnotify(1, 'Gui', 'Font', 'Iosevka Term 12')
-  " call rpcnotify(1, 'Gui', 'Font', 'Monospace 11')
-  " call rpcnotify(1, 'Gui', 'Font', 'Hack 11')
-  " call rpcnotify(1, 'Gui', 'Font', 'Iosevka Regular 11')
-  call rpcnotify(1, 'Gui', 'Option', 'Popupmenu', 0)
-  call rpcnotify(1, 'Gui', 'Option', 'Tabline', 0)
-  "call rpcnotify(1, 'Gui', 'Font', 'Hasklig Regular 11')
-  "call rpcnotify(1, 'Gui', 'Font', 'Fira Code Regular 11')
-  "https://github.com/ToxicFrog/Ligaturizer
-  " call rpcnotify(1, 'Gui', 'Font', 'LigaHack Regular 9')
-  call rpcnotify(1, 'Gui', 'Font', 'monospace 11')
-  " call rpcnotify(1, 'Gui', 'Font', 'Source Code Pro 12')
-  call rpcnotify(1, 'Gui', 'Command', 'PreferDarkTheme', 'on')
-  nnoremap <silent> <C-E> :NGToggleSidebar<cr>
+    "call rpcnotify(1, 'Gui', 'Option', 'Popupmenu', 0)
+    " call rpcnotify(1, 'Gui', 'Font', 'Iosevka Term 12')
+    " call rpcnotify(1, 'Gui', 'Font', 'Monospace 11')
+    " call rpcnotify(1, 'Gui', 'Font', 'Hack 11')
+    " call rpcnotify(1, 'Gui', 'Font', 'Iosevka Regular 11')
+    call rpcnotify(1, 'Gui', 'Option', 'Popupmenu', 0)
+    call rpcnotify(1, 'Gui', 'Option', 'Tabline', 0)
+    "call rpcnotify(1, 'Gui', 'Font', 'Hasklig Regular 11')
+    "call rpcnotify(1, 'Gui', 'Font', 'Fira Code Regular 11')
+    "https://github.com/ToxicFrog/Ligaturizer
+    " call rpcnotify(1, 'Gui', 'Font', 'LigaHack Regular 9')
+    if $HOSTNAME  == 't430'
+        call rpcnotify(1, 'Gui', 'Font', 'monospace 13')
+    else
+        call rpcnotify(1, 'Gui', 'Font', 'monospace 11')
+    endif
+    " call rpcnotify(1, 'Gui', 'Font', 'Source Code Pro 12')
+    call rpcnotify(1, 'Gui', 'Command', 'PreferDarkTheme', 'on')
+    nnoremap <silent> <C-E> :NGToggleSidebar<cr>
 endif
 
 if exists('g:gonvim_running')
