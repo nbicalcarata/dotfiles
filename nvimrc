@@ -653,6 +653,8 @@ augroup OverrideColor
             \' guifg=' . synIDattr(synIDtrans(hlID('StatusLine')), 'fg', 'gui')
     " autocmd ColorScheme * hi StatusLineNC gui=none cterm=none ctermbg=none guibg=none
     autocmd ColorScheme * hi Folded     gui=none cterm=none ctermbg=none guibg=none
+    autocmd ColorScheme * hi ALEErrorLine guibg=#47201C
+    autocmd ColorScheme * hi ALEWarningLine   guibg=#363620
     " autocmd ColorScheme * hi Cursor     ctermfg=15 ctermbg=15 guifg=#FFFFFF guibg=#FFFFFF
     " autocmd ColorScheme * hi DiffAdd    term=bold ctermfg=0 ctermbg=2 guifg=#2b2b2b guibg=#a5c261
     " autocmd ColorScheme * hi DiffDelete term=bold ctermfg=0 ctermbg=1 gui=bold guifg=#2b2b2b guibg=#da4939
@@ -1221,6 +1223,7 @@ nmap <leader>E <Plug>(ale_previous_wrap)
 let g:ale_enabled = 1
 let g:ale_pattern_options = {'\.min.js$': {'ale_enabled': 0}}
 let g:ale_set_loclist = 0
+let g:ale_set_signs = 0
 " let g:ale_change_sign_column_color = 1
 let g:ale_python_pylint_options = '--load-plugins pylint_django'
 let g:ale_python_flake8_options = '--ignore=E501' 
