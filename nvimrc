@@ -60,6 +60,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'dyng/ctrlsf.vim'
 Plug 'tpope/vim-vinegar'
 Plug 'gcmt/taboo.vim'
+Plug 'yuttie/comfortable-motion.vim'
 " Plug 'raghur/fruzzy', {'do': { -> fruzzy#install()}}
 " Plug 'davidhalter/jedi-vim'
 
