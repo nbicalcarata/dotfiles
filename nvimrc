@@ -1358,8 +1358,8 @@ nnoremap <leader>A :T docker exec -it --user=laradock laradock_workspace_1 sh -l
 " }}}
 " fugitive {{{
 
-" nnoremap <leader>G :Gstatus<cr>
-nnoremap <Leader>G :belowright :20Gstatus<CR>
+nnoremap <leader>G :Gstatus<cr>
+" nnoremap <Leader>G :belowright :20Gstatus<CR>
 
 augroup quickfix
     autocmd!
