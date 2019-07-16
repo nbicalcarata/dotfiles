@@ -1222,6 +1222,8 @@ let g:ale_pattern_options = {'\.min.js$': {'ale_enabled': 0}}
 let g:ale_set_loclist = 0
 " let g:ale_change_sign_column_color = 1
 let g:ale_python_pylint_options = '--load-plugins pylint_django'
+let g:ale_python_flake8_options = '--ignore=E501' 
+
 " let g:ale_python_pylint_use_global = 1
 " let g:ale_python_pylint_executable = '/home/adrian/Workspace/scaapp/bin/pylint'
 let g:ale_python_mypy_options = '--ignore-missing-imports'
