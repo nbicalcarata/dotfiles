@@ -33,8 +33,8 @@ Plug 'romainl/vim-cool'
 " Plug 'justinmk/vim-sneak'
 Plug 'yssl/QFEnter'
 " Plug 'scrooloose/nerdtree'
-" Plug 'Shougo/denite.nvim'
-Plug 'ctrlpvim/ctrlp.vim'
+Plug 'Shougo/denite.nvim'
+" Plug 'ctrlpvim/ctrlp.vim'
 Plug 'tpope/vim-commentary'
 Plug 'justinmk/vim-gtfo'
 Plug 'mbbill/undotree'
@@ -868,7 +868,7 @@ tnoremap <C-l> <C-\><C-n><C-w>l
 "tnoremap <C-w> <C-\><C-n><C-w>c
 
 "set working directory to current file
-nnoremap <leader>cd :cd %:p:h<CR>:pwd<CR>
+nnoremap <leader>lcd :cd %:p:h<CR>:pwd<CR>
 nnoremap <leader>td :tc %:p:h<CR>:pwd<CR>
 
 " Save as sudo
@@ -939,14 +939,37 @@ let g:netrw_banner = 0
 
 " }}}
 " Denite {{{
+"
+autocmd FileType denite call s:denite_my_settings()
+function! s:denite_my_settings() abort
+  nnoremap <silent><buffer><expr> <CR>
+  \ denite#do_map('do_action')
+  nnoremap <silent><buffer><expr> d
+  \ denite#do_map('do_action', 'delete')
+  nnoremap <silent><buffer><expr> p
+  \ denite#do_map('do_action', 'preview')
+  nnoremap <silent><buffer><expr> q
+  \ denite#do_map('quit')
+  nnoremap <silent><buffer><expr> i
+  \ denite#do_map('open_filter_buffer')
+  nnoremap <silent><buffer><expr> <Space>
+  \ denite#do_map('toggle_select').'j'
+endfunction
+
+call denite#custom#var('file/rec', 'command',
+      \ ['git', 'ls-files', '-co', '--exclude-standard'])
+
+call denite#custom#option('_', {
+            \ 'start_filter': v:true
+            \ })
 
 " Change mappings.
 "nnoremap <C-P> :Denite file_rec<CR>
-" nnoremap <leader>d :Denite 
-" nnoremap <leader>b :Denite buffer<cr>
-" nnoremap <leader>m :Denite file_old<cr>
-" nnoremap <leader>l :Denite line<cr>
-" nnoremap <leader>r :Denite register<cr>
+nnoremap <leader>f :Denite file/rec<CR>
+nnoremap <leader>d :Denite 
+nnoremap <leader>b :Denite buffer<cr>
+nnoremap <leader>l :Denite line<cr>
+nnoremap <leader>r :Denite register<cr>
 " nnoremap <leader>zz :Denite grep -path=~/Documentos/Apuntes/<cr>
 " nnoremap <leader>z :Denite file_rec -path=~/Documentos/Apuntes/<cr>
 
@@ -954,49 +977,18 @@ let g:netrw_banner = 0
 "     nnoremap <leader>z :Denite file_rec -path=~/Documents/Apuntes/<cr>
 " endif
 
-" call denite#custom#alias('source', 'file_rec/git', 'file_rec')
-
-" call denite#custom#var('file_rec/git', 'command',
-            \ ['git', 'ls-files', '-co', '--exclude-standard'])
-" nnoremap <silent> <leader>f :<C-u>Denite 
-"             \ `finddir('.git', ';') != '' ? 'file_rec/git' : 'file_rec'`<CR>
-
-" Change mappings
-" call denite#custom#map(
-"             \ 'insert',
-"             \ '<C-j>',
-"             \ '<denite:move_to_next_line>',
-"             \ 'noremap'
-"             \)
-" call denite#custom#map(
-"             \ 'insert',
-"             \ '<C-k>',
-"             \ '<denite:move_to_previous_line>',
-"             \ 'noremap'
-"             \)
-
-" call denite#custom#option('default', {
-"             \ 'prompt': '❯',
-"             \ 'reversed': 1,
-"             \ 'auto_resize': 1,
-"             \ 'highlight-mode-insert': 'Search'
-"             \ })
-
-" "            "\ 'statusline': 0
-" "            "\ 'split': 'no'
-" call denite#custom#var('buffer', 'date_format', '')
-
-" call denite#custom#option('_', 'highlight_matched_range', 'None')
-" call denite#custom#option('_', 'highlight_matched_char', 'Character')
+call denite#custom#option('_', 'highlight_matched_range', 'None')
+call denite#custom#option('_', 'highlight_matched_char', 'Character')
 
 " }}}
 " ctrlp {{{
 
-let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
-let g:ctrlp_map = '<leader>f'
-let g:ctrlp_switch_buffer = ''
-nnoremap <leader>b :CtrlPBuffer<enter>
-nnoremap <leader>l :CtrlPLine<enter>
+" let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+" " let g:ctrlp_working_path_mode = ''
+" let g:ctrlp_map = '<leader>f'
+" let g:ctrlp_switch_buffer = ''
+" nnoremap <leader>b :CtrlPBuffer<enter>
+" nnoremap <leader>l :CtrlPLine<enter>
 
 " }}}
 " UltiSnips {{{
