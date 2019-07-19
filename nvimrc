@@ -258,7 +258,7 @@ set termguicolors
 " Cursor line {{{
 
 set cursorline
-set guicursor=n-v-c:hor10,i-ci-ve:ver25,r-cr:hor20,o:hor50
+" set guicursor=n-v-c:hor10,i-ci-ve:ver25,r-cr:hor20,o:hor50
 
 "let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 " }}}
