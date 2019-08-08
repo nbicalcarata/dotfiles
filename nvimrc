@@ -960,7 +960,7 @@ try
     call denite#custom#option('_', 'highlight_matched_range', 'None')
     call denite#custom#option('_', 'highlight_matched_char', 'Character')
 catch
-    echomsg "Denite plugin not installed"
+    " echomsg "Denite plugin not installed"
 endtry
 
 " Change mappings.
