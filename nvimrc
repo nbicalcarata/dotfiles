@@ -662,14 +662,14 @@ augroup OverrideColor
     " autocmd ColorScheme * hi DiffText   term=reverse cterm=bold ctermfg=0 ctermbg=4 gui=bold guifg=#2b2b2b guibg=#6d9cbe
 
 
-    " if exists('g:GtkGuiLoaded')
-    "    autocmd ColorScheme * hi Statement  gui=none
-    "    autocmd ColorScheme * hi Type  gui=none
-    "    autocmd ColorScheme * hi NonText  gui=none
-    "    autocmd ColorScheme * hi DiffDelete  gui=none
-    "    autocmd ColorScheme * hi DiffText  gui=none
-    "    autocmd ColorScheme * hi Bold gui=none
-    " endif
+    if exists('g:GtkGuiLoaded')
+       autocmd ColorScheme * hi Statement  gui=none
+       autocmd ColorScheme * hi Type  gui=none
+       autocmd ColorScheme * hi NonText  gui=none
+       autocmd ColorScheme * hi DiffDelete  gui=none
+       autocmd ColorScheme * hi DiffText  gui=none
+       autocmd ColorScheme * hi Bold gui=none
+    endif
 
     " autocmd ColorScheme * hi LineNr                 guibg=none ctermbg=none
     " autocmd ColorScheme * hi SignColumn             guibg=none ctermbg=none

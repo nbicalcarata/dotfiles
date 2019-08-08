@@ -5,7 +5,8 @@ set visualbell t_vb=            " turn off error beep/flash
 " Neovim-qt
 if LINUX()
   " GuiFont monospace:h10
-   GuiFont Iosevka Term:h12
+   " GuiFont Iosevka Term:h12
+   GuiFont Iosevka SS08:h12
   "GuiFont! Iosevka Nerd Font:h12
   " GuiFont FantasqueSansMono Nerd Font Mono:h13
   " GuiFont Fantasque Sans Mono:h12
@@ -50,7 +51,8 @@ if exists('g:GtkGuiLoaded')
     if $HOSTNAME  == 't430'
         call rpcnotify(1, 'Gui', 'Font', 'monospace 13')
     else
-        call rpcnotify(1, 'Gui', 'Font', 'monospace 11')
+        " call rpcnotify(1, 'Gui', 'Font', 'monospace 11')
+        call rpcnotify(1, 'Gui', 'Font', 'Iosevka SS08 12')
     endif
     " call rpcnotify(1, 'Gui', 'Font', 'Source Code Pro 12')
     call rpcnotify(1, 'Gui', 'Command', 'PreferDarkTheme', 'on')
