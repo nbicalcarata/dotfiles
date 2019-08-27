@@ -38,8 +38,6 @@ Plug 'Shougo/denite.nvim'
 Plug 'tpope/vim-commentary'
 Plug 'justinmk/vim-gtfo'
 Plug 'mbbill/undotree'
-Plug 'nbicalcarata/vim-zim'
-Plug 'joanrivera/vim-zimwiki-syntax'
 Plug 'wesQ3/vim-windowswap'
 Plug 'pseewald/vim-anyfold'
 "Plug 'kevinkjt2000/tmuxline.vim'
@@ -51,16 +49,14 @@ Plug 'tpope/vim-surround'
 " Plug 'Yggdroot/indentLine'
 "Plug 'NovaDev94/vim-bufferline'
 "Plug 'ShirajG/golden-ratio'
-"Plug 'yuttie/comfortable-motion.vim'
 Plug 'kshenoy/vim-signature'
 Plug 'majutsushi/tagbar'
 Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-" Plug 'chrisbra/Colorizer'
-Plug 'dyng/ctrlsf.vim'
 Plug 'tpope/vim-vinegar'
 Plug 'gcmt/taboo.vim'
 Plug 'yuttie/comfortable-motion.vim'
+Plug 'sakhnik/nvim-gdb', { 'do': ':!./install.sh \| UpdateRemotePlugins' }
 " Plug 'raghur/fruzzy', {'do': { -> fruzzy#install()}}
 " Plug 'davidhalter/jedi-vim'
 
@@ -74,21 +70,17 @@ Plug 'yuttie/comfortable-motion.vim'
 "Plug 'ayu-theme/ayu-vim'
 Plug 'atelierbram/Base2Tone-vim' 
 Plug 'chriskempson/base16-vim'
-Plug 'nanotech/jellybeans.vim'
-Plug 'joshdick/onedark.vim'
-Plug 'drewtempelmeyer/palenight.vim'
-Plug 'morhetz/gruvbox'
-Plug 'whatyouhide/vim-gotham'
-Plug 'AlessandroYorba/Alduin'
+" Plug 'nanotech/jellybeans.vim'
+" Plug 'joshdick/onedark.vim'
+" Plug 'drewtempelmeyer/palenight.vim'
+" Plug 'morhetz/gruvbox'
+" Plug 'whatyouhide/vim-gotham'
+" Plug 'AlessandroYorba/Alduin'
 Plug 'protesilaos/prot16-vim'
 " Plug 'AlessandroYorba/Alduin'
 " Plug 'protesilaos/prot16-vim'
-" Plug 'xolox/vim-colorscheme-switcher'
-" Plug 'Taverius/vim-colorscheme-manager'
-Plug 'xolox/vim-misc'
 Plug 'equalsraf/neovim-gui-shim'
 " Plug 'metalelf0/base16-black-metal-scheme'
-" Plug 'UncleBill/prism.vim'
 
 " }}}
 " Git {{{
@@ -100,7 +92,7 @@ Plug 'junegunn/gv.vim'
 " Html {{{
 
 Plug 'Valloric/MatchTagAlways'
-Plug 'chrisgillis/vim-bootstrap3-snippets'
+" Plug 'chrisgillis/vim-bootstrap3-snippets'
 " Plug 'mattn/emmet-vim'
 Plug 'alvan/vim-closetag'
 
@@ -707,6 +699,7 @@ let g:mapleader = ','
 command! -nargs=* T split | terminal <args>
 command! -nargs=* VT vsplit | terminal <args>
 
+nnoremap <silent> <leader>/ :execute 'vimgrep /'.@/.'/j %'<CR>
 " nnoremap <leader>m :below 12sp term://$SHELL<cr>
 nnoremap <leader>m :below sp term://$SHELL<cr>
 
@@ -1351,7 +1344,7 @@ nnoremap <leader>A :T docker exec -it --user=laradock laradock_workspace_1 sh -l
 " }}}
 " fugitive {{{
 
-nnoremap <leader>G :Gstatus<cr>
+" nnoremap <leader>G :Gstatus<cr>
 " nnoremap <Leader>G :belowright :20Gstatus<CR>
 nnoremap <leader>ch :diffget //2<CR>
 nnoremap <leader>cl :diffget //3<CR>
