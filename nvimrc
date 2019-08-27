@@ -701,7 +701,12 @@ let g:mapleader = ','
 command! -nargs=* T split | terminal <args>
 command! -nargs=* VT vsplit | terminal <args>
 
-nnoremap <silent> <leader>/ :execute 'vimgrep /'.@/.'/j %'<CR>
+" Show last search in quifix
+" nnoremap <silent> <leader>/ :execute 'vimgrep /'.@/.'/j %'<CR>
+
+" Search word under cursor and show results in quickfix without moving it
+nnoremap <leader>- :execute "vimgrep /" . expand('<cword>') ."/j %"<CR>
+
 " nnoremap <leader>m :below 12sp term://$SHELL<cr>
 nnoremap <leader>m :below sp term://$SHELL<cr>
 
