@@ -57,6 +57,8 @@ Plug 'tpope/vim-vinegar'
 Plug 'gcmt/taboo.vim'
 Plug 'yuttie/comfortable-motion.vim'
 Plug 'sakhnik/nvim-gdb', { 'do': ':!./install.sh \| UpdateRemotePlugins' }
+Plug 'tpope/vim-dispatch'
+Plug 'radenling/vim-dispatch-neovim'
 " Plug 'raghur/fruzzy', {'do': { -> fruzzy#install()}}
 " Plug 'davidhalter/jedi-vim'
 
