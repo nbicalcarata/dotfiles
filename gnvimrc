@@ -49,7 +49,8 @@ if exists('g:GtkGuiLoaded')
     "https://github.com/ToxicFrog/Ligaturizer
     " call rpcnotify(1, 'Gui', 'Font', 'LigaHack Regular 9')
     if $HOSTNAME  == 't430'
-        call rpcnotify(1, 'Gui', 'Font', 'monospace 13')
+        " call rpcnotify(1, 'Gui', 'Font', 'monospace 13')
+        call rpcnotify(1, 'Gui', 'Font', 'Iosevka SS08 14')
     else
         " call rpcnotify(1, 'Gui', 'Font', 'monospace 11')
         call rpcnotify(1, 'Gui', 'Font', 'Iosevka SS08 12')
