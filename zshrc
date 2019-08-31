@@ -111,5 +111,5 @@ function homestead() {
   }
 
 prompt_dir() {
-  prompt_segment blue black '%2/'
+  prompt_segment white black '%2/'
 }
