@@ -4,25 +4,11 @@ set visualbell t_vb=            " turn off error beep/flash
 " fc-list | grep iosevka
 " Neovim-qt
 if LINUX()
-  " GuiFont monospace:h10
-   " GuiFont Iosevka Term:h12
-   GuiFont Iosevka SS08:h12
-  "GuiFont! Iosevka Nerd Font:h12
-  " GuiFont FantasqueSansMono Nerd Font Mono:h13
-  " GuiFont Fantasque Sans Mono:h12
-  " GuiFont 3270 Medium Nerd Font Mono:h12
-  "GuiFont LiterationMono Nerd Font Mono:h11
-  "GuiFont DejaVuSansMono Nerd Font:h12
-  "GuiFont DejaVuSansMonoForPowerline Nerd Font:h11
-  "GuiFont! InconsolataForPowerline Nerd Font:h13
-  "GuiFont Knack Nerd Font:h11
-  "GuiFont TerminessTTF Nerd Font:h13
-  "GuiFont UbuntuMono Nerd Font:h13
-  "GuiFont FuraMonoForPowerline Nerd Font:h12
-  "GuiFont Roboto Mono Nerd Font:h12
-  "Guifont DejaVu Sans Mono:h11
-  GuiTabline 0
-   let g:airline_theme='base16'
+    " GuiFont monospace:h10
+    " GuiFont Iosevka Term:h12
+    GuiFont Iosevka SS08:h12
+    GuiTabline 0
+    let g:airline_theme='base16'
 endif
 
 if WINDOWS()
@@ -37,25 +23,17 @@ call GuiWindowMaximized(1)
 
 " Neovim-gtk
 if exists('g:GtkGuiLoaded')
-    "call rpcnotify(1, 'Gui', 'Option', 'Popupmenu', 0)
-    " call rpcnotify(1, 'Gui', 'Font', 'Iosevka Term 12')
-    " call rpcnotify(1, 'Gui', 'Font', 'Monospace 11')
-    " call rpcnotify(1, 'Gui', 'Font', 'Hack 11')
-    " call rpcnotify(1, 'Gui', 'Font', 'Iosevka Regular 11')
-    call rpcnotify(1, 'Gui', 'Option', 'Popupmenu', 0)
+    call rpcnotify(1, 'Gui', 'Option', 'Popupmenu', 1)
     call rpcnotify(1, 'Gui', 'Option', 'Tabline', 0)
-    "call rpcnotify(1, 'Gui', 'Font', 'Hasklig Regular 11')
-    "call rpcnotify(1, 'Gui', 'Font', 'Fira Code Regular 11')
     "https://github.com/ToxicFrog/Ligaturizer
     " call rpcnotify(1, 'Gui', 'Font', 'LigaHack Regular 9')
     if $HOSTNAME  == 't430'
-        " call rpcnotify(1, 'Gui', 'Font', 'monospace 13')
-        call rpcnotify(1, 'Gui', 'Font', 'Iosevka SS08 14')
+        call rpcnotify(1, 'Gui', 'Font', 'monospace 13')
+        " call rpcnotify(1, 'Gui', 'Font', 'Iosevka SS08 14')
     else
-        " call rpcnotify(1, 'Gui', 'Font', 'monospace 11')
-        call rpcnotify(1, 'Gui', 'Font', 'Iosevka SS08 12')
+        call rpcnotify(1, 'Gui', 'Font', 'monospace 10')
+        " call rpcnotify(1, 'Gui', 'Font', 'Iosevka SS08 12')
     endif
-    " call rpcnotify(1, 'Gui', 'Font', 'Source Code Pro 12')
     call rpcnotify(1, 'Gui', 'Command', 'PreferDarkTheme', 'on')
     nnoremap <silent> <C-E> :NGToggleSidebar<cr>
 endif
@@ -63,11 +41,6 @@ endif
 if exists('g:gonvim_running')
    let g:airline_theme='base16'
 endif
-" augroup guiau
-"   autocmd!
-"   autocmd DirChanged * call rpcnotify(0, 'Dir', getcwd())
-"   autocmd WinEnter * call rpcnotify(0, 'Dir', getcwd())
-" augroup END
 
 " command! TreeViewShow call rpcnotify(0, 'TreeView', 'ShowHide', 1)
 " command! TreeViewHide call rpcnotify(0, 'TreeView', 'ShowHide', 0)

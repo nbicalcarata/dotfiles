@@ -70,15 +70,16 @@ Plug 'radenling/vim-dispatch-neovim'
 " Colorschemes {{{
 " Plug 'fenetikm/falcon'
 "Plug 'ayu-theme/ayu-vim'
-Plug 'atelierbram/Base2Tone-vim' 
-Plug 'chriskempson/base16-vim'
+" Plug 'atelierbram/Base2Tone-vim' 
+" Plug 'chriskempson/base16-vim'
+Plug 'Soares/base16.nvim'
 " Plug 'nanotech/jellybeans.vim'
 " Plug 'joshdick/onedark.vim'
 " Plug 'drewtempelmeyer/palenight.vim'
 " Plug 'morhetz/gruvbox'
 " Plug 'whatyouhide/vim-gotham'
 " Plug 'AlessandroYorba/Alduin'
-Plug 'protesilaos/prot16-vim'
+" Plug 'protesilaos/prot16-vim'
 " Plug 'AlessandroYorba/Alduin'
 " Plug 'protesilaos/prot16-vim'
 Plug 'equalsraf/neovim-gui-shim'
@@ -625,8 +626,6 @@ augroup OverrideColor
     " autocmd ColorScheme * hi! link StatusLineNC User6
     autocmd ColorScheme * hi! link StatusLineNC NonText
     autocmd ColorScheme * hi! link StatusLine Folded
-    " autocmd ColorScheme * hi! link ALEErrorSign DiffDelete
-    " autocmd ColorScheme * hi! link ALEWarning SignCursorLineNr
     autocmd ColorScheme * exec 'hi User1' .
             \' guibg=' . synIDattr(synIDtrans(hlID('Normal')), 'fg', 'gui') .
             \' guifg=' . synIDattr(synIDtrans(hlID('Normal')), 'bg', 'gui')
@@ -649,30 +648,6 @@ augroup OverrideColor
     autocmd ColorScheme * hi Folded     gui=none cterm=none ctermbg=none guibg=none
     autocmd ColorScheme * hi ALEErrorLine guibg=#47201C
     autocmd ColorScheme * hi ALEWarningLine   guibg=#363620
-    " autocmd ColorScheme * hi Cursor     ctermfg=15 ctermbg=15 guifg=#FFFFFF guibg=#FFFFFF
-    " autocmd ColorScheme * hi DiffAdd    term=bold ctermfg=0 ctermbg=2 guifg=#2b2b2b guibg=#a5c261
-    " autocmd ColorScheme * hi DiffDelete term=bold ctermfg=0 ctermbg=1 gui=bold guifg=#2b2b2b guibg=#da4939
-    " autocmd ColorScheme * hi DiffChange term=bold ctermfg=0 ctermbg=4 guifg=#2b2b2b guibg=#6d9cbe
-    " autocmd ColorScheme * hi DiffText   term=reverse cterm=bold ctermfg=0 ctermbg=4 gui=bold guifg=#2b2b2b guibg=#6d9cbe
-
-
-    if exists('g:GtkGuiLoaded')
-       autocmd ColorScheme * hi Statement  gui=none
-       autocmd ColorScheme * hi Type  gui=none
-       autocmd ColorScheme * hi NonText  gui=none
-       autocmd ColorScheme * hi DiffDelete  gui=none
-       autocmd ColorScheme * hi DiffText  gui=none
-       autocmd ColorScheme * hi Bold gui=none
-    endif
-
-    " autocmd ColorScheme * hi LineNr                 guibg=none ctermbg=none
-    " autocmd ColorScheme * hi SignColumn             guibg=none ctermbg=none
-    " autocmd ColorScheme * hi GitGutterAdd           guibg=none ctermbg=none
-    " autocmd ColorScheme * hi GitGutterChange        guibg=none ctermbg=none
-    " autocmd ColorScheme * hi GitGutterDelete        guibg=none ctermbg=none
-    " autocmd ColorScheme * hi GitGutterChangeDelete  guibg=none ctermbg=none
-    " autocmd ColorScheme * hi ALEErrorSign           guifg=red guibg=none ctermbg=none
-    " autocmd ColorScheme * hi ALEWarningSign         guifg=yellow guibg=none ctermbg=none
 augroup END
 
 let g:gonvim_draw_split = 0
@@ -686,11 +661,7 @@ let g:jellybeans_overrides = {
 
 let g:alduin_Shout_Fire_Breath = 1
 if LINUX()
-  colorscheme base16-default-dark
-  " colorscheme base16-ia-dark
-  " colorscheme base16-atlas
-  " colorscheme base16-material-palenight
-  " colorscheme Base2Tone_DrawbridgeDark
+  colorscheme darktooth
 endif
 
 " }}}
@@ -1328,16 +1299,6 @@ nmap <silent> gr <Plug>(coc-references)
 " map F <Plug>Sneak_S
 
 " }}}
-" color-switcher {{{
-
-let g:colorscheme_switcher_keep_background = 1
-let g:colorscheme_switcher_exclude_builtins = 1
-let g:colorscheme_manager_global_last = 1
-" let g:colorscheme_switcher_exclude = ['base16-atelier-cave-light', 'base16-atelier-dune-light', 'base16-atelier-estuary-light', 'base16-atelier-forest-light', 'base16-atelier-heath-light', 'base16-atelier-lakeside-light', 'base16-atelier-plateau-light', 'base16-atelier-savanna-light', 'base16-atelier-seaside-light', 'base16-atelier-sulphurpool-light', 'base16-classic-light', 'base16-default-light',  'base16-google-light', 'base16-grayscale-light', 'base16-gruvbox-light-hard', 'base16-gruvbox-light-medium', 'base16-gruvbox-light-soft', 'base16-harmonic-light', 'base16-mexico-light', 'base16-one-light', 'base16-solarized-light', 'base16-summerfruit-light', 'base16-unikitty-light', 'base16-material-lighter', 'base16-brushtrees', 'base16-cupcake', 'base16-cupertino', 'base16-brushtrees-dark', 'base16-tomorrow', 'base16-shapeshifter']
-
-let g:alduin_Shout_Fire_Breath = 1
-
-" }}}
 " Term {{{
 
 "Execute command from docker container
@@ -1516,5 +1477,14 @@ let g:prism_dir_changed_pattern = ['window', 'global']
 " let g:terminal_color_15 = '#eeeeec'
 " let g:terminal_color_background = g:terminal_color_0
 " let g:terminal_color_foreground = g:terminal_color_7
+
+" }}}
+" {{{
+
+" let g:base16_color_overrides = {
+"     \ 'DiffAdd': 'fg=green bg=similar3',
+"     \ 'DiffChange': 'fg=yellow bg=similar3 sp=yellow',
+"     \ 'DiffDelete': 'fg=red bg=similar3',
+"     \ 'DiffText': 'fg=blue bg=similar3 sp=blue'}
 
 " }}}
