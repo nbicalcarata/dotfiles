@@ -1446,7 +1446,7 @@ call airline#add_inactive_statusline_func('Render_Only_File')
 function! TabNumber(...)
     let builder = a:1
     let context = a:2
-    call builder.add_section('airline_b', printf(' %d/%d ', tabpagenr(), tabpagenr('$')))
+    call builder.add_section('airline_c', printf(' %d/%d ', tabpagenr(), tabpagenr('$')))
     return 0
 endfunction
 
