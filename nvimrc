@@ -667,18 +667,6 @@ augroup END
 let g:gonvim_draw_split = 0
 
 " }}}
-" Colorscheme {{{
-
-let g:jellybeans_overrides = {
-\    'CursorLine': { 'guibg': '232323' },
-\}
-
-let g:alduin_Shout_Fire_Breath = 1
-if LINUX()
-  colorscheme darktooth
-endif
-
-" }}}
 " Mappings {{{
 
 let g:mapleader = ','
@@ -1502,7 +1490,17 @@ let g:base16_color_overrides = {
     \ 'CursorLineNr': 'fg=light2 bg=similar3 bold',
     \ 'Pmenu': 'fg=light3 bg=similar3'}
 
-Base16Highlight CursorLineNr fg=light2 bg=similar3 bold
-Base16Highlight Pmenu fg=light3 bg=similar3
+" }}}
+" Colorscheme {{{
+
+let g:jellybeans_overrides = {
+\    'CursorLine': { 'guibg': '232323' },
+\}
+
+let g:alduin_Shout_Fire_Breath = 1
+
+if LINUX()
+  colorscheme darktooth
+endif
 
 " }}}
