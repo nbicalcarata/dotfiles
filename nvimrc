@@ -50,7 +50,7 @@ Plug 'tpope/vim-surround'
 "Plug 'NovaDev94/vim-bufferline'
 "Plug 'ShirajG/golden-ratio'
 Plug 'kshenoy/vim-signature'
-Plug 'majutsushi/tagbar'
+" Plug 'majutsushi/tagbar'
 Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-vinegar'
@@ -116,6 +116,7 @@ function! BuildYCM(info)
 endfunction
 
 " Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
+" let g:ale_sign_highlight_linenrs = 1
 Plug 'w0rp/ale'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
@@ -646,9 +647,22 @@ augroup OverrideColor
             \' guifg=' . synIDattr(synIDtrans(hlID('StatusLine')), 'fg', 'gui')
     " autocmd ColorScheme * hi StatusLineNC gui=none cterm=none ctermbg=none guibg=none
     autocmd ColorScheme * hi Folded     gui=none cterm=none ctermbg=none guibg=none
-    autocmd ColorScheme * hi ALEErrorLine guibg=#47201C
-    autocmd ColorScheme * hi ALEWarningLine   guibg=#363620
+    " autocmd ColorScheme * hi ALEErrorLine guibg=#47201C
+    " autocmd ColorScheme * hi ALEWarningLine   guibg=#363620
+
+    autocmd ColorScheme * hi ALEErrorSignLineNr guifg=#bf616a guibg=#52050c gui=bold
+    autocmd ColorScheme * hi ALEStyleErrorSignLineNr guifg=#bf616a guibg=#52050c gui=bold
+    autocmd ColorScheme * hi ALEWarningSignLineNr guifg=#ebcb8b guibg=#432d00 gui=bold
+    autocmd ColorScheme * hi ALEStyleWarningSignLineNr guifg=#ebcb8b guibg=#432d00 gui=bold
+    autocmd ColorScheme * hi ALEInfoSignLineNr guifg=#a3be8c guibg=#163601 gui=bold
+
+    autocmd ColorScheme * hi! link GitGutterAddLineNr DiffAdd
+    autocmd ColorScheme * hi! link GitGutterChangeLineNr DiffChange
+    autocmd ColorScheme * hi! link GitGutterDeleteLineNr DiffDelete
+    autocmd ColorScheme * hi! link GitGutterChangeDeleteLineNr DiffChange
+
 augroup END
+
 
 let g:gonvim_draw_split = 0
 
@@ -996,17 +1010,20 @@ let g:mta_filetypes = {
 
 set updatetime=100
 
-nmap <leader>gn <Plug>GitGutterNextHunk
-nmap <leader>gp <Plug>GitGutterPrevHunk
-nmap <Leader>gs <Plug>GitGutterStageHunk
-nmap <Leader>gr <Plug>GitGutterUndoHunk
+nmap <leader>gn <Plug>(GitGutterNextHunk)
+nmap <leader>gp <Plug>(GitGutterPrevHunk)
+nmap <Leader>gs <Plug>(GitGutterStageHunk)
+nmap <Leader>gr <Plug>(GitGutterUndoHunk)
 nmap <Leader>gc :T git checkout 
 nmap <Leader>gS :T git push --set-upstream origin 
 nmap <Leader>gP :T git push<cr>
 nmap <Leader>gd :Gdiff<cr>
 nmap <Leader>g+ :T git stash<CR>
 nmap <Leader>g- :T git stash pop<CR>
+
 "let g:gitgutter_max_signs = 800  " default value 500
+let g:gitgutter_preview_win_floating = 1
+let g:gitgutter_highlight_linenrs = 1
 
 "Box Drawings Heavy Vertical U+25e3
 if LINUX()
@@ -1184,7 +1201,7 @@ nmap <leader>E <Plug>(ale_previous_wrap)
 let g:ale_enabled = 1
 let g:ale_pattern_options = {'\.min.js$': {'ale_enabled': 0}}
 let g:ale_set_loclist = 0
-let g:ale_set_signs = 0
+let g:ale_set_signs = 1
 " let g:ale_change_sign_column_color = 1
 let g:ale_python_pylint_options = '--load-plugins pylint_django'
 let g:ale_python_flake8_options = '--ignore=E501' 
@@ -1479,12 +1496,13 @@ let g:prism_dir_changed_pattern = ['window', 'global']
 " let g:terminal_color_foreground = g:terminal_color_7
 
 " }}}
-" {{{
+" base16 {{{
 
-" let g:base16_color_overrides = {
-"     \ 'DiffAdd': 'fg=green bg=similar3',
-"     \ 'DiffChange': 'fg=yellow bg=similar3 sp=yellow',
-"     \ 'DiffDelete': 'fg=red bg=similar3',
-"     \ 'DiffText': 'fg=blue bg=similar3 sp=blue'}
+let g:base16_color_overrides = {
+    \ 'CursorLineNr': 'fg=light2 bg=similar3 bold',
+    \ 'Pmenu': 'fg=light3 bg=similar3'}
+
+Base16Highlight CursorLineNr fg=light2 bg=similar3 bold
+Base16Highlight Pmenu fg=light3 bg=similar3
 
 " }}}
