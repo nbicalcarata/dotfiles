@@ -27,7 +27,7 @@ endif
 
 " General {{{
 Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
-Plug 'plytophogy/vim-virtualenv'
+" Plug 'plytophogy/vim-virtualenv'
 " Plug 'lvht/phpcd.vim', { 'for': 'php', 'do': 'composer install' }
 Plug 'romainl/vim-cool'
 " Plug 'justinmk/vim-sneak'
@@ -54,7 +54,7 @@ Plug 'kshenoy/vim-signature'
 Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-vinegar'
-Plug 'gcmt/taboo.vim'
+" Plug 'gcmt/taboo.vim'
 Plug 'yuttie/comfortable-motion.vim'
 Plug 'sakhnik/nvim-gdb', { 'do': ':!./install.sh \| UpdateRemotePlugins' }
 Plug 'tpope/vim-dispatch'
@@ -661,6 +661,9 @@ augroup OverrideColor
     autocmd ColorScheme * hi! link GitGutterDeleteLineNr DiffDelete
     autocmd ColorScheme * hi! link GitGutterChangeDeleteLineNr DiffChange
 
+    autocmd ColorScheme * hi! link ALEErrorSign DiffDelete
+    autocmd ColorScheme * hi! link ALEWarningSign DiffChange
+
 augroup END
 
 
@@ -1190,7 +1193,10 @@ let g:ale_enabled = 1
 let g:ale_pattern_options = {'\.min.js$': {'ale_enabled': 0}}
 let g:ale_set_loclist = 0
 let g:ale_set_signs = 1
+let g:ale_sign_error = "●"
+let g:ale_sign_warning = "●"
 " let g:ale_change_sign_column_color = 1
+" let g:ale_sign_highlight_linenrs = 1
 let g:ale_python_pylint_options = '--load-plugins pylint_django'
 let g:ale_python_flake8_options = '--ignore=E501' 
 
