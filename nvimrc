@@ -27,63 +27,31 @@ endif
 
 " General {{{
 Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
-" Plug 'plytophogy/vim-virtualenv'
-" Plug 'lvht/phpcd.vim', { 'for': 'php', 'do': 'composer install' }
 Plug 'romainl/vim-cool'
-" Plug 'justinmk/vim-sneak'
 Plug 'yssl/QFEnter'
 " Plug 'scrooloose/nerdtree'
 Plug 'Shougo/denite.nvim'
-" Plug 'ctrlpvim/ctrlp.vim'
 Plug 'tpope/vim-commentary'
 Plug 'justinmk/vim-gtfo'
 Plug 'mbbill/undotree'
 Plug 'wesQ3/vim-windowswap'
 Plug 'pseewald/vim-anyfold'
-"Plug 'kevinkjt2000/tmuxline.vim'
-"Plug 'christoomey/vim-tmux-navigator'
 Plug 'mhinz/vim-startify'
 Plug 'mhinz/vim-grepper'
-"Plug 'skywind3000/asyncrun.vim'
 Plug 'tpope/vim-surround'
-" Plug 'Yggdroot/indentLine'
-"Plug 'NovaDev94/vim-bufferline'
-"Plug 'ShirajG/golden-ratio'
 Plug 'kshenoy/vim-signature'
-" Plug 'majutsushi/tagbar'
 Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-vinegar'
-" Plug 'gcmt/taboo.vim'
 Plug 'yuttie/comfortable-motion.vim'
-Plug 'sakhnik/nvim-gdb', { 'do': ':!./install.sh \| UpdateRemotePlugins' }
 Plug 'tpope/vim-dispatch'
 Plug 'radenling/vim-dispatch-neovim'
-" Plug 'raghur/fruzzy', {'do': { -> fruzzy#install()}}
-" Plug 'davidhalter/jedi-vim'
-
-" Javascript
-" Plug 'pangloss/vim-javascript'
-" Plug 'othree/javascript-libraries-syntax.vim'
+" Plug 'janko-m/vim-test'
 
 " }}}
 " Colorschemes {{{
-" Plug 'fenetikm/falcon'
-"Plug 'ayu-theme/ayu-vim'
-" Plug 'atelierbram/Base2Tone-vim' 
-" Plug 'chriskempson/base16-vim'
 Plug 'Soares/base16.nvim'
-" Plug 'nanotech/jellybeans.vim'
-" Plug 'joshdick/onedark.vim'
-" Plug 'drewtempelmeyer/palenight.vim'
-" Plug 'morhetz/gruvbox'
-" Plug 'whatyouhide/vim-gotham'
-" Plug 'AlessandroYorba/Alduin'
-" Plug 'protesilaos/prot16-vim'
-" Plug 'AlessandroYorba/Alduin'
-" Plug 'protesilaos/prot16-vim'
 Plug 'equalsraf/neovim-gui-shim'
-" Plug 'metalelf0/base16-black-metal-scheme'
 
 " }}}
 " Git {{{
@@ -91,48 +59,26 @@ Plug 'equalsraf/neovim-gui-shim'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'junegunn/gv.vim'
+
 " }}}
 " Html {{{
 
 Plug 'Valloric/MatchTagAlways'
-" Plug 'chrisgillis/vim-bootstrap3-snippets'
-" Plug 'mattn/emmet-vim'
 Plug 'alvan/vim-closetag'
 
 " }}}
 " Snippets & AutoComplete {{{
 
-" Plug 'Shougo/deoplete.nvim'
-" Plug 'lifepillar/vim-mucomplete'
-
-function! BuildYCM(info)
-  " info is a dictionary with 3 fields
-  " - name:   name of the plugin
-  " - status: 'installed', 'updated', or 'unchanged'
-  " - force:  set on PlugInstall! or PlugUpdate!
-  if a:info.status == 'installed' || a:info.force
-    !./install.py --js-completer
-  endif
-endfunction
-
-" Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
-" let g:ale_sign_highlight_linenrs = 1
 Plug 'w0rp/ale'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'jiangmiao/auto-pairs'
 Plug 'ludovicchabant/vim-gutentags'
-" Plug 'carlitux/deoplete-ternjs', { 'do': 'sudo npm install -g tern' }
-" Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
 
 " }}}
 " Syntax highlighting{{{
 
 Plug 'sheerun/vim-polyglot'
-Plug 'janko-m/vim-test'
-Plug 'StanAngeloff/php.vim'
-"Plug 'mxw/vim-jsx'
-Plug 'posva/vim-vue'
 
 " }}}
 
