@@ -37,7 +37,6 @@ Plug 'mbbill/undotree'
 Plug 'wesQ3/vim-windowswap'
 Plug 'pseewald/vim-anyfold'
 Plug 'mhinz/vim-startify'
-Plug 'mhinz/vim-grepper'
 Plug 'tpope/vim-surround'
 Plug 'kshenoy/vim-signature'
 Plug 'bling/vim-airline'
@@ -115,6 +114,7 @@ set smartcase                   " Case sensitive when uc present
 set inccommand=split            " live sustitution
 set listchars=tab:▸\ ,eol:¬,extends:»,precedes:«,trail:•
 set nofixendofline
+
 " Performance
 set noshowcmd noruler
 set lazyredraw
@@ -123,9 +123,6 @@ set diffopt+=vertical
 set autoread
 
 set autoindent
-" set tabstop=8
-" set softtabstop=4
-" set shiftwidth=4
 augroup IndentSettings
     autocmd!
     autocmd Filetype html setlocal ts=2 sw=2
@@ -200,9 +197,7 @@ set termguicolors
 " Cursor line {{{
 
 set cursorline
-" set guicursor=n-v-c:hor10,i-ci-ve:ver25,r-cr:hor20,o:hor50
 
-"let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 " }}}
 " Styling vertical splits {{{
 "https://github.com/vim-airline/vim-airline-themes/issues/48
@@ -287,7 +282,7 @@ endfunction
 "Deactivate per filetype
 "autocmd FileType markdown let &colorcolumn=""
 
-nnoremap <leader>co :call ToggleColorColumn()<CR>
+" nnoremap <leader>co :call ToggleColorColumn()<CR>
 
 " }}}
 " http://vim.wikia.com/wiki/Restore_cursor_to_file_position_in_previous_editing_session
@@ -324,17 +319,6 @@ function! LinterStatus() abort
     \   all_errors
     \)
 endfunction
-
-" }}}
-" Vinegar alternative {{{
-
-" function! s:vinegar()
-"   let fname = expand('%:t')
-"   edit %
-"   normal! gg
-"   call search('\<'.fname.'\>')
-" endfunction
-" nnoremap - :<C-U>call <SID>vinegar()<CR>
 
 " }}}
 " Autocmd rules {{{
@@ -689,37 +673,17 @@ vnoremap <leader>P "+P
 
 " Quick edit vimrc
 nnoremap <leader>ev :e ~/dotfiles/nvimrc<cr>
-nnoremap <leader>en :e ~/dotfiles/nvim/nplug.vim<cr>
-nnoremap <leader>eg :e ~/dotfiles/nvim/general.vim<cr>
-nnoremap <leader>ea :e ~/dotfiles/nvim/autocmd.vim<cr>
-nnoremap <leader>es :e ~/dotfiles/nvim/statusline.vim<cr>
-nnoremap <leader>ec :e ~/dotfiles/nvim/color.vim<cr>
-nnoremap <leader>em :e ~/dotfiles/nvim/map.vim<cr>
-nnoremap <leader>ep :e ~/dotfiles/nvim/plugins.vim<cr>
 nnoremap <leader>sv :source ~/.config/nvim/init.vim<cr>
 nnoremap <leader>sg :source ~/.config/nvim/ginit.vim<cr>
 
 if WINDOWS()
   nnoremap <leader>ev :e ~\AppData\Local\nvim\init.vim<cr>
-  nnoremap <leader>en :e ~\AppData\Local\nvim\nplug.vim<cr>
-  nnoremap <leader>eg :e ~\AppData\Local\nvim\general.vim<cr>
-  nnoremap <leader>ea :e ~\AppData\Local\nvim\autocmd.vim<cr>
-  nnoremap <leader>es :e ~\AppData\Local\nvim\statusline.vim<cr>
-  nnoremap <leader>ec :e ~\AppData\Local\nvim\color.vim<cr>
-  nnoremap <leader>em :e ~\AppData\Local\nvim\map.vim<cr>
-  nnoremap <leader>ep :e ~\AppData\Local\nvim\plugins.vim<cr>
   nnoremap <leader>sv :source ~\AppData\Local\nvim\init.vim<cr>
   nnoremap <leader>sg :source ~\AppData\Local\nvim\ginit.vim<cr>
 endif
 
 nnoremap <F1> <nop>
 nnoremap Q <nop>
-
-" Bind nohl
-" Removes highlight of your last search
-"noremap <C-n> :nohl<CR>
-"vnoremap <C-n> :nohl<CR>
-"inoremap <C-n> :nohl<CR>
 
 " Resizing windows
 nnoremap <C-up> <C-W>-
@@ -893,13 +857,6 @@ nnoremap <leader>d :Denite
 nnoremap <leader>b :Denite buffer<cr>
 nnoremap <leader>l :Denite line<cr>
 nnoremap <leader>r :Denite register<cr>
-" nnoremap <leader>zz :Denite grep -path=~/Documentos/Apuntes/<cr>
-" nnoremap <leader>z :Denite file_rec -path=~/Documentos/Apuntes/<cr>
-
-" if WINDOWS()
-"     nnoremap <leader>z :Denite file_rec -path=~/Documents/Apuntes/<cr>
-" endif
-
 
 " }}}
 " ctrlp {{{
@@ -1027,23 +984,6 @@ let g:undotree_SetFocusWhenToggle = 1
 let g:undotree_ShortIndicators = 1
 
 " }}}
-" Zim {{{
-
-nnoremap <leader>gz :GrepperAg  ~/Documentos/Apuntes/<C-Left><Left>
-if WINDOWS()
-    nnoremap <leader>gz :GrepperAg  ~\Documentos\Apuntes\<C-Left><Left>
-endif
-
-"Zim files keymaps
-",wH   Create Zim header on a buffer
-",wb   Bold a range
-",wi   Italicize a range
-",wh   Highlight a range
-",ws   Strikw a range
-",wh   Header 1 to 5
-"<f8>  Change * to *
-
-" }}}
 " AnyFold {{{
 
 "let g:anyfold_activate=1
@@ -1072,14 +1012,10 @@ nnoremap <Leader>F :CtrlSF
 " }}}
 " Grepper {{{
 
-nnoremap <Leader>a :GrepperAg 
-
-" gsW, gsi', motions
-" nmap as  <plug>(GrepperOperator)
-" xmap as  <plug>(GrepperOperator)
+nnoremap <Leader>a :Ggrep! 
 
 "Start searching the word under the cursor:
-nnoremap <leader>* :Grepper -tool ag -cword -noprompt<cr>
+nnoremap <leader>* :Ggrep! <C-R><C-W><cr>
 " }}}
 " Startify {{{
 
@@ -1109,25 +1045,6 @@ augroup END
 "let g:startify_session_persistence = 1
 let g:startify_session_autoload = 1
 
-function! KillTerm()
-    bufdo if bufname("%")=~"term://*" | bd! | endif
-"bufdo if bufname("%")=~"neoterm-1$" | bd! | endif
-endfunction
-
-"bufdo if bufname("%")=~?'.exe$' | bdel | endif
-"bufdo if bufname("%")=~'' | bd! | endif
-
-function! CleanNoNameEmptyBuffers()
-    let buffers = filter(range(1, bufnr('$')), 'buflisted(v:val) && empty(bufname(v:val)) && bufwinnr(v:val) < 0 && (getbufline(v:val, 1, "$") == [""])')
-    if !empty(buffers)
-        exe 'bd '.join(buffers, ' ')
-    else
-        echo 'No buffer deleted'
-    endif
-endfunction
-
-"nnoremap <silent> ,C :call CleanNoNameEmptyBuffers()<CR>
-"nnoremap <leader>kt :call KillTerm()<cr>
 nnoremap <leader>S :SSave<cr>
 
 " }}}
@@ -1199,29 +1116,6 @@ if 'VIRTUAL_ENV' in os.environ:
   execfile(activate_this, dict(__file__=activate_this))
 EOF
 " }}}
-" Deoplete {{{
-
-if WINDOWS()
-    let g:python3_host_prog = 'C:\Python36\python'
-endif
-let g:deoplete#enable_at_startup = 1
-" call deoplete#custom#source('ultisnips', 'matchers', ['matcher_fuzzy'])
-let g:deoplete#ignore_sources = get(g:, 'deoplete#ignore_sources', {})
-let g:deoplete#ignore_sources.php = ['omni']
-"let g:echodoc_enable_at_startup = 1
-let g:deoplete#omni#input_patterns = {}
-let g:deoplete#omni#input_patterns.php = '\w*|[^. \t]->\w*|\w*::\w*'
-let g:deoplete#sources#ternjs#filetypes = [
-            \ 'javascript',
-            \ 'vue'
-            \ ]
-" }}}
-" nvim-completion-manager and deoplete {{{
-
-" inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-
-" }}}
 " coc {{{
 let g:airline#extensions#coc#enabled = 1
 let g:coc_global_extensions = [ 'coc-tsserver', 'coc-tslint', 'coc-tslint-plugin', 'coc-css', 'coc-json', 'coc-python', 'coc-highlight', 'coc-emmet', 'coc-ultisnips' ]
@@ -1249,14 +1143,6 @@ nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
 " }}}
-" sneak {{{
-
-" let g:sneak#label = 1
-
-" map f <Plug>Sneak_s
-" map F <Plug>Sneak_S
-
-" }}}
 " Term {{{
 
 "Execute command from docker container
@@ -1270,8 +1156,6 @@ nnoremap <leader>A :T docker exec -it --user=laradock laradock_workspace_1 sh -l
 " }}}
 " fugitive {{{
 
-" nnoremap <leader>G :Gstatus<cr>
-" nnoremap <Leader>G :belowright :20Gstatus<CR>
 nnoremap <leader>ch :diffget //2<CR>
 nnoremap <leader>cl :diffget //3<CR>
 
@@ -1288,12 +1172,6 @@ augroup END
 "  kyypf"di"lf"di"lf"di"0jwvf,hxkf"pj0wxvf,hxkf"f"f"pj0wxvf,hxk$hhhhpjdd
 "
 " }}}
-"  golden-ratio {{{
-
-" let g:loaded_golden_ratio = 0
-"let g:golden_ratio_constant = 1.3
-
-"  }}}
 "  vim-closetag {{{
 
 let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.vue,*.blade.php'
@@ -1327,11 +1205,6 @@ let g:python_highlight_all = 1
 
 nnoremap <leader>gm :SignatureListGlobalMarks<cr>
 nnoremap <leader>M :SignatureListBufferMarks<cr>
-
-" }}}
-" narrow {{{
-
-let g:nrrw_rgn_wdth = 40
 
 " }}}
 " Fruzzy {{{
@@ -1368,30 +1241,11 @@ let g:airline_mode_map = {
     \ '' : 'S',
     \ }
 
-" function! AirlineInit()
-"   call airline#parts#define_raw('time', '%{strftime("%c"}')
-"   let g:airline_section_y = airline#sections#create_right(['ffenc', 'time'])
-" endfunction
-
-" autocmd VimEnter * call AirlineInit()
-
-" function! GetSessionName()
-"   let l:sname = fnamemodify(v:this_session, ':t')
-"   return l:sname
-" endfunction
-
-" function! AirlineInit()
-"   call airline#parts#define_function('session', 'GetSessionName')
-"   let g:airline_section_y = airline#section#create(['session'])
-" endfunction
-
 function! Render_Only_File(...)
   let builder = a:1
   let context = a:2
   call builder.add_section('file', '%t ')
-  " return 0   " the default: draw the rest of the statusline
-  " return -1  " do not modify the statusline
-  return 1   " modify the statusline with the current contents of the builder
+  return 1
 endfunction
 
 call airline#add_inactive_statusline_func('Render_Only_File')
@@ -1405,36 +1259,6 @@ endfunction
 
 call airline#add_statusline_func('TabNumber')
 
-" autocmd VimEnter * call AirlineInit()
-" autocmd User AirlineAfterInit call AirlineInit()
-
-" }}}
-" Prism {{{
-
-let g:prism_count_tab = 1
-let g:prism_dir_changed_pattern = ['window', 'global']
-
-" }}}
-" terminal color {{{
-
-" let g:terminal_color_0  = '#000000'
-" let g:terminal_color_1  = '#cc0000'
-" let g:terminal_color_2  = '#4e9a06'
-" let g:terminal_color_3  = '#c4a000'
-" let g:terminal_color_4  = '#3465a4'
-" let g:terminal_color_5  = '#75507b'
-" let g:terminal_color_6  = '#0b939b'
-" let g:terminal_color_7  = '#d3d7cf'
-" let g:terminal_color_8  = '#555753'
-" let g:terminal_color_9  = '#ef2929'
-" let g:terminal_color_10 = '#8ae234'
-" let g:terminal_color_11 = '#fce94f'
-" let g:terminal_color_12 = '#729fcf'
-" let g:terminal_color_13 = '#ad7fa8'
-" let g:terminal_color_14 = '#00f5e9'
-" let g:terminal_color_15 = '#eeeeec'
-" let g:terminal_color_background = g:terminal_color_0
-" let g:terminal_color_foreground = g:terminal_color_7
 
 " }}}
 " base16 {{{
