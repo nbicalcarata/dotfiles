@@ -731,6 +731,14 @@ noremap N Nzz
 "<leader>q to close buffer without closing the window
 map <leader>q :bp<bar>sp<bar>bn<bar>bd<CR>
 
+function! NumberToggle()
+    if(&relativenumber == 1)
+        set norelativenumber
+    else
+        set relativenumber
+    endif
+endfunc
+
 " Toggle between absolute and relative line numbers
 nnoremap <Leader>n :call NumberToggle()<cr>
 
