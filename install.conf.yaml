@@ -12,6 +12,7 @@
     ~/.vimrc: vimrc
     ~/.gvimrc: gvimrc
     ~/.bashrc: bashrc
+    ~/.pdbrc.py: pdbrc
     ~/.eslintrc: eslintrc
     ~/.zshrc: zshrc
     ~/.zprofile: zprofile

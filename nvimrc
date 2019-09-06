@@ -392,11 +392,12 @@ augroup END
 
 " }}}
 " PDB {{{
+" pip install pdbpp
 
 augroup SetBreakpoints
     autocmd!
-    autocmd FileType python map <silent> <leader>x oimport pdb; pdb.set_trace()<esc>
-    autocmd FileType python map <silent> <leader>X Oimport pdb; pdb.set_trace()<esc>
+    autocmd FileType python map <silent> <leader>x oimport pdb; pdb.set_trace()  # noqa: E702<esc>
+    autocmd FileType python map <silent> <leader>X Oimport pdb; pdb.set_trace()  # noqa: E702<esc>
 augroup END
 
 " }}}
