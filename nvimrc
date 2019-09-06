@@ -375,6 +375,14 @@ augroup OmniCompletion
 augroup END
 
 " }}}
+" {{{
+
+augroup TSSyntax
+    autocmd!
+    autocmd BufNewFile,BufRead *.ts setlocal filetype=typescript
+augroup END
+
+" }}}
 " PDB {{{
 " pip install pdbpp
 
