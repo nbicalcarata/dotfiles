@@ -587,10 +587,33 @@ augroup OverrideColor
     autocmd ColorScheme * hi ALEStyleWarningSignLineNr guifg=#ebcb8b guibg=#432d00 gui=bold
     autocmd ColorScheme * hi ALEInfoSignLineNr guifg=#a3be8c guibg=#163601 gui=bold
 
-    autocmd ColorScheme * hi! link GitGutterAddLineNr DiffAdd
-    autocmd ColorScheme * hi! link GitGutterChangeLineNr DiffChange
-    autocmd ColorScheme * hi! link GitGutterDeleteLineNr DiffDelete
-    autocmd ColorScheme * hi! link GitGutterChangeDeleteLineNr DiffChange
+    autocmd ColorScheme * exec 'hi GGDiffAddLineNr' .
+            \' guibg=' . synIDattr(synIDtrans(hlID('DiffAdd')), 'fg', 'gui') .
+            \' guifg=' . synIDattr(synIDtrans(hlID('DiffAdd')), 'bg', 'gui')
+    autocmd ColorScheme * exec 'hi GGDiffChangeLineNr' .
+            \' guibg=' . synIDattr(synIDtrans(hlID('DiffChange')), 'fg', 'gui') .
+            \' guifg=' . synIDattr(synIDtrans(hlID('DiffChange')), 'bg', 'gui')
+    autocmd ColorScheme * exec 'hi GGDiffDeleteLineNr' .
+            \' guibg=' . synIDattr(synIDtrans(hlID('DiffDelete')), 'fg', 'gui') .
+            \' guifg=' . synIDattr(synIDtrans(hlID('DiffDelete')), 'bg', 'gui')
+
+    autocmd ColorScheme * exec 'hi RemoveSign' .
+            \' guibg=' . synIDattr(synIDtrans(hlID('SignColumn')), 'bg', 'gui') .
+            \' guifg=' . synIDattr(synIDtrans(hlID('SignColumn')), 'bg', 'gui')
+
+    " autocmd ColorScheme * hi! link GitGutterAddLineNr DiffAdd
+    " autocmd ColorScheme * hi! link GitGutterChangeLineNr DiffChange
+    " autocmd ColorScheme * hi! link GitGutterDeleteLineNr DiffDelete
+    " autocmd ColorScheme * hi! link GitGutterChangeDeleteLineNr DiffChange
+    autocmd ColorScheme * hi! link GitGutterAddLineNr GGDiffAddLineNr
+    autocmd ColorScheme * hi! link GitGutterChangeLineNr GGDiffChangeLineNr
+    autocmd ColorScheme * hi! link GitGutterDeleteLineNr GGDiffDeleteLineNr
+    autocmd ColorScheme * hi! link GitGutterChangeDeleteLineNr GGDiffChangeLineNr
+
+    autocmd ColorScheme * hi! link GitGutterAdd RemoveSign
+    autocmd ColorScheme * hi! link GitGutterChange RemoveSign
+    autocmd ColorScheme * hi! link GitGutterDelete RemoveSign
+    autocmd ColorScheme * hi! link GitGutterChangeDelete RemoveSign
 
     autocmd ColorScheme * hi! link ALEErrorSign DiffDelete
     autocmd ColorScheme * hi! link ALEWarningSign DiffChange
@@ -867,16 +890,6 @@ nnoremap <leader>l :Denite line<cr>
 nnoremap <leader>r :Denite register<cr>
 
 " }}}
-" ctrlp {{{
-
-" let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
-" " let g:ctrlp_working_path_mode = ''
-" let g:ctrlp_map = '<leader>f'
-" let g:ctrlp_switch_buffer = ''
-" nnoremap <leader>b :CtrlPBuffer<enter>
-" nnoremap <leader>l :CtrlPLine<enter>
-
-" }}}
 " UltiSnips {{{
 let g:UltiSnipsExpandTrigger='<c-e>'
 let g:UltiSnipsListSnippets='<c-l>'
@@ -924,27 +937,8 @@ nmap <Leader>gd :Gdiff<cr>
 nmap <Leader>g+ :T git stash<CR>
 nmap <Leader>g- :T git stash pop<CR>
 
-"let g:gitgutter_max_signs = 800  " default value 500
 let g:gitgutter_preview_win_floating = 1
 let g:gitgutter_highlight_linenrs = 1
-
-"Box Drawings Heavy Vertical U+25e3
-if LINUX()
-    let g:gitgutter_sign_added = '┃'
-    let g:gitgutter_sign_modified = '┃'
-    let g:gitgutter_sign_removed_first_line = '▔'
-    "let g:gitgutter_sign_removed_first_line = '^'
-    "let g:gitgutter_sign_removed = '▁'
-    "http://www.utf8-chartable.de/unicode-utf8-table.pl?start=9472&unicodeinhtml=dec
-endif
-if WINDOWS()
-    let g:gitgutter_sign_added = '┃'
-    let g:gitgutter_sign_modified = '┃'
-    "let g:gitgutter_sign_modified = '▶'
-    "let g:gitgutter_sign_modified = '●'
-    let g:gitgutter_sign_removed_first_line = '▔'
-    "let g:gitgutter_sign_removed = '▁'
-endif
 
 " }}}
 " Vimtest {{{
@@ -1267,7 +1261,6 @@ endfunction
 
 call airline#add_statusline_func('TabNumber')
 
-
 " }}}
 " base16 {{{
 
@@ -1277,12 +1270,6 @@ let g:base16_color_overrides = {
 
 " }}}
 " Colorscheme {{{
-
-let g:jellybeans_overrides = {
-\    'CursorLine': { 'guibg': '232323' },
-\}
-
-let g:alduin_Shout_Fire_Breath = 1
 
 if LINUX()
   colorscheme darktooth
