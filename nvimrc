@@ -78,6 +78,7 @@ Plug 'ludovicchabant/vim-gutentags'
 " Syntax highlighting{{{
 
 Plug 'sheerun/vim-polyglot'
+Plug 'leafgarland/typescript-vim'
 
 " }}}
 
@@ -1277,6 +1278,11 @@ let g:base16_color_overrides = {
     \ 'Pmenu': 'fg=light3 bg=similar3'}
 
 " }}}
+" " polyglot {{{
+
+let g:polyglot_disabled = ['typescript']
+
+" " }}}
 " Colorscheme {{{
 
 if LINUX()
