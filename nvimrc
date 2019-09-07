@@ -617,6 +617,9 @@ augroup OverrideColor
     autocmd ColorScheme * exec 'hi InlineDiffRemoved' .
             \' guibg=' . synIDattr(synIDtrans(hlID('Normal')), 'bg', 'gui') .
             \' guifg=' . synIDattr(synIDtrans(hlID('DiffDelete')), 'fg', 'gui') . ' gui=bold'
+    autocmd ColorScheme * exec 'hi InlineDiffLine' .
+            \' guibg=' . synIDattr(synIDtrans(hlID('CursorLine')), 'bg', 'gui') .
+            \' guifg=' . synIDattr(synIDtrans(hlID('Statement')), 'fg', 'gui')
 
     " autocmd ColorScheme * hi! link GitGutterAddLineNr DiffAdd
     " autocmd ColorScheme * hi! link GitGutterChangeLineNr DiffChange
@@ -637,6 +640,7 @@ augroup OverrideColor
 
     autocmd ColorScheme * hi! link diffAdded InlineDiffAdded
     autocmd ColorScheme * hi! link diffRemoved InlineDiffRemoved
+    autocmd ColorScheme * hi! link diffLine InlineDiffLine
 
 augroup END
 
