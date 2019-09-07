@@ -610,6 +610,13 @@ augroup OverrideColor
             \' guibg=' . synIDattr(synIDtrans(hlID('SignColumn')), 'bg', 'gui') .
             \' guifg=' . synIDattr(synIDtrans(hlID('SignColumn')), 'bg', 'gui')
 
+    autocmd ColorScheme * exec 'hi InlineDiffAdded' .
+            \' guibg=' . synIDattr(synIDtrans(hlID('Normal')), 'bg', 'gui') .
+            \' guifg=' . synIDattr(synIDtrans(hlID('DiffAdd')), 'fg', 'gui') . ' gui=bold'
+    autocmd ColorScheme * exec 'hi InlineDiffRemoved' .
+            \' guibg=' . synIDattr(synIDtrans(hlID('Normal')), 'bg', 'gui') .
+            \' guifg=' . synIDattr(synIDtrans(hlID('DiffDelete')), 'fg', 'gui') . ' gui=bold'
+
     " autocmd ColorScheme * hi! link GitGutterAddLineNr DiffAdd
     " autocmd ColorScheme * hi! link GitGutterChangeLineNr DiffChange
     " autocmd ColorScheme * hi! link GitGutterDeleteLineNr DiffDelete
@@ -626,6 +633,9 @@ augroup OverrideColor
 
     autocmd ColorScheme * hi! link ALEErrorSign DiffDelete
     autocmd ColorScheme * hi! link ALEWarningSign DiffChange
+
+    autocmd ColorScheme * hi! link diffAdded InlineDiffAdded
+    autocmd ColorScheme * hi! link diffRemoved InlineDiffRemoved
 
 augroup END
 
