@@ -1180,6 +1180,7 @@ nnoremap <leader>A :T docker exec -it --user=laradock laradock_workspace_1 sh -l
 
 nnoremap <leader>ch :diffget //2<CR>
 nnoremap <leader>cl :diffget //3<CR>
+nnoremap <leader>G :vertical Gstatus<CR>
 
 augroup quickfix
     autocmd!
