@@ -598,14 +598,14 @@ augroup OverrideColor
     autocmd ColorScheme * hi ALEInfoSignLineNr guifg=#a3be8c guibg=#163601 gui=bold
 
     autocmd ColorScheme * exec 'hi GGDiffAddLineNr' .
-            \' guibg=' . synIDattr(synIDtrans(hlID('DiffAdd')), 'fg', 'gui') .
-            \' guifg=' . synIDattr(synIDtrans(hlID('DiffAdd')), 'bg', 'gui')
+            \' guibg=' . synIDattr(synIDtrans(hlID('DiffAdd')), 'bg', 'gui') .
+            \' guifg=' . synIDattr(synIDtrans(hlID('DiffAdd')), 'fg', 'gui')
     autocmd ColorScheme * exec 'hi GGDiffChangeLineNr' .
-            \' guibg=' . synIDattr(synIDtrans(hlID('DiffChange')), 'fg', 'gui') .
-            \' guifg=' . synIDattr(synIDtrans(hlID('DiffChange')), 'bg', 'gui')
+            \' guibg=' . synIDattr(synIDtrans(hlID('DiffChange')), 'bg', 'gui') .
+            \' guifg=' . synIDattr(synIDtrans(hlID('DiffChange')), 'fg', 'gui')
     autocmd ColorScheme * exec 'hi GGDiffDeleteLineNr' .
-            \' guibg=' . synIDattr(synIDtrans(hlID('DiffDelete')), 'fg', 'gui') .
-            \' guifg=' . synIDattr(synIDtrans(hlID('DiffDelete')), 'bg', 'gui')
+            \' guibg=' . synIDattr(synIDtrans(hlID('DiffDelete')), 'bg', 'gui') .
+            \' guifg=' . synIDattr(synIDtrans(hlID('DiffDelete')), 'fg', 'gui')
 
     autocmd ColorScheme * exec 'hi RemoveSign' .
             \' guibg=' . synIDattr(synIDtrans(hlID('SignColumn')), 'bg', 'gui') .
