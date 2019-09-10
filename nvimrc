@@ -662,7 +662,7 @@ command! -nargs=* VT vsplit | terminal <args>
 nnoremap <leader>- :execute "vimgrep /" . expand('<cword>') ."/j %"<CR>
 
 " nnoremap <leader>m :below 12sp term://$SHELL<cr>
-nnoremap <leader>m :below sp term://$SHELL<cr>
+nnoremap <leader>t :below sp term://$SHELL<cr>
 
 " Insert source bin/activate
 tnoremap <leader>va source venv/bin/activate<cr>
@@ -958,8 +958,7 @@ nmap <Leader>gc :T git checkout
 nmap <Leader>gS :T git push --set-upstream origin 
 nmap <Leader>gP :T git push<cr>
 nmap <Leader>gd :Gdiff<cr>
-nmap <Leader>g+ :T git stash<CR>
-nmap <Leader>g- :T git stash pop<CR>
+nmap <Leader>gl :Glog<cr>
 
 let g:gitgutter_preview_win_floating = 1
 let g:gitgutter_highlight_linenrs = 1
@@ -967,15 +966,15 @@ let g:gitgutter_highlight_linenrs = 1
 " }}}
 " Vimtest {{{
 
-nmap <silent><Leader>tf <Esc>:Pytest file<CR>
-nmap <silent><Leader>tc <Esc>:Pytest class<CR>
-nmap <sdilent><Leader>tm <Esc>:Pytest method<CR>
+" nmap <silent><Leader>tf <Esc>:Pytest file<CR>
+" nmap <silent><Leader>tc <Esc>:Pytest class<CR>
+" nmap <sdilent><Leader>tm <Esc>:Pytest method<CR>
 
-nmap <silent> <leader>tn :TestNearest<CR>
-nmap <silent> <leader>tf :TestFile<CR>
-nmap <silent> <leader>ts :TestSuite<CR>
-nmap <silent> <leader>tl :TestLast<CR>
-nmap <silent> <leader>tv :TestVisit<CR>
+" nmap <silent> <leader>tn :TestNearest<CR>
+" nmap <silent> <leader>tf :TestFile<CR>
+" nmap <silent> <leader>ts :TestSuite<CR>
+" nmap <silent> <leader>tl :TestLast<CR>
+" nmap <silent> <leader>tv :TestVisit<CR>
 
 let g:test#strategy = 'neovim'
 
@@ -1230,7 +1229,7 @@ let g:python_highlight_all = 1
 " }}}
 " vim-signature {{{
 
-nnoremap <leader>gm :SignatureListGlobalMarks<cr>
+nnoremap <leader>m :SignatureListGlobalMarks<cr>
 nnoremap <leader>M :SignatureListBufferMarks<cr>
 
 " }}}
