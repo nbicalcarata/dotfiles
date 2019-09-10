@@ -957,6 +957,7 @@ nmap <Leader>gS :T git push --set-upstream origin
 nmap <Leader>gP :T git push<cr>
 nmap <Leader>gd :Gdiff<cr>
 nmap <Leader>gl :Glog<cr>
+nmap <Leader>gb :Gbrowse<cr>
 
 let g:gitgutter_preview_win_floating = 1
 let g:gitgutter_highlight_linenrs = 1
