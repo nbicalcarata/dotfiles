@@ -810,8 +810,8 @@ tnoremap <C-l> <C-\><C-n><C-w>l
 "tnoremap <C-w> <C-\><C-n><C-w>c
 
 "set working directory to current file
-nnoremap <leader>lcd :cd %:p:h<CR>:pwd<CR>
-nnoremap <leader>td :tc %:p:h<CR>:pwd<CR>
+command FileDir cd %:p:h
+command TabDir tc %:p:h
 
 " Save as sudo
 "cmap w!! w !gksudo tee > /dev/null %
