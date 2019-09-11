@@ -42,7 +42,6 @@ Plug 'kshenoy/vim-signature'
 Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-vinegar'
-Plug 'yuttie/comfortable-motion.vim'
 " Plug 'janko-m/vim-test'
 
 " }}}
@@ -55,7 +54,6 @@ Plug 'equalsraf/neovim-gui-shim'
 
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
-" Plug 'junegunn/gv.vim'
 Plug 'tpope/vim-rhubarb'
 
 " }}}
@@ -265,26 +263,6 @@ function! ToggleFullScreen()
 endfunction
 
 " }}}
-" Toggle colorcolumn {{{
-
-function! ToggleColorColumn()
-  if &colorcolumn != ''
-    set colorcolumn&
-  else
-    "let &colorcolumn=80
-    let &colorcolumn='80,'.join(range(120,999),',')
-    " let &colorcolumn=join(range(120,999), ',')
-  endif
-endfunction
-
-"call ToggleColorColumn()
-
-"Deactivate per filetype
-"autocmd FileType markdown let &colorcolumn=""
-
-" nnoremap <leader>co :call ToggleColorColumn()<CR>
-
-" }}}
 " http://vim.wikia.com/wiki/Restore_cursor_to_file_position_in_previous_editing_session
 " Restore cursor to file position in previous editing session
 
@@ -419,17 +397,6 @@ augroup DisableThingsFromWindows
     autocmd!
     autocmd WinEnter * if &previewwindow | setlocal nolist | setlocal colorcolumn= | endif
     autocmd FileType qf,help setlocal nonumber colorcolumn=
-augroup END
-
-
-" }}}
-" Zim rules {{{
-
-augroup ZimRules
-    autocmd!
-    autocmd FileType zimwiki setlocal nonumber
-    autocmd FileType zimwiki setlocal wrap
-    "autocmd BufEnter * if &ft == 'zimwiki' | vert resize 60 | endif
 augroup END
 
 " }}}
@@ -641,7 +608,6 @@ augroup OverrideColor
     autocmd ColorScheme * hi! link diffLine InlineDiffLine
 
 augroup END
-
 
 let g:gonvim_draw_split = 0
 
