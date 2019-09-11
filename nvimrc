@@ -55,6 +55,8 @@ Plug 'equalsraf/neovim-gui-shim'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-rhubarb'
+Plug 'tpope/vim-dispatch'
+Plug 'radenling/vim-dispatch-neovim'
 
 " }}}
 " Html {{{
