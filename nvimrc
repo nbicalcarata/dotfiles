@@ -1196,8 +1196,8 @@ let g:python_highlight_all = 1
 " }}}
 " vim-signature {{{
 
-nnoremap <leader>m :SignatureListGlobalMarks<cr>
-nnoremap <leader>M :SignatureListBufferMarks<cr>
+command! GM :SignatureListGlobalMarks
+command! BM :SignatureListGlobalMarks
 
 " }}}
 " Fruzzy {{{
