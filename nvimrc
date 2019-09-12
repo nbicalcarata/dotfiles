@@ -1237,7 +1237,7 @@ let g:airline_mode_map = {
 function! Render_Only_File(...)
   let builder = a:1
   let context = a:2
-  call builder.add_section('file', '%t ')
+  call builder.add_section('file', '%f ')
   return 1
 endfunction
 
