@@ -776,8 +776,8 @@ tnoremap <C-l> <C-\><C-n><C-w>l
 "tnoremap <C-w> <C-\><C-n><C-w>c
 
 "set working directory to current file
-command FileDir cd %:p:h
-command TabDir tc %:p:h
+command! FileDir cd %:p:h
+command! TabDir tc %:p:h
 
 " Save as sudo
 "cmap w!! w !gksudo tee > /dev/null %
@@ -1274,13 +1274,13 @@ endif
 " }}}
 " Commands {{{
 
-command SandboxDeployBack T source venv/bin/activate; fab sandbox_deploy
-command SandboxDeployFront T source venv/bin/activate; fab sandbox_deploy_front
-command PreProdDeployBack T source venv/bin/activate; fab preprod_deploy
-command PreProdDeployFront T source venv/bin/activate; fab preprod_deploy_front
-command ProdDeployBack T source venv/bin/activate; fab prod_deploy
-command ProdDeployFront T source venv/bin/activate; fab prod_deploy_front
-command ScraperDeploy T source venv/bin/activate; fab scraper_deploy
-command -nargs=1 ScrapyCrawl T source venv/bin/activate; cd scraper; scrapy crawl <args>
+command! SandboxDeployBack T source venv/bin/activate; fab sandbox_deploy
+command! SandboxDeployFront T source venv/bin/activate; fab sandbox_deploy_front
+command! PreProdDeployBack T source venv/bin/activate; fab preprod_deploy
+command! PreProdDeployFront T source venv/bin/activate; fab preprod_deploy_front
+command! ProdDeployBack T source venv/bin/activate; fab prod_deploy
+command! ProdDeployFront T source venv/bin/activate; fab prod_deploy_front
+command! ScraperDeploy T source venv/bin/activate; fab scraper_deploy
+command! -nargs=1 ScrapyCrawl T source venv/bin/activate; cd scraper; scrapy crawl <args>
 
 " }}}
