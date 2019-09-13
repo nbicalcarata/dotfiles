@@ -1285,5 +1285,6 @@ command! ProdDeployBack T source venv/bin/activate; fab prod_deploy
 command! ProdDeployFront T source venv/bin/activate; fab prod_deploy_front
 command! ScraperDeploy T source venv/bin/activate; fab scraper_deploy
 command! -nargs=1 ScrapyCrawl T source venv/bin/activate; cd scraper; scrapy crawl <args>
+command! RunTests T source venv/bin/activate; python manage.py test
 
 " }}}
