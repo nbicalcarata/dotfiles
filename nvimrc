@@ -1271,7 +1271,7 @@ let g:polyglot_disabled = ['typescript']
 " Colorscheme {{{
 
 if LINUX()
-  colorscheme darktooth
+  colorscheme default
 endif
 
 " }}}
