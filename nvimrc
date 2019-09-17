@@ -29,7 +29,7 @@ endif
 Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
 Plug 'romainl/vim-cool'
 Plug 'yssl/QFEnter'
-" Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree'
 Plug 'Shougo/denite.nvim'
 Plug 'tpope/vim-commentary'
 Plug 'justinmk/vim-gtfo'
@@ -39,8 +39,8 @@ Plug 'pseewald/vim-anyfold'
 Plug 'mhinz/vim-startify'
 Plug 'tpope/vim-surround'
 Plug 'kshenoy/vim-signature'
-Plug 'bling/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+" Plug 'bling/vim-airline'
+" Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-vinegar'
 " Plug 'janko-m/vim-test'
 
@@ -201,7 +201,7 @@ set cursorline
 " }}}
 " Styling vertical splits {{{
 "https://github.com/vim-airline/vim-airline-themes/issues/48
-set fillchars=vert:│,fold:۰,diff:·,stlnc:─
+set fillchars=vert:│,fold:۰,diff:·,stlnc:─,stl:─
 " set fillchars=vert:█,fold:۰,diff:·,stlnc:─
 " set fillchars=vert:│,fold:۰,diff:· 
 " }}}
@@ -444,26 +444,22 @@ set laststatus=2
 
 " Simple {{{
 
-set statusline=
-set statusline+=%5* 
-set statusline+=\ %{tabpagenr()}/
-set statusline+=%{tabpagenr('$').'\ '}
-set statusline+=%3* 
-" set statusline+=\ %n\  
-set statusline+=\ %{Relative_Path_CWD()}\ 
-set statusline+=%5* 
-set statusline+=%{fugitive#head()!=''?'\ \ '.fugitive#head().'\ \•':''}
-set statusline+=\ %f
-set statusline+=\ %h%m%r
-set statusline+=%<
-set statusline+=%=
-" set statusline+=%(\ %{LinterStatus()}\ %)
-set statusline+=%1* 
-set statusline+=\ %{''!=#&filetype?&filetype.'\ •\ ':''}
-"set statusline+=%{fugitive#head()!=''?'\ \ '.fugitive#head().'\ •\ ':''}
-" set statusline+=%{fugitive#head()!=''?'\ '.fugitive#head().'\ •\ ':''}
- set statusline+=%{LinterStatus()!=''?'\ '.LinterStatus().'\ •\ ':''}
-set statusline+=%(%4l\,%3c%)\ 
+" set statusline=
+" set statusline+=%5* 
+" set statusline+=\ %{tabpagenr()}/
+" set statusline+=%{tabpagenr('$').'\ '}
+" set statusline+=%3* 
+" set statusline+=\ %{Relative_Path_CWD()}\ 
+" set statusline+=%5* 
+" set statusline+=%{fugitive#head()!=''?'\ \ '.fugitive#head().'\ \•':''}
+" set statusline+=\ %f
+" set statusline+=\ %h%m%r
+" set statusline+=%<
+" set statusline+=%=
+" set statusline+=%1* 
+" set statusline+=\ %{''!=#&filetype?&filetype.'\ •\ ':''}
+" set statusline+=%{LinterStatus()!=''?'\ '.LinterStatus().'\ •\ ':''}
+" set statusline+=%(%4l\,%3c%)\ 
 
 " }}}
 " Separators {{{
@@ -1211,49 +1207,46 @@ command! BM :SignatureListGlobalMarks
 " }}}
 " Airline {{{
 
-let g:airline_powerline_fonts = 1
-" let g:airline#extensions#tabline#enabled = 1 
-let g:airline#extensions#tabline#fnamemod = ':t'
-let g:airline#extensions#whitespace#enabled = 0
-let g:airline#extensions#tabline#show_buffers = 0
-let g:airline#extensions#tabline#show_splits = 0
-let g:airline#extensions#tabline#tabs_label = 'T'
-let g:airline#extensions#tabline#show_close_button = 0
-" let g:airline#themes#base16#constant = 1
-" let g:airline_base16_improved_contrast = 1
+" let g:airline_powerline_fonts = 1
+" let g:airline#extensions#tabline#fnamemod = ':t'
+" let g:airline#extensions#whitespace#enabled = 0
+" let g:airline#extensions#tabline#show_buffers = 0
+" let g:airline#extensions#tabline#show_splits = 0
+" let g:airline#extensions#tabline#tabs_label = 'T'
+" let g:airline#extensions#tabline#show_close_button = 0
 
-" Short names
-let g:airline_mode_map = {
-    \ '__' : '-',
-    \ 'n'  : 'N',
-    \ 'i'  : 'I',
-    \ 'R'  : 'R',
-    \ 'c'  : 'C',
-    \ 'v'  : 'V',
-    \ 'V'  : 'V',
-    \ '' : 'V',
-    \ 's'  : 'S',
-    \ 'S'  : 'S',
-    \ '' : 'S',
-    \ }
+" " Short names
+" let g:airline_mode_map = {
+"     \ '__' : '-',
+"     \ 'n'  : 'N',
+"     \ 'i'  : 'I',
+"     \ 'R'  : 'R',
+"     \ 'c'  : 'C',
+"     \ 'v'  : 'V',
+"     \ 'V'  : 'V',
+"     \ '' : 'V',
+"     \ 's'  : 'S',
+"     \ 'S'  : 'S',
+"     \ '' : 'S',
+"     \ }
 
-function! Render_Only_File(...)
-  let builder = a:1
-  let context = a:2
-  call builder.add_section('file', '%f ')
-  return 1
-endfunction
+" function! Render_Only_File(...)
+"   let builder = a:1
+"   let context = a:2
+"   call builder.add_section('file', '%f ')
+"   return 1
+" endfunction
 
-call airline#add_inactive_statusline_func('Render_Only_File')
+" call airline#add_inactive_statusline_func('Render_Only_File')
 
-function! TabNumber(...)
-    let builder = a:1
-    let context = a:2
-    call builder.add_section('airline_c', printf(' %d/%d ', tabpagenr(), tabpagenr('$')))
-    return 0
-endfunction
+" function! TabNumber(...)
+"     let builder = a:1
+"     let context = a:2
+"     call builder.add_section('airline_c', printf(' %d/%d ', tabpagenr(), tabpagenr('$')))
+"     return 0
+" endfunction
 
-call airline#add_statusline_func('TabNumber')
+" call airline#add_statusline_func('TabNumber')
 
 " }}}
 " base16 {{{
