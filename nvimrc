@@ -29,7 +29,7 @@ endif
 Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
 Plug 'romainl/vim-cool'
 Plug 'yssl/QFEnter'
-" Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree'
 Plug 'Shougo/denite.nvim'
 Plug 'tpope/vim-commentary'
 Plug 'justinmk/vim-gtfo'
