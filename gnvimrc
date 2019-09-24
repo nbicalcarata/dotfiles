@@ -23,7 +23,7 @@ call GuiWindowMaximized(1)
 
 " Neovim-gtk
 if exists('g:GtkGuiLoaded')
-    call rpcnotify(1, 'Gui', 'Option', 'Popupmenu', 1)
+    call rpcnotify(1, 'Gui', 'Option', 'Popupmenu', 0)
     call rpcnotify(1, 'Gui', 'Option', 'Tabline', 0)
     "https://github.com/ToxicFrog/Ligaturizer
     " call rpcnotify(1, 'Gui', 'Font', 'LigaHack Regular 9')
