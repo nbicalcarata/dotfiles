@@ -597,10 +597,10 @@ augroup OverrideColor
     autocmd ColorScheme * hi! link GitGutterDeleteLineNr GGDiffDeleteLineNr
     autocmd ColorScheme * hi! link GitGutterChangeDeleteLineNr GGDiffChangeLineNr
 
-    autocmd ColorScheme * hi! link GitGutterAdd RemoveSign
-    autocmd ColorScheme * hi! link GitGutterChange RemoveSign
-    autocmd ColorScheme * hi! link GitGutterDelete RemoveSign
-    autocmd ColorScheme * hi! link GitGutterChangeDelete RemoveSign
+    " autocmd ColorScheme * hi! link GitGutterAdd RemoveSign
+    " autocmd ColorScheme * hi! link GitGutterChange RemoveSign
+    " autocmd ColorScheme * hi! link GitGutterDelete RemoveSign
+    " autocmd ColorScheme * hi! link GitGutterChangeDelete RemoveSign
 
     autocmd ColorScheme * hi! link ALEErrorSign DiffDelete
     autocmd ColorScheme * hi! link ALEWarningSign DiffChange
