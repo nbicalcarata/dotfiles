@@ -648,7 +648,7 @@ nnoremap <leader>T <C-]>
 nnoremap <BS> <C-^>
 
 " Substitution on visual selection
-xnoremap <leader>vs y:%s/<C-r>"//g<Left><Left>
+" xnoremap <leader>vs y:%s/<C-r>"//g<Left><Left>
 
 " Find files
 "nnoremap <leader>f :find *
@@ -708,8 +708,8 @@ nnoremap <C-right> 5<C-W><
 nnoremap <C-left> 5<C-W>>
 
 " Substitute
-nnoremap <leader>s :%s///g<left><left><left>
-vnoremap <leader>s :s///g<left><left><left>
+nnoremap <leader>s :%s///gI<left><left><left><left>
+vnoremap <leader>s :s///gI<left><left><left><left>
 
 " Select current line (no indentation)
 nnoremap vv ^vg_
