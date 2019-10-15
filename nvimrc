@@ -29,7 +29,6 @@ endif
 Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
 Plug 'romainl/vim-cool'
 Plug 'yssl/QFEnter'
-Plug 'scrooloose/nerdtree'
 Plug 'Shougo/denite.nvim'
 Plug 'tpope/vim-commentary'
 Plug 'justinmk/vim-gtfo'
@@ -42,6 +41,7 @@ Plug 'kshenoy/vim-signature'
 Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-vinegar'
+Plug 'voldikss/vim-floaterm'
 " Plug 'janko-m/vim-test'
 
 " }}}
@@ -170,6 +170,7 @@ set foldmethod=marker
 set foldcolumn=0
 set foldlevel=99                                " Folds open at start
 set conceallevel=2
+set scrolloff=999
 
 " }}}
 " Wild menu options {{{
@@ -1278,6 +1279,15 @@ let g:polyglot_disabled = ['typescript']
 if LINUX()
   colorscheme default
 endif
+
+" }}}
+" Floatterm {{{
+
+noremap  <silent> <leader>t :FloatermToggle<CR>
+noremap! <silent> <leader>t <Esc>:FloatermToggle<CR>
+tnoremap <silent> <leader>t <C-\><C-n>:FloatermToggle<CR>
+let g:floaterm_position = 'center'
+let g:floaterm_width = 120
 
 " }}}
 " Commands {{{
