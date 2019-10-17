@@ -1229,6 +1229,7 @@ let g:airline#extensions#tabline#tabs_label = 'T'
 let g:airline#extensions#tabline#show_close_button = 0
 " let g:airline#themes#base16#constant = 1
 " let g:airline_base16_improved_contrast = 1
+let g:airline_theme = 'base16'
 
 " Short names
 let g:airline_mode_map = {
