@@ -871,6 +871,8 @@ endfunction
 try
     call denite#custom#var('file/rec', 'command', ['git', 'ls-files', '-co', '--exclude-standard'])
     call denite#custom#option('_', { 'start_filter': v:true })
+    call denite#custom#option('_', { 'split': 'floating' })
+    call denite#custom#option('_', { 'prompt': '>>' })
     call denite#custom#option('_', 'highlight_matched_range', 'None')
     call denite#custom#option('_', 'highlight_matched_char', 'Character')
 catch
