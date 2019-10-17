@@ -1,0 +1,28 @@
+font_size 11
+font_family      Fira Code
+bold_font        Fire Code Bold
+italic_font      Fira Code Italic 
+bold_italic_font Fira Code Bold Italic
+
+map ctrl+shift+plus change_font_size all +1.0
+map ctrl+shift+minus change_font_size all -1.0
+map ctrl+shift+backspace change_font_size all 0
+
+enable_audio_bell no
+visual_bell_duration 0.0
+window_alert_on_bell no
+bell_on_tab no
+
+tab_bar_style separator
+
+x11_hide_window_decorations yes
+
+background #181818
+
+tab_separator " │"
+
+active_tab_font_style   bold
+active_tab_foreground #999
+active_tab_background #181818
+inactive_tab_foreground #444
+inactive_tab_background #181818
