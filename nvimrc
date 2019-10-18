@@ -873,6 +873,7 @@ try
     call denite#custom#var('file/rec', 'command', ['git', 'ls-files', '-co', '--exclude-standard'])
     call denite#custom#option('_', { 'start_filter': v:true })
     call denite#custom#option('_', { 'split': 'floating' })
+    call denite#custom#option('_', { 'winrow': 4 })
     call denite#custom#option('_', { 'prompt': '>>' })
     call denite#custom#option('_', 'highlight_matched_range', 'None')
     call denite#custom#option('_', 'highlight_matched_char', 'Character')
@@ -1122,7 +1123,15 @@ EOF
 " }}}
 " coc {{{
 let g:airline#extensions#coc#enabled = 1
-let g:coc_global_extensions = [ 'coc-tsserver', 'coc-tslint', 'coc-tslint-plugin', 'coc-css', 'coc-json', 'coc-python', 'coc-highlight', 'coc-emmet', 'coc-ultisnips' ]
+let g:coc_global_extensions = [ 'coc-tsserver',
+                              \ 'coc-tslint',
+                              \ 'coc-tslint-plugin',
+                              \ 'coc-css',
+                              \ 'coc-json',
+                              \ 'coc-python',
+                              \ 'coc-highlight',
+                              \ 'coc-emmet',
+                              \ 'coc-ultisnips' ]
 
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
