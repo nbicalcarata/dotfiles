@@ -42,7 +42,6 @@ Plug 'kshenoy/vim-signature'
 Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 " Plug 'tpope/vim-vinegar'
-Plug 'voldikss/vim-floaterm'
 " Plug 'janko-m/vim-test'
 
 " }}}
@@ -622,6 +621,7 @@ let g:mapleader = ','
 
 command! -nargs=* T split | terminal <args>
 command! -nargs=* VT vsplit | terminal <args>
+noremap  <silent><leader>t :T<CR>
 
 " Show last search in quifix
 " nnoremap <silent> <leader>/ :execute 'vimgrep /'.@/.'/j %'<CR>
@@ -1283,15 +1283,6 @@ let g:polyglot_disabled = ['typescript']
 if LINUX()
   colorscheme default
 endif
-
-" }}}
-" Floatterm {{{
-
-noremap  <silent> <leader>t :FloatermToggle<CR>
-noremap! <silent> <leader>t <Esc>:FloatermToggle<CR>
-tnoremap <silent> <leader>t <C-\><C-n>:FloatermToggle<CR>
-let g:floaterm_position = 'center'
-let g:floaterm_width = 120
 
 " }}}
 " defx {{{
