@@ -1359,7 +1359,7 @@ call defx#custom#column('icon', {
       \ 'root_icon': ' ',
       \ })
 
-nmap - :Defx -search=`expand('%:p')` -wincol=999 -winheight=999 -winwidth=45 -split=floating -toggle<CR>
+nmap <silent>- :Defx -search=`expand('%:p')` -wincol=999 -winheight=999 -winwidth=45 -split=floating -toggle<CR>
 
 " }}}
 " Commands {{{
