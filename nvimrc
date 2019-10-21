@@ -171,6 +171,7 @@ set foldcolumn=0
 set foldlevel=99                                " Folds open at start
 set conceallevel=2
 set scrolloff=999
+set signcolumn=yes:2
 
 " }}}
 " Wild menu options {{{
