@@ -135,6 +135,7 @@ augroup IndentSettings
     autocmd Filetype vim setlocal ts=4 sw=4
     autocmd Filetype css setlocal ts=4 sw=4
     autocmd Filetype cucumber setlocal ts=2 sw=2
+    autocmd Filetype json setlocal ts=2 sw=2
 augroup END
 set expandtab
 set nojoinspaces                " Prevents inserting two spaces after
