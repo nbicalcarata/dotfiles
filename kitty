@@ -21,7 +21,7 @@ x11_hide_window_decorations yes
 
 background #181818
 
-tab_separator " │"
+tab_separator " │ "
 
 active_tab_font_style   bold
 active_tab_foreground #999
