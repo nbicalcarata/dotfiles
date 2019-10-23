@@ -1362,11 +1362,15 @@ function! s:defx_my_settings() abort
   \ defx#do_action('change_vim_cwd')
 endfunction
 
-call defx#custom#column('icon', {
-      \ 'directory_icon': '▸',
-      \ 'opened_icon': '▾',
-      \ 'root_icon': ' ',
-      \ })
+try
+    call defx#custom#column('icon', {
+          \ 'directory_icon': '▸',
+          \ 'opened_icon': '▾',
+          \ 'root_icon': ' ',
+          \ })
+catch
+    " Defx not installed
+endtry
 
 nmap <silent>- :Defx -search=`expand('%:p')` -wincol=999 -winheight=999 -winwidth=45 -split=floating -toggle<CR>
 
