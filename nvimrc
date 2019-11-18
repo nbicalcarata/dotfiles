@@ -27,7 +27,7 @@ endif
 
 " General {{{
 Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
-Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
+" Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'romainl/vim-cool'
 Plug 'yssl/QFEnter'
 Plug 'Shougo/denite.nvim'
@@ -41,7 +41,7 @@ Plug 'tpope/vim-surround'
 Plug 'kshenoy/vim-signature'
 Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-" Plug 'tpope/vim-vinegar'
+Plug 'tpope/vim-vinegar'
 " Plug 'janko-m/vim-test'
 
 " }}}
@@ -53,6 +53,7 @@ Plug 'equalsraf/neovim-gui-shim'
 " Git {{{
 
 Plug 'tpope/vim-fugitive'
+Plug 'junegunn/gv.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-dispatch'
@@ -172,7 +173,7 @@ set foldcolumn=0
 set foldlevel=99                                " Folds open at start
 set conceallevel=2
 set scrolloff=999
-set signcolumn=yes:2
+" set signcolumn=yes:2
 
 " }}}
 " Wild menu options {{{
@@ -623,7 +624,6 @@ let g:mapleader = ','
 
 command! -nargs=* T split | terminal <args>
 command! -nargs=* VT vsplit | terminal <args>
-noremap  <silent><leader>t :T<CR>
 
 " Show last search in quifix
 " nnoremap <silent> <leader>/ :execute 'vimgrep /'.@/.'/j %'<CR>
@@ -874,7 +874,7 @@ endfunction
 try
     call denite#custom#var('file/rec', 'command', ['git', 'ls-files', '-co', '--exclude-standard'])
     call denite#custom#option('_', { 'start_filter': v:true })
-    call denite#custom#option('_', { 'split': 'floating' })
+    " call denite#custom#option('_', { 'split': 'floating' })
     call denite#custom#option('_', { 'winrow': 4 })
     call denite#custom#option('_', { 'prompt': '>>' })
     call denite#custom#option('_', 'highlight_matched_range', 'None')
@@ -1370,11 +1370,17 @@ try
           \ 'opened_icon': '▾',
           \ 'root_icon': ' ',
           \ })
+
+	" call defx#custom#column('filename', {
+	"       \ 'min_width': 60,
+	"       \ })
 catch
     " Defx not installed
 endtry
 
-nmap <silent>- :Defx -search=`expand('%:p')` -wincol=999 -winheight=999 -winwidth=45 -split=floating -toggle<CR>
+" Floating
+" nmap <silent>- :Defx -search=`expand('%:p')` -wincol=999 -winheight=999 -winwidth=65 -split=floating -toggle<CR>
+" nmap <silent>- :Defx -search=`expand('%:p')`<CR>
 
 " }}}
 " Commands {{{
