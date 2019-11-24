@@ -1292,7 +1292,7 @@ let g:polyglot_disabled = ['typescript']
 " Colorscheme {{{
 
 if LINUX()
-  colorscheme default
+  colorscheme solarized
 endif
 
 " }}}
