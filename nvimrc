@@ -174,6 +174,7 @@ set foldlevel=99                                " Folds open at start
 set conceallevel=2
 set scrolloff=999
 " set signcolumn=yes:2
+let &colorcolumn="80,".join(range(120,999),",")
 
 " }}}
 " Wild menu options {{{
@@ -1281,6 +1282,7 @@ call airline#add_statusline_func('TabNumber')
 
 let g:base16_color_overrides = {
     \ 'CursorLineNr': 'fg=light2 bg=similar3 bold',
+    \ 'ColorColumn': 'bg=light2 bg=similar3',
     \ 'Pmenu': 'fg=light3 bg=similar3'}
 
 " }}}
