@@ -130,6 +130,7 @@ augroup IndentSettings
     autocmd Filetype htmldjango setlocal ts=2 sw=2
     autocmd Filetype php setlocal ts=4 sw=4
     autocmd Filetype vue setlocal ts=2 sw=2
+    autocmd Filetype javascript setlocal ts=2 sw=2
     autocmd Filetype blade setlocal ts=2 sw=2
     autocmd Filetype typescript setlocal ts=4 sw=4
     autocmd Filetype scss setlocal ts=4 sw=4
