@@ -8,7 +8,7 @@ if LINUX()
     " GuiFont Iosevka Term:h12
     GuiFont Iosevka SS08:h12
     GuiTabline 0
-    let g:airline_theme='base16'
+    let g:airline_theme='jellybeans'
 endif
 
 if WINDOWS()

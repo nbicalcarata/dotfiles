@@ -175,7 +175,7 @@ set foldlevel=99                                " Folds open at start
 set conceallevel=2
 set scrolloff=999
 " set signcolumn=yes:2
-let &colorcolumn="80,".join(range(120,999),",")
+let &colorcolumn=join(range(120,999),",")
 
 " }}}
 " Wild menu options {{{
@@ -383,9 +383,9 @@ augroup END
 
 augroup CursorLineOnlyInActiveWindow
     autocmd!
-    autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+    autocmd VimEnter,WinEnter,BufWinEnter,InsertLeave * setlocal cursorline
     " autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorcolumn
-    autocmd WinLeave * setlocal nocursorline
+    autocmd WinLeave,InsertEnter * setlocal nocursorline
     " autocmd WinLeave * setlocal nocursorcolumn
 augroup END
 
@@ -403,8 +403,8 @@ augroup END
 
 augroup DisableThingsFromWindows
     autocmd!
-    autocmd WinEnter * if &previewwindow | setlocal nolist | setlocal colorcolumn= | endif
-    autocmd FileType qf,help setlocal nonumber colorcolumn=
+    autocmd VimEnter,WinEnter,BufWinEnter * if &previewwindow | setlocal nolist | setlocal colorcolumn= | endif
+    autocmd FileType qf,help,fugitive setlocal nonumber colorcolumn=
 augroup END
 
 " }}}
@@ -477,61 +477,6 @@ set statusline+=%(%4l\,%3c%)\
 let left_sep=''
 let right_sep=''
 
-" powerline symbols
-"let g:airline_left_sep = ''
-"let g:airline_left_alt_sep = ''
-"let g:airline_right_sep = ''
-"let g:airline_right_alt_sep = ''
-"let g:airline_symbols.branch = ''
-"let g:airline_symbols.readonly = ''
-"let g:airline_symbols.linenr = '☰'
-"let g:airline_symbols.maxlinenr = ''
-
-" }}}
-" Airline style {{{
-
-""https://www.reddit.com/r/vim/comments/6b7b08/my_custom_statusline/
-
-"let g:mode ={
-        "\ '__' : '-', 'n'  : 'N',
-        "\ 'i'  : 'I', 'R'  : 'R',
-        "\ 'v'  : 'V', 'V'  : 'V',
-        "\ 'c'  : 'C', '' : 'V',
-        "\ 's'  : 'S', 'S'  : 'S',
-        "\ '' : 'S', 't'  : 'T',
-    "\}
-
-"set statusline=
-"set statusline+=%1*
-"set statusline+=%(\ %{g:mode[mode()]}\ %)
-"set statusline+=%(%{&paste?'P\ ':''}%)
-"set statusline+=%2*
-"set statusline+=%{left_sep}
-"set statusline+=%3*
-"set statusline+=%{fugitive#head()!=''?'\ \ \ '.fugitive#head().'\ ':''}
-"set statusline+=%4*
-"set statusline+=%{left_sep}
-"set statusline+=%5*
-"set statusline+=\ %<
-"set statusline+=%t
-"set statusline+=\ 
-"set statusline+=%{&modified?'[+]':''}
-"set statusline+=%{&readonly?'':''}
-"set statusline+=%=
-"set statusline+=\ %{''!=#&filetype?&filetype:''}
-"set statusline+=%{right_alt_sep}
-"set statusline+=\ 
-"set statusline+=%4*
-"set statusline+=%{right_sep}
-"set statusline+=%3*
-"set statusline+=%(\ %{LinterStatus()}%)
-"set statusline+=\ 
-"set statusline+=%2*
-"set statusline+=%{right_sep}
-"set statusline+=%1*
-"set statusline+=%(%<\ %4l\,%3c%)\ 
-
-" }}}
 " }}}
 " Override color au {{{
 augroup OverrideColor
@@ -889,7 +834,7 @@ endtry
 "nnoremap <C-P> :Denite file_rec<CR>
 nnoremap <leader>f :Denite file/rec<CR>
 nnoremap <leader>d :Denite 
-nnoremap <leader>b :Denite buffer<cr>
+nnoremap <leader>v :Denite buffer<cr>
 nnoremap <leader>l :Denite line<cr>
 nnoremap <leader>r :Denite register<cr>
 
@@ -937,7 +882,7 @@ nmap <Leader>gr <Plug>(GitGutterUndoHunk)
 nmap <Leader>gc :T git checkout 
 nmap <Leader>gS :T git push --set-upstream origin 
 nmap <Leader>gP :T git push<cr>
-nmap <Leader>gd :Gdiff<cr>
+nmap <Leader>gd :tabedit %<CR>:Gdiff<cr>
 nmap <Leader>gl :Glog<cr>
 nmap <Leader>gb :Gbrowse<cr>
 
@@ -1234,16 +1179,21 @@ command! BM :SignatureListGlobalMarks
 " Airline {{{
 
 let g:airline_powerline_fonts = 1
-" let g:airline#extensions#tabline#enabled = 1 
-let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline#extensions#whitespace#enabled = 0
-let g:airline#extensions#tabline#show_buffers = 0
-let g:airline#extensions#tabline#show_splits = 0
-let g:airline#extensions#tabline#tabs_label = 'T'
-let g:airline#extensions#tabline#show_close_button = 0
-" let g:airline#themes#base16#constant = 1
-" let g:airline_base16_improved_contrast = 1
-let g:airline_theme = 'base16'
+
+let g:airline#extensions#tabline#enabled = 1           " enable airline tabline                                                           
+let g:airline#extensions#tabline#show_close_button = 0 " remove 'X' at the end of the tabline                                            
+let g:airline#extensions#tabline#show_tabs = 0
+let g:airline#extensions#tabline#tabs_label = 'T'       " can put text here like BUFFERS to denote buffers (I clear it so nothing is shown)
+let g:airline#extensions#tabline#buffers_label = 'B'    " can put text here like TABS to denote tabs (I clear it so nothing is shown)      
+" let g:airline#extensions#tabline#fnamemod = ':t'       " disable file paths in the tab                                                    
+let g:airline#extensions#tabline#formatter = 'short_path'
+" let g:airline#extensions#tabline#show_tab_count = 0    " dont show tab numbers on the right                                                           
+let g:airline#extensions#tabline#show_buffers = 0      " dont show buffers in the tabline                                                 
+let g:airline#extensions#tabline#tab_min_count = 1     " minimum of 2 tabs needed to display the tabline                                  
+let g:airline#extensions#tabline#show_splits = 0       " disables the buffer name that displays on the right of the tabline               
+" let g:airline#extensions#tabline#show_tab_nr = 0       " disable tab numbers                                                              
+let g:airline#extensions#tabline#show_tab_type = 0     " disables the weird ornage arrow on the tabline
 
 " Short names
 let g:airline_mode_map = {
@@ -1276,7 +1226,7 @@ function! TabNumber(...)
     return 0
 endfunction
 
-call airline#add_statusline_func('TabNumber')
+" call airline#add_statusline_func('TabNumber')
 
 " }}}
 " base16 {{{
@@ -1295,7 +1245,8 @@ let g:polyglot_disabled = ['typescript']
 " Colorscheme {{{
 
 if LINUX()
-  colorscheme solarized
+    colorscheme phd
+    let g:airline_theme = 'jellybeans'
 endif
 
 " }}}
