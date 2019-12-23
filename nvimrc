@@ -882,7 +882,7 @@ nmap <Leader>gr <Plug>(GitGutterUndoHunk)
 nmap <Leader>gc :T git checkout 
 nmap <Leader>gS :T git push --set-upstream origin 
 nmap <Leader>gP :T git push<cr>
-nmap <Leader>gd :tabedit %<CR>:Gdiff<cr>
+nmap <Leader>gd :-1tabedit %<CR>:Gdiff<cr>
 nmap <Leader>gl :Glog<cr>
 nmap <Leader>gb :Gbrowse<cr>
 
