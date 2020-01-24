@@ -48,6 +48,7 @@ Plug 'tpope/vim-vinegar'
 " Colorschemes {{{
 Plug 'Soares/base16.nvim'
 Plug 'equalsraf/neovim-gui-shim'
+Plug 'atelierbram/Base2Tone-vim'
 
 " }}}
 " Git {{{
@@ -78,6 +79,7 @@ Plug 'jiangmiao/auto-pairs'
 " Syntax highlighting{{{
 
 Plug 'sheerun/vim-polyglot'
+Plug 'ianks/vim-tsx'
 Plug 'leafgarland/typescript-vim'
 
 " }}}
@@ -176,6 +178,7 @@ set conceallevel=2
 set scrolloff=999
 " set signcolumn=yes:2
 let &colorcolumn=join(range(120,999),",")
+set list
 
 " }}}
 " Wild menu options {{{
@@ -404,7 +407,7 @@ augroup END
 augroup DisableThingsFromWindows
     autocmd!
     autocmd VimEnter,WinEnter,BufWinEnter * if &previewwindow | setlocal nolist | setlocal colorcolumn= | endif
-    autocmd FileType qf,help,fugitive setlocal nonumber colorcolumn=
+    autocmd FileType qf,help,fugitive setlocal nonumber colorcolumn= nolist
 augroup END
 
 " }}}
@@ -412,8 +415,7 @@ augroup END
 
 augroup RstRules
     autocmd!
-    autocmd FileType rst syn spell toplevel
-    autocmd FileType rst setlocal spell
+    autocmd FileType rst setlocal syntax=OFF
 augroup END
 
 " }}}
@@ -794,6 +796,7 @@ let g:NERDTreeQuitOnOpen=1
 let g:netrw_altfile = 1
 " Use the NERDtree style
 let g:netrw_banner = 0
+let g:netrw_fastbrowse = 0
 " let g:netrw_liststyle = 3
 " let g:netrw_altv = 1
 " let g:netrw_winsize = 15
@@ -1181,18 +1184,18 @@ command! BM :SignatureListGlobalMarks
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#whitespace#enabled = 0
 
-let g:airline#extensions#tabline#enabled = 1           " enable airline tabline                                                           
-let g:airline#extensions#tabline#show_close_button = 0 " remove 'X' at the end of the tabline                                            
-let g:airline#extensions#tabline#show_tabs = 0
+let g:airline#extensions#tabline#enabled = 1           " enable airline tabline
+let g:airline#extensions#tabline#show_close_button = 0 " remove 'X' at the end of the tabline
+let g:airline#extensions#tabline#show_tabs = 1
 let g:airline#extensions#tabline#tabs_label = 'T'       " can put text here like BUFFERS to denote buffers (I clear it so nothing is shown)
-let g:airline#extensions#tabline#buffers_label = 'B'    " can put text here like TABS to denote tabs (I clear it so nothing is shown)      
-" let g:airline#extensions#tabline#fnamemod = ':t'       " disable file paths in the tab                                                    
+let g:airline#extensions#tabline#buffers_label = 'B'    " can put text here like TABS to denote tabs (I clear it so nothing is shown)
+" let g:airline#extensions#tabline#fnamemod = ':t'       " disable file paths in the tab
 let g:airline#extensions#tabline#formatter = 'short_path'
-" let g:airline#extensions#tabline#show_tab_count = 0    " dont show tab numbers on the right                                                           
-let g:airline#extensions#tabline#show_buffers = 0      " dont show buffers in the tabline                                                 
-let g:airline#extensions#tabline#tab_min_count = 1     " minimum of 2 tabs needed to display the tabline                                  
-let g:airline#extensions#tabline#show_splits = 0       " disables the buffer name that displays on the right of the tabline               
-" let g:airline#extensions#tabline#show_tab_nr = 0       " disable tab numbers                                                              
+" let g:airline#extensions#tabline#show_tab_count = 0    " dont show tab numbers on the right
+let g:airline#extensions#tabline#show_buffers = 0      " dont show buffers in the tabline
+let g:airline#extensions#tabline#tab_min_count = 1     " minimum of 2 tabs needed to display the tabline
+let g:airline#extensions#tabline#show_splits = 0       " disables the buffer name that displays on the right of the tabline
+" let g:airline#extensions#tabline#show_tab_nr = 0       " disable tab numbers
 let g:airline#extensions#tabline#show_tab_type = 0     " disables the weird ornage arrow on the tabline
 
 " Short names

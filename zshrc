@@ -128,3 +128,6 @@ add-zsh-hook preexec set-title-preexec
 export PATH="/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin/:$PATH"
 export MANPATH="/home/linuxbrew/.linuxbrew/share/man:$MANPATH"
 export INFOPATH="/home/linuxbrew/.linuxbrew/share/info:$INFOPATH"
+export BACKEND_URL="http://127.0.0.1:8000/"
+export API_URI="http://localhost:8000/graphql/" 
+export API_MOUNT_URI="/dashboard/" 

@@ -28,11 +28,11 @@ if exists('g:GtkGuiLoaded')
     "https://github.com/ToxicFrog/Ligaturizer
     " call rpcnotify(1, 'Gui', 'Font', 'LigaHack Regular 9')
     if $HOSTNAME  == 't430'
-        call rpcnotify(1, 'Gui', 'Font', 'monospace 12')
-        " call rpcnotify(1, 'Gui', 'Font', 'Iosevka SS08 14')
+        " call rpcnotify(1, 'Gui', 'Font', 'monospace 12')
+        call rpcnotify(1, 'Gui', 'Font', 'Iosevka 14')
     else
-        call rpcnotify(1, 'Gui', 'Font', 'monospace 10')
-        " call rpcnotify(1, 'Gui', 'Font', 'Iosevka SS08 12')
+        " call rpcnotify(1, 'Gui', 'Font', 'monospace 10')
+        call rpcnotify(1, 'Gui', 'Font', 'Iosevka 13')
     endif
     call rpcnotify(1, 'Gui', 'Command', 'PreferDarkTheme', 'on')
     nnoremap <silent> <C-E> :NGToggleSidebar<cr>
