@@ -28,6 +28,7 @@ endif
 " General {{{
 Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
 " Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'Shougo/neomru.vim'
 Plug 'romainl/vim-cool'
 Plug 'yssl/QFEnter'
 Plug 'Shougo/denite.nvim'
@@ -48,17 +49,16 @@ Plug 'tpope/vim-vinegar'
 " Colorschemes {{{
 Plug 'Soares/base16.nvim'
 Plug 'equalsraf/neovim-gui-shim'
-Plug 'atelierbram/Base2Tone-vim'
 
 " }}}
 " Git {{{
 
 Plug 'tpope/vim-fugitive'
 Plug 'junegunn/gv.vim'
-Plug 'airblade/vim-gitgutter'
+" Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-rhubarb'
-Plug 'tpope/vim-dispatch'
-Plug 'radenling/vim-dispatch-neovim'
+" Plug 'tpope/vim-dispatch'
+" Plug 'radenling/vim-dispatch-neovim'
 
 " }}}
 " Html {{{
@@ -80,6 +80,7 @@ Plug 'jiangmiao/auto-pairs'
 
 Plug 'sheerun/vim-polyglot'
 Plug 'ianks/vim-tsx'
+Plug 'posva/vim-vue'
 Plug 'leafgarland/typescript-vim'
 
 " }}}
@@ -100,7 +101,7 @@ set runtimepath+=~/neovim-qt/src/gui/runtime
 if executable('ag')
    set grepprg=ag\ --nogroup\ --nocolor
 endif
-set number
+" set number
 "set background=dark
 set wrap
 set linebreak
@@ -170,15 +171,18 @@ set virtualedit=onemore                         " Allow for cursor beyond last c
 set nospell                                     " Spell checking off
 set hidden                                      " Allow buffer switching without saving
 " set list
-set foldenable                                  " Enable folding
-set foldmethod=marker
-set foldcolumn=0
+" set foldenable                                  " Enable folding
+" set foldmethod=marker
+" set foldcolumn=0
 set foldlevel=99                                " Folds open at start
 set conceallevel=2
 set scrolloff=999
-" set signcolumn=yes:2
-let &colorcolumn=join(range(120,999),",")
+set signcolumn=yes:2
+" set signcolumn=yes
+" let &colorcolumn=join(range(120,999),",")
+" set colorcolumn=120
 set list
+match ErrorMsg /\%>120c/
 
 " }}}
 " Wild menu options {{{
@@ -210,7 +214,7 @@ set cursorline
 " }}}
 " Styling vertical splits {{{
 "https://github.com/vim-airline/vim-airline-themes/issues/48
-set fillchars=vert:│,fold:۰,diff:·,stlnc:─
+set fillchars=vert:│,fold:-,diff:·,stlnc:─
 " set fillchars=vert:█,fold:۰,diff:·,stlnc:─
 " set fillchars=vert:│,fold:۰,diff:· 
 " }}}
@@ -516,6 +520,18 @@ augroup OverrideColor
     autocmd ColorScheme * hi ALEWarningSignLineNr guifg=#ebcb8b guibg=#432d00 gui=bold
     autocmd ColorScheme * hi ALEStyleWarningSignLineNr guifg=#ebcb8b guibg=#432d00 gui=bold
     autocmd ColorScheme * hi ALEInfoSignLineNr guifg=#a3be8c guibg=#163601 gui=bold
+    autocmd ColorScheme * exec 'hi DiffAddNB' .
+            \' gui=None' .
+            \' guibg=None' .
+            \' guifg=' . synIDattr(synIDtrans(hlID('DiffAdd')), 'fg', 'gui')
+    autocmd ColorScheme * exec 'hi DiffDeleteNB' .
+            \' gui=None' .
+            \' guibg=None' .
+            \' guifg=' . synIDattr(synIDtrans(hlID('DiffDelete')), 'fg', 'gui')
+    autocmd ColorScheme * exec 'hi DiffChangeNB' .
+            \' gui=None' .
+            \' guibg=None' .
+            \' guifg=' . synIDattr(synIDtrans(hlID('DiffChange')), 'fg', 'gui')
 
     autocmd ColorScheme * exec 'hi GGDiffAddLineNr' .
             \' guibg=' . synIDattr(synIDtrans(hlID('DiffAdd')), 'bg', 'gui') .
@@ -555,8 +571,8 @@ augroup OverrideColor
     " autocmd ColorScheme * hi! link GitGutterDelete RemoveSign
     " autocmd ColorScheme * hi! link GitGutterChangeDelete RemoveSign
 
-    autocmd ColorScheme * hi! link ALEErrorSign DiffDelete
-    autocmd ColorScheme * hi! link ALEWarningSign DiffChange
+    " autocmd ColorScheme * hi! link ALEErrorSign DiffDelete
+    " autocmd ColorScheme * hi! link ALEWarningSign DiffChange
 
     autocmd ColorScheme * hi! link diffAdded InlineDiffAdded
     autocmd ColorScheme * hi! link diffRemoved InlineDiffRemoved
@@ -621,9 +637,11 @@ noremap <leader>7 7gt
 noremap <leader>8 8gt
 noremap <leader>9 9gt
 
-nnoremap th :tabnext<CR>
-nnoremap tl :tabprev<CR>
 nnoremap tn :tabnew<CR>
+
+" Next/prev tab
+nnoremap <silent> <tab> gt
+nnoremap <silent> <s-tab> gT
 
 " Copy to clipboard
 vnoremap <leader>y "+y
@@ -638,7 +656,7 @@ vnoremap <leader>p "+p
 vnoremap <leader>P "+P
 
 " Space to fold
-"nnoremap <space> za
+nnoremap <space> za
 
 " Quick edit vimrc
 nnoremap <leader>ev :e ~/dotfiles/nvimrc<cr>
@@ -716,6 +734,8 @@ nmap <leader>i :set list!<CR>
 
 " Ag
 "nnoremap <leader>a :Ag
+
+" nmap <unique> <c-s-r> <Plug>NetrwRefresh
 
 " Move between splits
 nnoremap <C-H> <C-W><C-H>
@@ -824,7 +844,7 @@ endfunction
 try
     call denite#custom#var('file/rec', 'command', ['git', 'ls-files', '-co', '--exclude-standard'])
     call denite#custom#option('_', { 'start_filter': v:true })
-    " call denite#custom#option('_', { 'split': 'floating' })
+    call denite#custom#option('_', { 'split': 'floating' })
     call denite#custom#option('_', { 'winrow': 4 })
     call denite#custom#option('_', { 'prompt': '>>' })
     call denite#custom#option('_', 'highlight_matched_range', 'None')
@@ -835,11 +855,11 @@ endtry
 
 " Change mappings.
 "nnoremap <C-P> :Denite file_rec<CR>
-nnoremap <leader>f :Denite file/rec<CR>
+" nnoremap <leader>r :Denite file/rec<CR>
 nnoremap <leader>d :Denite 
 nnoremap <leader>v :Denite buffer<cr>
 nnoremap <leader>l :Denite line<cr>
-nnoremap <leader>r :Denite register<cr>
+nnoremap <leader>f :Denite file_mru file/rec<cr>
 
 " }}}
 " UltiSnips {{{
@@ -874,14 +894,14 @@ let g:mta_filetypes = {
             \}
 
 " }}}
-" Git gutter {{{
+" Git {{{
 
-set updatetime=100
+" set updatetime=100
 
-nmap <leader>gn <Plug>(GitGutterNextHunk)
-nmap <leader>gp <Plug>(GitGutterPrevHunk)
-nmap <Leader>gs <Plug>(GitGutterStageHunk)
-nmap <Leader>gr <Plug>(GitGutterUndoHunk)
+nmap <leader>gn <Plug>(coc-git-nextchunk)
+nmap <leader>gp <Plug>(coc-git-prevchunk)
+nmap <Leader>gs :CocCommand git.chunkStage<CR>
+nmap <Leader>gr :CocCommand git.chunkUndo<CR>
 nmap <Leader>gc :T git checkout 
 nmap <Leader>gS :T git push --set-upstream origin 
 nmap <Leader>gP :T git push<cr>
@@ -894,6 +914,7 @@ let g:gitgutter_preview_win_floating = 1
 let g:gitgutter_sign_added = '┃'
 let g:gitgutter_sign_modified = '┃'
 let g:gitgutter_sign_removed_first_line = '▔'
+let g:gitgutter_override_sign_column_highlight = 0
 
 " }}}
 " Vimtest {{{
@@ -945,20 +966,21 @@ let g:undotree_ShortIndicators = 1
 
 "let g:anyfold_activate=1
 let g:anyfold_fold_display=0
-let g:anyfold_fold_comments=1
+let g:anyfold_fold_comments = 0
 
 augroup FileTypeFolds
     autocmd!
-    autocmd Filetype python AnyFoldActivate
+    autocmd Filetype * AnyFoldActivate
+    " autocmd Filetype python AnyFoldActivate
     " autocmd Filetype javascript let b:anyfold_activate=0
     " autocmd Filetype jsx let b:anyfold_activate=0
-    autocmd Filetype php AnyFoldActivate
-    autocmd Filetype bash AnyFoldActivate
-    autocmd Filetype java AnyFoldActivate
-    autocmd Filetype cs AnyFoldActivate
-    autocmd Filetype html AnyFoldActivate
-    autocmd Filetype vue AnyFoldActivate
-    autocmd Filetype html,blade,vue,help setlocal foldcolumn=0
+    " autocmd Filetype php AnyFoldActivate
+    " autocmd Filetype bash AnyFoldActivate
+    " autocmd Filetype java AnyFoldActivate
+    " autocmd Filetype cs AnyFoldActivate
+    " autocmd Filetype html AnyFoldActivate
+    " autocmd Filetype vue AnyFoldActivate
+    " autocmd Filetype html,blade,vue,help setlocal foldcolumn=0
 augroup END
 
 " }}}
@@ -1014,8 +1036,8 @@ let g:ale_enabled = 1
 let g:ale_pattern_options = {'\.min.js$': {'ale_enabled': 0}}
 let g:ale_set_loclist = 0
 let g:ale_set_signs = 1
-let g:ale_sign_error = 'E➤'
-let g:ale_sign_warning = 'W➤'
+let g:ale_sign_error = 'E'
+let g:ale_sign_warning = 'W'
 " let g:ale_change_sign_column_color = 1
 " let g:ale_sign_highlight_linenrs = 1
 let g:ale_python_pylint_options = '--load-plugins pylint_django'
@@ -1081,6 +1103,8 @@ let g:coc_global_extensions = [ 'coc-tsserver',
                               \ 'coc-css',
                               \ 'coc-json',
                               \ 'coc-python',
+                              \ 'coc-git',
+                              \ 'coc-vetur',
                               \ 'coc-highlight',
                               \ 'coc-emmet',
                               \ 'coc-ultisnips' ]
@@ -1235,8 +1259,11 @@ endfunction
 " base16 {{{
 
 let g:base16_color_overrides = {
-    \ 'CursorLineNr': 'fg=light2 bg=similar3 bold',
+    \ 'CursorLineNr': 'fg=light1 bg=similar3 bold',
     \ 'ColorColumn': 'bg=light2 bg=similar3',
+    \ 'SignColumn': 'fg=contrast1 bg=black',
+    \ 'FoldColumn': 'fg=contrast1 bg=black',
+    \ 'LineNr': 'fg=similar1 bg=black',
     \ 'Pmenu': 'fg=light3 bg=similar3'}
 
 " }}}
@@ -1248,7 +1275,7 @@ let g:polyglot_disabled = ['typescript']
 " Colorscheme {{{
 
 if LINUX()
-    colorscheme phd
+    colorscheme twilight
     let g:airline_theme = 'jellybeans'
 endif
 
