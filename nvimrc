@@ -828,6 +828,13 @@ let g:netrw_fastbrowse = 0
 augroup Denite
     autocmd!
     autocmd FileType denite call s:denite_my_settings()
+    autocmd WinEnter * if &filetype =~# '^denite'
+        \ |   highlight! link CursorLine Visual
+        \ | endif
+
+    autocmd WinLeave * if &filetype ==# 'denite'
+        \ |   highlight! link CursorLine NONE
+        \ | endif
 augroup end
 
 function! s:denite_my_settings() abort
@@ -846,9 +853,9 @@ try
     call denite#custom#option('_', { 'start_filter': v:true })
     call denite#custom#option('_', { 'split': 'floating' })
     call denite#custom#option('_', { 'winrow': 4 })
-    call denite#custom#option('_', { 'prompt': '>>' })
-    call denite#custom#option('_', 'highlight_matched_range', 'None')
-    call denite#custom#option('_', 'highlight_matched_char', 'Character')
+    " call denite#custom#option('_', { 'prompt': '>>' })
+    call denite#custom#option('_', 'highlight_matched_range', 'Character')
+    " call denite#custom#option('_', 'highlight_matched_char', 'Character')
 catch
     " echomsg "Denite plugin not installed"
 endtry
