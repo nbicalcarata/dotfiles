@@ -849,7 +849,8 @@ function! s:denite_my_settings() abort
 endfunction
 
 try
-    call denite#custom#var('file/rec', 'command', ['git', 'ls-files', '-co', '--exclude-standard'])
+	call denite#custom#alias('source', 'file/rec/git', 'file/rec')
+    call denite#custom#var('file/rec/git', 'command', ['git', 'ls-files', '-co', '--exclude-standard'])
     call denite#custom#option('_', { 'start_filter': v:true })
     call denite#custom#option('_', { 'split': 'floating' })
     call denite#custom#option('_', { 'winrow': 4 })
@@ -861,12 +862,11 @@ catch
 endtry
 
 " Change mappings.
-"nnoremap <C-P> :Denite file_rec<CR>
-" nnoremap <leader>r :Denite file/rec<CR>
 nnoremap <leader>d :Denite 
 nnoremap <leader>v :Denite buffer<cr>
 nnoremap <leader>l :Denite line<cr>
-nnoremap <leader>f :Denite file_mru file/rec<cr>
+nnoremap <leader>f :Denite file_mru
+\ `finddir('.git', ';') != '' ? 'file/rec/git' : 'file'`<CR>
 
 " }}}
 " UltiSnips {{{
