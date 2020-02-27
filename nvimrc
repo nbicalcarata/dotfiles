@@ -97,6 +97,7 @@ syntax enable
 if executable('ag')
    set grepprg=ag\ --nogroup\ --nocolor
 endif
+set wildmode=list:longest,full
 set title
 set novisualbell
 set equalalways
