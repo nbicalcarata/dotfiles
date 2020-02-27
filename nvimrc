@@ -32,6 +32,8 @@ Plug 'Shougo/neomru.vim'
 Plug 'romainl/vim-cool'
 Plug 'yssl/QFEnter'
 Plug 'Shougo/denite.nvim'
+" Plug 'junegunn/fzf', { 'do': './install --bin' }
+" Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-commentary'
 Plug 'justinmk/vim-gtfo'
 Plug 'mbbill/undotree'
@@ -44,6 +46,7 @@ Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-vinegar'
 " Plug 'janko-m/vim-test'
+" Plug 'wellle/context.vim'
 
 " }}}
 " Colorschemes {{{
@@ -55,7 +58,7 @@ Plug 'equalsraf/neovim-gui-shim'
 
 Plug 'tpope/vim-fugitive'
 Plug 'junegunn/gv.vim'
-" Plug 'airblade/vim-gitgutter'
+Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-rhubarb'
 " Plug 'tpope/vim-dispatch'
 " Plug 'radenling/vim-dispatch-neovim'
@@ -172,15 +175,12 @@ set nospell                                     " Spell checking off
 set hidden                                      " Allow buffer switching without saving
 " set list
 " set foldenable                                  " Enable folding
-" set foldmethod=marker
+set foldmethod=marker
 " set foldcolumn=0
 set foldlevel=99                                " Folds open at start
 set conceallevel=2
 set scrolloff=999
-set signcolumn=yes:2
-" set signcolumn=yes
-" let &colorcolumn=join(range(120,999),",")
-" set colorcolumn=120
+set signcolumn=yes
 set list
 match ErrorMsg /\%>120c/
 
@@ -451,65 +451,21 @@ augroup END
 " }}}
 " }}}
 " Statusline {{{
-set showtabline=0
+
+set showtabline=1
 set laststatus=2
-
-" Simple {{{
-
-set statusline=
-set statusline+=%5* 
-set statusline+=\ %{tabpagenr()}/
-set statusline+=%{tabpagenr('$').'\ '}
-set statusline+=%3* 
-" set statusline+=\ %n\  
-set statusline+=\ %{Relative_Path_CWD()}\ 
-set statusline+=%5* 
-set statusline+=%{fugitive#head()!=''?'\ \ '.fugitive#head().'\ \•':''}
-set statusline+=\ %f
-set statusline+=\ %h%m%r
-set statusline+=%<
-set statusline+=%=
-" set statusline+=%(\ %{LinterStatus()}\ %)
-set statusline+=%1* 
-set statusline+=\ %{''!=#&filetype?&filetype.'\ •\ ':''}
-"set statusline+=%{fugitive#head()!=''?'\ \ '.fugitive#head().'\ •\ ':''}
-" set statusline+=%{fugitive#head()!=''?'\ '.fugitive#head().'\ •\ ':''}
- set statusline+=%{LinterStatus()!=''?'\ '.LinterStatus().'\ •\ ':''}
-set statusline+=%(%4l\,%3c%)\ 
-
-" }}}
-" Separators {{{
-
-let left_sep=''
-let right_sep=''
 
 " }}}
 " Override color au {{{
 augroup OverrideColor
     autocmd!
-    " autocmd ColorScheme * hi! link LineNr TabLine
     autocmd ColorScheme * hi! link VertSplit NonText
-    " autocmd ColorScheme * hi! link StatusLineNC User6
     autocmd ColorScheme * hi! link StatusLineNC NonText
-    autocmd ColorScheme * hi! link StatusLine Folded
-    autocmd ColorScheme * exec 'hi User1' .
-            \' guibg=' . synIDattr(synIDtrans(hlID('Normal')), 'fg', 'gui') .
-            \' guifg=' . synIDattr(synIDtrans(hlID('Normal')), 'bg', 'gui')
-    autocmd ColorScheme * exec 'hi User2' .
-            \' guibg=' . synIDattr(synIDtrans(hlID('Function')), 'fg', 'gui') .
-            \' guifg=' . synIDattr(synIDtrans(hlID('Normal')), 'fg', 'gui')
-    autocmd ColorScheme * exec 'hi User3' .
-            \' guibg=' . synIDattr(synIDtrans(hlID('Function')), 'fg', 'gui') .
-            \' guifg=' . synIDattr(synIDtrans(hlID('Normal')), 'bg', 'gui')
-    autocmd ColorScheme * exec 'hi User4' .
-            \' guibg=' . synIDattr(synIDtrans(hlID('CursorLine')), 'bg', 'gui')
-            \' guifg=' . synIDattr(synIDtrans(hlID('Function')), 'fg', 'gui')
-    autocmd ColorScheme * exec 'hi User5' .
-            \' guibg=' . synIDattr(synIDtrans(hlID('CursorLine')), 'bg', 'gui')
-            \' guifg=' . synIDattr(synIDtrans(hlID('Normal')), 'fg', 'gui')
-    autocmd ColorScheme * exec 'hi User6' .
-            \' guibg=' . synIDattr(synIDtrans(hlID('Normal')), 'bg', 'gui') .
-            \' guifg=' . synIDattr(synIDtrans(hlID('StatusLine')), 'fg', 'gui')
+    autocmd ColorScheme * hi! link StatusLine TabLineFill
+    autocmd ColorScheme * hi Folded      gui=none cterm=none ctermbg=none guibg=none
+    autocmd ColorScheme * hi TabLine     gui=none cterm=none
+    autocmd ColorScheme * hi TabLineSel  gui=bold,reverse
+    autocmd ColorScheme * hi TabLineFill gui=none
     " autocmd ColorScheme * hi StatusLineNC gui=none cterm=none ctermbg=none guibg=none
     autocmd ColorScheme * hi Folded     gui=none cterm=none ctermbg=none guibg=none
     " autocmd ColorScheme * hi ALEErrorLine guibg=#47201C
@@ -637,7 +593,7 @@ noremap <leader>7 7gt
 noremap <leader>8 8gt
 noremap <leader>9 9gt
 
-nnoremap tn :tabnew<CR>
+nnoremap <leader>tn :tabnew<CR>
 
 " Next/prev tab
 nnoremap <silent> <tab> gt
@@ -764,39 +720,9 @@ nnoremap <leader>en :keepalt file<space>
 " }}}
 " Plugins settings
 
-" phpcd {{{
-
-let g:phpcd_autoload_path = '.autoload.php'
-
-" }}}
-" YouCompleteMe {{{
-
-let g:EclimCompletionMethod = 'omnifunc'
-let g:ycm_autoclose_preview_window_after_insertion = 1
-let g:EclimPhpValidate = 0
-
-" }}}
-" tmuxline {{{
-
-"let g:tmuxline_powerline_separators = 0
-"let g:tmuxline_separators = {
-"    \ 'left' : '▚',
-"    \ 'left_alt': '▖',
-"    \ 'right' : '▞',
-"    \ 'right_alt' : '▗',
-"    \ 'space' : ' '}
-
-" }}}
 " vim-cool {{{
 
 let g:CoolTotalMatches = 1
-
-" }}}
-" Bufferline {{{
-
-let g:bufferline_echo = 0
-let g:bufferline_separator = ' '
-let g:bufferline_rotate = 1
 
 " }}}
 " NERDTree {{{
@@ -827,6 +753,7 @@ let g:netrw_fastbrowse = 0
 "
 augroup Denite
     autocmd!
+    autocmd VimResized * call <SID>denite_detect_size()
     autocmd FileType denite call s:denite_my_settings()
     autocmd WinEnter * if &filetype =~# '^denite'
         \ |   highlight! link CursorLine Visual
@@ -848,15 +775,29 @@ function! s:denite_my_settings() abort
   nnoremap <silent><buffer><expr> <Space> denite#do_map('toggle_select').'j'
 endfunction
 
+function! s:denite_detect_size() abort
+    let s:denite_winheight = 20
+    let s:denite_winrow = 4
+    let s:denite_winwidth = &columns > 240 ? &columns / 2 : 120
+    let s:denite_wincol = &columns > s:denite_winwidth ? (&columns - s:denite_winwidth) / 2 : 0
+    call denite#custom#option('_', {
+                \ 'wincol': s:denite_wincol,
+                \ 'winheight': s:denite_winheight,
+                \ 'winrow': s:denite_winrow,
+                \ 'winwidth': s:denite_winwidth,
+                \ })
+endfunction
+
 try
+    call s:denite_detect_size()
 	call denite#custom#alias('source', 'file/rec/git', 'file/rec')
     call denite#custom#var('file/rec/git', 'command', ['git', 'ls-files', '-co', '--exclude-standard'])
     call denite#custom#option('_', { 'start_filter': v:true })
     call denite#custom#option('_', { 'split': 'floating' })
-    call denite#custom#option('_', { 'winrow': 4 })
-    " call denite#custom#option('_', { 'prompt': '>>' })
-    call denite#custom#option('_', 'highlight_matched_range', 'Character')
-    " call denite#custom#option('_', 'highlight_matched_char', 'Character')
+    call denite#custom#option('_', { 'prompt': '>>' })
+    " call denite#custom#option('_', { 'highlight_filter_background': 'Visual' })
+    " call denite#custom#option('_', 'highlight_matched_range', 'Character')
+    call denite#custom#option('_', 'highlight_matched_char', 'Character')
 catch
     " echomsg "Denite plugin not installed"
 endtry
@@ -870,18 +811,13 @@ nnoremap <leader>f :Denite file_mru
 
 " }}}
 " UltiSnips {{{
+
 let g:UltiSnipsExpandTrigger='<c-e>'
 let g:UltiSnipsListSnippets='<c-l>'
 let g:UltiSnipsJumpForwardTrigger='<c-j>'
 let g:UltiSnipsJumpBackwardTrigger='<c-k>'
 inoremap <c-x><c-k> <c-x><c-k>
 let g:UltiSnipsSnippetDirectories = ['UltiSnips']
-
-"To load frameworks honza snippets
-"UltiSnipsAddFiletypes php-laravel
-"UltiSnipsAddFiletypes php-spec
-"UltiSnipsAddFiletypes javascript-jasmine
-"autocmd FileType js UltiSnipsAddFiletypes javascript-jasmine
 
 " }}}
 " Matchtag always {{{
@@ -903,18 +839,18 @@ let g:mta_filetypes = {
 " }}}
 " Git {{{
 
-" set updatetime=100
+set updatetime=100
 
-nmap <leader>gn <Plug>(coc-git-nextchunk)
-nmap <leader>gp <Plug>(coc-git-prevchunk)
-nmap <Leader>gs :CocCommand git.chunkStage<CR>
-nmap <Leader>gr :CocCommand git.chunkUndo<CR>
+nmap <silent><leader>gn :GitGutterNextHunk<CR>
+nmap <silent><leader>gp :GitGutterPrevHunk<CR>
+nmap <silent><Leader>gs :GitGutterStageHunk<CR>
+nmap <silent><Leader>gr :GitGutterUndoHunk<CR>
 nmap <Leader>gc :T git checkout 
 nmap <Leader>gS :T git push --set-upstream origin 
 nmap <Leader>gP :T git push<cr>
-nmap <Leader>gd :-1tabedit %<CR>:Gdiff<cr>
-nmap <Leader>gl :Glog<cr>
-nmap <Leader>gb :Gbrowse<cr>
+nmap <silent><Leader>gd :-1tabedit %<CR>:Gdiff<cr>
+nmap <silent><Leader>gl :Glog<cr>
+nmap <silent><Leader>gb :Gbrowse<cr>
 
 let g:gitgutter_preview_win_floating = 1
 " let g:gitgutter_highlight_linenrs = 1
@@ -991,17 +927,13 @@ augroup FileTypeFolds
 augroup END
 
 " }}}
-" CtrlSF {{{
-
-nnoremap <Leader>F :CtrlSF 
-
-" }}}
 " Grepper {{{
 
 nnoremap <Leader>a :Ggrep! 
 
 "Start searching the word under the cursor:
 nnoremap <leader>* :Ggrep! <C-R><C-W><cr>
+
 " }}}
 " Startify {{{
 
@@ -1068,28 +1000,10 @@ let g:ale_javascript_eslint_use_global = 1
 let g:vue_disable_pre_processors = 1
 
 " }}}
-" vim-gtfo {{{
-
-"let g:gtfo#terminals = { 'unix': 'tilix' }
-
-" }}}
 " gutentags {{{
 
 let g:gutentags_cache_dir = '~/.cache/gutentags'
 "let g:gutentags_ctags_exclude = ["*.min.js", "*.min.css", "build", ".git", "node_modules", "db", "log"]
-
-" }}}
-" mucomplete {{{
-
-let g:mucomplete#enable_auto_at_startup = 1
-let g:mucomplete#no_popup_mappings = 1
-" let g:AutoPairsMapCR = 0
-" imap <Plug>MyCR <Plug>(MUcompleteCR)<Plug>AutoPairsReturn
-" imap <cr> <Plug>MyCR
-let g:mucomplete#chains = {
-        \ 'default' : ['path', 'keyn', 'ulti', 'omni'],
-        \ 'vim'     : ['path', 'cmd', 'keyn']
-        \ }
 
 " }}}
 " Python with virtualenv support {{{
@@ -1110,8 +1024,6 @@ let g:coc_global_extensions = [ 'coc-tsserver',
                               \ 'coc-css',
                               \ 'coc-json',
                               \ 'coc-python',
-                              \ 'coc-git',
-                              \ 'coc-vetur',
                               \ 'coc-highlight',
                               \ 'coc-emmet',
                               \ 'coc-ultisnips' ]
@@ -1162,29 +1074,11 @@ augroup quickfix
 augroup END
 
 " }}}
-"  Macros {{{
-"  Command :reg show macro content, and register
-"
-"  Prices table csv, public price must be removed first
-"  kyypf"di"lf"di"lf"di"0jwvf,hxkf"pj0wxvf,hxkf"f"f"pj0wxvf,hxk$hhhhpjdd
-"
-" }}}
-"  vim-closetag {{{
+" vim-closetag {{{
 
 let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.vue,*.blade.php'
 
 "  }}}
-" emmet {{{
-
-let g:user_emmet_install_global = 0
-
-" augroup EmmetExpansion
-"     autocmd!
-"     autocmd FileType htmldjango,html,blade,vue EmmetInstall |
-"                 \ imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
-" augroup END
-
-" }}}
 " indentline {{{
 
 "let g:indentLine_concealcursor=0
@@ -1204,10 +1098,33 @@ command! GM :SignatureListGlobalMarks
 command! BM :SignatureListGlobalMarks
 
 " }}}
-" Fruzzy {{{
+" fzf {{{
+" let $FZF_DEFAULT_OPTS='--reverse --margin=1,2'
+" let g:fzf_buffers_jump = 0
+" let g:fzf_command_prefix = 'Fzf'
+" let g:fzf_layout = { 'window': { 'width': 0.7, 'height': 0.6, 'yoffset': 0.2, 'border': 'rounded' } }
 
-" let g:fruzzy#usenative = 1
-" call denite#custom#source('_', 'matchers', ['matcher/fruzzy'])
+" nnoremap <leader>d :Fzf
+" nnoremap <silent><leader>r :FzfFiles<cr>
+" nnoremap <silent><leader>v :FzfBuffers<cr>
+" nnoremap <silent><leader>l :FzfBLines<cr>
+" nnoremap <silent><leader>f :FzfCycle<cr>
+
+" augroup EscFzf
+"   au TermOpen * tnoremap <buffer> <Esc> <c-\><c-n>
+"   au FileType fzf tunmap <buffer> <Esc>
+" augroup END
+
+" function! s:fzf_next(idx)
+"   let commands = ['FzfHistory', 'FzfGFiles']
+"   execute commands[a:idx]
+"   let next = (a:idx + 1) % len(commands)
+"   let previous = (a:idx - 1) % len(commands)
+"   execute 'tnoremap <buffer> <silent> <c-f> <c-\><c-n>:close<cr>:sleep 100m<cr>:call <sid>fzf_next('.next.')<cr>'
+"   execute 'tnoremap <buffer> <silent> <c-b> <c-\><c-n>:close<cr>:sleep 100m<cr>:call <sid>fzf_next('.previous.')<cr>'
+" endfunction
+
+" command! FzfCycle call <sid>fzf_next(0)
 
 " }}}
 " Airline {{{
@@ -1282,7 +1199,7 @@ let g:polyglot_disabled = ['typescript']
 " Colorscheme {{{
 
 if LINUX()
-    colorscheme twilight
+    colorscheme default
     let g:airline_theme = 'jellybeans'
 endif
 
@@ -1385,5 +1302,21 @@ command! ProdDeployFront T source venv/bin/activate; fab prod_deploy_front
 command! ScraperDeploy T source venv/bin/activate; fab scraper_deploy
 command! -nargs=1 ScrapyCrawl T source venv/bin/activate; cd scraper; scrapy crawl <args>
 command! RunTests T source venv/bin/activate; python manage.py test
+
+" }}}
+" context {{{
+
+" let g:context_border_char = '─'
+" let g:context_add_mappings = 0
+" let g:context_add_autocmds = 0
+
+" augroup context.vim
+"     autocmd!
+"     autocmd VimEnter     * ContextActivate
+"     autocmd BufAdd       * call context#update('BufAdd')
+"     autocmd BufEnter     * call context#update('BufEnter')
+"     autocmd VimResized   * call context#update('VimResized')
+"     autocmd CursorHold   * call context#update('CursorHold')
+" augroup END
 
 " }}}

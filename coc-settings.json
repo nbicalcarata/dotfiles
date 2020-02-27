@@ -1,12 +1,4 @@
 {
-        "git.realtimeGutters": false,
-        "git.addedSign.text": "┃",
-        "git.changedSign.text": "┃",
-        "git.changedSign.hlGroup": "DiffChangeNB",
-        "git.addedSign.hlGroup": "DiffAddNB",
-        "git.removedSign.hlGroup": "DiffDeleteNB",
-        "git.topRemovedSign.hlGroup": "DiffDeleteNB",
-        "git.changeRemovedSign.hlGroup": "DiffDeleteNB",
         "diagnostic.checkCurrentLine" : true,
         "diagnostic.enable": false,
         "python.jediEnabled": true,
