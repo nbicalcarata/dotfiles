@@ -28,6 +28,7 @@ endif
 " General {{{
 Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
 Plug 'Shougo/neomru.vim'
+Plug 'Shougo/neoyank.vim'
 Plug 'romainl/vim-cool'
 Plug 'yssl/QFEnter'
 Plug 'Shougo/denite.nvim'
