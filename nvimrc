@@ -604,7 +604,7 @@ catch
 endtry
 
 " Change mappings.
-nnoremap <silent><leader>d :Denite 
+nnoremap <leader>d :Denite 
 nnoremap <silent><leader>v :Denite buffer<cr>
 nnoremap <silent><leader>l :Denite line<cr>
 nnoremap <silent><leader>f :Denite file_mru
