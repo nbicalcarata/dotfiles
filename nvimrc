@@ -1053,7 +1053,7 @@ command! RunTests T source venv/bin/activate; python manage.py test
 let g:EasyMotion_do_mapping = 0
 let g:EasyMotion_smartcase = 1
 let g:EasyMotion_keys = 'asdfghjklqwertyuiopzxcvbnm'
-let g:EasyMotion_prompt = '{n}>> '
+let g:EasyMotion_prompt = '{n}>>'
 let g:EasyMotion_verbose = 0
 
 nmap s <Plug>(easymotion-overwin-f)
