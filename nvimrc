@@ -37,7 +37,7 @@ Plug 'tpope/vim-commentary'
 Plug 'justinmk/vim-gtfo'
 Plug 'mbbill/undotree'
 Plug 'wesQ3/vim-windowswap'
-Plug 'pseewald/vim-anyfold'
+" Plug 'pseewald/vim-anyfold'
 Plug 'mhinz/vim-startify'
 Plug 'kshenoy/vim-signature'
 " Plug 'bling/vim-airline'
@@ -669,13 +669,13 @@ let g:undotree_ShortIndicators = 1
 " AnyFold {{{
 
 " let g:anyfold_activate = 1
-let g:anyfold_fold_display = 0
-let g:anyfold_fold_comments = 0
+" let g:anyfold_fold_display = 0
+" let g:anyfold_fold_comments = 0
 
-augroup FileTypeFolds
-    autocmd!
-    autocmd Filetype * AnyFoldActivate
-augroup END
+" augroup FileTypeFolds
+"     autocmd!
+"     autocmd Filetype * AnyFoldActivate
+" augroup END
 
 " }}}
 " Grepper {{{
