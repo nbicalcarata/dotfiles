@@ -27,7 +27,6 @@ endif
 
 " General {{{
 Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
-" Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/neomru.vim'
 Plug 'romainl/vim-cool'
 Plug 'yssl/QFEnter'
@@ -40,18 +39,15 @@ Plug 'mbbill/undotree'
 Plug 'wesQ3/vim-windowswap'
 Plug 'pseewald/vim-anyfold'
 Plug 'mhinz/vim-startify'
-Plug 'tpope/vim-surround'
 Plug 'kshenoy/vim-signature'
-Plug 'bling/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+" Plug 'bling/vim-airline'
+" Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-vinegar'
-" Plug 'janko-m/vim-test'
-" Plug 'wellle/context.vim'
 
 " }}}
 " Colorschemes {{{
+
 Plug 'Soares/base16.nvim'
-Plug 'equalsraf/neovim-gui-shim'
 
 " }}}
 " Git {{{
@@ -60,8 +56,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'junegunn/gv.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-rhubarb'
-" Plug 'tpope/vim-dispatch'
-" Plug 'radenling/vim-dispatch-neovim'
 
 " }}}
 " Html {{{
@@ -76,7 +70,6 @@ Plug 'w0rp/ale'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'jiangmiao/auto-pairs'
-" Plug 'ludovicchabant/vim-gutentags'
 
 " }}}
 " Syntax highlighting{{{
@@ -99,37 +92,43 @@ filetype plugin indent on
 syntax enable
 
 " General {{{
-"set path+=**
-set runtimepath+=~/neovim-qt/src/gui/runtime
 if executable('ag')
    set grepprg=ag\ --nogroup\ --nocolor
 endif
-" set number
-"set background=dark
-set wrap
-set linebreak
-set title
-set visualbell t_vb=            " turn off error beep/flash
-set novisualbell                " turn off visual bell
+set novisualbell
 set equalalways
-" set noequalalways
-set hlsearch                  " Highlight search matches
-set showmatch                   " show matching brackets/parenthesis
-set ignorecase                  " Case insensitive search
-set smartcase                   " Case sensitive when uc present
-"set scrolloff=5                 " Minimum lines to keep above and below cursor
-set inccommand=split            " live sustitution
+set hlsearch
+set showmatch
+set ignorecase
+set smartcase
+set inccommand=split
 set listchars=tab:▸\ ,eol:¬,extends:»,precedes:«,trail:•
-set nofixendofline
-
-" Performance
-set noshowcmd noruler
-set lazyredraw
-set regexpengine=1
 set diffopt+=vertical
-set autoread
-
 set autoindent
+set noshowcmd
+
+set nospell
+set hidden 
+set foldmethod=marker
+set foldlevel=99
+set scrolloff=999
+set signcolumn=yes
+set list
+
+set expandtab
+set splitright
+set splitbelow
+
+match ErrorMsg /\%>120c/
+let g:loaded_matchparen = 1
+
+" }}}
+
+set clipboard=unnamedplus
+if WINDOWS()
+    set clipboard=unnamed
+endif
+
 augroup IndentSettings
     autocmd!
     autocmd Filetype html setlocal ts=2 sw=2
@@ -145,61 +144,6 @@ augroup IndentSettings
     autocmd Filetype cucumber setlocal ts=2 sw=2
     autocmd Filetype json setlocal ts=2 sw=2
 augroup END
-set expandtab
-set nojoinspaces                " Prevents inserting two spaces after
-set splitright                  " Puts new vsplit windows to the right
-set splitbelow                  " Puts new split windows to the bottom
-let g:loaded_matchparen = 1
-set pastetoggle=<F12>           " pastetoggle (sane indentation on pastes)
-
-" }}}
-
-"set spell spelllang=es
-"set spellfile=~/.local/share/nvim/site/spell/es.utf-8.add
-"set completeopt-=preview
-set t_md=
-set completeopt+=menuone
-set completeopt+=noselect
-set completeopt+=noinsert
-set mouse=a                                     " Automatically enable mouse usage
-set mousehide                                   " Hide the mouse cursor while typing
-set clipboard=unnamedplus
-if WINDOWS()
-    set clipboard=unnamed
-endif
-set shortmess+=cafilmnrxoOtT                     " Abbrev. of messages (avoids 'hit enter')
-"set shortmess+=c                     " Abbrev. of messages (avoids 'hit enter')
-set viewoptions=folds,options,cursor,unix,slash " Unix / Windows compatibility
-set virtualedit=onemore                         " Allow for cursor beyond last character
-set nospell                                     " Spell checking off
-set hidden                                      " Allow buffer switching without saving
-" set list
-" set foldenable                                  " Enable folding
-set foldmethod=marker
-" set foldcolumn=0
-set foldlevel=99                                " Folds open at start
-set conceallevel=2
-set scrolloff=999
-set signcolumn=yes
-set list
-match ErrorMsg /\%>120c/
-
-" }}}
-" Wild menu options {{{
-
-set wildignorecase
-set wildmode=list:longest,full                           " matches mimic bash or zsh
-set wildignore+=.hg,.git,.svn                            " Version control
-set wildignore+=*.aux,*.out,*.toc                        " LaTeX intermediate files
-set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg,*.ico     " binary images
-set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest         " compiled object files
-set wildignore+=*.spl                                    " compiled spelling word lists
-set wildignore+=*.sw?                                    " Vim swap files
-set wildignore+=*.pyc                                    " Python byte code
-set wildignore+=*.class                                  " Java byte code
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.rar           " MacOSX/Linux
-set wildignore+=*/node_modules/*,*/vendor/*
-set wildignore+=tags
 
 " }}}
 " True color {{{
@@ -212,11 +156,9 @@ set termguicolors
 set cursorline
 
 " }}}
-" Styling vertical splits {{{
-"https://github.com/vim-airline/vim-airline-themes/issues/48
+
 set fillchars=vert:│,fold:-,diff:·,stlnc:─
-" set fillchars=vert:█,fold:۰,diff:·,stlnc:─
-" set fillchars=vert:│,fold:۰,diff:· 
+
 " }}}
 " Backup and undo {{{
 
@@ -238,11 +180,6 @@ function! InitializeDirectories()
     if has('persistent_undo')
         let l:dir_list['undo'] = 'undodir'
     endif
-
-    " To specify a different directory in which to place the vimbackup,
-    " vimviews, vimundo, and vimswap files/directories, add the following to
-    " your .vimrc.before.local file:
-    "directory = $HOME . '/.vim/'
 
     let l:common_dir = l:parent . '/.' . l:prefix
 
@@ -295,34 +232,13 @@ augroup END
 
 " }}}
 
-function! Relative_Path_CWD()
-    let l:path = fnamemodify(getcwd(),":t")
-    return l:path
-endfunction
-
-function! LinterStatus() abort
-    let l:counts = ale#statusline#Count(bufnr(''))
-
-    let l:all_errors = l:counts.error + l:counts.style_error
-    let l:all_non_errors = l:counts.total - l:all_errors
-
-    return l:counts.total == 0 ? '' : printf(
-    \   '%dW %dE',
-    \   all_non_errors,
-    \   all_errors
-    \)
-endfunction
-
 " }}}
 " Autocmd rules {{{
 
 " Term start in insert mode {{{
-" https://vi.stackexchange.com/a/3765/10344
 
 augroup TermInsert
     autocmd!
-    " autocmd BufEnter * if &buftype == 'terminal' | :startinsert | endif
-    " autocmd BufEnter term://* startinsert
     autocmd TermOpen * startinsert
 augroup END
 
@@ -337,10 +253,10 @@ augroup END
 " }}}
 " Diff settings {{{
 
-" augroup DiffSettings
-"     autocmd!
-"     autocmd FilterWritePre * if &diff | setlocal fdc=0 | endif
-" augroup END
+augroup DiffSettings
+    autocmd!
+    autocmd FilterWritePre * if &diff | setlocal foldcolumn=0 | endif
+augroup END
 
 " }}}
 " Move cursor to last position on file {{{
@@ -350,21 +266,6 @@ augroup END
 augroup FirstLineCommit
     autocmd!
     autocmd FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
-augroup END
-
-" }}}
-" Omnicompletion {{{
-
-augroup OmniCompletion
-    autocmd!
-    autocmd FileType css set omnifunc=csscomplete#CompleteCSS
-    autocmd FileType html,markdown set omnifunc=htmlcomplete#CompleteTags
-    autocmd FileType javascript,vue set omnifunc=javascriptcomplete#CompleteJS
-    autocmd FileType python set omnifunc=pythoncomplete#Complete
-    autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
-    autocmd FileType ruby set omnifunc=rubycomplete#Complete
-    " autocmd FileType htmldjango set omnifunc=htmldjangocomplete#CompleteDjango
-    "autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 augroup END
 
 " }}}
@@ -423,24 +324,6 @@ augroup RstRules
 augroup END
 
 " }}}
-" PHP with html syntax {{{
-
-" augroup phpLaravel
-"     autocmd!
-    " autocmd BufRead,BufNewFile *.blade.php UltiSnipsAddFiletypes php.php-laravel.html
-    " autocmd BufRead,BufNewFile *.js UltiSnipsAddFiletypes js.html
-    " autocmd BufRead,BufNewFile *.vue UltiSnipsAddFiletypes js.html
-" augroup END
-
-" }}}
-" Sync syntax from start to all buffers {{{
-
-" augroup syncSyntax
-"   autocmd!
-"   autocmd BufEnter * :syntax sync fromstart
-" augroup END
-
-" }}}
 " Term settings {{{
 
 augroup termSettings
@@ -452,8 +335,11 @@ augroup END
 " }}}
 " Statusline {{{
 
-set showtabline=1
+set showtabline=0
 set laststatus=2
+
+set statusline=
+set statusline+=\ %{tabpagenr()}/%{tabpagenr('$').'\ '}\ %f\ %h%m%r
 
 " }}}
 " Override color au {{{
@@ -466,42 +352,6 @@ augroup OverrideColor
     autocmd ColorScheme * hi TabLine     gui=none cterm=none
     autocmd ColorScheme * hi TabLineSel  gui=bold,reverse
     autocmd ColorScheme * hi TabLineFill gui=none
-    " autocmd ColorScheme * hi StatusLineNC gui=none cterm=none ctermbg=none guibg=none
-    autocmd ColorScheme * hi Folded     gui=none cterm=none ctermbg=none guibg=none
-    " autocmd ColorScheme * hi ALEErrorLine guibg=#47201C
-    " autocmd ColorScheme * hi ALEWarningLine   guibg=#363620
-
-    autocmd ColorScheme * hi ALEErrorSignLineNr guifg=#bf616a guibg=#52050c gui=bold
-    autocmd ColorScheme * hi ALEStyleErrorSignLineNr guifg=#bf616a guibg=#52050c gui=bold
-    autocmd ColorScheme * hi ALEWarningSignLineNr guifg=#ebcb8b guibg=#432d00 gui=bold
-    autocmd ColorScheme * hi ALEStyleWarningSignLineNr guifg=#ebcb8b guibg=#432d00 gui=bold
-    autocmd ColorScheme * hi ALEInfoSignLineNr guifg=#a3be8c guibg=#163601 gui=bold
-    autocmd ColorScheme * exec 'hi DiffAddNB' .
-            \' gui=None' .
-            \' guibg=None' .
-            \' guifg=' . synIDattr(synIDtrans(hlID('DiffAdd')), 'fg', 'gui')
-    autocmd ColorScheme * exec 'hi DiffDeleteNB' .
-            \' gui=None' .
-            \' guibg=None' .
-            \' guifg=' . synIDattr(synIDtrans(hlID('DiffDelete')), 'fg', 'gui')
-    autocmd ColorScheme * exec 'hi DiffChangeNB' .
-            \' gui=None' .
-            \' guibg=None' .
-            \' guifg=' . synIDattr(synIDtrans(hlID('DiffChange')), 'fg', 'gui')
-
-    autocmd ColorScheme * exec 'hi GGDiffAddLineNr' .
-            \' guibg=' . synIDattr(synIDtrans(hlID('DiffAdd')), 'bg', 'gui') .
-            \' guifg=' . synIDattr(synIDtrans(hlID('DiffAdd')), 'fg', 'gui')
-    autocmd ColorScheme * exec 'hi GGDiffChangeLineNr' .
-            \' guibg=' . synIDattr(synIDtrans(hlID('DiffChange')), 'bg', 'gui') .
-            \' guifg=' . synIDattr(synIDtrans(hlID('DiffChange')), 'fg', 'gui')
-    autocmd ColorScheme * exec 'hi GGDiffDeleteLineNr' .
-            \' guibg=' . synIDattr(synIDtrans(hlID('DiffDelete')), 'bg', 'gui') .
-            \' guifg=' . synIDattr(synIDtrans(hlID('DiffDelete')), 'fg', 'gui')
-
-    autocmd ColorScheme * exec 'hi RemoveSign' .
-            \' guibg=' . synIDattr(synIDtrans(hlID('SignColumn')), 'bg', 'gui') .
-            \' guifg=' . synIDattr(synIDtrans(hlID('SignColumn')), 'bg', 'gui')
 
     autocmd ColorScheme * exec 'hi InlineDiffAdded' .
             \' guibg=' . synIDattr(synIDtrans(hlID('Normal')), 'bg', 'gui') .
@@ -513,30 +363,10 @@ augroup OverrideColor
             \' guibg=' . synIDattr(synIDtrans(hlID('CursorLine')), 'bg', 'gui') .
             \' guifg=' . synIDattr(synIDtrans(hlID('Statement')), 'fg', 'gui')
 
-    " autocmd ColorScheme * hi! link GitGutterAddLineNr DiffAdd
-    " autocmd ColorScheme * hi! link GitGutterChangeLineNr DiffChange
-    " autocmd ColorScheme * hi! link GitGutterDeleteLineNr DiffDelete
-    " autocmd ColorScheme * hi! link GitGutterChangeDeleteLineNr DiffChange
-    autocmd ColorScheme * hi! link GitGutterAddLineNr GGDiffAddLineNr
-    autocmd ColorScheme * hi! link GitGutterChangeLineNr GGDiffChangeLineNr
-    autocmd ColorScheme * hi! link GitGutterDeleteLineNr GGDiffDeleteLineNr
-    autocmd ColorScheme * hi! link GitGutterChangeDeleteLineNr GGDiffChangeLineNr
-
-    " autocmd ColorScheme * hi! link GitGutterAdd RemoveSign
-    " autocmd ColorScheme * hi! link GitGutterChange RemoveSign
-    " autocmd ColorScheme * hi! link GitGutterDelete RemoveSign
-    " autocmd ColorScheme * hi! link GitGutterChangeDelete RemoveSign
-
-    " autocmd ColorScheme * hi! link ALEErrorSign DiffDelete
-    " autocmd ColorScheme * hi! link ALEWarningSign DiffChange
-
     autocmd ColorScheme * hi! link diffAdded InlineDiffAdded
     autocmd ColorScheme * hi! link diffRemoved InlineDiffRemoved
     autocmd ColorScheme * hi! link diffLine InlineDiffLine
-
 augroup END
-
-let g:gonvim_draw_split = 0
 
 " }}}
 " Mappings {{{
@@ -546,13 +376,9 @@ let g:mapleader = ','
 command! -nargs=* T split | terminal <args>
 command! -nargs=* VT vsplit | terminal <args>
 
-" Show last search in quifix
-" nnoremap <silent> <leader>/ :execute 'vimgrep /'.@/.'/j %'<CR>
-
 " Search word under cursor and show results in quickfix without moving it
 nnoremap <leader>- :execute "vimgrep /" . expand('<cword>') ."/j %"<CR>
 
-" nnoremap <leader>m :below 12sp term://$SHELL<cr>
 nnoremap <leader>m :below sp term://$SHELL<cr>
 
 " Insert source bin/activate
@@ -561,19 +387,8 @@ tnoremap <leader>va source venv/bin/activate<cr>
 " Jump to tag
 nnoremap <leader>T <C-]>
 
-" To edit on tab :-tabedit %
-
-" edit file in current directory
-"nnoremap <leader>e :e %
-
-" create directory
-"nnoremap <leader>m :!mkdir %
-
 " Jump to previous edited buffer
 nnoremap <BS> <C-^>
-
-" Substitution on visual selection
-" xnoremap <leader>vs y:%s/<C-r>"//g<Left><Left>
 
 " Find files
 "nnoremap <leader>f :find *
@@ -598,18 +413,6 @@ nnoremap <leader>tn :tabnew<CR>
 " Next/prev tab
 nnoremap <silent> <tab> gt
 nnoremap <silent> <s-tab> gT
-
-" Copy to clipboard
-vnoremap <leader>y "+y
-nnoremap <leader>Y "+yg_
-nnoremap <leader>y "+y
-nnoremap <leader>yy "+yy
-
-" Paste from clipboard
-nnoremap <leader>p "+p
-nnoremap <leader>P "+P
-vnoremap <leader>p "+p
-vnoremap <leader>P "+P
 
 " Space to fold
 nnoremap <space> za
@@ -668,9 +471,6 @@ map zh zH
 noremap n nzz
 noremap N Nzz
 
-" Fullscreen mode for neovim-qt
-" map <silent> <F11> :call ToggleFullScreen()<CR>
-
 "<leader>q to close buffer without closing the window
 map <leader>q :bp<bar>sp<bar>bn<bar>bd<CR>
 
@@ -688,11 +488,6 @@ nnoremap <Leader>n :call NumberToggle()<cr>
 " Toggle between invisible chars
 nmap <leader>i :set list!<CR>
 
-" Ag
-"nnoremap <leader>a :Ag
-
-" nmap <unique> <c-s-r> <Plug>NetrwRefresh
-
 " Move between splits
 nnoremap <C-H> <C-W><C-H>
 nnoremap <C-J> <C-W><C-J>
@@ -705,14 +500,10 @@ tnoremap <C-h> <C-\><C-n><C-w>h
 tnoremap <C-j> <C-\><C-n><C-w>j
 tnoremap <C-k> <C-\><C-n><C-w>k
 tnoremap <C-l> <C-\><C-n><C-w>l
-"tnoremap <C-w> <C-\><C-n><C-w>c
 
 "set working directory to current file
 command! FileDir cd %:p:h
 command! TabDir tc %:p:h
-
-" Save as sudo
-"cmap w!! w !gksudo tee > /dev/null %
 
 "Rename buffer
 nnoremap <leader>en :keepalt file<space>
@@ -740,7 +531,6 @@ let g:NERDTreeQuitOnOpen=1
 " netrw {{{
 
 let g:netrw_altfile = 1
-" Use the NERDtree style
 let g:netrw_banner = 0
 let g:netrw_fastbrowse = 0
 " let g:netrw_liststyle = 3
@@ -803,10 +593,10 @@ catch
 endtry
 
 " Change mappings.
-nnoremap <leader>d :Denite 
-nnoremap <leader>v :Denite buffer<cr>
-nnoremap <leader>l :Denite line<cr>
-nnoremap <leader>f :Denite file_mru
+nnoremap <silent><leader>d :Denite 
+nnoremap <silent><leader>v :Denite buffer<cr>
+nnoremap <silent><leader>l :Denite line<cr>
+nnoremap <silent><leader>f :Denite file_mru
 \ `finddir('.git', ';') != '' ? 'file/rec/git' : 'file'`<CR>
 
 " }}}
@@ -853,48 +643,10 @@ nmap <silent><Leader>gl :Glog<cr>
 nmap <silent><Leader>gb :Gbrowse<cr>
 
 let g:gitgutter_preview_win_floating = 1
-" let g:gitgutter_highlight_linenrs = 1
 let g:gitgutter_sign_added = '┃'
 let g:gitgutter_sign_modified = '┃'
 let g:gitgutter_sign_removed_first_line = '▔'
 let g:gitgutter_override_sign_column_highlight = 0
-
-" }}}
-" Vimtest {{{
-
-" nmap <silent><Leader>tf <Esc>:Pytest file<CR>
-" nmap <silent><Leader>tc <Esc>:Pytest class<CR>
-" nmap <sdilent><Leader>tm <Esc>:Pytest method<CR>
-
-" nmap <silent> <leader>tn :TestNearest<CR>
-" nmap <silent> <leader>tf :TestFile<CR>
-" nmap <silent> <leader>ts :TestSuite<CR>
-" nmap <silent> <leader>tl :TestLast<CR>
-" nmap <silent> <leader>tv :TestVisit<CR>
-
-let g:test#strategy = 'neovim'
-
-function! DockerTransform(cmd) abort
-    let l:docker_project = fnamemodify(getcwd(),":t")
-    let l:forward_slashes = a:cmd
-    let l:forward_slashes = substitute(l:forward_slashes, "\\", "\/", "g")
-    "docker exec -it containerName sh -c "cd /var/www && /bin/bash"
-    return "docker exec -it --user=laradock laradock_workspace_1 sh -c ".shellescape('cd '.docker_project.'; '.forward_slashes)
-endfunction
-
-let g:test#custom_transformations = {'docker': function('DockerTransform')}
-let g:test#transformation = 'docker'
-
-"Ejemplo
-"vagrant ssh --command "cd /home/vagrant/project; ./vendor/bin/phpunit
-
-"function! VagrantTransform(cmd) abort
-"let l:vagrant_project = fnamemodify(getcwd(),":t")
-"return "cd ~/Homestead && ssh -tt $(vagrant ssh-config | awk 'NR>1 {print \" -o \"$1\"=\"$2}') localhost ".shellescape('cd /home/vagrant/sitios/'.vagrant_project.'; '.a:cmd)
-"return "cd ~/Homestead && ssh -tt vagrant@192.168.10.10 ".shellescape('cd /home/vagrant/sitios/'.vagrant_project.'; '.a:cmd)
-"endfunction
-"let g:test#custom_transformations = {'vagrant': function('VagrantTransform')}
-"let g:test#transformation = 'vagrant'
 
 " }}}
 " Undotree {{{
@@ -907,23 +659,13 @@ let g:undotree_ShortIndicators = 1
 " }}}
 " AnyFold {{{
 
-"let g:anyfold_activate=1
-let g:anyfold_fold_display=0
+" let g:anyfold_activate = 1
+let g:anyfold_fold_display = 0
 let g:anyfold_fold_comments = 0
 
 augroup FileTypeFolds
     autocmd!
     autocmd Filetype * AnyFoldActivate
-    " autocmd Filetype python AnyFoldActivate
-    " autocmd Filetype javascript let b:anyfold_activate=0
-    " autocmd Filetype jsx let b:anyfold_activate=0
-    " autocmd Filetype php AnyFoldActivate
-    " autocmd Filetype bash AnyFoldActivate
-    " autocmd Filetype java AnyFoldActivate
-    " autocmd Filetype cs AnyFoldActivate
-    " autocmd Filetype html AnyFoldActivate
-    " autocmd Filetype vue AnyFoldActivate
-    " autocmd Filetype html,blade,vue,help setlocal foldcolumn=0
 augroup END
 
 " }}}
@@ -946,7 +688,6 @@ let g:startify_lists = [
       \ ]
 
 set sessionoptions-=help,blank,folds
-"set sessionoptions=blank,curdir,folds,help,tabpages,winpos
 
 let g:startify_custom_header = [
             \ '                       █▀▀▄ █▀▀ █▀▀█ ▀█░█▀ ░▀░ █▀▄▀█',
@@ -959,10 +700,7 @@ augroup StartifyAu
     autocmd User Startified setlocal cursorline
 augroup END
 
-"let g:startify_change_to_dir = 0
-"let g:startify_session_persistence = 1
 let g:startify_session_autoload = 1
-
 nnoremap <leader>S :SSave<cr>
 
 " }}}
@@ -977,17 +715,10 @@ let g:ale_set_loclist = 0
 let g:ale_set_signs = 1
 let g:ale_sign_error = 'E'
 let g:ale_sign_warning = 'W'
-" let g:ale_change_sign_column_color = 1
-" let g:ale_sign_highlight_linenrs = 1
 let g:ale_python_pylint_options = '--load-plugins pylint_django'
 let g:ale_python_flake8_options = '--ignore=E501' 
-
-" let g:ale_python_pylint_use_global = 1
-" let g:ale_python_pylint_executable = '/home/adrian/Workspace/scaapp/bin/pylint'
 let g:ale_python_mypy_options = '--ignore-missing-imports'
-
 let g:ale_javascript_eslint_use_global = 1
-"let g:ale_open_list = 1
 " let g:ale_linters = {
 "             \ 'javascript': ['eslint'],
 "             \ 'typescript': ['tslint'],
@@ -1005,16 +736,6 @@ let g:vue_disable_pre_processors = 1
 let g:gutentags_cache_dir = '~/.cache/gutentags'
 "let g:gutentags_ctags_exclude = ["*.min.js", "*.min.css", "build", ".git", "node_modules", "db", "log"]
 
-" }}}
-" Python with virtualenv support {{{
-py << EOF
-import os
-import sys
-if 'VIRTUAL_ENV' in os.environ:
-  project_base_dir = os.environ['VIRTUAL_ENV']
-  activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
-  execfile(activate_this, dict(__file__=activate_this))
-EOF
 " }}}
 " coc {{{
 let g:airline#extensions#coc#enabled = 1
@@ -1054,10 +775,9 @@ nmap <silent> gr <Plug>(coc-references)
 " Term {{{
 
 "Execute command from docker container
-"To make it work, removed de t option from command
+"To make it work, remove t option from command
 
 "docker exec -i --user=laradock laradock_workspace_1 sh -c "cd interpos; ./vendor/bin/behat features/order.feature
-
 "docker exec -i --user=laradock laradock_workspace_1 sh -lc "cd interpos; npm run dev
 nnoremap <leader>A :T docker exec -it --user=laradock laradock_workspace_1 sh -lc ""<left>
 
@@ -1079,14 +799,6 @@ augroup END
 let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.vue,*.blade.php'
 
 "  }}}
-" indentline {{{
-
-"let g:indentLine_concealcursor=0
-""let g:indentLine_char='│'
-"let g:indentLine_char = '┊'
-"let g:indentLine_fileTypeExclude = ['text', 'help', 'startify']
-
-" }}}
 " Python syntax highlight {{{
 
 let g:python_highlight_all = 1
@@ -1132,18 +844,15 @@ command! BM :SignatureListGlobalMarks
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#whitespace#enabled = 0
 
-let g:airline#extensions#tabline#enabled = 1           " enable airline tabline
+let g:airline#extensions#tabline#enabled = 0           " enable airline tabline
 let g:airline#extensions#tabline#show_close_button = 0 " remove 'X' at the end of the tabline
 let g:airline#extensions#tabline#show_tabs = 1
 let g:airline#extensions#tabline#tabs_label = 'T'       " can put text here like BUFFERS to denote buffers (I clear it so nothing is shown)
 let g:airline#extensions#tabline#buffers_label = 'B'    " can put text here like TABS to denote tabs (I clear it so nothing is shown)
-" let g:airline#extensions#tabline#fnamemod = ':t'       " disable file paths in the tab
 let g:airline#extensions#tabline#formatter = 'short_path'
-" let g:airline#extensions#tabline#show_tab_count = 0    " dont show tab numbers on the right
 let g:airline#extensions#tabline#show_buffers = 0      " dont show buffers in the tabline
 let g:airline#extensions#tabline#tab_min_count = 1     " minimum of 2 tabs needed to display the tabline
 let g:airline#extensions#tabline#show_splits = 0       " disables the buffer name that displays on the right of the tabline
-" let g:airline#extensions#tabline#show_tab_nr = 0       " disable tab numbers
 let g:airline#extensions#tabline#show_tab_type = 0     " disables the weird ornage arrow on the tabline
 
 " Short names
@@ -1168,7 +877,11 @@ function! Render_Only_File(...)
   return 1
 endfunction
 
-call airline#add_inactive_statusline_func('Render_Only_File')
+try
+    call airline#add_inactive_statusline_func('Render_Only_File')
+catch
+    " no airline
+endtry
 
 function! TabNumber(...)
     let builder = a:1
@@ -1177,7 +890,11 @@ function! TabNumber(...)
     return 0
 endfunction
 
-" call airline#add_statusline_func('TabNumber')
+try
+    call airline#add_statusline_func('TabNumber')
+catch
+    " no airline
+endtry
 
 " }}}
 " base16 {{{

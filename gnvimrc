@@ -1,32 +1,12 @@
-set visualbell t_vb=            " turn off error beep/flash
+set visualbell t_vb=
 
 " Gui font
 " fc-list | grep iosevka
-" Neovim-qt
-if LINUX()
-    " GuiFont monospace:h10
-    " GuiFont Iosevka Term:h12
-    GuiFont Iosevka SS08:h12
-    GuiTabline 0
-    let g:airline_theme='jellybeans'
-endif
-
-if WINDOWS()
-  "Guifont! Consolas:h12
-  "GuiFont! Hack NF:h11
-  "call rpcnotify(1, 'Gui', 'Font', 'Iosevka NF 12')
-  call rpcnotify(1, 'Gui', 'Font', 'Iosevka 12')
-  "GuiFont! Iosevka NF:h12
-endif
-
-call GuiWindowMaximized(1)
 
 " Neovim-gtk
 if exists('g:GtkGuiLoaded')
     call rpcnotify(1, 'Gui', 'Option', 'Popupmenu', 0)
     call rpcnotify(1, 'Gui', 'Option', 'Tabline', 0)
-    "https://github.com/ToxicFrog/Ligaturizer
-    " call rpcnotify(1, 'Gui', 'Font', 'LigaHack Regular 9')
     if $HOSTNAME  == 't430'
         " call rpcnotify(1, 'Gui', 'Font', 'monospace 12')
         call rpcnotify(1, 'Gui', 'Font', 'Iosevka 14')
@@ -38,13 +18,6 @@ if exists('g:GtkGuiLoaded')
     nnoremap <silent> <C-E> :NGToggleSidebar<cr>
 endif
 
-if exists('g:gonvim_running')
-   let g:airline_theme='base16'
-endif
-
-" command! TreeViewShow call rpcnotify(0, 'TreeView', 'ShowHide', 1)
-" command! TreeViewHide call rpcnotify(0, 'TreeView', 'ShowHide', 0)
-" command! TreeViewToggle call rpcnotify(0, 'TreeView', 'Toggle')
 command! NGToggleSidebar call rpcnotify(1, 'Gui', 'Command', 'ToggleSidebar')
 command! -nargs=+ NGTransparency call rpcnotify(1, 'Gui', 'Command', 'Transparency', <f-args>)
 command! -nargs=1 NGPreferDarkTheme call rpcnotify(1, 'Gui', 'Command', 'PreferDarkTheme', <q-args>)
