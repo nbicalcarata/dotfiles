@@ -95,6 +95,7 @@ syntax enable
 if executable('ag')
    set grepprg=ag\ --nogroup\ --nocolor
 endif
+set title
 set novisualbell
 set equalalways
 set hlsearch
@@ -335,11 +336,19 @@ augroup END
 " }}}
 " Statusline {{{
 
+function! Relative_Path_CWD()
+    let l:path = fnamemodify(getcwd(),":t")
+    return l:path
+endfunction
+
 set showtabline=0
 set laststatus=2
 
 set statusline=
-set statusline+=\ %{tabpagenr()}/%{tabpagenr('$').'\ '}\ %f\ %h%m%r
+set statusline+=\ %{tabpagenr()}/%{tabpagenr('$').'\ \ '}«
+set statusline+=\ %{Relative_Path_CWD().'\ '}» 
+set statusline+=%{fugitive#head()!=''?'\ \ '.fugitive#head().'\ ':''}
+set statusline+=\ %h%m%r
 
 " }}}
 " Override color au {{{
