@@ -1,5 +1,7 @@
-font_size 11
-font_family      Liga DejaVu Sans Mono
+font_size 14
+font_family      Iosevka
+bold_font        Iosevka Bold 
+#font_family     Liga DejaVu Sans Mono
 #font_family     Fira Code
 #font_family     Liga Hack
 #font_family     Liga Meslo LG M DZ
@@ -19,7 +21,7 @@ tab_bar_style separator
 
 x11_hide_window_decorations yes
 
-background #061229
+background #181818
 
 tab_separator " │ "
 

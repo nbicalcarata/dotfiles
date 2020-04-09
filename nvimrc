@@ -29,22 +29,18 @@ endif
 Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
 Plug 'Shougo/neomru.vim'
 Plug 'Shougo/neoyank.vim'
-Plug 'romainl/vim-cool'
 Plug 'yssl/QFEnter'
 Plug 'Shougo/denite.nvim'
 " Plug 'junegunn/fzf', { 'do': './install --bin' }
 " Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-commentary'
 Plug 'justinmk/vim-gtfo'
-Plug 'mbbill/undotree'
 Plug 'wesQ3/vim-windowswap'
-" Plug 'pseewald/vim-anyfold'
+Plug 'pseewald/vim-anyfold'
 Plug 'mhinz/vim-startify'
-Plug 'kshenoy/vim-signature'
-" Plug 'bling/vim-airline'
-" Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-vinegar'
 Plug 'easymotion/vim-easymotion'
+Plug 'voldikss/vim-browser-search'
 
 " }}}
 " Colorschemes {{{
@@ -100,16 +96,18 @@ endif
 set wildmode=list:longest,full
 set title
 set novisualbell
-set equalalways
+set noequalalways
 set hlsearch
 set showmatch
 set ignorecase
 set smartcase
 set inccommand=split
 set listchars=tab:▸\ ,eol:¬,extends:»,precedes:«,trail:•
-set diffopt+=vertical
+" set diffopt+=vertical
 set autoindent
 set noshowcmd
+set nofixendofline
+set nonumber
 
 set nospell
 set hidden 
@@ -118,12 +116,13 @@ set foldlevel=99
 set scrolloff=999
 set signcolumn=yes
 set list
+set colorcolumn=120
 
 set expandtab
 set splitright
 set splitbelow
 
-match ErrorMsg /\%>120c/
+" match ErrorMsg /\%>120c/
 let g:loaded_matchparen = 1
 
 " }}}
@@ -158,11 +157,11 @@ set termguicolors
 " Cursor line {{{
 
 set cursorline
+set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
+  \,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
+  \,sm:block-blinkwait175-blinkoff150-blinkon175
 
 " }}}
-
-set fillchars=vert:│,fold:-,diff:·,stlnc:─
-
 " }}}
 " Backup and undo {{{
 
@@ -304,11 +303,11 @@ augroup END
 " }}}
 " Open help files in right side {{{
 
-augroup HelpFilesRightSide
-    autocmd!
-    autocmd FileType help wincmd L
-    autocmd FileType help set bufhidden=unload
-augroup END
+" augroup HelpFilesRightSide
+"     autocmd!
+"     autocmd FileType help wincmd L
+"     autocmd FileType help set bufhidden=unload
+" augroup END
 
 " }}}
 " Disable list on preview window {{{
@@ -339,45 +338,66 @@ augroup END
 " }}}
 " Statusline {{{
 
-function! Relative_Path_CWD()
+set fillchars=vert:│,fold:-,diff:·,stlnc:─
+
+function! CWD()
     let l:path = fnamemodify(getcwd(),":t")
     return l:path
 endfunction
 
+function! ActiveStatus()
+    let statusline=""
+    let statusline.="\ %{tabpagenr()}/%{tabpagenr('$').'\ \ '}«"
+    let statusline.="\ %{CWD().'\ '}»"
+    let statusline.="%{fugitive#head()!=''?'\ \ '.fugitive#head().'\ ':''}"
+    let statusline.="\ %t"
+    let statusline.="\ %h%m%r"
+    let statusline.="\ %=%-14.(%l,%c%V%)\ %P\ "
+    return statusline
+endfunction
+
+function! InactiveStatus()
+    let statusline=""
+    let statusline.="\["
+    let statusline.="\ %t\ "
+    let statusline.="\]"
+    return statusline
+endfunction
+
+augroup status
+    autocmd!
+    autocmd WinEnter * setlocal statusline=%!ActiveStatus()
+    autocmd WinLeave,QuickFixCmdPost * setlocal statusline=%!InactiveStatus()
+augroup END
+
 set showtabline=0
 set laststatus=2
 
-set statusline=
-set statusline+=\ %{tabpagenr()}/%{tabpagenr('$').'\ \ '}«
-set statusline+=\ %{Relative_Path_CWD().'\ '}» 
-set statusline+=%{fugitive#head()!=''?'\ \ '.fugitive#head().'\ ':''}
-set statusline+=\ %h%m%r
+set statusline=%!ActiveStatus()
 
 " }}}
-" Override color au {{{
+" Override color {{{
 augroup OverrideColor
     autocmd!
-    autocmd ColorScheme * hi! link VertSplit NonText
-    autocmd ColorScheme * hi! link StatusLineNC NonText
-    autocmd ColorScheme * hi! link StatusLine TabLineFill
-    autocmd ColorScheme * hi Folded      gui=none cterm=none ctermbg=none guibg=none
-    autocmd ColorScheme * hi TabLine     gui=none cterm=none
-    autocmd ColorScheme * hi TabLineSel  gui=bold,reverse
-    autocmd ColorScheme * hi TabLineFill gui=none
+    autocmd ColorScheme * hi! link VertSplit Directory
+    autocmd ColorScheme * hi! link StatusLineNC Directory
+    autocmd ColorScheme * hi! link StatusLine MatchParen
+    autocmd ColorScheme * hi Pmenu gui=none
+    autocmd ColorScheme * hi Folded gui=none
 
     autocmd ColorScheme * exec 'hi InlineDiffAdded' .
             \' guibg=' . synIDattr(synIDtrans(hlID('Normal')), 'bg', 'gui') .
-            \' guifg=' . synIDattr(synIDtrans(hlID('DiffAdd')), 'fg', 'gui') . ' gui=bold'
+            \' guifg=' . synIDattr(synIDtrans(hlID('DiffAdd')), 'fg', 'gui')
     autocmd ColorScheme * exec 'hi InlineDiffRemoved' .
             \' guibg=' . synIDattr(synIDtrans(hlID('Normal')), 'bg', 'gui') .
-            \' guifg=' . synIDattr(synIDtrans(hlID('DiffDelete')), 'fg', 'gui') . ' gui=bold'
+            \' guifg=' . synIDattr(synIDtrans(hlID('DiffDelete')), 'fg', 'gui')
     autocmd ColorScheme * exec 'hi InlineDiffLine' .
             \' guibg=' . synIDattr(synIDtrans(hlID('CursorLine')), 'bg', 'gui') .
             \' guifg=' . synIDattr(synIDtrans(hlID('Statement')), 'fg', 'gui')
 
-    autocmd ColorScheme * hi! link diffAdded InlineDiffAdded
-    autocmd ColorScheme * hi! link diffRemoved InlineDiffRemoved
-    autocmd ColorScheme * hi! link diffLine InlineDiffLine
+    " autocmd ColorScheme * hi! link diffAdded InlineDiffAdded
+    " autocmd ColorScheme * hi! link diffRemoved InlineDiffRemoved
+    " autocmd ColorScheme * hi! link diffLine InlineDiffLine
 augroup END
 
 " }}}
@@ -391,6 +411,7 @@ command! -nargs=* VT vsplit | terminal <args>
 " Search word under cursor and show results in quickfix without moving it
 nnoremap <leader>- :execute "vimgrep /" . expand('<cword>') ."/j %"<CR>
 
+nnoremap <leader>M :top sp term://$SHELL<cr>
 nnoremap <leader>m :below sp term://$SHELL<cr>
 
 " Insert source bin/activate
@@ -534,10 +555,10 @@ let NERDTreeMinimalUI = 1
 let NERDTreeRespectWildIgnore = 1 
 let NERDTreeAutoDeleteBuffer = 1
 let NERDTreeShowHidden=1
-let g:NERDTreeQuitOnOpen=1
+let g:NERDTreeQuitOnOpen=0
 " let NERDTreeStatusline = ''
-" nnoremap <silent> <leader>e :NERDTreeFind<cr>
-" map <C-e> :NERDTreeToggle<CR>
+nnoremap <silent><leader>e :NERDTreeFind<cr>
+map <silent><C-e> :NERDTreeToggle<CR>
 
 " }}}
 " netrw {{{
@@ -580,6 +601,7 @@ endfunction
 function! s:denite_detect_size() abort
     let s:denite_winheight = 20
     let s:denite_winrow = 4
+    let s:denite_winrow = 20 
     let s:denite_winwidth = &columns > 240 ? &columns / 2 : 120
     let s:denite_wincol = &columns > s:denite_winwidth ? (&columns - s:denite_winwidth) / 2 : 0
     call denite#custom#option('_', {
@@ -592,13 +614,12 @@ endfunction
 
 try
     call s:denite_detect_size()
-	call denite#custom#alias('source', 'file/rec/git', 'file/rec')
+    call denite#custom#source('file_mru', 'matchers', ['matcher/fuzzy', 'matcher/project_files'])
+    call denite#custom#alias('source', 'file/rec/git', 'file/rec')
     call denite#custom#var('file/rec/git', 'command', ['git', 'ls-files', '-co', '--exclude-standard'])
     call denite#custom#option('_', { 'start_filter': v:true })
     call denite#custom#option('_', { 'split': 'floating' })
     call denite#custom#option('_', { 'prompt': '>>' })
-    " call denite#custom#option('_', { 'highlight_filter_background': 'Visual' })
-    " call denite#custom#option('_', 'highlight_matched_range', 'Character')
     call denite#custom#option('_', 'highlight_matched_char', 'Character')
 catch
     " echomsg "Denite plugin not installed"
@@ -610,6 +631,7 @@ nnoremap <silent><leader>v :Denite buffer<cr>
 nnoremap <silent><leader>l :Denite line<cr>
 nnoremap <silent><leader>f :Denite file_mru
 \ `finddir('.git', ';') != '' ? 'file/rec/git' : 'file'`<CR>
+nnoremap <silent><leader>F :Denite file/rec/git<cr>
 
 " }}}
 " UltiSnips {{{
@@ -671,14 +693,13 @@ let g:undotree_ShortIndicators = 1
 " }}}
 " AnyFold {{{
 
-" let g:anyfold_activate = 1
-" let g:anyfold_fold_display = 0
-" let g:anyfold_fold_comments = 0
+let g:anyfold_fold_display = 0
+let g:anyfold_fold_comments = 0
 
-" augroup FileTypeFolds
-"     autocmd!
-"     autocmd Filetype * AnyFoldActivate
-" augroup END
+augroup FileTypeFolds
+    autocmd!
+    autocmd Filetype * AnyFoldActivate
+augroup END
 
 " }}}
 " Grepper {{{
@@ -718,8 +739,8 @@ nnoremap <leader>S :SSave<cr>
 " }}}
 " ale {{{
 
-nmap <leader>e <Plug>(ale_next_wrap)
-nmap <leader>E <Plug>(ale_previous_wrap)
+" nmap <leader>e <Plug>(ale_next_wrap)
+" nmap <leader>E <Plug>(ale_previous_wrap)
 
 let g:ale_enabled = 1
 let g:ale_pattern_options = {'\.min.js$': {'ale_enabled': 0}}
@@ -791,7 +812,7 @@ nmap <silent> gr <Plug>(coc-references)
 
 "docker exec -i --user=laradock laradock_workspace_1 sh -c "cd interpos; ./vendor/bin/behat features/order.feature
 "docker exec -i --user=laradock laradock_workspace_1 sh -lc "cd interpos; npm run dev
-nnoremap <leader>A :T docker exec -it --user=laradock laradock_workspace_1 sh -lc ""<left>
+" nnoremap <leader>A :T docker exec -it --user=laradock laradock_workspace_1 sh -lc ""<left>
 
 " }}}
 " fugitive {{{
@@ -856,17 +877,6 @@ command! BM :SignatureListGlobalMarks
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#whitespace#enabled = 0
 
-let g:airline#extensions#tabline#enabled = 0           " enable airline tabline
-let g:airline#extensions#tabline#show_close_button = 0 " remove 'X' at the end of the tabline
-let g:airline#extensions#tabline#show_tabs = 1
-let g:airline#extensions#tabline#tabs_label = 'T'       " can put text here like BUFFERS to denote buffers (I clear it so nothing is shown)
-let g:airline#extensions#tabline#buffers_label = 'B'    " can put text here like TABS to denote tabs (I clear it so nothing is shown)
-let g:airline#extensions#tabline#formatter = 'short_path'
-let g:airline#extensions#tabline#show_buffers = 0      " dont show buffers in the tabline
-let g:airline#extensions#tabline#tab_min_count = 1     " minimum of 2 tabs needed to display the tabline
-let g:airline#extensions#tabline#show_splits = 0       " disables the buffer name that displays on the right of the tabline
-let g:airline#extensions#tabline#show_tab_type = 0     " disables the weird ornage arrow on the tabline
-
 " Short names
 let g:airline_mode_map = {
     \ '__' : '-',
@@ -914,10 +924,12 @@ endtry
 let g:base16_color_overrides = {
     \ 'CursorLineNr': 'fg=light1 bg=similar3 bold',
     \ 'ColorColumn': 'bg=light2 bg=similar3',
-    \ 'SignColumn': 'fg=contrast1 bg=black',
-    \ 'FoldColumn': 'fg=contrast1 bg=black',
-    \ 'LineNr': 'fg=similar1 bg=black',
     \ 'Pmenu': 'fg=light3 bg=similar3'}
+    " \ 'SignColumn': 'fg=contrast1 bg=black',
+    " \ 'FoldColumn': 'fg=contrast1 bg=black',
+    " \ 'LineNr': 'fg=similar1 bg=black',
+
+let g:base16_transparent_background = 0
 
 " }}}
 " " polyglot {{{
@@ -929,98 +941,15 @@ let g:polyglot_disabled = ['typescript']
 
 if LINUX()
     colorscheme default
-    let g:airline_theme = 'jellybeans'
+    let g:airline_theme = 'base16'
 endif
 
 " }}}
-" defx {{{
-
-autocmd FileType defx call s:defx_my_settings()
-function! s:defx_my_settings() abort
-  " Define mappings
-  nnoremap <silent><buffer><expr> <CR>
-  \ defx#is_directory() ?
-  \ defx#do_action('open') :
-  \ defx#do_action('multi', ['drop', 'quit'])
-  nnoremap <silent><buffer><expr> c
-  \ defx#do_action('copy')
-  nnoremap <silent><buffer><expr> m
-  \ defx#do_action('move')
-  nnoremap <silent><buffer><expr> p
-  \ defx#do_action('paste')
-  nnoremap <silent><buffer><expr> l
-  \ defx#do_action('open')
-  nnoremap <silent><buffer><expr> E
-  \ defx#do_action('open', 'vsplit')
-  nnoremap <silent><buffer><expr> P
-  \ defx#do_action('open', 'pedit')
-  nnoremap <silent><buffer><expr> o
-  \ defx#do_action('open_or_close_tree')
-  nnoremap <silent><buffer><expr> K
-  \ defx#do_action('new_directory')
-  nnoremap <silent><buffer><expr> N
-  \ defx#do_action('new_file')
-  nnoremap <silent><buffer><expr> M
-  \ defx#do_action('new_multiple_files')
-  nnoremap <silent><buffer><expr> C
-  \ defx#do_action('toggle_columns',
-  \                'mark:indent:icon:filename:type:size:time')
-  nnoremap <silent><buffer><expr> S
-  \ defx#do_action('toggle_sort', 'time')
-  nnoremap <silent><buffer><expr> d
-  \ defx#do_action('remove')
-  nnoremap <silent><buffer><expr> r
-  \ defx#do_action('rename')
-  nnoremap <silent><buffer><expr> !
-  \ defx#do_action('execute_command')
-  nnoremap <silent><buffer><expr> x
-  \ defx#do_action('execute_system')
-  nnoremap <silent><buffer><expr> yy
-  \ defx#do_action('yank_path')
-  nnoremap <silent><buffer><expr> .
-  \ defx#do_action('toggle_ignored_files')
-  nnoremap <silent><buffer><expr> ;
-  \ defx#do_action('repeat')
-  nnoremap <silent><buffer><expr> h
-  \ defx#do_action('cd', ['..'])
-  nnoremap <silent><buffer><expr> ~
-  \ defx#do_action('cd')
-  nnoremap <silent><buffer><expr> q
-  \ defx#do_action('quit')
-  nnoremap <silent><buffer><expr> <Space>
-  \ defx#do_action('toggle_select') . 'j'
-  nnoremap <silent><buffer><expr> *
-  \ defx#do_action('toggle_select_all')
-  nnoremap <silent><buffer><expr> j
-  \ line('.') == line('$') ? 'gg' : 'j'
-  nnoremap <silent><buffer><expr> k
-  \ line('.') == 1 ? 'G' : 'k'
-  nnoremap <silent><buffer><expr> <C-g>
-  \ defx#do_action('print')
-  nnoremap <silent><buffer><expr> cd
-  \ defx#do_action('change_vim_cwd')
-endfunction
-
-try
-    call defx#custom#column('icon', {
-          \ 'directory_icon': '▸',
-          \ 'opened_icon': '▾',
-          \ 'root_icon': ' ',
-          \ })
-
-	" call defx#custom#column('filename', {
-	"       \ 'min_width': 60,
-	"       \ })
-catch
-    " Defx not installed
-endtry
-
-" Floating
-" nmap <silent>- :Defx -search=`expand('%:p')` -wincol=999 -winheight=999 -winwidth=65 -split=floating -toggle<CR>
-" nmap <silent>- :Defx -search=`expand('%:p')`<CR>
-
-" }}}
 " Commands {{{
+
+function! s:attach_current()
+    execute 'T abduco -a' CWD()
+endfunction
 
 command! SandboxDeployBack T source venv/bin/activate; fab sandbox_deploy
 command! SandboxDeployFront T source venv/bin/activate; fab sandbox_deploy_front
@@ -1031,22 +960,24 @@ command! ProdDeployFront T source venv/bin/activate; fab prod_deploy_front
 command! ScraperDeploy T source venv/bin/activate; fab scraper_deploy
 command! -nargs=1 ScrapyCrawl T source venv/bin/activate; cd scraper; scrapy crawl <args>
 command! RunTests T source venv/bin/activate; python manage.py test
+command! -nargs=* DockerManage T docker-compose -f local.yml run --rm django python manage.py <args>
+command! Attach call <sid>attach_current()
+command! -nargs=1 RunServer T abduco -c <c-r>=CWD()<cr> <args>
 
-" }}}
-" context {{{
 
-" let g:context_border_char = '─'
-" let g:context_add_mappings = 0
-" let g:context_add_autocmds = 0
+nnoremap <leader>C
+\ :T abduco -c <c-r>=CWD()<cr>
+\ docker-compose -f local.yml up
 
-" augroup context.vim
-"     autocmd!
-"     autocmd VimEnter     * ContextActivate
-"     autocmd BufAdd       * call context#update('BufAdd')
-"     autocmd BufEnter     * call context#update('BufEnter')
-"     autocmd VimResized   * call context#update('VimResized')
-"     autocmd CursorHold   * call context#update('CursorHold')
-" augroup END
+nnoremap <leader>R
+\ :T docker-compose -f local.yml run -rm django 
+
+nnoremap <leader>A
+\ :T abduco -a <c-r>=CWD()<cr>
+" \ :T abduco
+" \ browser-sync start --proxy 127.0.0.1:8000
+" \ --reload-delay=300 --reload-debounce=500
+" \ --files '<c-r>=CWD()<cr>'
 
 " }}}
 " easymotion {{{

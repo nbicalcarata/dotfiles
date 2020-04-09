@@ -18,7 +18,7 @@ ZSH_THEME="robbyrussell"
 #ZSH_THEME="steeef"
 #ZSH_THEME="wezm"
 #ZSH_THEME="darkblood"
-ZSH_THEME="agnoster"
+# ZSH_THEME="agnoster"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
