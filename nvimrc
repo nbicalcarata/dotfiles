@@ -68,6 +68,7 @@ Plug 'w0rp/ale'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'jiangmiao/auto-pairs'
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 
 " }}}
 " Syntax highlighting{{{
@@ -108,6 +109,7 @@ set autoindent
 set noshowcmd
 set nofixendofline
 set nonumber
+set mouse=a
 
 set nospell
 set hidden 
@@ -205,21 +207,9 @@ endfunction
 call InitializeDirectories()
 
 " }}}
-" Functions {{{
-" Toggle fullscreen {{{
-
-function! ToggleFullScreen()
-  if g:GuiWindowFullScreen == 1
-    let l:state = 0
-  else
-    let l:state = 1
-  endif
-  call GuiWindowFullScreen(l:state)
-endfunction
-
 " }}}
+" Autocmd rules {{{
 " http://vim.wikia.com/wiki/Restore_cursor_to_file_position_in_previous_editing_session
-" Restore cursor to file position in previous editing session
 
 function! ResCur()
     if line("'\"") <= line('$')
@@ -232,12 +222,6 @@ augroup resCur
     autocmd!
     autocmd BufWinEnter * call ResCur()
 augroup END
-
-" }}}
-
-" }}}
-" Autocmd rules {{{
-
 " Term start in insert mode {{{
 
 augroup TermInsert
@@ -295,9 +279,7 @@ augroup END
 augroup CursorLineOnlyInActiveWindow
     autocmd!
     autocmd VimEnter,WinEnter,BufWinEnter,InsertLeave * setlocal cursorline
-    " autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorcolumn
     autocmd WinLeave,InsertEnter * setlocal nocursorline
-    " autocmd WinLeave * setlocal nocursorcolumn
 augroup END
 
 " }}}
@@ -321,10 +303,10 @@ augroup END
 " }}}
 " rst rules {{{
 
-augroup RstRules
-    autocmd!
-    autocmd FileType rst setlocal syntax=OFF
-augroup END
+" augroup RstRules
+"     autocmd!
+"     autocmd FileType rst setlocal syntax=OFF
+" augroup END
 
 " }}}
 " Term settings {{{
@@ -372,7 +354,6 @@ augroup END
 
 set showtabline=0
 set laststatus=2
-
 set statusline=%!ActiveStatus()
 
 " }}}
@@ -395,9 +376,9 @@ augroup OverrideColor
             \' guibg=' . synIDattr(synIDtrans(hlID('CursorLine')), 'bg', 'gui') .
             \' guifg=' . synIDattr(synIDtrans(hlID('Statement')), 'fg', 'gui')
 
-    " autocmd ColorScheme * hi! link diffAdded InlineDiffAdded
-    " autocmd ColorScheme * hi! link diffRemoved InlineDiffRemoved
-    " autocmd ColorScheme * hi! link diffLine InlineDiffLine
+    autocmd ColorScheme * hi! link diffAdded InlineDiffAdded
+    autocmd ColorScheme * hi! link diffRemoved InlineDiffRemoved
+    autocmd ColorScheme * hi! link diffLine InlineDiffLine
 augroup END
 
 " }}}
@@ -544,11 +525,6 @@ nnoremap <leader>en :keepalt file<space>
 " }}}
 " Plugins settings
 
-" vim-cool {{{
-
-let g:CoolTotalMatches = 1
-
-" }}}
 " NERDTree {{{
 
 let NERDTreeMinimalUI = 1
@@ -557,8 +533,8 @@ let NERDTreeAutoDeleteBuffer = 1
 let NERDTreeShowHidden=1
 let g:NERDTreeQuitOnOpen=0
 " let NERDTreeStatusline = ''
-nnoremap <silent><leader>e :NERDTreeFind<cr>
-map <silent><C-e> :NERDTreeToggle<CR>
+" nnoremap <silent><leader>e :NERDTreeFind<cr>
+" map <silent><C-e> :NERDTreeToggle<CR>
 
 " }}}
 " netrw {{{
@@ -600,14 +576,11 @@ endfunction
 
 function! s:denite_detect_size() abort
     let s:denite_winheight = 20
-    let s:denite_winrow = 4
-    let s:denite_winrow = 20 
     let s:denite_winwidth = &columns > 240 ? &columns / 2 : 120
     let s:denite_wincol = &columns > s:denite_winwidth ? (&columns - s:denite_winwidth) / 2 : 0
     call denite#custom#option('_', {
                 \ 'wincol': s:denite_wincol,
                 \ 'winheight': s:denite_winheight,
-                \ 'winrow': s:denite_winrow,
                 \ 'winwidth': s:denite_winwidth,
                 \ })
 endfunction
@@ -698,7 +671,14 @@ let g:anyfold_fold_comments = 0
 
 augroup FileTypeFolds
     autocmd!
-    autocmd Filetype * AnyFoldActivate
+    autocmd Filetype html AnyFoldActivate 
+    autocmd Filetype htmldjango AnyFoldActivate 
+    autocmd Filetype python AnyFoldActivate 
+    autocmd Filetype vim AnyFoldActivate 
+    autocmd Filetype typescript AnyFoldActivate 
+    autocmd Filetype vue AnyFoldActivate 
+    autocmd Filetype jsx AnyFoldActivate 
+    autocmd Filetype javascript AnyFoldActivate 
 augroup END
 
 " }}}
@@ -806,13 +786,6 @@ nmap <silent> gr <Plug>(coc-references)
 
 " }}}
 " Term {{{
-
-"Execute command from docker container
-"To make it work, remove t option from command
-
-"docker exec -i --user=laradock laradock_workspace_1 sh -c "cd interpos; ./vendor/bin/behat features/order.feature
-"docker exec -i --user=laradock laradock_workspace_1 sh -lc "cd interpos; npm run dev
-" nnoremap <leader>A :T docker exec -it --user=laradock laradock_workspace_1 sh -lc ""<left>
 
 " }}}
 " fugitive {{{
@@ -991,5 +964,10 @@ let g:EasyMotion_verbose = 0
 nmap s <Plug>(easymotion-overwin-f)
 map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
+
+" }}}
+" markdown-preview {{{
+
+let g:mkdp_auto_close = 0
 
 " }}}
