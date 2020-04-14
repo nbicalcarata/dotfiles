@@ -695,9 +695,6 @@ nnoremap <leader>* :Ggrep! <C-R><C-W><cr>
 let g:startify_lists = [
       \ { 'type': 'sessions',  'header': [   '   Sessions']       },
       \ { 'type': 'files',     'header': [   '   MRU']            },
-      \ { 'type': 'dir',       'header': [   '   MRU '. getcwd()] },
-      \ { 'type': 'bookmarks', 'header': [   '   Bookmarks']      },
-      \ { 'type': 'commands',  'header': [   '   Commands']       },
       \ ]
 
 set sessionoptions-=help,blank,folds
