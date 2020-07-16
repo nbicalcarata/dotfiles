@@ -26,10 +26,11 @@ endif
 " }}}
 
 " General {{{
-Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'Shougo/neomru.vim'
 Plug 'Shougo/neoyank.vim'
-Plug 'yssl/QFEnter'
+" Plug 'yssl/QFEnter'
+" Plug 'Shougo/denite.nvim', {'commit': '6139d4c'}
 Plug 'Shougo/denite.nvim'
 " Plug 'junegunn/fzf', { 'do': './install --bin' }
 " Plug 'junegunn/fzf.vim'
@@ -37,15 +38,18 @@ Plug 'tpope/vim-commentary'
 Plug 'justinmk/vim-gtfo'
 Plug 'wesQ3/vim-windowswap'
 Plug 'pseewald/vim-anyfold'
-Plug 'mhinz/vim-startify'
+Plug 'lambdalisue/session.vim'
 Plug 'tpope/vim-vinegar'
 Plug 'easymotion/vim-easymotion'
 Plug 'voldikss/vim-browser-search'
+Plug 'rhysd/git-messenger.vim'
+" Plug 'danilamihailov/beacon.nvim'
 
 " }}}
 " Colorschemes {{{
 
 Plug 'Soares/base16.nvim'
+Plug 'doums/darcula'
 
 " }}}
 " Git {{{
@@ -58,13 +62,12 @@ Plug 'tpope/vim-rhubarb'
 " }}}
 " Html {{{
 
-Plug 'Valloric/MatchTagAlways'
-Plug 'alvan/vim-closetag'
+" Plug 'Valloric/MatchTagAlways'
 
 " }}}
 " Snippets & AutoComplete {{{
 
-Plug 'w0rp/ale'
+" Plug 'w0rp/ale'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'jiangmiao/auto-pairs'
@@ -74,9 +77,6 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 " Syntax highlighting{{{
 
 Plug 'sheerun/vim-polyglot'
-Plug 'ianks/vim-tsx'
-Plug 'posva/vim-vue'
-Plug 'leafgarland/typescript-vim'
 
 " }}}
 
@@ -123,6 +123,7 @@ set colorcolumn=120
 set expandtab
 set splitright
 set splitbelow
+set sessionoptions-=folds
 
 " match ErrorMsg /\%>120c/
 let g:loaded_matchparen = 1
@@ -224,8 +225,9 @@ augroup resCur
 augroup END
 " Term start in insert mode {{{
 
-augroup TermInsert
+augroup TermCmd
     autocmd!
+    autocmd TermOpen * setlocal winfixheight winfixwidth
     autocmd TermOpen * startinsert
 augroup END
 
@@ -235,14 +237,6 @@ augroup END
 augroup QfBl
     autocmd!
     autocmd FileType qf wincmd J
-augroup END
-
-" }}}
-" Diff settings {{{
-
-augroup DiffSettings
-    autocmd!
-    autocmd FilterWritePre * if &diff | setlocal foldcolumn=0 | endif
 augroup END
 
 " }}}
@@ -298,6 +292,8 @@ augroup DisableThingsFromWindows
     autocmd!
     autocmd VimEnter,WinEnter,BufWinEnter * if &previewwindow | setlocal nolist | setlocal colorcolumn= | endif
     autocmd FileType qf,help,fugitive setlocal nonumber colorcolumn= nolist
+    autocmd FilterWritePre * if &diff | setlocal foldcolumn=0 | endif
+    autocmd TermOpen * setlocal foldcolumn=0 signcolumn=no nonumber
 augroup END
 
 " }}}
@@ -309,18 +305,9 @@ augroup END
 " augroup END
 
 " }}}
-" Term settings {{{
-
-augroup termSettings
-    autocmd!
-    autocmd TermOpen * setlocal foldcolumn=0 signcolumn=no nonumber
-augroup END
-
-" }}}
-" }}}
 " Statusline {{{
 
-set fillchars=vert:│,fold:-,diff:·,stlnc:─
+set fillchars=vert:│,fold:-,diff:·,stlnc:─,eob:\ 
 
 function! CWD()
     let l:path = fnamemodify(getcwd(),":t")
@@ -334,15 +321,13 @@ function! ActiveStatus()
     let statusline.="%{fugitive#head()!=''?'\ \ '.fugitive#head().'\ ':''}"
     let statusline.="\ %t"
     let statusline.="\ %h%m%r"
-    let statusline.="\ %=%-14.(%l,%c%V%)\ %P\ "
+    let statusline.="\ %=%-14.(%l,%c%V%)\ %y\ "
     return statusline
 endfunction
 
 function! InactiveStatus()
     let statusline=""
-    let statusline.="\["
     let statusline.="\ %t\ "
-    let statusline.="\]"
     return statusline
 endfunction
 
@@ -363,22 +348,29 @@ augroup OverrideColor
     autocmd ColorScheme * hi! link VertSplit Directory
     autocmd ColorScheme * hi! link StatusLineNC Directory
     autocmd ColorScheme * hi! link StatusLine MatchParen
-    autocmd ColorScheme * hi Pmenu gui=none
+    autocmd ColorScheme * hi! link Pmenu CursorLine
+    " autocmd ColorScheme * hi Pmenu gui=none
     autocmd ColorScheme * hi Folded gui=none
-
-    autocmd ColorScheme * exec 'hi InlineDiffAdded' .
-            \' guibg=' . synIDattr(synIDtrans(hlID('Normal')), 'bg', 'gui') .
-            \' guifg=' . synIDattr(synIDtrans(hlID('DiffAdd')), 'fg', 'gui')
-    autocmd ColorScheme * exec 'hi InlineDiffRemoved' .
-            \' guibg=' . synIDattr(synIDtrans(hlID('Normal')), 'bg', 'gui') .
-            \' guifg=' . synIDattr(synIDtrans(hlID('DiffDelete')), 'fg', 'gui')
+    " autocmd ColorScheme * exec 'hi InlineDiffAdded' .
+    "         \' guibg=' . synIDattr(synIDtrans(hlID('Normal')), 'bg', 'gui') .
+    "         \' guifg=' . synIDattr(synIDtrans(hlID('DiffAdd')), 'fg', 'gui')
+    " autocmd ColorScheme * exec 'hi InlineDiffRemoved' .
+    "         \' guibg=' . synIDattr(synIDtrans(hlID('Normal')), 'bg', 'gui') .
+    "         \' guifg=' . synIDattr(synIDtrans(hlID('DiffDelete')), 'fg', 'gui')
     autocmd ColorScheme * exec 'hi InlineDiffLine' .
             \' guibg=' . synIDattr(synIDtrans(hlID('CursorLine')), 'bg', 'gui') .
             \' guifg=' . synIDattr(synIDtrans(hlID('Statement')), 'fg', 'gui')
 
-    autocmd ColorScheme * hi! link diffAdded InlineDiffAdded
-    autocmd ColorScheme * hi! link diffRemoved InlineDiffRemoved
-    autocmd ColorScheme * hi! link diffLine InlineDiffLine
+    autocmd ColorScheme * hi! diffAdded guifg=#009900 ctermfg=2
+    autocmd ColorScheme * hi! diffRemoved guifg=#ff2222 ctermfg=1
+    autocmd ColorScheme * hi! diffChanged guifg=#bbbb00 ctermfg=3
+    " autocmd ColorScheme * hi! link diffLine InlineDiffLine
+    " autocmd ColorScheme * hi! link GitGutterAdd GitAddStripe
+    " autocmd ColorScheme * hi! link GitGutterChange GitChangeStripe
+    " autocmd ColorScheme * hi! link GitGutterDelete GitDeleteStripe
+    autocmd ColorScheme * hi! link GitGutterAdd DiffAdd
+    autocmd ColorScheme * hi! link GitGutterChange DiffChange
+    autocmd ColorScheme * hi! link GitGutterDelete DiffDelete
 augroup END
 
 " }}}
@@ -386,13 +378,18 @@ augroup END
 
 let g:mapleader = ','
 
+nnoremap <esc><esc> :noh<cr>
+
+" Yank from cursor to the end of the line
+nnoremap Y y$
+
 command! -nargs=* T split | terminal <args>
 command! -nargs=* VT vsplit | terminal <args>
 
 " Search word under cursor and show results in quickfix without moving it
 nnoremap <leader>- :execute "vimgrep /" . expand('<cword>') ."/j %"<CR>
 
-nnoremap <leader>M :top sp term://$SHELL<cr>
+nnoremap <leader>M :top 11sp term://$SHELL<cr>
 nnoremap <leader>m :below sp term://$SHELL<cr>
 
 " Insert source bin/activate
@@ -410,18 +407,6 @@ nnoremap <BS> <C-^>
 " Find buffer
 "nnoremap <leader>b :buffer *
 nnoremap <leader>B :ls<CR>:b<Space>
-
-" Go to tab by number
-noremap <leader>1 1gt
-noremap <leader>2 2gt
-noremap <leader>3 3gt
-noremap <leader>4 4gt
-noremap <leader>5 5gt
-noremap <leader>6 6gt
-noremap <leader>7 7gt
-noremap <leader>8 8gt
-noremap <leader>9 9gt
-
 nnoremap <leader>tn :tabnew<CR>
 
 " Next/prev tab
@@ -475,7 +460,7 @@ vnoremap < <gv
 vnoremap > >gv
 
 " Adjust viewports to the same size
-map <Leader>= <C-w>=
+map <Leader><space> <C-w>=
 
 " Easier horizontal scrolling
 map zl zL
@@ -524,19 +509,6 @@ nnoremap <leader>en :keepalt file<space>
 
 " }}}
 " Plugins settings
-
-" NERDTree {{{
-
-let NERDTreeMinimalUI = 1
-let NERDTreeRespectWildIgnore = 1 
-let NERDTreeAutoDeleteBuffer = 1
-let NERDTreeShowHidden=1
-let g:NERDTreeQuitOnOpen=0
-" let NERDTreeStatusline = ''
-" nnoremap <silent><leader>e :NERDTreeFind<cr>
-" map <silent><C-e> :NERDTreeToggle<CR>
-
-" }}}
 " netrw {{{
 
 let g:netrw_altfile = 1
@@ -552,15 +524,15 @@ let g:netrw_fastbrowse = 0
 "
 augroup Denite
     autocmd!
-    autocmd VimResized * call <SID>denite_detect_size()
+    " autocmd VimResized * call <SID>denite_detect_size()
     autocmd FileType denite call s:denite_my_settings()
-    autocmd WinEnter * if &filetype =~# '^denite'
-        \ |   highlight! link CursorLine Visual
-        \ | endif
+    " autocmd WinEnter * if &filetype =~# '^denite'
+    "     \ |   highlight! link CursorLine Visual
+    "     \ | endif
 
-    autocmd WinLeave * if &filetype ==# 'denite'
-        \ |   highlight! link CursorLine NONE
-        \ | endif
+    " autocmd WinLeave * if &filetype ==# 'denite'
+    "     \ |   highlight! link CursorLine NONE
+    "     \ | endif
 augroup end
 
 function! s:denite_my_settings() abort
@@ -572,6 +544,12 @@ function! s:denite_my_settings() abort
   nnoremap <silent><buffer><expr> q denite#do_map('quit')
   nnoremap <silent><buffer><expr> i denite#do_map('open_filter_buffer')
   nnoremap <silent><buffer><expr> <Space> denite#do_map('toggle_select').'j'
+  nnoremap <silent><buffer> <C-a> :<C-u>call <SID>denite_quickfix()<CR>
+endfunction
+
+function! s:denite_quickfix()
+    call denite#call_map('toggle_select_all')
+    call denite#call_map('do_action', 'quickfix')
 endfunction
 
 function! s:denite_detect_size() abort
@@ -586,25 +564,25 @@ function! s:denite_detect_size() abort
 endfunction
 
 try
-    call s:denite_detect_size()
+    " call s:denite_detect_size()
     call denite#custom#source('file_mru', 'matchers', ['matcher/fuzzy', 'matcher/project_files'])
     call denite#custom#alias('source', 'file/rec/git', 'file/rec')
     call denite#custom#var('file/rec/git', 'command', ['git', 'ls-files', '-co', '--exclude-standard'])
     call denite#custom#option('_', { 'start_filter': v:true })
-    call denite#custom#option('_', { 'split': 'floating' })
+    " call denite#custom#option('_', { 'split': 'floating' })
     call denite#custom#option('_', { 'prompt': '>>' })
-    call denite#custom#option('_', 'highlight_matched_char', 'Character')
 catch
     " echomsg "Denite plugin not installed"
 endtry
 
 " Change mappings.
-nnoremap <leader>d :Denite 
+nnoremap <silent><leader>d :Denite source<cr>
 nnoremap <silent><leader>v :Denite buffer<cr>
 nnoremap <silent><leader>l :Denite line<cr>
 nnoremap <silent><leader>f :Denite file_mru
 \ `finddir('.git', ';') != '' ? 'file/rec/git' : 'file'`<CR>
 nnoremap <silent><leader>F :Denite file/rec/git<cr>
+nnoremap <silent><leader>r :Denite neoyank<cr>
 
 " }}}
 " UltiSnips {{{
@@ -642,6 +620,8 @@ nmap <silent><leader>gn :GitGutterNextHunk<CR>
 nmap <silent><leader>gp :GitGutterPrevHunk<CR>
 nmap <silent><Leader>gs :GitGutterStageHunk<CR>
 nmap <silent><Leader>gr :GitGutterUndoHunk<CR>
+nmap <silent><Leader>gq :GitGutterQuickFix\|copen<CR>
+nmap <silent><Leader>ge :GitGutterPreviewHunk<CR>
 nmap <Leader>gc :T git checkout 
 nmap <Leader>gS :T git push --set-upstream origin 
 nmap <Leader>gP :T git push<cr>
@@ -653,7 +633,9 @@ let g:gitgutter_preview_win_floating = 1
 let g:gitgutter_sign_added = '┃'
 let g:gitgutter_sign_modified = '┃'
 let g:gitgutter_sign_removed_first_line = '▔'
-let g:gitgutter_override_sign_column_highlight = 0
+let g:gitgutter_sign_removed = '▶'
+" let g:gitgutter_set_sign_backgrounds = 1
+" let g:gitgutter_override_sign_column_highlight = 0
 
 " }}}
 " Undotree {{{
@@ -690,28 +672,9 @@ nnoremap <Leader>a :Ggrep!
 nnoremap <leader>* :Ggrep! <C-R><C-W><cr>
 
 " }}}
-" Startify {{{
+" session {{{
 
-let g:startify_lists = [
-      \ { 'type': 'sessions',  'header': [   '   Sessions']       },
-      \ { 'type': 'files',     'header': [   '   MRU']            },
-      \ ]
-
-set sessionoptions-=help,blank,folds
-
-let g:startify_custom_header = [
-            \ '                       █▀▀▄ █▀▀ █▀▀█ ▀█░█▀ ░▀░ █▀▄▀█',
-            \ '                       █░░█ █▀▀ █░░█ ░█▄█░ ▀█▀ █░▀░█',
-            \ '                       ▀░░▀ ▀▀▀ ▀▀▀▀ ░░▀░░ ▀▀▀ ▀░░░▀',
-            \ ]
-
-augroup StartifyAu
-    autocmd!
-    autocmd User Startified setlocal cursorline
-augroup END
-
-let g:startify_session_autoload = 1
-nnoremap <leader>S :SSave<cr>
+nnoremap <leader>S :SessionSave!<cr>
 
 " }}}
 " ale {{{
@@ -893,8 +856,8 @@ endtry
 
 let g:base16_color_overrides = {
     \ 'CursorLineNr': 'fg=light1 bg=similar3 bold',
-    \ 'ColorColumn': 'bg=light2 bg=similar3',
-    \ 'Pmenu': 'fg=light3 bg=similar3'}
+    \ 'ColorColumn': 'bg=light2 bg=similar3'}
+    " \ 'Pmenu': 'fg=light3 bg=similar3'}
     " \ 'SignColumn': 'fg=contrast1 bg=black',
     " \ 'FoldColumn': 'fg=contrast1 bg=black',
     " \ 'LineNr': 'fg=similar1 bg=black',
@@ -904,15 +867,12 @@ let g:base16_transparent_background = 0
 " }}}
 " " polyglot {{{
 
-let g:polyglot_disabled = ['typescript']
+" let g:polyglot_disabled = ['typescript']
 
 " " }}}
 " Colorscheme {{{
 
-if LINUX()
-    colorscheme default
-    let g:airline_theme = 'base16'
-endif
+colorscheme chalk
 
 " }}}
 " Commands {{{
@@ -944,10 +904,6 @@ nnoremap <leader>R
 
 nnoremap <leader>A
 \ :T abduco -a <c-r>=CWD()<cr>
-" \ :T abduco
-" \ browser-sync start --proxy 127.0.0.1:8000
-" \ --reload-delay=300 --reload-debounce=500
-" \ --files '<c-r>=CWD()<cr>'
 
 " }}}
 " easymotion {{{
@@ -959,12 +915,25 @@ let g:EasyMotion_prompt = '{n}>>'
 let g:EasyMotion_verbose = 0
 
 nmap s <Plug>(easymotion-overwin-f)
-map <Leader>j <Plug>(easymotion-j)
-map <Leader>k <Plug>(easymotion-k)
 
 " }}}
 " markdown-preview {{{
 
 let g:mkdp_auto_close = 0
+
+" Web search }}}
+
+nnoremap <leader>sg :Search google 
+
+" }}}
+" neoyank {{{
+
+let g:neoyank#file = $HOME.'/.nvimyankring/yankring.txt'
+
+" }}}
+" beacon {{{
+
+" let g:beacon_minimal_jump = 10
+let g:beacon_ignore_filetypes = ['denite', 'denite-filter']
 
 " }}}
