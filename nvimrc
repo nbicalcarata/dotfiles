@@ -27,13 +27,8 @@ endif
 
 " General {{{
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'Shougo/neomru.vim'
-Plug 'Shougo/neoyank.vim'
-" Plug 'yssl/QFEnter'
-" Plug 'Shougo/denite.nvim', {'commit': '6139d4c'}
-Plug 'Shougo/denite.nvim'
-" Plug 'junegunn/fzf', { 'do': './install --bin' }
-" Plug 'junegunn/fzf.vim'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-commentary'
 Plug 'justinmk/vim-gtfo'
 Plug 'wesQ3/vim-windowswap'
@@ -520,71 +515,6 @@ let g:netrw_fastbrowse = 0
 " nmap <C-E> :Lexplore<CR>
 
 " }}}
-" Denite {{{
-"
-augroup Denite
-    autocmd!
-    " autocmd VimResized * call <SID>denite_detect_size()
-    autocmd FileType denite call s:denite_my_settings()
-    " autocmd WinEnter * if &filetype =~# '^denite'
-    "     \ |   highlight! link CursorLine Visual
-    "     \ | endif
-
-    " autocmd WinLeave * if &filetype ==# 'denite'
-    "     \ |   highlight! link CursorLine NONE
-    "     \ | endif
-augroup end
-
-function! s:denite_my_settings() abort
-  nnoremap <silent><buffer><expr> <CR> denite#do_map('do_action')
-  nnoremap <silent><buffer><expr> d denite#do_map('do_action', 'delete')
-  nnoremap <silent><buffer><expr> p denite#do_map('do_action', 'preview')
-  nnoremap <silent><buffer><expr> <C-v> denite#do_map('do_action', 'vsplit')
-  nnoremap <silent><buffer><expr> <C-x> denite#do_map('do_action', 'split')
-  nnoremap <silent><buffer><expr> q denite#do_map('quit')
-  nnoremap <silent><buffer><expr> i denite#do_map('open_filter_buffer')
-  nnoremap <silent><buffer><expr> <Space> denite#do_map('toggle_select').'j'
-  nnoremap <silent><buffer> <C-a> :<C-u>call <SID>denite_quickfix()<CR>
-endfunction
-
-function! s:denite_quickfix()
-    call denite#call_map('toggle_select_all')
-    call denite#call_map('do_action', 'quickfix')
-endfunction
-
-function! s:denite_detect_size() abort
-    let s:denite_winheight = 20
-    let s:denite_winwidth = &columns > 240 ? &columns / 2 : 120
-    let s:denite_wincol = &columns > s:denite_winwidth ? (&columns - s:denite_winwidth) / 2 : 0
-    call denite#custom#option('_', {
-                \ 'wincol': s:denite_wincol,
-                \ 'winheight': s:denite_winheight,
-                \ 'winwidth': s:denite_winwidth,
-                \ })
-endfunction
-
-try
-    " call s:denite_detect_size()
-    call denite#custom#source('file_mru', 'matchers', ['matcher/fuzzy', 'matcher/project_files'])
-    call denite#custom#alias('source', 'file/rec/git', 'file/rec')
-    call denite#custom#var('file/rec/git', 'command', ['git', 'ls-files', '-co', '--exclude-standard'])
-    call denite#custom#option('_', { 'start_filter': v:true })
-    " call denite#custom#option('_', { 'split': 'floating' })
-    call denite#custom#option('_', { 'prompt': '>>' })
-catch
-    " echomsg "Denite plugin not installed"
-endtry
-
-" Change mappings.
-nnoremap <silent><leader>d :Denite source<cr>
-nnoremap <silent><leader>v :Denite buffer<cr>
-nnoremap <silent><leader>l :Denite line<cr>
-nnoremap <silent><leader>f :Denite file_mru
-\ `finddir('.git', ';') != '' ? 'file/rec/git' : 'file'`<CR>
-nnoremap <silent><leader>F :Denite file/rec/git<cr>
-nnoremap <silent><leader>r :Denite neoyank<cr>
-
-" }}}
 " UltiSnips {{{
 
 let g:UltiSnipsExpandTrigger='<c-e>'
@@ -777,32 +707,46 @@ command! BM :SignatureListGlobalMarks
 
 " }}}
 " fzf {{{
-" let $FZF_DEFAULT_OPTS='--reverse --margin=1,2'
-" let g:fzf_buffers_jump = 0
-" let g:fzf_command_prefix = 'Fzf'
-" let g:fzf_layout = { 'window': { 'width': 0.7, 'height': 0.6, 'yoffset': 0.2, 'border': 'rounded' } }
 
-" nnoremap <leader>d :Fzf
-" nnoremap <silent><leader>r :FzfFiles<cr>
-" nnoremap <silent><leader>v :FzfBuffers<cr>
-" nnoremap <silent><leader>l :FzfBLines<cr>
-" nnoremap <silent><leader>f :FzfCycle<cr>
+let $FZF_DEFAULT_OPTS='--reverse --margin=1,2'
+let g:fzf_buffers_jump = 0
+let g:fzf_command_prefix = 'Fzf'
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.4, 'yoffset': 0.5 } }
 
-" augroup EscFzf
-"   au TermOpen * tnoremap <buffer> <Esc> <c-\><c-n>
-"   au FileType fzf tunmap <buffer> <Esc>
-" augroup END
+tnoremap <expr> <Esc> (&filetype == "fzf") ? "<Esc>" : "<c-\><c-n>"
+nnoremap <silent><leader>d :FzfCommands<cr>
+nnoremap <silent><leader>r :FzfRegisters<cr>
+nnoremap <silent><leader>h :FzfHistory<cr>
+nnoremap <silent><leader>v :FzfBuffers<cr>
+nnoremap <silent><leader>l :FzfBLines<cr>
+nnoremap <silent><leader>f :FzfGFiles<cr>
+nnoremap <silent><leader>F :FzfFiles<cr>
 
-" function! s:fzf_next(idx)
-"   let commands = ['FzfHistory', 'FzfGFiles']
-"   execute commands[a:idx]
-"   let next = (a:idx + 1) % len(commands)
-"   let previous = (a:idx - 1) % len(commands)
-"   execute 'tnoremap <buffer> <silent> <c-f> <c-\><c-n>:close<cr>:sleep 100m<cr>:call <sid>fzf_next('.next.')<cr>'
-"   execute 'tnoremap <buffer> <silent> <c-b> <c-\><c-n>:close<cr>:sleep 100m<cr>:call <sid>fzf_next('.previous.')<cr>'
-" endfunction
+augroup fzfpopupter
+    autocmd!
+    autocmd FileType fzf exe 'tnoremap <buffer><nowait> <C-j> <Down>'
+        \ | tnoremap <buffer><nowait> <C-k> <Up>
+augroup END
 
-" command! FzfCycle call <sid>fzf_next(0)
+" Yank history
+function! s:get_registers() abort
+  redir => l:regs
+  silent registers
+  redir END
+
+  return split(l:regs, '\n')[1:]
+endfunction
+
+function! s:registers(...) abort
+  let l:opts = {
+        \ 'source': s:get_registers(),
+        \ 'sink': {x -> feedkeys(matchstr(x, '\v^\S+\ze.*') . (a:1 ? 'P' : 'p'), 'x')},
+        \ 'options': '--prompt="Reg> "'
+        \ }
+  call fzf#run(fzf#wrap(l:opts))
+endfunction
+
+command! -bang FzfRegisters call s:registers('<bang>' ==# '!')
 
 " }}}
 " Airline {{{
@@ -921,19 +865,15 @@ nmap s <Plug>(easymotion-overwin-f)
 
 let g:mkdp_auto_close = 0
 
-" Web search }}}
+" }}}
+" Web search {{{
 
 nnoremap <leader>sg :Search google 
-
-" }}}
-" neoyank {{{
-
-let g:neoyank#file = $HOME.'/.nvimyankring/yankring.txt'
 
 " }}}
 " beacon {{{
 
 " let g:beacon_minimal_jump = 10
-let g:beacon_ignore_filetypes = ['denite', 'denite-filter']
+" let g:beacon_ignore_filetypes = ['denite', 'denite-filter']
 
 " }}}
