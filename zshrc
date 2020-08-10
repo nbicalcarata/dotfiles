@@ -131,3 +131,9 @@ export INFOPATH="/home/linuxbrew/.linuxbrew/share/info:$INFOPATH"
 export BACKEND_URL="http://127.0.0.1:8000/"
 export API_URI="http://localhost:8000/graphql/" 
 export API_MOUNT_URI="/dashboard/" 
+
+export ANDROID_HOME=$HOME/Android/Sdk
+export PATH=$PATH:$ANDROID_HOME/emulator
+export PATH=$PATH:$ANDROID_HOME/tools
+export PATH=$PATH:$ANDROID_HOME/tools/bin
+export PATH=$PATH:$ANDROID_HOME/platform-tools
