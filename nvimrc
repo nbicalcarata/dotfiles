@@ -215,6 +215,11 @@ function! ResCur()
     endif
 endfunction
 
+augroup TabSessionTitleGroup
+  autocmd!
+  autocmd SessionLoadPost * let &titlestring = substitute(fnamemodify(v:this_session, ':t'), '.vim', '', '')
+augroup end
+
 augroup resCur
     autocmd!
     autocmd BufWinEnter * call ResCur()
