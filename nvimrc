@@ -883,3 +883,8 @@ nnoremap <leader>sg :Search google
 " let g:beacon_ignore_filetypes = ['denite', 'denite-filter']
 
 " }}}
+" editorconfig {{{
+
+let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
+
+" }}}
