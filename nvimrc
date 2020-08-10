@@ -38,13 +38,13 @@ Plug 'tpope/vim-vinegar'
 Plug 'easymotion/vim-easymotion'
 Plug 'voldikss/vim-browser-search'
 Plug 'rhysd/git-messenger.vim'
+Plug 'editorconfig/editorconfig-vim'
 " Plug 'danilamihailov/beacon.nvim'
 
 " }}}
 " Colorschemes {{{
 
 Plug 'Soares/base16.nvim'
-Plug 'doums/darcula'
 
 " }}}
 " Git {{{
