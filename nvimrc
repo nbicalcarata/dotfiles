@@ -34,11 +34,11 @@ Plug 'justinmk/vim-gtfo'
 Plug 'wesQ3/vim-windowswap'
 Plug 'pseewald/vim-anyfold'
 Plug 'lambdalisue/session.vim'
-Plug 'tpope/vim-vinegar'
+Plug 'justinmk/vim-dirvish'
 Plug 'easymotion/vim-easymotion'
 Plug 'voldikss/vim-browser-search'
 Plug 'rhysd/git-messenger.vim'
-Plug 'editorconfig/editorconfig-vim'
+" Plug 'editorconfig/editorconfig-vim'
 " Plug 'danilamihailov/beacon.nvim'
 
 " }}}
@@ -64,10 +64,11 @@ Plug 'shumphrey/fugitive-gitlab.vim'
 " Snippets & AutoComplete {{{
 
 " Plug 'w0rp/ale'
+Plug 'betoharres/vim-react-ultiSnips'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'jiangmiao/auto-pairs'
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
+" Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 
 " }}}
 " Syntax highlighting{{{
@@ -338,7 +339,7 @@ augroup status
     autocmd WinLeave,QuickFixCmdPost * setlocal statusline=%!InactiveStatus()
 augroup END
 
-set showtabline=0
+set showtabline=1
 set laststatus=2
 set statusline=%!ActiveStatus()
 
@@ -352,6 +353,9 @@ augroup OverrideColor
     autocmd ColorScheme * hi! link Pmenu CursorLine
     " autocmd ColorScheme * hi Pmenu gui=none
     autocmd ColorScheme * hi Folded gui=none
+    autocmd ColorScheme * hi TabLine cterm=none gui=none
+    autocmd ColorScheme * hi TabLineFill cterm=none gui=none
+    autocmd ColorScheme * hi TabLineSel cterm=none gui=bold
     " autocmd ColorScheme * exec 'hi InlineDiffAdded' .
     "         \' guibg=' . synIDattr(synIDtrans(hlID('Normal')), 'bg', 'gui') .
     "         \' guifg=' . synIDattr(synIDtrans(hlID('DiffAdd')), 'fg', 'gui')
@@ -380,6 +384,9 @@ augroup END
 let g:mapleader = ','
 
 nnoremap <esc><esc> :noh<cr>
+
+" Backtick
+inoremap '' `
 
 " Yank from cursor to the end of the line
 nnoremap Y y$
@@ -611,6 +618,7 @@ nnoremap <leader>* :Ggrep! <C-R><C-W><cr>
 " session {{{
 
 nnoremap <leader>S :SessionSave!<cr>
+nnoremap <leader>O :SessionOpen 
 
 " }}}
 " ale {{{
@@ -664,10 +672,21 @@ inoremap <silent><expr> <TAB>
       \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
-" Expand with enter (conflicts with auto-pairs)
-":verbose imap <CR>
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : 
-                                           \"\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+" Use <c-space> to trigger completion.
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
+
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
+" position. Coc only does snippet and additional edit on confirm.
+" <cr> could be remapped by other vim plugin, try `:verbose imap <CR>`.
+if exists('*complete_info')
+  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+else
+  inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+endif
 
 function! s:check_back_space() abort
   let col = col('.') - 1
@@ -717,7 +736,7 @@ command! BM :SignatureListGlobalMarks
 let $FZF_DEFAULT_OPTS='--reverse --margin=1,2'
 let g:fzf_buffers_jump = 0
 let g:fzf_command_prefix = 'Fzf'
-let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.4, 'yoffset': 0.5 } }
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6, 'yoffset': 0.5 } }
 
 tnoremap <expr> <Esc> (&filetype == "fzf") ? "<Esc>" : "<c-\><c-n>"
 nnoremap <silent><leader>d :FzfCommands<cr>
@@ -725,7 +744,7 @@ nnoremap <silent><leader>r :FzfRegisters<cr>
 nnoremap <silent><leader>h :FzfHistory<cr>
 nnoremap <silent><leader>v :FzfBuffers<cr>
 nnoremap <silent><leader>l :FzfBLines<cr>
-nnoremap <silent><leader>f :FzfGFiles<cr>
+nnoremap <expr><leader>f (len(system('git rev-parse')) ? ':FzfFiles' : ':FzfGFiles')."\<cr>"
 nnoremap <silent><leader>F :FzfFiles<cr>
 
 augroup fzfpopupter
@@ -822,7 +841,7 @@ let g:base16_transparent_background = 0
 " " }}}
 " Colorscheme {{{
 
-colorscheme chalk
+colorscheme paraiso
 
 " }}}
 " Commands {{{
@@ -886,5 +905,19 @@ nnoremap <leader>sg :Search google
 " editorconfig {{{
 
 let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
+
+" }}}
+" dirvish {{{
+
+augroup dirvish_config
+    autocmd!
+    autocmd FileType dirvish nnoremap <buffer> + :edit %
+    autocmd FileType dirvish nmap <buffer> q <Plug>(dirvish_quit)
+    autocmd BufWritePre,FileWritePre * silent! call mkdir(expand('<afile>:p:h'), 'p')
+augroup END
+
+let g:dirvish_mode = ':sort ,^.*[\/],'
+" let g:loaded_netrw       = 1
+" let g:loaded_netrwPlugin = 1
 
 " }}}

@@ -11,6 +11,7 @@ endfunction
 filetype plugin indent on
 syntax on
 
+set termguicolors
 set nocompatible
 set noswapfile
 set laststatus=2
@@ -33,53 +34,30 @@ set completeopt-=preview
 set wildignorecase
 set wildmode=list:longest,full
 
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
 call plug#begin('~/.vim/plugged')
 
-"Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
-"Plug 'chriskempson/base16-vim'
-"Plug '~/.vim/plugged/eclim'
-"Plug 'jiangmiao/auto-pairs'
-"Plug 'romainl/vim-cool'
-"Plug 'Shougo/denite.nvim'
-"Plug 'scrooloose/nerdcommenter'
 
 " General {{{
-Plug 'lvht/phpcd.vim', { 'for': 'php', 'do': 'composer install' }
-Plug 'romainl/vim-cool'
-Plug 'scrooloose/nerdtree'
-Plug 'Shougo/denite.nvim'
-"Plug 'scrooloose/nerdcommenter'
 Plug 'tpope/vim-commentary'
 Plug 'justinmk/vim-gtfo'
-Plug 'mbbill/undotree'
-Plug 'nbicalcarata/vim-zim'
-Plug 'joanrivera/vim-zimwiki-syntax'
+Plug 'justinmk/vim-dirvish
 Plug 'wesQ3/vim-windowswap'
 Plug 'pseewald/vim-anyfold'
-"Plug 'kevinkjt2000/tmuxline.vim'
-"Plug 'christoomey/vim-tmux-navigator'
 Plug 'mhinz/vim-startify'
-Plug 'mhinz/vim-grepper'
-Plug 'mklabs/split-term.vim'
 "Plug 'skywind3000/asyncrun.vim'
 Plug 'tpope/vim-surround'
-"Plug 'Yggdroot/indentLine'
-"Plug 'NovaDev94/vim-bufferline'
-"Plug 'ShirajG/golden-ratio'
-"Plug 'yuttie/comfortable-motion.vim'
 " }}}
 " Colorschemes {{{
-" Plug 'fenetikm/falcon'
-"Plug 'ayu-theme/ayu-vim'
-Plug 'atelierbram/Base2Tone-vim' 
 Plug 'chriskempson/base16-vim'
 Plug 'AlessandroYorba/Alduin'
-Plug 'protesilaos/prot16-vim'
-Plug 'xolox/vim-colorscheme-switcher'
-Plug 'Taverius/vim-colorscheme-manager'
 Plug 'xolox/vim-misc'
 Plug 'equalsraf/neovim-gui-shim'
-Plug 'metalelf0/base16-black-metal-scheme'
 
 " }}}
 " Git {{{
@@ -101,32 +79,14 @@ Plug 'alvan/vim-closetag'
 "Plug 'Shougo/deoplete.nvim'
 "Plug 'lifepillar/vim-mucomplete'
 
-function! BuildYCM(info)
-  " info is a dictionary with 3 fields
-  " - name:   name of the plugin
-  " - status: 'installed', 'updated', or 'unchanged'
-  " - force:  set on PlugInstall! or PlugUpdate!
-  if a:info.status == 'installed' || a:info.force
-    !./install.py --js-completer
-  endif
-endfunction
-
-Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
-Plug 'w0rp/ale'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'jiangmiao/auto-pairs'
-Plug 'ludovicchabant/vim-gutentags'
-"Plug 'carlitux/deoplete-ternjs', { 'do': 'sudo npm install -g tern' }
 
 " }}}
 " Syntax highlighting{{{
 
 Plug 'sheerun/vim-polyglot'
-Plug 'janko-m/vim-test'
-Plug 'StanAngeloff/php.vim'
-"Plug 'mxw/vim-jsx'
-Plug 'posva/vim-vue'
 
 call plug#end()
 
@@ -189,57 +149,6 @@ nnoremap <silent> <leader>e :NERDTreeFind<cr>
 map <C-e> :NERDTreeToggle<CR>
 
 " }}}
-" Denite {{{
-
-" Change mappings.
-"nnoremap <C-P> :Denite file_rec<CR>
-nnoremap <leader>d :Denite 
-nnoremap <leader>B :Denite buffer<cr>
-nnoremap <leader>m :Denite file_old<cr>
-nnoremap <leader>l :Denite line<cr>
-"nnoremap <leader>o :Denite outline<cr>
-nnoremap <leader>r :Denite register<cr>
-nnoremap <leader>zz :Denite grep -path=~/Documentos/Apuntes/<cr>
-nnoremap <leader>z :Denite file_rec -path=~/Documentos/Apuntes/<cr>
-
-if WINDOWS()
-    nnoremap <leader>z :Denite file_rec -path=~/Documents/Apuntes/<cr>
-endif
-
-call denite#custom#alias('source', 'file_rec/git', 'file_rec')
-
-call denite#custom#var('file_rec/git', 'command',
-            \ ['git', 'ls-files', '-co', '--exclude-standard'])
-nnoremap <silent> <leader>f :<C-u>Denite
-            \ `finddir('.git', ';') != '' ? 'file_rec/git' : 'file_rec'`<CR>
-
-" Change mappings
-call denite#custom#map(
-            \ 'insert',
-            \ '<C-j>',
-            \ '<denite:move_to_next_line>',
-            \ 'noremap'
-            \)
-call denite#custom#map(
-            \ 'insert',
-            \ '<C-k>',
-            \ '<denite:move_to_previous_line>',
-            \ 'noremap'
-            \)
-
-call denite#custom#option('default', {
-            \ 'prompt': '❯',
-            \ 'reversed': 1,
-            \ 'auto_resize': 1,
-	    \ 'statusline': v:false
-            \ })
-
-            "\ 'statusline': 0
-            "\ 'split': 'no'
-call denite#custom#var('buffer', 'date_format', '')
-call denite#custom#option('_', 'highlight_matched_range', 'None')
-call denite#custom#option('_', 'highlight_matched_char', 'Character')
-" }}}
 " UltiSnips {{{
 let g:UltiSnipsExpandTrigger='<c-e>'
 let g:UltiSnipsListSnippets='<c-l>'
@@ -247,12 +156,6 @@ let g:UltiSnipsJumpForwardTrigger='<c-j>'
 let g:UltiSnipsJumpBackwardTrigger='<c-k>'
 inoremap <c-x><c-k> <c-x><c-k>
 let g:UltiSnipsSnippetDirectories = ['UltiSnips']
-" }}}
-" youcompleteme {{{
-"
-let g:EclimCompletionMethod = 'omnifunc'
-let g:ycm_autoclose_preview_window_after_insertion = 1
-
 " }}}
 set fillchars=vert:│,fold:۰,diff:· 
 " Matchtag always {{{
@@ -509,16 +412,6 @@ let g:gutentags_cache_dir = '~/.cache/gutentags'
         "\ }
 
 " }}}
-" Python with virtualenv support {{{
-py << EOF
-import os
-import sys
-if 'VIRTUAL_ENV' in os.environ:
-  project_base_dir = os.environ['VIRTUAL_ENV']
-  activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
-  execfile(activate_this, dict(__file__=activate_this))
-EOF
-" }}}
 " Deoplete {{{
 
 if WINDOWS()
@@ -540,16 +433,6 @@ endif
 
 "inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 "inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-
-" }}}
-" color-switcher {{{
-
-let g:colorscheme_switcher_keep_background = 1
-let g:colorscheme_switcher_exclude_builtins = 1
-let g:colorscheme_manager_global_last = 1
-let g:colorscheme_switcher_exclude = ['base16-atelier-cave-light', 'base16-atelier-dune-light', 'base16-atelier-estuary-light', 'base16-atelier-forest-light', 'base16-atelier-heath-light', 'base16-atelier-lakeside-light', 'base16-atelier-plateau-light', 'base16-atelier-savanna-light', 'base16-atelier-seaside-light', 'base16-atelier-sulphurpool-light', 'base16-classic-light', 'base16-default-light',  'base16-google-light', 'base16-grayscale-light', 'base16-gruvbox-light-hard', 'base16-gruvbox-light-medium', 'base16-gruvbox-light-soft', 'base16-harmonic-light', 'base16-mexico-light', 'base16-one-light', 'base16-solarized-light', 'base16-summerfruit-light', 'base16-unikitty-light', 'base16-material-lighter', 'base16-brushtrees', 'base16-cupcake', 'base16-cupertino', 'base16-brushtrees-dark', 'base16-tomorrow', 'base16-shapeshifter']
-
-let g:alduin_Shout_Fire_Breath = 1
 
 " }}}
 " split-term {{{
