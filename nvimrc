@@ -734,6 +734,7 @@ command! BM :SignatureListGlobalMarks
 " fzf {{{
 
 let $FZF_DEFAULT_OPTS='--reverse --margin=1,2'
+let g:fzf_preview_window = ''
 let g:fzf_buffers_jump = 0
 let g:fzf_command_prefix = 'Fzf'
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6, 'yoffset': 0.5 } }
