@@ -33,11 +33,14 @@ Plug 'tpope/vim-commentary'
 Plug 'justinmk/vim-gtfo'
 Plug 'wesQ3/vim-windowswap'
 Plug 'pseewald/vim-anyfold'
-Plug 'lambdalisue/session.vim'
+Plug 'mhinz/vim-startify'
 Plug 'justinmk/vim-dirvish'
 Plug 'easymotion/vim-easymotion'
 Plug 'voldikss/vim-browser-search'
 Plug 'rhysd/git-messenger.vim'
+Plug 'mattn/emmet-vim'
+Plug 'wfxr/minimap.vim', {'do': ':!cargo install --locked code-minimap'}
+" Plug 'Xuyuanp/scrollbar.nvim'
 " Plug 'editorconfig/editorconfig-vim'
 " Plug 'danilamihailov/beacon.nvim'
 
@@ -121,9 +124,6 @@ set expandtab
 set splitright
 set splitbelow
 set sessionoptions-=folds
-
-" match ErrorMsg /\%>120c/
-let g:loaded_matchparen = 1
 
 " }}}
 
@@ -293,7 +293,7 @@ augroup END
 augroup DisableThingsFromWindows
     autocmd!
     autocmd VimEnter,WinEnter,BufWinEnter * if &previewwindow | setlocal nolist | setlocal colorcolumn= | endif
-    autocmd FileType qf,help,fugitive setlocal nonumber colorcolumn= nolist
+    autocmd FileType qf,help,fugitive setlocal signcolumn=no nonumber colorcolumn= nolist
     autocmd FilterWritePre * if &diff | setlocal foldcolumn=0 | endif
     autocmd TermOpen * setlocal foldcolumn=0 signcolumn=no nonumber
 augroup END
@@ -397,8 +397,10 @@ command! -nargs=* VT vsplit | terminal <args>
 " Search word under cursor and show results in quickfix without moving it
 nnoremap <leader>- :execute "vimgrep /" . expand('<cword>') ."/j %"<CR>
 
-nnoremap <leader>M :top 11sp term://$SHELL<cr>
-nnoremap <leader>m :below sp term://$SHELL<cr>
+if !exists('g:vscode')
+    nnoremap <leader>M :top 11sp term://$SHELL<cr>
+    nnoremap <leader>m :below sp term://$SHELL<cr>
+endif
 
 " Insert source bin/activate
 tnoremap <leader>va source venv/bin/activate<cr>
@@ -610,15 +612,32 @@ augroup END
 " Grepper {{{
 
 nnoremap <Leader>a :Ggrep! 
+nnoremap <Leader>A :FzfAg 
 
 "Start searching the word under the cursor:
 nnoremap <leader>* :Ggrep! <C-R><C-W><cr>
 
 " }}}
-" session {{{
+" Startify {{{
 
-nnoremap <leader>S :SessionSave!<cr>
-nnoremap <leader>O :SessionOpen 
+nnoremap <leader>S :SSave!<cr>
+nnoremap <leader>O :SLoad 
+
+let g:startify_lists = [
+      \ { 'type': 'sessions',  'header': [   '   Sessions']       },
+      \ { 'type': 'files',     'header': [   '   MRU']            },
+      \ ]
+
+let g:startify_custom_header = [
+            \ '                       █▀▀▄ █▀▀ █▀▀█ ▀█░█▀ ░▀░ █▀▄▀█',
+            \ '                       █░░█ █▀▀ █░░█ ░█▄█░ ▀█▀ █░▀░█',
+            \ '                       ▀░░▀ ▀▀▀ ▀▀▀▀ ░░▀░░ ▀▀▀ ▀░░░▀',
+            \ ]
+
+augroup StartifyAu
+    autocmd!
+    autocmd User Startified setlocal cursorline
+augroup END
 
 " }}}
 " ale {{{
@@ -664,6 +683,7 @@ let g:coc_global_extensions = [ 'coc-tsserver',
                               \ 'coc-python',
                               \ 'coc-highlight',
                               \ 'coc-emmet',
+                              \ 'coc-vetur',
                               \ 'coc-ultisnips' ]
 
 inoremap <silent><expr> <TAB>
@@ -739,14 +759,16 @@ let g:fzf_buffers_jump = 0
 let g:fzf_command_prefix = 'Fzf'
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6, 'yoffset': 0.5 } }
 
-tnoremap <expr> <Esc> (&filetype == "fzf") ? "<Esc>" : "<c-\><c-n>"
-nnoremap <silent><leader>d :FzfCommands<cr>
-nnoremap <silent><leader>r :FzfRegisters<cr>
-nnoremap <silent><leader>h :FzfHistory<cr>
-nnoremap <silent><leader>v :FzfBuffers<cr>
-nnoremap <silent><leader>l :FzfBLines<cr>
-nnoremap <expr><leader>f (len(system('git rev-parse')) ? ':FzfFiles' : ':FzfGFiles')."\<cr>"
-nnoremap <silent><leader>F :FzfFiles<cr>
+if !exists('g:vscode')
+    tnoremap <expr> <Esc> (&filetype == "fzf") ? "<Esc>" : "<c-\><c-n>"
+    nnoremap <silent><leader>d :FzfCommands<cr>
+    nnoremap <silent><leader>r :FzfRegisters<cr>
+    nnoremap <silent><leader>h :FzfHistory<cr>
+    nnoremap <silent><leader>v :FzfBuffers<cr>
+    nnoremap <silent><leader>l :FzfBLines<cr>
+    nnoremap <expr><leader>f (len(system('git rev-parse')) ? ':FzfFiles' : ':FzfGFiles')."\<cr>"
+    nnoremap <silent><leader>F :FzfFiles<cr>
+endif
 
 augroup fzfpopupter
     autocmd!
@@ -872,8 +894,8 @@ nnoremap <leader>C
 nnoremap <leader>R
 \ :T docker-compose -f local.yml run -rm django 
 
-nnoremap <leader>A
-\ :T abduco -a <c-r>=CWD()<cr>
+" nnoremap <leader>A
+" \ :T abduco -a <c-r>=CWD()<cr>
 
 " }}}
 " easymotion {{{
@@ -900,7 +922,6 @@ nnoremap <leader>sg :Search google
 " beacon {{{
 
 " let g:beacon_minimal_jump = 10
-" let g:beacon_ignore_filetypes = ['denite', 'denite-filter']
 
 " }}}
 " editorconfig {{{
@@ -920,5 +941,35 @@ augroup END
 let g:dirvish_mode = ':sort ,^.*[\/],'
 " let g:loaded_netrw       = 1
 " let g:loaded_netrwPlugin = 1
+
+" }}}
+" scrollbar {{{
+
+let g:scrollbar_shape = {
+\ 'head': '▲',
+\ 'body': '█',
+\ 'tail': '▼',
+\ }
+
+augroup your_config_scrollbar_nvim
+    autocmd!
+    autocmd BufEnter    * silent! lua require('scrollbar').show()
+    autocmd BufLeave    * silent! lua require('scrollbar').clear()
+
+    autocmd CursorMoved * silent! lua require('scrollbar').show()
+    autocmd VimResized  * silent! lua require('scrollbar').show()
+
+    autocmd FocusGained * silent! lua require('scrollbar').show()
+    autocmd FocusLost   * silent! lua require('scrollbar').clear()
+augroup end
+
+" }}}
+" emmet {{{
+
+let g:user_emmet_settings = {
+\  'javascript' : {
+\      'extends' : 'jsx',
+\  },
+\}
 
 " }}}
