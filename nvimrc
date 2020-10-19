@@ -39,7 +39,7 @@ Plug 'easymotion/vim-easymotion'
 Plug 'voldikss/vim-browser-search'
 Plug 'rhysd/git-messenger.vim'
 Plug 'mattn/emmet-vim'
-Plug 'wfxr/minimap.vim', {'do': ':!cargo install --locked code-minimap'}
+" Plug 'wfxr/minimap.vim', {'do': ':!cargo install --locked code-minimap'}
 " Plug 'Xuyuanp/scrollbar.nvim'
 " Plug 'editorconfig/editorconfig-vim'
 " Plug 'danilamihailov/beacon.nvim'
