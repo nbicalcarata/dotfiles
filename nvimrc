@@ -611,7 +611,7 @@ augroup END
 " }}}
 " Grepper {{{
 
-nnoremap <Leader>a :Ggrep! 
+nnoremap <Leader>a :GGrep 
 nnoremap <Leader>A :FzfAg 
 
 "Start searching the word under the cursor:
@@ -729,9 +729,10 @@ nnoremap <leader>ch :diffget //2<CR>
 nnoremap <leader>cl :diffget //3<CR>
 nnoremap <leader>G :vertical Gstatus<CR>
 
-augroup quickfix
-    autocmd!
-    autocmd QuickFixCmdPost *grep* cwindow
+augroup init_quickfix
+  autocmd!
+  autocmd QuickFixCmdPost [^l]* cwindow
+  autocmd QuickFixCmdPost l* lwindow
 augroup END
 
 " }}}
@@ -753,11 +754,11 @@ command! BM :SignatureListGlobalMarks
 " }}}
 " fzf {{{
 
-let $FZF_DEFAULT_OPTS='--reverse --margin=1,2'
-let g:fzf_preview_window = ''
+let $FZF_DEFAULT_OPTS='--reverse --margin=1,2 --bind ctrl-a:select-all'
+let g:fzf_preview_window = ['down:50%', 'ctrl-s']
 let g:fzf_buffers_jump = 0
 let g:fzf_command_prefix = 'Fzf'
-let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6, 'yoffset': 0.5 } }
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.7, 'yoffset': 0.5 } }
 
 if !exists('g:vscode')
     tnoremap <expr> <Esc> (&filetype == "fzf") ? "<Esc>" : "<c-\><c-n>"
@@ -795,6 +796,23 @@ function! s:registers(...) abort
 endfunction
 
 command! -bang FzfRegisters call s:registers('<bang>' ==# '!')
+command! -bang -nargs=* GGrep
+  \ call fzf#vim#grep(
+  \   'git grep --line-number --ignore-case -- '.shellescape(<q-args>), 0,
+  \   fzf#vim#with_preview({'dir': systemlist('git rev-parse --show-toplevel')[0]}, 'down:50%'), <bang>0)
+
+" CTRL-A CTRL-Q to select all and build quickfix list
+function! s:build_quickfix_list(lines)
+  call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
+  copen
+  cc
+endfunction
+
+let g:fzf_action = {
+  \ 'ctrl-q': function('s:build_quickfix_list'),
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-v': 'vsplit' }
 
 " }}}
 " Airline {{{
