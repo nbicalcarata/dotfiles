@@ -755,6 +755,7 @@ command! BM :SignatureListGlobalMarks
 " fzf {{{
 
 let $FZF_DEFAULT_OPTS='--reverse --margin=1,2 --bind ctrl-a:select-all'
+let $BAT_THEME = 'base16'
 let g:fzf_preview_window = ['down:50%', 'ctrl-s']
 let g:fzf_buffers_jump = 0
 let g:fzf_command_prefix = 'Fzf'
