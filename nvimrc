@@ -616,7 +616,7 @@ nnoremap <Leader>a :GGrep
 nnoremap <Leader>A :FzfAg 
 
 "Start searching the word under the cursor:
-nnoremap <leader>* :Ggrep! <C-R><C-W><cr>
+nnoremap <leader>* :GGrep <C-R><C-W><cr>
 
 " }}}
 " Startify {{{
