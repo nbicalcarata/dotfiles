@@ -39,6 +39,7 @@ Plug 'easymotion/vim-easymotion'
 Plug 'voldikss/vim-browser-search'
 Plug 'rhysd/git-messenger.vim'
 Plug 'mattn/emmet-vim'
+Plug 'gcmt/taboo.vim'
 " Plug 'wfxr/minimap.vim', {'do': ':!cargo install --locked code-minimap'}
 " Plug 'Xuyuanp/scrollbar.nvim'
 " Plug 'editorconfig/editorconfig-vim'
@@ -124,6 +125,7 @@ set expandtab
 set splitright
 set splitbelow
 set sessionoptions-=folds
+set sessionoptions+=tabpages,globals
 
 " }}}
 
@@ -339,7 +341,6 @@ augroup status
     autocmd WinLeave,QuickFixCmdPost * setlocal statusline=%!InactiveStatus()
 augroup END
 
-set showtabline=1
 set laststatus=2
 set statusline=%!ActiveStatus()
 
@@ -1008,5 +1009,10 @@ let g:user_emmet_settings = {
 \      'extends' : 'jsx',
 \  },
 \}
+
+" }}}
+" taboo {{{
+
+let taboo_close_tabs_label = "X" 
 
 " }}}
