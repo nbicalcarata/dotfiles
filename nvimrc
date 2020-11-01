@@ -320,8 +320,8 @@ endfunction
 
 function! ActiveStatus()
     let statusline=""
-    let statusline.="\ %{tabpagenr()}/%{tabpagenr('$').'\ \ '}«"
-    let statusline.="\ %{CWD().'\ '}»"
+    " let statusline.="\ %{tabpagenr()}/%{tabpagenr('$').'\ \ '}"
+    let statusline.=" « "."%{CWD()}"." »"
     let statusline.="%{fugitive#head()!=''?'\ \ '.fugitive#head().'\ ':''}"
     let statusline.="\ %t"
     let statusline.="\ %h%m%r"
