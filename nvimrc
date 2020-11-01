@@ -356,7 +356,8 @@ augroup OverrideColor
     autocmd ColorScheme * hi Folded gui=none
     autocmd ColorScheme * hi TabLine cterm=none gui=none
     autocmd ColorScheme * hi TabLineFill cterm=none gui=none
-    autocmd ColorScheme * hi TabLineSel cterm=none gui=bold
+    " autocmd ColorScheme * hi TabLineSel cterm=none gui=bold
+    autocmd ColorScheme * hi! link TabLineSel MatchParen
     " autocmd ColorScheme * exec 'hi InlineDiffAdded' .
     "         \' guibg=' . synIDattr(synIDtrans(hlID('Normal')), 'bg', 'gui') .
     "         \' guifg=' . synIDattr(synIDtrans(hlID('DiffAdd')), 'fg', 'gui')
