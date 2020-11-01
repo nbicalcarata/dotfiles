@@ -730,12 +730,6 @@ nnoremap <leader>ch :diffget //2<CR>
 nnoremap <leader>cl :diffget //3<CR>
 nnoremap <leader>G :vertical Gstatus<CR>
 
-augroup init_quickfix
-  autocmd!
-  autocmd QuickFixCmdPost [^l]* cwindow
-  autocmd QuickFixCmdPost l* lwindow
-augroup END
-
 " }}}
 " vim-closetag {{{
 
