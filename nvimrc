@@ -1009,5 +1009,6 @@ let g:user_emmet_settings = {
 " taboo {{{
 
 let taboo_close_tabs_label = "X" 
+let taboo_renamed_tab_format = " %l%m "
 
 " }}}
