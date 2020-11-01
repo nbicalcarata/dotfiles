@@ -40,6 +40,7 @@ Plug 'voldikss/vim-browser-search'
 Plug 'rhysd/git-messenger.vim'
 Plug 'mattn/emmet-vim'
 Plug 'gcmt/taboo.vim'
+Plug 'ryanoasis/vim-devicons'
 " Plug 'wfxr/minimap.vim', {'do': ':!cargo install --locked code-minimap'}
 " Plug 'Xuyuanp/scrollbar.nvim'
 " Plug 'editorconfig/editorconfig-vim'
@@ -512,12 +513,9 @@ tnoremap <C-j> <C-\><C-n><C-w>j
 tnoremap <C-k> <C-\><C-n><C-w>k
 tnoremap <C-l> <C-\><C-n><C-w>l
 
-"set working directory to current file
+" Set working directory to current file
 command! FileDir cd %:p:h
 command! TabDir tc %:p:h
-
-"Rename buffer
-nnoremap <leader>en :keepalt file<space>
 
 " }}}
 " Plugins settings
@@ -1013,8 +1011,15 @@ let g:user_emmet_settings = {
 
 " }}}
 " taboo {{{
+" https://github.com/ryanoasis/vim-devicons/wiki/FAQ-&-Troubleshooting#fonts
+" Install nerdfonts
+" https://github.com/ryanoasis/nerd-fonts/blob/master/src/glyphs/Symbols-1000-em%20Nerd%20Font%20Complete.ttf
+
+" Rename tab
+nnoremap <leader>en :TabooRename 
 
 let taboo_close_tabs_label = "X" 
-let taboo_renamed_tab_format = " %l%m "
+let taboo_tab_format = " %d  %f%m "
+let taboo_renamed_tab_format = " %d  %l%m "
 
 " }}}
