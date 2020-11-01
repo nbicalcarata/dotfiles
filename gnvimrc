@@ -9,10 +9,10 @@ if exists('g:GtkGuiLoaded')
     call rpcnotify(1, 'Gui', 'Option', 'Tabline', 0)
     if $HOSTNAME  == 't430'
         " call rpcnotify(1, 'Gui', 'Font', 'monospace 12')
-        call rpcnotify(1, 'Gui', 'Font', 'Iosevka 14')
+        call rpcnotify(1, 'Gui', 'Font', 'Iosevka Term Regular 14')
     else
         " call rpcnotify(1, 'Gui', 'Font', 'monospace 10')
-        call rpcnotify(1, 'Gui', 'Font', 'Iosevka 13')
+        call rpcnotify(1, 'Gui', 'Font', 'Iosevka Term Regular 14')
         " call rpcnotify(1, 'Gui', 'Font', 'Iosevka Extended 14')
         " call rpcnotify(1, 'Gui', 'Font', 'Cascadia Code Regular 12')
         " call rpcnotify(1, 'Gui', 'Font', 'Fira Code Medium 12')
