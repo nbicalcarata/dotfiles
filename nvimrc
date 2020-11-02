@@ -408,8 +408,8 @@ endif
 " Insert source bin/activate
 tnoremap <leader>va source venv/bin/activate<cr>
 
-" Jump to tag
-nnoremap <leader>T <C-]>
+" " Jump to tag
+" nnoremap <leader>T <C-]>
 
 " Jump to previous edited buffer
 nnoremap <BS> <C-^>
@@ -759,6 +759,7 @@ if !exists('g:vscode')
     nnoremap <silent><leader>l :FzfBLines<cr>
     nnoremap <expr><leader>f (len(system('git rev-parse')) ? ':FzfFiles' : ':FzfGFiles')."\<cr>"
     nnoremap <silent><leader>F :FzfFiles<cr>
+    nnoremap <leader>T :FzfWindows<cr>
 endif
 
 augroup fzfpopupter
@@ -1008,7 +1009,7 @@ let g:user_emmet_settings = {
 nnoremap <leader>en :TabooRename 
 
 let taboo_close_tabs_label = "X" 
-let taboo_tab_format = " %d  %f%m "
-let taboo_renamed_tab_format = " %d  %l%m "
+let taboo_tab_format = " %d  %f%I%m "
+let taboo_renamed_tab_format = " %d  %l%I%m "
 
 " }}}
