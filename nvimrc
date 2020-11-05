@@ -117,7 +117,7 @@ set nospell
 set hidden 
 set foldmethod=marker
 set foldlevel=99
-set scrolloff=999
+set scrolloff=5
 set signcolumn=yes
 set list
 set colorcolumn=120
