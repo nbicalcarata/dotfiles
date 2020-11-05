@@ -325,8 +325,10 @@ function! ActiveStatus()
     let statusline.=" « "."%{CWD()}"." »"
     let statusline.="%{fugitive#head()!=''?'\ \ '.fugitive#head().'\ ':''}"
     let statusline.="\ %t"
-    let statusline.="\ %h%m%r"
-    let statusline.="\ %=%-14.(%l,%c%V%)\ %y\ "
+    " let statusline.="\ %h%m%r"
+    let statusline.="%{&modified?'\ +\ ':''}"
+    let statusline.="%{&readonly?'\ \ ':''}"
+    let statusline.="\ %=%-20.(%l/%L,%c%)\ %{&filetype}\ "
     return statusline
 endfunction
 
