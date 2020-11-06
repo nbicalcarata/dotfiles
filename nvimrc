@@ -93,8 +93,8 @@ filetype plugin indent on
 syntax enable
 
 " General {{{
-if executable('ag')
-   set grepprg=ag\ --nogroup\ --nocolor
+if executable("rg")
+    set grepprg=rg\ --vimgrep\ --no-heading
 endif
 set wildmode=list:longest,full
 set title
@@ -411,7 +411,7 @@ endif
 tnoremap <leader>va source venv/bin/activate<cr>
 
 " " Jump to tag
-" nnoremap <leader>T <C-]>
+nnoremap <leader>T <C-]>
 
 " Jump to previous edited buffer
 nnoremap <BS> <C-^>
@@ -602,11 +602,10 @@ augroup END
 " }}}
 " Grepper {{{
 
-nnoremap <Leader>a :GGrep 
-nnoremap <Leader>A :FzfAg 
+nnoremap <Leader>a :FzfRg 
 
 "Start searching the word under the cursor:
-nnoremap <leader>* :GGrep <C-R><C-W><cr>
+nnoremap <leader>A :FzfRg <C-R><C-W><cr>
 
 " }}}
 " Startify {{{
@@ -759,9 +758,9 @@ if !exists('g:vscode')
     nnoremap <silent><leader>h :FzfHistory<cr>
     nnoremap <silent><leader>v :FzfBuffers<cr>
     nnoremap <silent><leader>l :FzfBLines<cr>
-    nnoremap <expr><leader>f (len(system('git rev-parse')) ? ':FzfFiles' : ':FzfGFiles')."\<cr>"
-    nnoremap <silent><leader>F :FzfFiles<cr>
-    nnoremap <leader>T :FzfWindows<cr>
+    " nnoremap <expr><leader>f (len(system('git rev-parse')) ? ':FzfFiles' : ':FzfGFiles')."\<cr>"
+    nnoremap <silent><leader>f :FzfFiles<cr>
+    nnoremap <leader>V :FzfWindows<cr>
 endif
 
 augroup fzfpopupter
