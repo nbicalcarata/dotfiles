@@ -26,13 +26,11 @@ endif
 " }}}
 
 " General {{{
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-commentary'
 Plug 'justinmk/vim-gtfo'
 Plug 'wesQ3/vim-windowswap'
-Plug 'pseewald/vim-anyfold'
 Plug 'mhinz/vim-startify'
 Plug 'justinmk/vim-dirvish'
 Plug 'easymotion/vim-easymotion'
@@ -50,6 +48,8 @@ Plug 'ryanoasis/vim-devicons'
 " Colorschemes {{{
 
 Plug 'Soares/base16.nvim'
+Plug 'bluz71/vim-moonfly-colors'
+Plug 'bluz71/vim-nightfly-guicolors'
 
 " }}}
 " Git {{{
@@ -68,17 +68,18 @@ Plug 'shumphrey/fugitive-gitlab.vim'
 " }}}
 " Snippets & AutoComplete {{{
 
-" Plug 'w0rp/ale'
+let g:ale_completion_enabled = 1
+Plug 'w0rp/ale'
 Plug 'betoharres/vim-react-ultiSnips'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'jiangmiao/auto-pairs'
-" Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 
 " }}}
 " Syntax highlighting{{{
 
 Plug 'sheerun/vim-polyglot'
+Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSInstall all' }
 
 " }}}
 
@@ -91,6 +92,22 @@ call plug#end()
 
 filetype plugin indent on
 syntax enable
+
+" Treesitter {{{
+
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = "maintained",
+  highlight = {
+    enable = true,
+  },
+  indent = {
+    enable = true
+  }
+}
+EOF
+
+" }}}
 
 " General {{{
 if executable("rg")
@@ -115,11 +132,13 @@ set mouse=a
 
 set nospell
 set hidden 
-set foldmethod=marker
+" set foldmethod=marker
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
 set foldlevel=99
 set scrolloff=5
 set signcolumn=yes
-set list
+" set list
 set colorcolumn=120
 
 set expandtab
@@ -353,34 +372,14 @@ augroup OverrideColor
     autocmd!
     autocmd ColorScheme * hi! link VertSplit Directory
     autocmd ColorScheme * hi! link StatusLineNC Directory
-    autocmd ColorScheme * hi! link StatusLine MatchParen
-    autocmd ColorScheme * hi! link Pmenu CursorLine
+    " autocmd ColorScheme * hi! link StatusLine MatchParen
+    " autocmd ColorScheme * hi! link Pmenu CursorLine
     " autocmd ColorScheme * hi Pmenu gui=none
     autocmd ColorScheme * hi Folded gui=none
-    autocmd ColorScheme * hi TabLine cterm=none gui=none
-    autocmd ColorScheme * hi TabLineFill cterm=none gui=none
+    " autocmd ColorScheme * hi TabLine cterm=none gui=none
+    " autocmd ColorScheme * hi TabLineFill cterm=none gui=none
     " autocmd ColorScheme * hi TabLineSel cterm=none gui=bold
-    autocmd ColorScheme * hi! link TabLineSel MatchParen
-    " autocmd ColorScheme * exec 'hi InlineDiffAdded' .
-    "         \' guibg=' . synIDattr(synIDtrans(hlID('Normal')), 'bg', 'gui') .
-    "         \' guifg=' . synIDattr(synIDtrans(hlID('DiffAdd')), 'fg', 'gui')
-    " autocmd ColorScheme * exec 'hi InlineDiffRemoved' .
-    "         \' guibg=' . synIDattr(synIDtrans(hlID('Normal')), 'bg', 'gui') .
-    "         \' guifg=' . synIDattr(synIDtrans(hlID('DiffDelete')), 'fg', 'gui')
-    autocmd ColorScheme * exec 'hi InlineDiffLine' .
-            \' guibg=' . synIDattr(synIDtrans(hlID('CursorLine')), 'bg', 'gui') .
-            \' guifg=' . synIDattr(synIDtrans(hlID('Statement')), 'fg', 'gui')
-
-    autocmd ColorScheme * hi! diffAdded guifg=#009900 ctermfg=2
-    autocmd ColorScheme * hi! diffRemoved guifg=#ff2222 ctermfg=1
-    autocmd ColorScheme * hi! diffChanged guifg=#bbbb00 ctermfg=3
-    " autocmd ColorScheme * hi! link diffLine InlineDiffLine
-    " autocmd ColorScheme * hi! link GitGutterAdd GitAddStripe
-    " autocmd ColorScheme * hi! link GitGutterChange GitChangeStripe
-    " autocmd ColorScheme * hi! link GitGutterDelete GitDeleteStripe
-    autocmd ColorScheme * hi! link GitGutterAdd DiffAdd
-    autocmd ColorScheme * hi! link GitGutterChange DiffChange
-    autocmd ColorScheme * hi! link GitGutterDelete DiffDelete
+    autocmd ColorScheme * hi! link TabLineSel SpecialKey
 augroup END
 
 " }}}
@@ -582,24 +581,6 @@ let g:undotree_SetFocusWhenToggle = 1
 let g:undotree_ShortIndicators = 1
 
 " }}}
-" AnyFold {{{
-
-let g:anyfold_fold_display = 0
-let g:anyfold_fold_comments = 0
-
-augroup FileTypeFolds
-    autocmd!
-    autocmd Filetype html AnyFoldActivate 
-    autocmd Filetype htmldjango AnyFoldActivate 
-    autocmd Filetype python AnyFoldActivate 
-    autocmd Filetype vim AnyFoldActivate 
-    autocmd Filetype typescript AnyFoldActivate 
-    autocmd Filetype vue AnyFoldActivate 
-    autocmd Filetype jsx AnyFoldActivate 
-    autocmd Filetype javascript AnyFoldActivate 
-augroup END
-
-" }}}
 " Grepper {{{
 
 nnoremap <Leader>a :FzfRg 
@@ -632,10 +613,13 @@ augroup END
 " }}}
 " ale {{{
 
+" sudo npm -g install pyright typescript
+
 " nmap <leader>e <Plug>(ale_next_wrap)
 " nmap <leader>E <Plug>(ale_previous_wrap)
 
 let g:ale_enabled = 1
+let g:ale_completion_autoimport = 1
 let g:ale_pattern_options = {'\.min.js$': {'ale_enabled': 0}}
 let g:ale_set_loclist = 0
 let g:ale_set_signs = 1
@@ -644,13 +628,16 @@ let g:ale_sign_warning = 'W'
 let g:ale_python_pylint_options = '--load-plugins pylint_django'
 let g:ale_python_flake8_options = '--ignore=E501' 
 let g:ale_python_mypy_options = '--ignore-missing-imports'
-let g:ale_javascript_eslint_use_global = 1
-" let g:ale_linters = {
-"             \ 'javascript': ['eslint'],
-"             \ 'typescript': ['tslint'],
-"             \ 'vue': ['eslint']
-"             \}
+" let g:ale_javascript_eslint_use_global = 1
+let g:ale_linters = {
+\   'javascript': ['tsserver', 'eslint'],
+\   'vue': ['eslint']
+\}
 
+inoremap <silent><expr> <Tab>
+      \ pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <silent><expr> <S-Tab>
+      \ pumvisible() ? "\<C-p>" : "\<S-TAB>"
 " }}}
 " vim-vue {{{
 
@@ -661,53 +648,6 @@ let g:vue_disable_pre_processors = 1
 
 let g:gutentags_cache_dir = '~/.cache/gutentags'
 "let g:gutentags_ctags_exclude = ["*.min.js", "*.min.css", "build", ".git", "node_modules", "db", "log"]
-
-" }}}
-" coc {{{
-let g:airline#extensions#coc#enabled = 1
-let g:coc_global_extensions = [ 'coc-tsserver',
-                              \ 'coc-tslint',
-                              \ 'coc-tslint-plugin',
-                              \ 'coc-css',
-                              \ 'coc-json',
-                              \ 'coc-python',
-                              \ 'coc-highlight',
-                              \ 'coc-emmet',
-                              \ 'coc-vetur',
-                              \ 'coc-ultisnips' ]
-
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-" Use <c-space> to trigger completion.
-if has('nvim')
-  inoremap <silent><expr> <c-space> coc#refresh()
-else
-  inoremap <silent><expr> <c-@> coc#refresh()
-endif
-
-" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
-" position. Coc only does snippet and additional edit on confirm.
-" <cr> could be remapped by other vim plugin, try `:verbose imap <CR>`.
-if exists('*complete_info')
-  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
-else
-  inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-endif
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-" Remap keys for gotos
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
 
 " }}}
 " Term {{{
@@ -892,7 +832,7 @@ let g:base16_transparent_background = 0
 " " }}}
 " Colorscheme {{{
 
-colorscheme paraiso
+colorscheme nightfly
 
 " }}}
 " Commands {{{
@@ -937,19 +877,9 @@ let g:EasyMotion_verbose = 0
 nmap s <Plug>(easymotion-overwin-f)
 
 " }}}
-" markdown-preview {{{
-
-let g:mkdp_auto_close = 0
-
-" }}}
 " Web search {{{
 
 nnoremap <leader>sg :Search google 
-
-" }}}
-" beacon {{{
-
-" let g:beacon_minimal_jump = 10
 
 " }}}
 " editorconfig {{{
@@ -1011,6 +941,6 @@ nnoremap <leader>en :TabooRename
 
 let taboo_close_tabs_label = "X" 
 let taboo_tab_format = " %d  %f%I%m "
-let taboo_renamed_tab_format = " %d  %l%I%m "
+let taboo_renamed_tab_format = " %d  [%l]%I%m "
 
 " }}}
