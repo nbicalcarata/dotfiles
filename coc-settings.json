@@ -1,20 +1,18 @@
 {
-        "diagnostic.checkCurrentLine" : true,
-        "diagnostic.enable": true,
-        "diagnostic.signOffset": 9999999,
-        "python.jediEnabled": true,
-        "python.linting.pylintEnabled": false,
-        "python.linting.flake8Enabled": true,
-        "python.linting.flake8Args": [
-                "--ignore=E501"
-        ],
-        "python.linting.pylintArgs": [
-                "--load-plugins pylint_django"
-        ],
-        "emmet.includeLanguages": {
-                "htmldjango": "html",
-                "blade": "html",
-                "vue-html": "html",
-                "javascript": "javascriptreact"
-        }
+  "coc.preferences.extensionUpdateCheck": "daily",
+  "diagnostic.checkCurrentLine": true,
+  "diagnostic.enable": true,
+  "diagnostic.errorSign": "E",
+  "diagnostic.warningSign": "W",
+  "python.jediEnabled": true,
+  "python.linting.pylintEnabled": false,
+  "python.linting.flake8Enabled": true,
+  "python.linting.flake8Args": ["--ignore=E501"],
+  "python.linting.pylintArgs": ["--load-plugins pylint_django"],
+  "emmet.includeLanguages": {
+    "htmldjango": "html",
+    "blade": "html",
+    "vue-html": "html",
+    "javascript": "javascriptreact"
+  }
 }

@@ -26,8 +26,10 @@ endif
 " }}}
 
 " General {{{
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'antoinemadec/coc-fzf'
 Plug 'tpope/vim-commentary'
 Plug 'justinmk/vim-gtfo'
 Plug 'wesQ3/vim-windowswap'
@@ -39,10 +41,6 @@ Plug 'rhysd/git-messenger.vim'
 Plug 'mattn/emmet-vim'
 Plug 'gcmt/taboo.vim'
 Plug 'ryanoasis/vim-devicons'
-" Plug 'wfxr/minimap.vim', {'do': ':!cargo install --locked code-minimap'}
-" Plug 'Xuyuanp/scrollbar.nvim'
-" Plug 'editorconfig/editorconfig-vim'
-" Plug 'danilamihailov/beacon.nvim'
 
 " }}}
 " Colorschemes {{{
@@ -61,25 +59,20 @@ Plug 'tpope/vim-rhubarb'
 Plug 'shumphrey/fugitive-gitlab.vim'
 
 " }}}
-" Html {{{
-
-" Plug 'Valloric/MatchTagAlways'
-
-" }}}
 " Snippets & AutoComplete {{{
 
-let g:ale_completion_enabled = 1
-Plug 'w0rp/ale'
 Plug 'betoharres/vim-react-ultiSnips'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'jiangmiao/auto-pairs'
+Plug 'alvan/vim-closetag'
 
 " }}}
 " Syntax highlighting{{{
 
-Plug 'sheerun/vim-polyglot'
+" Plug 'sheerun/vim-polyglot'
 Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSInstall all' }
+Plug 'vobornik/vim-mql4'
 
 " }}}
 
@@ -146,6 +139,7 @@ set splitright
 set splitbelow
 set sessionoptions-=folds
 set sessionoptions+=tabpages,globals
+set shortmess+=c
 
 " }}}
 
@@ -321,14 +315,6 @@ augroup DisableThingsFromWindows
 augroup END
 
 " }}}
-" rst rules {{{
-
-" augroup RstRules
-"     autocmd!
-"     autocmd FileType rst setlocal syntax=OFF
-" augroup END
-
-" }}}
 " Statusline {{{
 
 set fillchars=vert:│,fold:-,diff:·,stlnc:─,eob:\ 
@@ -379,7 +365,7 @@ augroup OverrideColor
     " autocmd ColorScheme * hi TabLine cterm=none gui=none
     " autocmd ColorScheme * hi TabLineFill cterm=none gui=none
     " autocmd ColorScheme * hi TabLineSel cterm=none gui=bold
-    autocmd ColorScheme * hi! link TabLineSel SpecialKey
+    autocmd ColorScheme * hi! link TabLineSel WildMenu
 augroup END
 
 " }}}
@@ -530,26 +516,9 @@ inoremap <c-x><c-k> <c-x><c-k>
 let g:UltiSnipsSnippetDirectories = ['UltiSnips']
 
 " }}}
-" Matchtag always {{{
-
-" Custom MatchTag syntax group with a default highlight color
-"let g:mta_use_matchparen_group = 0
-let g:mta_filetypes = {
-            \ 'html' : 1,
-            \ 'htmldjango' : 1,
-            \ 'xhtml' : 1,
-            \ 'xml' : 1,
-            \ 'jinja' : 1,
-            \ 'blade' : 1,
-            \ 'php' : 1,
-            \ 'javascript' : 1,
-            \ 'vue' : 1,
-            \}
-
-" }}}
 " Git {{{
 
-set updatetime=100
+set updatetime=300
 
 nmap <silent><leader>gn :GitGutterNextHunk<CR>
 nmap <silent><leader>gp :GitGutterPrevHunk<CR>
@@ -611,37 +580,54 @@ augroup StartifyAu
 augroup END
 
 " }}}
-" ale {{{
+" coc {{{
+let g:coc_global_extensions = [ 'coc-tsserver',
+                              \ 'coc-eslint',
+                              \ 'coc-prettier',
+                              \ 'coc-css',
+                              \ 'coc-json',
+                              \ 'coc-python',
+                              \ 'coc-highlight',
+                              \ 'coc-emmet',
+                              \ 'coc-vetur',
+                              \ 'coc-ultisnips' ]
 
-" sudo npm -g install pyright typescript
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
-" nmap <leader>e <Plug>(ale_next_wrap)
-" nmap <leader>E <Plug>(ale_previous_wrap)
+" Use <c-space> to trigger completion.
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
 
-let g:ale_enabled = 1
-let g:ale_completion_autoimport = 1
-let g:ale_pattern_options = {'\.min.js$': {'ale_enabled': 0}}
-let g:ale_set_loclist = 0
-let g:ale_set_signs = 1
-let g:ale_sign_error = 'E'
-let g:ale_sign_warning = 'W'
-let g:ale_python_pylint_options = '--load-plugins pylint_django'
-let g:ale_python_flake8_options = '--ignore=E501' 
-let g:ale_python_mypy_options = '--ignore-missing-imports'
-" let g:ale_javascript_eslint_use_global = 1
-let g:ale_linters = {
-\   'javascript': ['tsserver', 'eslint'],
-\   'vue': ['eslint']
-\}
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
+" position. Coc only does snippet and additional edit on confirm.
+" <cr> could be remapped by other vim plugin, try `:verbose imap <CR>`.
+if exists('*complete_info')
+  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+else
+  inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+endif
 
-inoremap <silent><expr> <Tab>
-      \ pumvisible() ? "\<C-n>" : "\<TAB>"
-inoremap <silent><expr> <S-Tab>
-      \ pumvisible() ? "\<C-p>" : "\<S-TAB>"
-" }}}
-" vim-vue {{{
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
 
-let g:vue_disable_pre_processors = 1
+" Remap keys for gotos
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
 " }}}
 " gutentags {{{
@@ -666,20 +652,9 @@ augroup init_quickfix
 augroup END
 
 " }}}
-" vim-closetag {{{
-
-let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.vue,*.blade.php'
-
-"  }}}
 " Python syntax highlight {{{
 
 let g:python_highlight_all = 1
-
-" }}}
-" vim-signature {{{
-
-command! GM :SignatureListGlobalMarks
-command! BM :SignatureListGlobalMarks
 
 " }}}
 " fzf {{{
@@ -901,27 +876,6 @@ let g:dirvish_mode = ':sort ,^.*[\/],'
 " let g:loaded_netrwPlugin = 1
 
 " }}}
-" scrollbar {{{
-
-let g:scrollbar_shape = {
-\ 'head': '▲',
-\ 'body': '█',
-\ 'tail': '▼',
-\ }
-
-augroup your_config_scrollbar_nvim
-    autocmd!
-    autocmd BufEnter    * silent! lua require('scrollbar').show()
-    autocmd BufLeave    * silent! lua require('scrollbar').clear()
-
-    autocmd CursorMoved * silent! lua require('scrollbar').show()
-    autocmd VimResized  * silent! lua require('scrollbar').show()
-
-    autocmd FocusGained * silent! lua require('scrollbar').show()
-    autocmd FocusLost   * silent! lua require('scrollbar').clear()
-augroup end
-
-" }}}
 " emmet {{{
 
 let g:user_emmet_settings = {
@@ -932,8 +886,8 @@ let g:user_emmet_settings = {
 
 " }}}
 " taboo {{{
+
 " https://github.com/ryanoasis/vim-devicons/wiki/FAQ-&-Troubleshooting#fonts
-" Install nerdfonts
 " https://github.com/ryanoasis/nerd-fonts/blob/master/src/glyphs/Symbols-1000-em%20Nerd%20Font%20Complete.ttf
 
 " Rename tab
@@ -942,5 +896,17 @@ nnoremap <leader>en :TabooRename
 let taboo_close_tabs_label = "X" 
 let taboo_tab_format = " %d  %f%I%m "
 let taboo_renamed_tab_format = " %d  [%l]%I%m "
+
+" }}}
+" autoclose {{{
+
+let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.htmldjango'
+let g:closetag_filetypes = 'javascript'
+
+" }}}
+" coc-fzf {{{
+
+let g:coc_fzf_preview = ''
+let g:coc_fzf_opts = []
 
 " }}}
