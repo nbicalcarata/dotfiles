@@ -41,13 +41,14 @@ Plug 'rhysd/git-messenger.vim'
 Plug 'mattn/emmet-vim'
 Plug 'gcmt/taboo.vim'
 Plug 'ryanoasis/vim-devicons'
+Plug 'Yggdroot/indentLine'
+Plug 'lukas-reineke/indent-blankline.nvim', {'branch': 'lua'}
 
 " }}}
 " Colorschemes {{{
 
-Plug 'Soares/base16.nvim'
-Plug 'bluz71/vim-moonfly-colors'
-Plug 'bluz71/vim-nightfly-guicolors'
+Plug 'sainnhe/gruvbox-material'
+Plug 'sainnhe/sonokai'
 
 " }}}
 " Git {{{
@@ -131,7 +132,7 @@ set foldexpr=nvim_treesitter#foldexpr()
 set foldlevel=99
 set scrolloff=5
 set signcolumn=yes
-" set list
+set list
 set colorcolumn=120
 
 set expandtab
@@ -173,9 +174,6 @@ set termguicolors
 " Cursor line {{{
 
 set cursorline
-set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
-  \,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
-  \,sm:block-blinkwait175-blinkoff150-blinkon175
 
 " }}}
 " }}}
@@ -326,11 +324,9 @@ endfunction
 
 function! ActiveStatus()
     let statusline=""
-    " let statusline.="\ %{tabpagenr()}/%{tabpagenr('$').'\ \ '}"
     let statusline.=" « "."%{CWD()}"." »"
     let statusline.="%{fugitive#head()!=''?'\ \ '.fugitive#head().'\ ':''}"
     let statusline.="\ %t"
-    " let statusline.="\ %h%m%r"
     let statusline.="%{&modified?'\ +\ ':''}"
     let statusline.="%{&readonly?'\ \ ':''}"
     let statusline.="\ %=%-20.(%l/%L,%c%)\ %{&filetype}\ "
@@ -356,16 +352,19 @@ set statusline=%!ActiveStatus()
 " Override color {{{
 augroup OverrideColor
     autocmd!
-    autocmd ColorScheme * hi! link VertSplit Directory
-    autocmd ColorScheme * hi! link StatusLineNC Directory
-    " autocmd ColorScheme * hi! link StatusLine MatchParen
+    autocmd ColorScheme * hi! link VertSplit Ignore
+    autocmd ColorScheme * hi! link StatusLineNC Ignore
+    autocmd ColorScheme * hi! link DiffText Comment
+    autocmd ColorScheme * hi! link StatusLine TabLine
+    autocmd ColorScheme * hi Cursor cterm=reverse gui=reverse
     " autocmd ColorScheme * hi! link Pmenu CursorLine
     " autocmd ColorScheme * hi Pmenu gui=none
-    autocmd ColorScheme * hi Folded gui=none
+    " autocmd ColorScheme * hi Folded gui=none
     " autocmd ColorScheme * hi TabLine cterm=none gui=none
     " autocmd ColorScheme * hi TabLineFill cterm=none gui=none
     " autocmd ColorScheme * hi TabLineSel cterm=none gui=bold
-    autocmd ColorScheme * hi! link TabLineSel WildMenu
+    " autocmd ColorScheme * hi! link TabLineSel WildMenu
+    " autocmd ColorScheme * hi! link NonText Conceal
 augroup END
 
 " }}}
@@ -500,10 +499,6 @@ command! TabDir tc %:p:h
 let g:netrw_altfile = 1
 let g:netrw_banner = 0
 let g:netrw_fastbrowse = 0
-" let g:netrw_liststyle = 3
-" let g:netrw_altv = 1
-" let g:netrw_winsize = 15
-" nmap <C-E> :Lexplore<CR>
 
 " }}}
 " UltiSnips {{{
@@ -536,26 +531,19 @@ nmap <silent><Leader>gb :Gbrowse<cr>
 let g:gitgutter_preview_win_floating = 1
 let g:gitgutter_sign_added = '┃'
 let g:gitgutter_sign_modified = '┃'
+let g:gitgutter_sign_modified_removed = '┃'
 let g:gitgutter_sign_removed_first_line = '▔'
 let g:gitgutter_sign_removed = '▶'
 " let g:gitgutter_set_sign_backgrounds = 1
 " let g:gitgutter_override_sign_column_highlight = 0
 
 " }}}
-" Undotree {{{
-
-nnoremap <Leader>u :UndotreeToggle<cr>
-let g:undotree_WindowLayout = 3
-let g:undotree_SetFocusWhenToggle = 1
-let g:undotree_ShortIndicators = 1
-
-" }}}
 " Grepper {{{
 
-nnoremap <Leader>a :FzfRg 
+nnoremap <Leader>a :Rg 
 
 "Start searching the word under the cursor:
-nnoremap <leader>A :FzfRg <C-R><C-W><cr>
+nnoremap <leader>A :Rg <C-R><C-W><cr>
 
 " }}}
 " Startify {{{
@@ -636,9 +624,6 @@ let g:gutentags_cache_dir = '~/.cache/gutentags'
 "let g:gutentags_ctags_exclude = ["*.min.js", "*.min.css", "build", ".git", "node_modules", "db", "log"]
 
 " }}}
-" Term {{{
-
-" }}}
 " fugitive {{{
 
 nnoremap <leader>ch :diffget //2<CR>
@@ -657,25 +642,39 @@ augroup END
 let g:python_highlight_all = 1
 
 " }}}
+" Colorscheme {{{
+
+" hard, medium, soft
+let g:gruvbox_material_background = 'hard'
+colorscheme gruvbox-material
+
+" let g:sonokai_cursor = 'yellow'
+" colorscheme sonokai 
+
+set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
+  \,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
+  \,sm:block-blinkwait175-blinkoff150-blinkon175
+
+" }}}
 " fzf {{{
 
 let $FZF_DEFAULT_OPTS='--reverse --margin=1,2 --bind ctrl-a:select-all'
-let $BAT_THEME = 'base16'
+let $BAT_THEME = 'OneHalfDark'
 let g:fzf_preview_window = ['down:50%', 'ctrl-s']
 let g:fzf_buffers_jump = 0
-let g:fzf_command_prefix = 'Fzf'
+" let g:fzf_command_prefix = 'Fzf'
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.7, 'yoffset': 0.5 } }
 
 if !exists('g:vscode')
     tnoremap <expr> <Esc> (&filetype == "fzf") ? "<Esc>" : "<c-\><c-n>"
-    nnoremap <silent><leader>d :FzfCommands<cr>
-    nnoremap <silent><leader>r :FzfRegisters<cr>
-    nnoremap <silent><leader>h :FzfHistory<cr>
-    nnoremap <silent><leader>v :FzfBuffers<cr>
-    nnoremap <silent><leader>l :FzfBLines<cr>
-    " nnoremap <expr><leader>f (len(system('git rev-parse')) ? ':FzfFiles' : ':FzfGFiles')."\<cr>"
-    nnoremap <silent><leader>f :FzfFiles<cr>
-    nnoremap <leader>V :FzfWindows<cr>
+    nnoremap <silent><leader>d :Commands<cr>
+    nnoremap <silent><leader>r :Registers<cr>
+    nnoremap <silent><leader>h :History<cr>
+    nnoremap <silent><leader>v :Buffers<cr>
+    nnoremap <silent><leader>l :BLines<cr>
+    " nnoremap <expr><leader>f (len(system('git rev-parse')) ? ':Files' : ':GFiles')."\<cr>"
+    nnoremap <silent><leader>f :Files<cr>
+    nnoremap <leader>V :Windows<cr>
 endif
 
 augroup fzfpopupter
@@ -702,7 +701,7 @@ function! s:registers(...) abort
   call fzf#run(fzf#wrap(l:opts))
 endfunction
 
-command! -bang FzfRegisters call s:registers('<bang>' ==# '!')
+command! -bang Registers call s:registers('<bang>' ==# '!')
 command! -bang -nargs=* GGrep
   \ call fzf#vim#grep(
   \   'git grep --line-number --ignore-case -- '.shellescape(<q-args>), 0,
@@ -733,82 +732,12 @@ let g:fzf_colors =
   \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
   \ 'hl+':     ['fg', 'Statement'],
   \ 'info':    ['fg', 'PreProc'],
-  \ 'border':  ['fg', 'MatchParen'],
+  \ 'border':  ['fg', 'Ignore'],
   \ 'prompt':  ['fg', 'Conditional'],
   \ 'pointer': ['fg', 'Exception'],
   \ 'marker':  ['fg', 'Keyword'],
   \ 'spinner': ['fg', 'Label'],
   \ 'header':  ['fg', 'Comment'] }
-" }}}
-" Airline {{{
-
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#whitespace#enabled = 0
-
-" Short names
-let g:airline_mode_map = {
-    \ '__' : '-',
-    \ 'n'  : 'N',
-    \ 'i'  : 'I',
-    \ 'R'  : 'R',
-    \ 'c'  : 'C',
-    \ 'v'  : 'V',
-    \ 'V'  : 'V',
-    \ '' : 'V',
-    \ 's'  : 'S',
-    \ 'S'  : 'S',
-    \ '' : 'S',
-    \ }
-
-function! Render_Only_File(...)
-  let builder = a:1
-  let context = a:2
-  call builder.add_section('file', '%f ')
-  return 1
-endfunction
-
-try
-    call airline#add_inactive_statusline_func('Render_Only_File')
-catch
-    " no airline
-endtry
-
-function! TabNumber(...)
-    let builder = a:1
-    let context = a:2
-    call builder.add_section('airline_c', printf(' %d/%d ', tabpagenr(), tabpagenr('$')))
-    return 0
-endfunction
-
-try
-    call airline#add_statusline_func('TabNumber')
-catch
-    " no airline
-endtry
-
-" }}}
-" base16 {{{
-
-let g:base16_color_overrides = {
-    \ 'CursorLineNr': 'fg=light1 bg=similar3 bold',
-    \ 'ColorColumn': 'bg=light2 bg=similar3'}
-    " \ 'Pmenu': 'fg=light3 bg=similar3'}
-    " \ 'SignColumn': 'fg=contrast1 bg=black',
-    " \ 'FoldColumn': 'fg=contrast1 bg=black',
-    " \ 'LineNr': 'fg=similar1 bg=black',
-
-let g:base16_transparent_background = 0
-
-" }}}
-" " polyglot {{{
-
-" let g:polyglot_disabled = ['typescript']
-
-" " }}}
-" Colorscheme {{{
-
-colorscheme nightfly
-
 " }}}
 " Commands {{{
 
@@ -816,15 +745,9 @@ function! s:attach_current()
     execute 'T abduco -a' CWD()
 endfunction
 
-command! SandboxDeployBack T source venv/bin/activate; fab sandbox_deploy
-command! SandboxDeployFront T source venv/bin/activate; fab sandbox_deploy_front
-command! PreProdDeployBack T source venv/bin/activate; fab preprod_deploy
-command! PreProdDeployFront T source venv/bin/activate; fab preprod_deploy_front
-command! ProdDeployBack T source venv/bin/activate; fab prod_deploy
-command! ProdDeployFront T source venv/bin/activate; fab prod_deploy_front
-command! ScraperDeploy T source venv/bin/activate; fab scraper_deploy
-command! -nargs=1 ScrapyCrawl T source venv/bin/activate; cd scraper; scrapy crawl <args>
-command! RunTests T source venv/bin/activate; python manage.py test
+" command! ScraperDeploy T source venv/bin/activate; fab scraper_deploy
+" command! -nargs=1 ScrapyCrawl T source venv/bin/activate; cd scraper; scrapy crawl <args>
+" command! RunTests T source venv/bin/activate; python manage.py test
 command! -nargs=* DockerManage T docker-compose -f local.yml run --rm django python manage.py <args>
 command! Attach call <sid>attach_current()
 command! -nargs=1 RunServer T abduco -c <c-r>=CWD()<cr> <args>
@@ -910,3 +833,7 @@ let g:coc_fzf_preview = ''
 let g:coc_fzf_opts = []
 
 " }}}
+"
+let g:indentLine_char_list = ['|', '¦', '┆', '┊']
+let g:indent_blankline_char_list = ['|', '¦', '┆', '┊']
+

@@ -1,5 +1,7 @@
 {
   "coc.preferences.extensionUpdateCheck": "daily",
+  "coc.preferences.formatOnSaveFiletypes": ["javascript"],
+  "diagnostic.refreshOnInsertMode": true,
   "diagnostic.checkCurrentLine": true,
   "diagnostic.enable": true,
   "diagnostic.errorSign": "E",
