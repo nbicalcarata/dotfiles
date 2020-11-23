@@ -694,7 +694,8 @@ let g:EasyMotion_verbose = 0
 nmap s <Plug>(easymotion-overwin-f)
 
 " Web search
-nnoremap <leader>sg :Search google 
+nmap <silent> <Leader>kj <Plug>SearchNormal
+vmap <silent> <Leader>kj <Plug>SearchVisual
 
 " editorconfig
 let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
