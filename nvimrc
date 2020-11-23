@@ -1,5 +1,4 @@
-" Identify plataform {{{
-
+" Identify plataform
 silent function! OSX()
   return has('macunix')
 endfunction
@@ -10,11 +9,7 @@ silent function! WINDOWS()
   return  (has('win16') || has('win32') || has('win64'))
 endfunction
 
-" }}}
-" Plug {{{
-
-" Setup directory {{{
-
+" Plug setup directory
 if LINUX()
     call plug#begin('~/.local/share/nvim/plugged')
 endif
@@ -23,9 +18,7 @@ if WINDOWS()
     call plug#begin('~\AppData\Local\nvim\plugged')
 endif
 
-" }}}
-
-" General {{{
+" General
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
@@ -44,51 +37,35 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'Yggdroot/indentLine'
 Plug 'lukas-reineke/indent-blankline.nvim', {'branch': 'lua'}
 
-" }}}
-" Colorschemes {{{
-
+" Colorschemes
 Plug 'sainnhe/gruvbox-material'
 Plug 'sainnhe/sonokai'
 
-" }}}
-" Git {{{
-
+" Git
 Plug 'tpope/vim-fugitive'
 Plug 'junegunn/gv.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-rhubarb'
 Plug 'shumphrey/fugitive-gitlab.vim'
 
-" }}}
-" Snippets & AutoComplete {{{
-
+" Snippets & AutoComplete
 Plug 'betoharres/vim-react-ultiSnips'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'jiangmiao/auto-pairs'
 Plug 'alvan/vim-closetag'
 
-" }}}
-" Syntax highlighting{{{
-
+" Syntax highlighting
 " Plug 'sheerun/vim-polyglot'
 Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSInstall all' }
 Plug 'vobornik/vim-mql4'
 
-" }}}
-
-" Plug end {{{
-
 call plug#end()
-
-" }}}
-" }}}
 
 filetype plugin indent on
 syntax enable
 
-" Treesitter {{{
-
+" Treesitter
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
   ensure_installed = "maintained",
@@ -101,9 +78,7 @@ require'nvim-treesitter.configs'.setup {
 }
 EOF
 
-" }}}
-
-" General {{{
+" General
 if executable("rg")
     set grepprg=rg\ --vimgrep\ --no-heading
 endif
@@ -142,8 +117,6 @@ set sessionoptions-=folds
 set sessionoptions+=tabpages,globals
 set shortmess+=c
 
-" }}}
-
 set clipboard=unnamedplus
 if WINDOWS()
     set clipboard=unnamed
@@ -165,20 +138,13 @@ augroup IndentSettings
     autocmd Filetype json setlocal ts=2 sw=2
 augroup END
 
-" }}}
-" True color {{{
-
+" True color
 set termguicolors
 
-" }}}
-" Cursor line {{{
-
+" Cursor line
 set cursorline
 
-" }}}
-" }}}
-" Backup and undo {{{
-
+" Backup and undo
 set noswapfile
 set backup                                     " Backups are nice ...
 if has('persistent_undo')
@@ -218,11 +184,8 @@ function! InitializeDirectories()
 endfunction
 call InitializeDirectories()
 
-" }}}
-" }}}
-" Autocmd rules {{{
+" Autocmd rules
 " http://vim.wikia.com/wiki/Restore_cursor_to_file_position_in_previous_editing_session
-
 function! ResCur()
     if line("'\"") <= line('$')
         silent! normal! g`"
@@ -239,25 +202,21 @@ augroup resCur
     autocmd!
     autocmd BufWinEnter * call ResCur()
 augroup END
-" Term start in insert mode {{{
 
+" Term start in insert mode
 augroup TermCmd
     autocmd!
     autocmd TermOpen * setlocal winfixheight winfixwidth
     autocmd TermOpen * startinsert
 augroup END
 
-" }}}
-" Quickfix below everything {{{
-
+" Quickfix below everything
 augroup QfBl
     autocmd!
     autocmd FileType qf wincmd J
 augroup END
 
-" }}}
-" Move cursor to last position on file {{{
-
+" Move cursor to last position on file
 " Instead of reverting the cursor to the last position in the buffer, we
 " set it to the first line when editing a git commit message
 augroup FirstLineCommit
@@ -265,45 +224,34 @@ augroup FirstLineCommit
     autocmd FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
 augroup END
 
-" }}}
-" {{{
-
 augroup TSSyntax
     autocmd!
     autocmd BufNewFile,BufRead *.ts setlocal filetype=typescript
 augroup END
 
-" }}}
-" PDB {{{
+" PDB
 " pip install pdbpp
-
 augroup SetBreakpoints
     autocmd!
     autocmd FileType python map <silent> <leader>x oimport pdb; pdb.set_trace()  # noqa: E702<esc>
     autocmd FileType python map <silent> <leader>X Oimport pdb; pdb.set_trace()  # noqa: E702<esc>
 augroup END
 
-" }}}
-" Only show cursorline in the current window {{{
-
+" Only show cursorline in the current window
 augroup CursorLineOnlyInActiveWindow
     autocmd!
     autocmd VimEnter,WinEnter,BufWinEnter,InsertLeave * setlocal cursorline
     autocmd WinLeave,InsertEnter * setlocal nocursorline
 augroup END
 
-" }}}
-" Open help files in right side {{{
-
+" Open help files in right side
 " augroup HelpFilesRightSide
 "     autocmd!
 "     autocmd FileType help wincmd L
 "     autocmd FileType help set bufhidden=unload
 " augroup END
 
-" }}}
-" Disable list on preview window {{{
-
+" Disable list on preview window
 augroup DisableThingsFromWindows
     autocmd!
     autocmd VimEnter,WinEnter,BufWinEnter * if &previewwindow | setlocal nolist | setlocal colorcolumn= | endif
@@ -312,9 +260,7 @@ augroup DisableThingsFromWindows
     autocmd TermOpen * setlocal foldcolumn=0 signcolumn=no nonumber
 augroup END
 
-" }}}
-" Statusline {{{
-
+" Statusline
 set fillchars=vert:│,fold:-,diff:·,stlnc:─,eob:\ 
 
 function! CWD()
@@ -348,8 +294,7 @@ augroup END
 set laststatus=2
 set statusline=%!ActiveStatus()
 
-" }}}
-" Override color {{{
+" Override color
 augroup OverrideColor
     autocmd!
     autocmd ColorScheme * hi! link VertSplit Ignore
@@ -367,9 +312,7 @@ augroup OverrideColor
     " autocmd ColorScheme * hi! link NonText Conceal
 augroup END
 
-" }}}
-" Mappings {{{
-
+" Mappings
 let g:mapleader = ','
 
 nnoremap <esc><esc> :noh<cr>
@@ -492,17 +435,13 @@ tnoremap <C-l> <C-\><C-n><C-w>l
 command! FileDir cd %:p:h
 command! TabDir tc %:p:h
 
-" }}}
 " Plugins settings
-" netrw {{{
-
+" netrw
 let g:netrw_altfile = 1
 let g:netrw_banner = 0
 let g:netrw_fastbrowse = 0
 
-" }}}
-" UltiSnips {{{
-
+" UltiSnips
 let g:UltiSnipsExpandTrigger='<c-e>'
 let g:UltiSnipsListSnippets='<c-l>'
 let g:UltiSnipsJumpForwardTrigger='<c-j>'
@@ -510,9 +449,7 @@ let g:UltiSnipsJumpBackwardTrigger='<c-k>'
 inoremap <c-x><c-k> <c-x><c-k>
 let g:UltiSnipsSnippetDirectories = ['UltiSnips']
 
-" }}}
-" Git {{{
-
+" Git
 set updatetime=300
 
 nmap <silent><leader>gn :GitGutterNextHunk<CR>
@@ -537,17 +474,14 @@ let g:gitgutter_sign_removed = '▶'
 " let g:gitgutter_set_sign_backgrounds = 1
 " let g:gitgutter_override_sign_column_highlight = 0
 
-" }}}
-" Grepper {{{
 
+" Grepper
 nnoremap <Leader>a :Rg 
 
 "Start searching the word under the cursor:
 nnoremap <leader>A :Rg <C-R><C-W><cr>
 
-" }}}
-" Startify {{{
-
+" Startify
 nnoremap <leader>S :SSave!<cr>
 nnoremap <leader>O :SLoad 
 
@@ -567,8 +501,7 @@ augroup StartifyAu
     autocmd User Startified setlocal cursorline
 augroup END
 
-" }}}
-" coc {{{
+" coc-vim
 let g:coc_global_extensions = [ 'coc-tsserver',
                               \ 'coc-eslint',
                               \ 'coc-prettier',
@@ -617,15 +550,11 @@ nmap <silent> gr <Plug>(coc-references)
 
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
-" }}}
-" gutentags {{{
-
+" gutentags
 let g:gutentags_cache_dir = '~/.cache/gutentags'
 "let g:gutentags_ctags_exclude = ["*.min.js", "*.min.css", "build", ".git", "node_modules", "db", "log"]
 
-" }}}
-" fugitive {{{
-
+" fugitive
 nnoremap <leader>ch :diffget //2<CR>
 nnoremap <leader>cl :diffget //3<CR>
 nnoremap <leader>G :vertical Gstatus<CR>
@@ -636,14 +565,10 @@ augroup init_quickfix
   autocmd QuickFixCmdPost l* lwindow
 augroup END
 
-" }}}
-" Python syntax highlight {{{
-
+" Python syntax highlight
 let g:python_highlight_all = 1
 
-" }}}
-" Colorscheme {{{
-
+" Colorscheme
 " hard, medium, soft
 let g:gruvbox_material_background = 'hard'
 colorscheme gruvbox-material
@@ -655,9 +580,7 @@ set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
   \,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
   \,sm:block-blinkwait175-blinkoff150-blinkon175
 
-" }}}
-" fzf {{{
-
+" fzf
 let $FZF_DEFAULT_OPTS='--reverse --margin=1,2 --bind ctrl-a:select-all'
 let $BAT_THEME = 'OneHalfDark'
 let g:fzf_preview_window = ['down:50%', 'ctrl-s']
@@ -738,9 +661,8 @@ let g:fzf_colors =
   \ 'marker':  ['fg', 'Keyword'],
   \ 'spinner': ['fg', 'Label'],
   \ 'header':  ['fg', 'Comment'] }
-" }}}
-" Commands {{{
 
+" Commands
 function! s:attach_current()
     execute 'T abduco -a' CWD()
 endfunction
@@ -752,7 +674,6 @@ command! -nargs=* DockerManage T docker-compose -f local.yml run --rm django pyt
 command! Attach call <sid>attach_current()
 command! -nargs=1 RunServer T abduco -c <c-r>=CWD()<cr> <args>
 
-
 nnoremap <leader>C
 \ :T abduco -c <c-r>=CWD()<cr>
 \ docker-compose -f local.yml up
@@ -763,9 +684,7 @@ nnoremap <leader>R
 " nnoremap <leader>A
 " \ :T abduco -a <c-r>=CWD()<cr>
 
-" }}}
-" easymotion {{{
-
+" easymotion
 let g:EasyMotion_do_mapping = 0
 let g:EasyMotion_smartcase = 1
 let g:EasyMotion_keys = 'asdfghjklqwertyuiopzxcvbnm'
@@ -774,19 +693,13 @@ let g:EasyMotion_verbose = 0
 
 nmap s <Plug>(easymotion-overwin-f)
 
-" }}}
-" Web search {{{
-
+" Web search
 nnoremap <leader>sg :Search google 
 
-" }}}
-" editorconfig {{{
-
+" editorconfig
 let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
 
-" }}}
-" dirvish {{{
-
+" dirvish
 augroup dirvish_config
     autocmd!
     autocmd FileType dirvish nnoremap <buffer> + :edit %
@@ -798,18 +711,14 @@ let g:dirvish_mode = ':sort ,^.*[\/],'
 " let g:loaded_netrw       = 1
 " let g:loaded_netrwPlugin = 1
 
-" }}}
-" emmet {{{
-
+" emmet
 let g:user_emmet_settings = {
 \  'javascript' : {
 \      'extends' : 'jsx',
 \  },
 \}
 
-" }}}
-" taboo {{{
-
+" taboo
 " https://github.com/ryanoasis/vim-devicons/wiki/FAQ-&-Troubleshooting#fonts
 " https://github.com/ryanoasis/nerd-fonts/blob/master/src/glyphs/Symbols-1000-em%20Nerd%20Font%20Complete.ttf
 
@@ -820,20 +729,14 @@ let taboo_close_tabs_label = "X"
 let taboo_tab_format = " %d  %f%I%m "
 let taboo_renamed_tab_format = " %d  [%l]%I%m "
 
-" }}}
-" autoclose {{{
-
+" autoclose
 let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.htmldjango'
 let g:closetag_filetypes = 'javascript'
 
-" }}}
-" coc-fzf {{{
-
+" coc-fzf
 let g:coc_fzf_preview = ''
 let g:coc_fzf_opts = []
 
-" }}}
-"
+" indentline
 let g:indentLine_char_list = ['|', '¦', '┆', '┊']
 let g:indent_blankline_char_list = ['|', '¦', '┆', '┊']
-
