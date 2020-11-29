@@ -56,8 +56,8 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'alvan/vim-closetag'
 
 " Syntax highlighting
-" Plug 'sheerun/vim-polyglot'
-Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSInstall all' }
+Plug 'sheerun/vim-polyglot'
+" Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSInstall all' }
 Plug 'vobornik/vim-mql4'
 
 call plug#end()
@@ -66,17 +66,17 @@ filetype plugin indent on
 syntax enable
 
 " Treesitter
-lua <<EOF
-require'nvim-treesitter.configs'.setup {
-  ensure_installed = "maintained",
-  highlight = {
-    enable = true,
-  },
-  indent = {
-    enable = true
-  }
-}
-EOF
+" lua <<EOF
+" require'nvim-treesitter.configs'.setup {
+"   ensure_installed = "maintained",
+"   highlight = {
+"     enable = true,
+"   },
+"   indent = {
+"     enable = true
+"   }
+" }
+" EOF
 
 " General
 if executable("rg")
@@ -214,6 +214,7 @@ augroup END
 augroup QfBl
     autocmd!
     autocmd FileType qf wincmd J
+    autocmd FileType qf setlocal winfixheight 
 augroup END
 
 " Move cursor to last position on file
@@ -299,17 +300,9 @@ augroup OverrideColor
     autocmd!
     autocmd ColorScheme * hi! link VertSplit Ignore
     autocmd ColorScheme * hi! link StatusLineNC Ignore
-    autocmd ColorScheme * hi! link DiffText Comment
     autocmd ColorScheme * hi! link StatusLine TabLine
-    autocmd ColorScheme * hi Cursor cterm=reverse gui=reverse
-    " autocmd ColorScheme * hi! link Pmenu CursorLine
     " autocmd ColorScheme * hi Pmenu gui=none
-    " autocmd ColorScheme * hi Folded gui=none
-    " autocmd ColorScheme * hi TabLine cterm=none gui=none
-    " autocmd ColorScheme * hi TabLineFill cterm=none gui=none
     " autocmd ColorScheme * hi TabLineSel cterm=none gui=bold
-    " autocmd ColorScheme * hi! link TabLineSel WildMenu
-    " autocmd ColorScheme * hi! link NonText Conceal
 augroup END
 
 " Mappings
@@ -402,7 +395,8 @@ vnoremap < <gv
 vnoremap > >gv
 
 " Adjust viewports to the same size
-map <Leader><space> <C-w>=
+noremap <leader>we <C-w>=
+noremap <leader><space> <c-w>_ \| <c-w>\|
 
 " Easier horizontal scrolling
 map zl zL
@@ -461,7 +455,9 @@ nmap <silent><Leader>ge :GitGutterPreviewHunk<CR>
 nmap <Leader>gc :T git checkout 
 nmap <Leader>gS :T git push --set-upstream origin 
 nmap <Leader>gP :T git push<cr>
-nmap <silent><Leader>gd :-1tabedit %<CR>:Gdiff<cr>
+" nmap <silent><Leader>gd :-1tabedit %<CR>:Gdiff<cr>
+nmap <silent><Leader>gd :Gvdiffsplit<cr>
+nmap <silent><Leader>gD :Ghdiffsplit<cr>
 nmap <silent><Leader>gl :Glog<cr>
 nmap <silent><Leader>gb :Gbrowse<cr>
 
@@ -473,7 +469,6 @@ let g:gitgutter_sign_removed_first_line = '▔'
 let g:gitgutter_sign_removed = '▶'
 " let g:gitgutter_set_sign_backgrounds = 1
 " let g:gitgutter_override_sign_column_highlight = 0
-
 
 " Grepper
 nnoremap <Leader>a :Rg 
@@ -571,32 +566,35 @@ let g:python_highlight_all = 1
 " Colorscheme
 " hard, medium, soft
 let g:gruvbox_material_background = 'hard'
-colorscheme gruvbox-material
+" material, mix, original
+" let g:gruvbox_material_palette = 'material'
+" colorscheme gruvbox-material
 
-" let g:sonokai_cursor = 'yellow'
-" colorscheme sonokai 
+" default, atlantis, andromeda, shusia, maia
+let g:sonokai_style = 'shusia'
+" let g:sonokai_transparent_background = 1
+let g:sonokai_cursor = 'blue'
+colorscheme sonokai 
 
 set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
   \,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
   \,sm:block-blinkwait175-blinkoff150-blinkon175
 
 " fzf
-let $FZF_DEFAULT_OPTS='--reverse --margin=1,2 --bind ctrl-a:select-all'
-let $BAT_THEME = 'OneHalfDark'
-let g:fzf_preview_window = ['down:50%', 'ctrl-s']
+let $FZF_DEFAULT_OPTS='--bind ctrl-a:select-all'
+let g:fzf_preview_window = ['up:50%', 'ctrl-s']
 let g:fzf_buffers_jump = 0
-" let g:fzf_command_prefix = 'Fzf'
-let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.7, 'yoffset': 0.5 } }
+let g:fzf_commands_expect = 'alt-enter,ctrl-x'
 
 if !exists('g:vscode')
     tnoremap <expr> <Esc> (&filetype == "fzf") ? "<Esc>" : "<c-\><c-n>"
     nnoremap <silent><leader>d :Commands<cr>
     nnoremap <silent><leader>r :Registers<cr>
-    nnoremap <silent><leader>h :History<cr>
     nnoremap <silent><leader>v :Buffers<cr>
     nnoremap <silent><leader>l :BLines<cr>
     " nnoremap <expr><leader>f (len(system('git rev-parse')) ? ':Files' : ':GFiles')."\<cr>"
-    nnoremap <silent><leader>f :Files<cr>
+    nnoremap <silent><leader>F :Files<cr>
+    nnoremap <silent><leader>f :GFiles<cr>
     nnoremap <leader>V :Windows<cr>
 endif
 
@@ -611,7 +609,6 @@ function! s:get_registers() abort
   redir => l:regs
   silent registers
   redir END
-
   return split(l:regs, '\n')[1:]
 endfunction
 
@@ -623,12 +620,7 @@ function! s:registers(...) abort
         \ }
   call fzf#run(fzf#wrap(l:opts))
 endfunction
-
 command! -bang Registers call s:registers('<bang>' ==# '!')
-command! -bang -nargs=* GGrep
-  \ call fzf#vim#grep(
-  \   'git grep --line-number --ignore-case -- '.shellescape(<q-args>), 0,
-  \   fzf#vim#with_preview({'dir': systemlist('git rev-parse --show-toplevel')[0]}, 'down:50%'), <bang>0)
 
 " CTRL-A CTRL-Q to select all and build quickfix list
 function! s:build_quickfix_list(lines)
@@ -696,6 +688,7 @@ nmap s <Plug>(easymotion-overwin-f)
 " Web search
 nmap <silent> <Leader>kj <Plug>SearchNormal
 vmap <silent> <Leader>kj <Plug>SearchVisual
+nnoremap <leader>j :BrowserSearch 
 
 " editorconfig
 let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
