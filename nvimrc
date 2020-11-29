@@ -49,7 +49,6 @@ Plug 'tpope/vim-rhubarb'
 Plug 'shumphrey/fugitive-gitlab.vim'
 
 " Snippets & AutoComplete
-Plug 'betoharres/vim-react-ultiSnips'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'jiangmiao/auto-pairs'
@@ -57,7 +56,6 @@ Plug 'alvan/vim-closetag'
 
 " Syntax highlighting
 Plug 'sheerun/vim-polyglot'
-" Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSInstall all' }
 Plug 'vobornik/vim-mql4'
 
 call plug#end()
@@ -65,121 +63,37 @@ call plug#end()
 filetype plugin indent on
 syntax enable
 
-" Treesitter
-" lua <<EOF
-" require'nvim-treesitter.configs'.setup {
-"   ensure_installed = "maintained",
-"   highlight = {
-"     enable = true,
-"   },
-"   indent = {
-"     enable = true
-"   }
-" }
-" EOF
-
-" General
-if executable("rg")
-    set grepprg=rg\ --vimgrep\ --no-heading
-endif
 set wildmode=list:longest,full
-set title
-set novisualbell
-set noequalalways
-set hlsearch
-set showmatch
-set ignorecase
-set smartcase
-set inccommand=split
 set listchars=tab:▸\ ,eol:¬,extends:»,precedes:«,trail:•
-" set diffopt+=vertical
 set autoindent
 set noshowcmd
-set nofixendofline
-set nonumber
 set mouse=a
-
-set nospell
 set hidden 
-set foldlevel=99
-set scrolloff=5
-set signcolumn=yes
 set list
+set signcolumn=yes
 set colorcolumn=120
-
 set expandtab
 set splitright
 set splitbelow
+set foldlevel=99
+set scrolloff=5
 set sessionoptions-=folds
 set sessionoptions+=tabpages,globals
 set shortmess+=c
-
 set clipboard=unnamedplus
 if WINDOWS()
     set clipboard=unnamed
 endif
-
-augroup IndentSettings
-    autocmd!
-    autocmd Filetype html setlocal ts=2 sw=2
-    autocmd Filetype htmldjango setlocal ts=2 sw=2
-    autocmd Filetype php setlocal ts=4 sw=4
-    autocmd Filetype vue setlocal ts=2 sw=2
-    autocmd Filetype javascript setlocal ts=2 sw=2
-    autocmd Filetype blade setlocal ts=2 sw=2
-    autocmd Filetype typescript setlocal ts=4 sw=4
-    autocmd Filetype scss setlocal ts=4 sw=4
-    autocmd Filetype vim setlocal ts=4 sw=4
-    autocmd Filetype css setlocal ts=4 sw=4
-    autocmd Filetype cucumber setlocal ts=2 sw=2
-    autocmd Filetype json setlocal ts=2 sw=2
-augroup END
-
-" True color
 set termguicolors
-
-" Cursor line
+set inccommand=split
 set cursorline
-
-" Backup and undo
 set noswapfile
-set backup                                     " Backups are nice ...
+set backup
 if has('persistent_undo')
-    set undofile                                " So is persistent undo ...
-    set undolevels=10000                        " Maximum number of changes that can be undone
-    set undoreload=10000                        " Maximum number lines to save for undo
+    set undofile
+    set undolevels=10000
+    set undoreload=10000
 endif
-
-function! InitializeDirectories()
-    let l:parent = $HOME
-    let l:prefix = 'nvim'
-    let l:dir_list = {
-                \ 'backup': 'backupdir',
-                \ 'views': 'viewdir', }
-
-    if has('persistent_undo')
-        let l:dir_list['undo'] = 'undodir'
-    endif
-
-    let l:common_dir = l:parent . '/.' . l:prefix
-
-    for [l:dirname, l:settingname] in items(l:dir_list)
-        let l:directory = l:common_dir . l:dirname . '/'
-        if exists('*mkdir')
-            if !isdirectory(l:directory)
-                call mkdir(l:directory)
-            endif
-        endif
-        if !isdirectory(l:directory)
-            echo 'Warning: Unable to create backup directory: ' . l:directory
-            echo 'Try: mkdir -p ' . l:directory
-        else
-            let l:directory = substitute(l:directory, ' ', '\\\\ ', 'g')
-            exec 'set ' . l:settingname . '=' . l:directory
-        endif
-    endfor
-endfunction
-call InitializeDirectories()
 
 " Autocmd rules
 " http://vim.wikia.com/wiki/Restore_cursor_to_file_position_in_previous_editing_session
@@ -190,15 +104,15 @@ function! ResCur()
     endif
 endfunction
 
-augroup TabSessionTitleGroup
-  autocmd!
-  autocmd SessionLoadPost * let &titlestring = substitute(fnamemodify(v:this_session, ':t'), '.vim', '', '')
-augroup end
-
 augroup resCur
     autocmd!
     autocmd BufWinEnter * call ResCur()
 augroup END
+
+" augroup TabSessionTitleGroup
+"   autocmd!
+"   autocmd SessionLoadPost * let &titlestring = substitute(fnamemodify(v:this_session, ':t'), '.vim', '', '')
+" augroup end
 
 " Term start in insert mode
 augroup TermCmd
@@ -222,11 +136,6 @@ augroup FirstLineCommit
     autocmd FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
 augroup END
 
-augroup TSSyntax
-    autocmd!
-    autocmd BufNewFile,BufRead *.ts setlocal filetype=typescript
-augroup END
-
 " PDB
 " pip install pdbpp
 augroup SetBreakpoints
@@ -241,13 +150,6 @@ augroup CursorLineOnlyInActiveWindow
     autocmd VimEnter,WinEnter,BufWinEnter,InsertLeave * setlocal cursorline
     autocmd WinLeave,InsertEnter * setlocal nocursorline
 augroup END
-
-" Open help files in right side
-" augroup HelpFilesRightSide
-"     autocmd!
-"     autocmd FileType help wincmd L
-"     autocmd FileType help set bufhidden=unload
-" augroup END
 
 " Disable list on preview window
 augroup DisableThingsFromWindows
@@ -309,9 +211,6 @@ nnoremap <esc><esc> :noh<cr>
 
 " Backtick
 inoremap '' `
-
-" Yank from cursor to the end of the line
-nnoremap Y y$
 
 command! -nargs=* T split | terminal <args>
 command! -nargs=* VT vsplit | terminal <args>
@@ -542,10 +441,6 @@ nmap <silent> gr <Plug>(coc-references)
 
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
-" gutentags
-let g:gutentags_cache_dir = '~/.cache/gutentags'
-"let g:gutentags_ctags_exclude = ["*.min.js", "*.min.css", "build", ".git", "node_modules", "db", "log"]
-
 " fugitive
 nnoremap <leader>ch :diffget //2<CR>
 nnoremap <leader>cl :diffget //3<CR>
@@ -569,35 +464,31 @@ let g:gruvbox_material_background = 'hard'
 
 " default, atlantis, andromeda, shusia, maia
 let g:sonokai_style = 'shusia'
-" let g:sonokai_transparent_background = 1
 let g:sonokai_cursor = 'blue'
+
 colorscheme sonokai 
 
-set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
-  \,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
-  \,sm:block-blinkwait175-blinkoff150-blinkon175
-
 " fzf
-let $FZF_DEFAULT_OPTS='--bind ctrl-a:select-all'
-let g:fzf_preview_window = ['up:50%', 'ctrl-s']
+let $FZF_DEFAULT_OPTS='--reverse --bind ctrl-a:select-all'
+let g:fzf_preview_window = ['down:50%', 'ctrl-s']
 let g:fzf_buffers_jump = 0
 let g:fzf_commands_expect = 'alt-enter,ctrl-x'
 
 if !exists('g:vscode')
-    tnoremap <expr> <Esc> (&filetype == "fzf") ? "<Esc>" : "<c-\><c-n>"
-    nnoremap <silent><leader>d :Commands<cr>
-    nnoremap <silent><leader>r :Registers<cr>
-    nnoremap <silent><leader>v :Buffers<cr>
-    nnoremap <silent><leader>l :BLines<cr>
-    " nnoremap <expr><leader>f (len(system('git rev-parse')) ? ':Files' : ':GFiles')."\<cr>"
-    nnoremap <silent><leader>F :Files<cr>
-    nnoremap <silent><leader>f :GFiles<cr>
-    nnoremap <leader>V :Windows<cr>
+  tnoremap <expr> <Esc> (&filetype == "fzf") ? "<Esc>" : "<c-\><c-n>"
+  nnoremap <silent><leader>d :Commands<cr>
+  nnoremap <silent><leader>r :Registers<cr>
+  nnoremap <silent><leader>v :Buffers<cr>
+  nnoremap <silent><leader>l :BLines<cr>
+  " nnoremap <expr><leader>f (len(system('git rev-parse')) ? ':Files' : ':GFiles')."\<cr>"
+  nnoremap <silent><leader>F :Files<cr>
+  nnoremap <silent><leader>f :GFiles<cr>
+  nnoremap <leader>V :Windows<cr>
 endif
 
 augroup fzfpopupter
-    autocmd!
-    autocmd FileType fzf exe 'tnoremap <buffer><nowait> <C-j> <Down>'
+  autocmd!
+  autocmd FileType fzf exe 'tnoremap <buffer><nowait> <C-j> <Down>'
         \ | tnoremap <buffer><nowait> <C-k> <Up>
 augroup END
 
@@ -632,10 +523,6 @@ let g:fzf_action = {
   \ 'ctrl-x': 'split',
   \ 'ctrl-v': 'vsplit' }
 
-" Customize fzf colors to match your color scheme
-" - fzf#wrap translates this to a set of `--color` options
-  " \ 'border':  ['fg', 'Ignore'],
-
 let g:fzf_colors =
 \ { 'fg':      ['fg', 'Normal'],
   \ 'bg':      ['bg', 'Normal'],
@@ -651,27 +538,8 @@ let g:fzf_colors =
   \ 'spinner': ['fg', 'Label'],
   \ 'header':  ['fg', 'Comment'] }
 
-" Commands
-function! s:attach_current()
-    execute 'T abduco -a' CWD()
-endfunction
-
-" command! ScraperDeploy T source venv/bin/activate; fab scraper_deploy
-" command! -nargs=1 ScrapyCrawl T source venv/bin/activate; cd scraper; scrapy crawl <args>
-" command! RunTests T source venv/bin/activate; python manage.py test
 command! -nargs=* DockerManage T docker-compose -f local.yml run --rm django python manage.py <args>
-command! Attach call <sid>attach_current()
-command! -nargs=1 RunServer T abduco -c <c-r>=CWD()<cr> <args>
-
-nnoremap <leader>C
-\ :T abduco -c <c-r>=CWD()<cr>
-\ docker-compose -f local.yml up
-
-nnoremap <leader>R
-\ :T docker-compose -f local.yml run -rm django 
-
-" nnoremap <leader>A
-" \ :T abduco -a <c-r>=CWD()<cr>
+nnoremap <leader>R :T docker-compose -f local.yml run -rm django 
 
 " easymotion
 let g:EasyMotion_do_mapping = 0
@@ -687,9 +555,6 @@ nmap <silent> <Leader>kj <Plug>SearchNormal
 vmap <silent> <Leader>kj <Plug>SearchVisual
 nnoremap <leader>j :BrowserSearch 
 
-" editorconfig
-let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
-
 " dirvish
 augroup dirvish_config
     autocmd!
@@ -699,8 +564,6 @@ augroup dirvish_config
 augroup END
 
 let g:dirvish_mode = ':sort ,^.*[\/],'
-" let g:loaded_netrw       = 1
-" let g:loaded_netrwPlugin = 1
 
 " emmet
 let g:user_emmet_settings = {
@@ -712,8 +575,6 @@ let g:user_emmet_settings = {
 " taboo
 " https://github.com/ryanoasis/vim-devicons/wiki/FAQ-&-Troubleshooting#fonts
 " https://github.com/ryanoasis/nerd-fonts/blob/master/src/glyphs/Symbols-1000-em%20Nerd%20Font%20Complete.ttf
-
-" Rename tab
 nnoremap <leader>en :TabooRename 
 
 let taboo_close_tabs_label = "X" 
