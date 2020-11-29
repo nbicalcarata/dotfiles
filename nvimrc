@@ -101,9 +101,6 @@ set mouse=a
 
 set nospell
 set hidden 
-" set foldmethod=marker
-set foldmethod=expr
-set foldexpr=nvim_treesitter#foldexpr()
 set foldlevel=99
 set scrolloff=5
 set signcolumn=yes
