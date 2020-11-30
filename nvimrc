@@ -6,7 +6,7 @@ silent function! LINUX()
   return has('unix') && !has('macunix') && !has('win32unix')
 endfunction
 silent function! WINDOWS()
-  return  (has('win16') || has('win32') || has('win64'))
+  return (has('win16') || has('win32') || has('win64'))
 endfunction
 
 " Plug setup directory
@@ -72,7 +72,6 @@ set hidden
 set list
 set signcolumn=yes
 set colorcolumn=120
-set expandtab
 set splitright
 set splitbelow
 set foldlevel=99
@@ -95,6 +94,37 @@ if has('persistent_undo')
     set undoreload=10000
 endif
 
+function! InitializeDirectories()
+    let l:parent = $HOME
+    let l:prefix = 'nvim'
+    let l:dir_list = {
+                \ 'backup': 'backupdir',
+                \ 'views': 'viewdir', }
+
+    if has('persistent_undo')
+        let l:dir_list['undo'] = 'undodir'
+    endif
+
+    let l:common_dir = l:parent . '/.' . l:prefix
+
+    for [l:dirname, l:settingname] in items(l:dir_list)
+        let l:directory = l:common_dir . l:dirname . '/'
+        if exists('*mkdir')
+            if !isdirectory(l:directory)
+                call mkdir(l:directory)
+            endif
+        endif
+        if !isdirectory(l:directory)
+            echo 'Warning: Unable to create backup directory: ' . l:directory
+            echo 'Try: mkdir -p ' . l:directory
+        else
+            let l:directory = substitute(l:directory, ' ', '\\\\ ', 'g')
+            exec 'set ' . l:settingname . '=' . l:directory
+        endif
+    endfor
+endfunction
+call InitializeDirectories()
+
 " Autocmd rules
 " http://vim.wikia.com/wiki/Restore_cursor_to_file_position_in_previous_editing_session
 function! ResCur()
@@ -108,11 +138,6 @@ augroup resCur
     autocmd!
     autocmd BufWinEnter * call ResCur()
 augroup END
-
-" augroup TabSessionTitleGroup
-"   autocmd!
-"   autocmd SessionLoadPost * let &titlestring = substitute(fnamemodify(v:this_session, ':t'), '.vim', '', '')
-" augroup end
 
 " Term start in insert mode
 augroup TermCmd
