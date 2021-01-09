@@ -52,6 +52,5 @@ windows:
       # synchronize: after
       panes:
         - nvim
-        - ls
   - server: python --version
   - logs: tree
