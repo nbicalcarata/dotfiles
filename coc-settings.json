@@ -5,6 +5,8 @@
   "diagnostic.enable": true,
   "diagnostic.errorSign": "E",
   "diagnostic.warningSign": "W",
+  "diagnostic.messageTarget": "echo",
+  "javascript.validate.enable": false,
   "python.jediEnabled": true,
   "python.linting.pylintEnabled": false,
   "python.linting.flake8Enabled": true,

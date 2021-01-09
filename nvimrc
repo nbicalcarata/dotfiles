@@ -34,8 +34,9 @@ Plug 'rhysd/git-messenger.vim'
 Plug 'mattn/emmet-vim'
 Plug 'gcmt/taboo.vim'
 Plug 'ryanoasis/vim-devicons'
-Plug 'Yggdroot/indentLine'
-Plug 'lukas-reineke/indent-blankline.nvim', {'branch': 'lua'}
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'vim-airline/vim-airline'
+Plug 'edkolev/tmuxline.vim'
 
 " Colorschemes
 Plug 'sainnhe/gruvbox-material'
@@ -63,29 +64,70 @@ call plug#end()
 filetype plugin indent on
 syntax enable
 
+" General
+" if executable("rg")
+"     set grepprg=rg\ --vimgrep\ --no-heading
+" endif
 set wildmode=list:longest,full
+set title
+set novisualbell
+set noequalalways
+set hlsearch
+set showmatch
+set ignorecase
+set smartcase
+set inccommand=split
 set listchars=tab:▸\ ,eol:¬,extends:»,precedes:«,trail:•
 set autoindent
 set noshowcmd
+set nofixendofline
+set nonumber
 set mouse=a
-set hidden 
-set list
-set signcolumn=yes
-set colorcolumn=120
-set splitright
-set splitbelow
+
+set nospell
+set hidden
 set foldlevel=99
 set scrolloff=5
+set signcolumn=yes
+set list
+set colorcolumn=120
+
+set expandtab
+set splitright
+set splitbelow
 set sessionoptions-=folds
 set sessionoptions+=tabpages,globals
 set shortmess+=c
+
 set clipboard=unnamedplus
 if WINDOWS()
     set clipboard=unnamed
 endif
+
+set shiftwidth=2
+" augroup IndentSettings
+"     autocmd!
+"     autocmd Filetype html setlocal ts=2 sw=2
+"     autocmd Filetype htmldjango setlocal ts=2 sw=2
+"     autocmd Filetype php setlocal ts=4 sw=4
+"     autocmd Filetype vue setlocal ts=2 sw=2
+"     autocmd Filetype javascript setlocal ts=2 sw=2
+"     autocmd Filetype blade setlocal ts=2 sw=2
+"     autocmd Filetype typescript setlocal ts=4 sw=4
+"     autocmd Filetype scss setlocal ts=4 sw=4
+"     autocmd Filetype vim setlocal ts=4 sw=4
+"     autocmd Filetype css setlocal ts=4 sw=4
+"     autocmd Filetype cucumber setlocal ts=2 sw=2
+"     autocmd Filetype json setlocal ts=2 sw=2
+" augroup END
+
+" True color
 set termguicolors
-set inccommand=split
+
+" Cursor line
 set cursorline
+
+" Backup and undo
 set noswapfile
 set backup
 if has('persistent_undo')
@@ -147,11 +189,10 @@ augroup TermCmd
 augroup END
 
 " Quickfix below everything
-augroup QfBl
-    autocmd!
-    autocmd FileType qf wincmd J
-    autocmd FileType qf setlocal winfixheight 
-augroup END
+" augroup QfBl
+"     autocmd!
+"     autocmd FileType qf wincmd J
+" augroup END
 
 " Move cursor to last position on file
 " Instead of reverting the cursor to the last position in the buffer, we
@@ -172,8 +213,8 @@ augroup END
 " Only show cursorline in the current window
 augroup CursorLineOnlyInActiveWindow
     autocmd!
-    autocmd VimEnter,WinEnter,BufWinEnter,InsertLeave * setlocal cursorline
-    autocmd WinLeave,InsertEnter * setlocal nocursorline
+    autocmd VimEnter,WinEnter,BufWinEnter,InsertLeave * setlocal cursorline cursorcolumn
+    autocmd WinLeave,InsertEnter * setlocal nocursorline nocursorcolumn
 augroup END
 
 " Disable list on preview window
@@ -201,6 +242,8 @@ function! ActiveStatus()
     let statusline.="%{&modified?'\ +\ ':''}"
     let statusline.="%{&readonly?'\ \ ':''}"
     let statusline.="\ %=%-20.(%l/%L,%c%)\ %{&filetype}\ "
+    let statusline.="\ "
+    let statusline.="%{SleuthIndicator()}\ "
     return statusline
 endfunction
 
@@ -210,14 +253,14 @@ function! InactiveStatus()
     return statusline
 endfunction
 
-augroup status
-    autocmd!
-    autocmd WinEnter * setlocal statusline=%!ActiveStatus()
-    autocmd WinLeave,QuickFixCmdPost * setlocal statusline=%!InactiveStatus()
-augroup END
+" augroup status
+"     autocmd!
+"     autocmd WinEnter * setlocal statusline=%!ActiveStatus()
+"     autocmd WinLeave,QuickFixCmdPost * setlocal statusline=%!InactiveStatus()
+" augroup END
 
 set laststatus=2
-set statusline=%!ActiveStatus()
+" set statusline=%!ActiveStatus()
 
 " Override color
 augroup OverrideColor
@@ -334,10 +377,10 @@ map <leader>q :bp<bar>sp<bar>bn<bar>bd<CR>
 nmap <leader>i :set list!<CR>
 
 " Move between splits
-nnoremap <C-H> <C-W><C-H>
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
+" nnoremap <C-H> <C-W><C-H>
+" nnoremap <C-J> <C-W><C-J>
+" nnoremap <C-K> <C-W><C-K>
+" nnoremap <C-L> <C-W><C-L>
 
 " Term move between splits
 tnoremap <Esc> <C-\><C-n>
@@ -421,6 +464,7 @@ augroup END
 let g:coc_global_extensions = [ 'coc-tsserver',
                               \ 'coc-eslint',
                               \ 'coc-prettier',
+                              \ 'coc-html',
                               \ 'coc-css',
                               \ 'coc-json',
                               \ 'coc-python',
@@ -496,6 +540,7 @@ colorscheme sonokai
 " fzf
 let $FZF_DEFAULT_OPTS='--reverse --bind ctrl-a:select-all'
 let g:fzf_preview_window = ['down:50%', 'ctrl-s']
+let g:fzf_layout = { 'window': { 'width': 0.7, 'height': 0.6 } }
 let g:fzf_buffers_jump = 0
 let g:fzf_commands_expect = 'alt-enter,ctrl-x'
 
@@ -617,3 +662,43 @@ let g:coc_fzf_opts = []
 " indentline
 let g:indentLine_char_list = ['|', '¦', '┆', '┊']
 let g:indent_blankline_char_list = ['|', '¦', '┆', '┊']
+
+" airline
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#show_buffers = 0
+let g:airline#extensions#tabline#show_splits = 0
+let g:airline#extensions#tabline#tabs_label = 'T'
+let g:airline#extensions#tabline#show_tab_count = 0
+let g:airline#extensions#tabline#tab_min_count = 2
+let g:airline#extensions#tabline#show_tab_nr = 0
+
+let g:airline_mode_map = {
+    \ '__'     : '-',
+    \ 'c'      : 'C',
+    \ 'i'      : 'I',
+    \ 'ic'     : 'I',
+    \ 'ix'     : 'I',
+    \ 'n'      : 'N',
+    \ 'multi'  : 'M',
+    \ 'ni'     : 'N',
+    \ 'no'     : 'N',
+    \ 'R'      : 'R',
+    \ 'Rv'     : 'R',
+    \ 's'      : 'S',
+    \ 'S'      : 'S',
+    \ ''     : 'S',
+    \ 't'      : 'T',
+    \ 'v'      : 'V',
+    \ 'V'      : 'V',
+    \ ''     : 'V',
+    \ }
+
+function! Render_Only_File(...)
+  let builder = a:1
+  let context = a:2
+  call builder.add_section('file', ' %f ')
+  return 1
+endfunction
+
+call airline#add_inactive_statusline_func('Render_Only_File')

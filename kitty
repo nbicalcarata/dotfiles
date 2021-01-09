@@ -1,12 +1,14 @@
-font_size 14
-font_family      Iosevka
-bold_font        Iosevka Bold 
+font_size 11
+font_family      JetBrains Mono
+bold_font        JetBrains Mono Bold 
+italic_font      JetBrains Mono Italic
+bold_italic_font JetBrains Mono Bold Italic
+
 #font_family     Liga DejaVu Sans Mono
 #font_family     Fira Code
 #font_family     Liga Hack
 #font_family     Liga Meslo LG M DZ
 #bold_font       Fire Code Bold
-bold_font        Iosevka Bold
 
 map ctrl+shift+plus change_font_size all +1.0
 map ctrl+shift+minus change_font_size all -1.0
@@ -19,7 +21,7 @@ bell_on_tab no
 
 tab_bar_style separator
 
-x11_hide_window_decorations yes
+x11_hide_window_decorations no
 
 background #181818
 
