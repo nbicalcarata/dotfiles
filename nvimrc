@@ -610,6 +610,8 @@ let g:fzf_colors =
 
 command! -nargs=* DockerManage T docker-compose -f local.yml run --rm django python manage.py <args>
 nnoremap <leader>R :T docker-compose -f local.yml run -rm django 
+command! PullDotfiles T cd ~/dotfiles; git pull;
+command! PushDotfiles T cd ~/dotfiles; git add .; git commit -m "Quick sync"; git push;
 
 " easymotion
 let g:EasyMotion_do_mapping = 0

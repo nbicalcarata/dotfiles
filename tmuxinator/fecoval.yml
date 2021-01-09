@@ -1,0 +1,13 @@
+# /home/adrian/.config/tmuxinator/fecoval.yml
+
+name: fecoval
+root: ~/
+
+windows:
+  - neovim:
+      panes:
+        - cd ~/Workspace/fecoval-web; nvim
+  - fecoval-stack:
+      layout: tiled
+      panes:
+        - cd ~/Workspace/fecoval-web; docker-compose -f local.yml up

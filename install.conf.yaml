@@ -29,6 +29,9 @@
     ~/.config/nvim/ginit.vim: gnvimrc
     ~/.config/nvim/coc-settings.json: coc-settings.json
     ~/.config/kitty/kitty.conf: kitty
+    ~/.config/tmuxinator:
+      create: true
+      path: tmuxinator
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]
