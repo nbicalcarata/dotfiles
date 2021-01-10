@@ -448,6 +448,7 @@ nnoremap <leader>A :Rg <C-R><C-W><cr>
 nnoremap <leader>S :SSave!<cr>
 nnoremap <leader>O :SLoad 
 
+" let g:startify_disable_at_vimenter = 1
 let g:startify_lists = [
       \ { 'type': 'sessions',  'header': [   '   Sessions']       },
       \ { 'type': 'files',     'header': [   '   MRU']            },
@@ -462,6 +463,8 @@ let g:startify_custom_header = [
 augroup StartifyAu
     autocmd!
     autocmd User Startified setlocal cursorline
+    " https://github.com/neovim/neovim/issues/11330
+    autocmd VimEnter * :silent exec "!kill -s SIGWINCH $PPID"
 augroup END
 
 " coc-vim
@@ -615,7 +618,8 @@ let g:fzf_colors =
 command! -nargs=* DockerManage T docker-compose -f local.yml run --rm django python manage.py <args>
 nnoremap <leader>R :T docker-compose -f local.yml run -rm django 
 command! PullDotfiles T cd ~/dotfiles; git pull;
-command! PushDotfiles T cd ~/dotfiles; git add .; git commit -m "Quick sync"; git push;
+command! SyncDotfiles T cd ~/dotfiles; git add .; git commit -m "Quick sync"; git push;
+command! DirSessions :normal! a ~/.local/share/nvim/session/<ESC>
 
 " easymotion
 let g:EasyMotion_do_mapping = 0
