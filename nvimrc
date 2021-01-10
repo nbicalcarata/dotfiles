@@ -619,7 +619,7 @@ command! -nargs=* DockerManage T docker-compose -f local.yml run --rm django pyt
 nnoremap <leader>R :T docker-compose -f local.yml run -rm django 
 command! PullDotfiles T cd ~/dotfiles; git pull;
 command! SyncDotfiles T cd ~/dotfiles; git add .; git commit -m "Quick sync"; git push;
-command! DirSessions :normal! a ~/.local/share/nvim/session/<ESC>
+command! -nargs=1 DirSessionNvim :normal! a nvim -S ~/.local/share/nvim/session/<args>
 
 " easymotion
 let g:EasyMotion_do_mapping = 0
