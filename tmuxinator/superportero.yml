@@ -5,14 +5,24 @@ root: ~/
 
 windows:
   - editor:
-      # layout: main-vertical
+      layout: main-vertical
       panes:
-        - nvim
-  - stack:
-      layout: even-vertical
-      panes:
+        - nvim -S ~/.local/share/nvim/session/superportero
         - cd ~/Workspace/superportero-back; docker-compose -f local.yml up
         - cd ~/Workspace/superportero-app; npx react-native start
   - run-android:
       panes:
           - cd ~/Workspace/superportero-app; npx react-native run-android
+
+# windows:
+#   - editor:
+#       panes:
+#         - nvim -S ~/.local/share/nvim/session/superportero
+#   - stack:
+#       layout: even-vertical
+#       panes:
+#         - cd ~/Workspace/superportero-back; docker-compose -f local.yml up
+#         - cd ~/Workspace/superportero-app; npx react-native start
+#   - run-android:
+#       panes:
+#           - cd ~/Workspace/superportero-app; npx react-native run-android
