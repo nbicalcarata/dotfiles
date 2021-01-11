@@ -1,8 +1,7 @@
-dotfiles
-========
-
 Mis archivos de configuración
+=============================
 
+Instalación:
 ```sh
 git clone git@github.com:nbicalcarata/dotfiles.git && cd ~/dotfiles && ./install
 ```
