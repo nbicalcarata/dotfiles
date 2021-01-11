@@ -10,9 +10,8 @@ windows:
         - nvim -S ~/.local/share/nvim/session/superportero
         - cd ~/Workspace/superportero-back; docker-compose -f local.yml up
         - cd ~/Workspace/superportero-app; npx react-native start
-  - run-android:
-      panes:
-          - cd ~/Workspace/superportero-app; npx react-native run-android
+  - run-android: cd ~/Workspace/superportero-app; npx react-native run-android
+  - tunnel: lt --port 8000 --subdomain superportero-backend
 
 # windows:
 #   - editor:
