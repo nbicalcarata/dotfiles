@@ -13,5 +13,6 @@ Dependencias
 - Devicons: https://github.com/ryanoasis/nerd-fonts/blob/master/src/glyphs/Symbols-1000-em%20Nerd%20Font%20Complete.ttf
 
 ```sh
+$ sudo dnf copr enable agriffis/neovim-nightly
 $ sudo dnf install xclip neovim python3-neovim nodejs ripgrep
 ```
