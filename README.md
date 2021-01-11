@@ -3,7 +3,7 @@ Mis archivos de configuración
 
 ## Dependencias
 
-- vim-plug: https://github.com/junegunn/vim-pluggithub.com/junegunn/vim-plug
+- vim-plug: https://github.com/junegunn/vim-plug
 - Devicons: https://github.com/ryanoasis/nerd-fonts/blob/master/src/glyphs/Symbols-1000-em%20Nerd%20Font%20Complete.ttf
 
 ```sh
@@ -22,7 +22,7 @@ ssh-keygen -t ed25519 -C "your_email@example.com"
 eval "$(ssh-agent -s)"
 xclip -selection clipboard < ~/.ssh/id_ed25519.pub
 
-# Pegarla en ssh y gpg keys de github
+# Pegarla en ssh y gpg keys de github https://github.com/settings/keys
 
 # Clonar repositorio
 git clone git@github.com:nbicalcarata/dotfiles.git && cd ~/dotfiles && ./install
