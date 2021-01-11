@@ -13,5 +13,6 @@ Dependencias
 
 ```sh
 $ sudo dnf copr enable agriffis/neovim-nightly
-$ sudo dnf install xclip neovim python3-neovim nodejs ripgrep
+$ gem install tmuxinator
+$ sudo dnf install tmux xclip neovim python3-neovim nodejs ripgrep
 ```
