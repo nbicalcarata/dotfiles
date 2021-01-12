@@ -542,7 +542,11 @@ let g:gruvbox_material_background = 'hard'
 let g:sonokai_style = 'shusia'
 let g:sonokai_cursor = 'blue'
 
-colorscheme sonokai 
+try
+  colorscheme sonokai 
+catch
+  " echo 'Colorscheme not found'
+endtry
 
 " fzf
 let $FZF_DEFAULT_OPTS='--reverse --bind ctrl-a:select-all'
@@ -711,4 +715,8 @@ function! Render_Only_File(...)
   return 1
 endfunction
 
-call airline#add_inactive_statusline_func('Render_Only_File')
+try
+  call airline#add_inactive_statusline_func('Render_Only_File')
+catch
+  " echo 'Airline not installed'
+endtry
