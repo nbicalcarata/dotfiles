@@ -41,6 +41,7 @@ Plug 'edkolev/tmuxline.vim'
 " Colorschemes
 Plug 'sainnhe/gruvbox-material'
 Plug 'sainnhe/sonokai'
+Plug 'sainnhe/edge'
 
 " Git
 Plug 'tpope/vim-fugitive'
@@ -474,7 +475,7 @@ let g:coc_global_extensions = [ 'coc-tsserver',
                               \ 'coc-html',
                               \ 'coc-css',
                               \ 'coc-json',
-                              \ 'coc-python',
+                              \ 'coc-pyright',
                               \ 'coc-highlight',
                               \ 'coc-emmet',
                               \ 'coc-vetur',
@@ -509,7 +510,7 @@ endfunction
 
 " Remap keys for gotos
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
+nmap <silent> <leader>E <Plug>(coc-diagnostic-next)
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
@@ -720,3 +721,6 @@ try
 catch
   " echo 'Airline not installed'
 endtry
+
+" polyglot
+let g:polyglot_disabled = ['vue']

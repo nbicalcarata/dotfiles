@@ -9,3 +9,4 @@ windows:
       panes:
         - nvim -S ~/.local/share/nvim/session/fecoval
         - docker-compose -f local.yml up
+        - cd frontend; npm run serve
