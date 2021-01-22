@@ -344,6 +344,9 @@ nnoremap <C-left> 5<C-W>>
 nnoremap <leader>s :%s///gI<left><left><left><left>
 vnoremap <leader>s :s///gI<left><left><left><left>
 
+" All results from quickfix
+nnoremap <leader>R :cfdo %s///g \| update<c-left><c-left><left><left><left><left>
+
 " Select current line (no indentation)
 nnoremap vv ^vg_
 
@@ -621,7 +624,6 @@ let g:fzf_colors =
   \ 'header':  ['fg', 'Comment'] }
 
 command! -nargs=* DockerManage T docker-compose -f local.yml run --rm django python manage.py <args>
-nnoremap <leader>R :T docker-compose -f local.yml run -rm django 
 command! PullDotfiles T cd ~/dotfiles; git pull;
 command! SyncDotfiles T cd ~/dotfiles; git add .; git commit -m "Quick sync"; git push;
 command! -nargs=1 DirSessionNvim :normal! a nvim -S ~/.local/share/nvim/session/<args>

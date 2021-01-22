@@ -1,0 +1,23 @@
+# /home/adrian/.config/tmuxinator/dashforge.yml
+
+name: dashforge
+root: ~/Workspace/dashforge
+
+windows:
+  - editor:
+      layout: main-vertical
+      panes:
+        - nvim -S ~/.local/share/nvim/session/dashforge
+        - gulp serve
+        # - cd ~/Workspace/backend; docker-compose -f local.yml up
+        # - cd ~/Workspace/frontend; yarn run dev
+  # - run-android:
+  #     panes:
+  #         - cd ~/Workspace/client; npx react-native run-android
+  # - server: python --version
+  # - logs: ls
+  # - stack:
+  #     layout: even-vertical
+  #     panes:
+  #       - cd ~/Workspace/backend; docker-compose -f local.yml up
+  #       - cd ~/Workspace/frontend; npx react-native start
