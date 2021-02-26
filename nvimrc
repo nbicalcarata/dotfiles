@@ -24,6 +24,7 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'antoinemadec/coc-fzf'
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-eunuch'
 Plug 'justinmk/vim-gtfo'
 Plug 'wesQ3/vim-windowswap'
 Plug 'mhinz/vim-startify'
@@ -37,6 +38,7 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'vim-airline/vim-airline'
 Plug 'edkolev/tmuxline.vim'
+Plug 'lukas-reineke/indent-blankline.nvim', {'branch': 'lua'}
 
 " Colorschemes
 Plug 'sainnhe/gruvbox-material'
@@ -63,12 +65,13 @@ Plug 'vobornik/vim-mql4'
 call plug#end()
 
 filetype plugin indent on
+filetype plugin on
 syntax enable
 
 " General
-" if executable("rg")
-"     set grepprg=rg\ --vimgrep\ --no-heading
-" endif
+if executable("rg")
+    set grepprg=rg\ --vimgrep\ --no-heading
+endif
 set wildmode=list:longest,full
 set title
 set novisualbell
@@ -82,7 +85,7 @@ set listchars=tab:▸\ ,eol:¬,extends:»,precedes:«,trail:•
 set autoindent
 set noshowcmd
 set nofixendofline
-set nonumber
+" set number
 set mouse=a
 
 set nospell
@@ -218,8 +221,8 @@ augroup END
 " Only show cursorline in the current window
 augroup CursorLineOnlyInActiveWindow
     autocmd!
-    autocmd VimEnter,WinEnter,BufWinEnter,InsertLeave * setlocal cursorline cursorcolumn
-    autocmd WinLeave,InsertEnter * setlocal nocursorline nocursorcolumn
+    autocmd VimEnter,WinEnter,BufWinEnter,InsertLeave * setlocal cursorline
+    autocmd WinLeave,InsertEnter * setlocal nocursorline
 augroup END
 
 " Disable list on preview window
@@ -301,9 +304,6 @@ tnoremap <leader>va source venv/bin/activate<cr>
 
 " " Jump to tag
 nnoremap <leader>T <C-]>
-
-" Jump to previous edited buffer
-nnoremap <BS> <C-^>
 
 " Find files
 "nnoremap <leader>f :find *
@@ -442,12 +442,6 @@ let g:gitgutter_sign_removed = '▶'
 " let g:gitgutter_set_sign_backgrounds = 1
 " let g:gitgutter_override_sign_column_highlight = 0
 
-" Grepper
-nnoremap <Leader>a :Rg 
-
-"Start searching the word under the cursor:
-nnoremap <leader>A :Rg <C-R><C-W><cr>
-
 " Startify
 nnoremap <leader>S :SSave!<cr>
 nnoremap <leader>O :SLoad 
@@ -475,13 +469,11 @@ augroup END
 let g:coc_global_extensions = [ 'coc-tsserver',
                               \ 'coc-eslint',
                               \ 'coc-prettier',
-                              \ 'coc-html',
                               \ 'coc-css',
                               \ 'coc-json',
                               \ 'coc-pyright',
                               \ 'coc-highlight',
                               \ 'coc-emmet',
-                              \ 'coc-vetur',
                               \ 'coc-ultisnips' ]
 
 inoremap <silent><expr> <TAB>
@@ -547,17 +539,22 @@ let g:sonokai_style = 'shusia'
 let g:sonokai_cursor = 'blue'
 
 try
-  colorscheme sonokai 
+  colorscheme gruvbox-material
 catch
   " echo 'Colorscheme not found'
 endtry
 
 " fzf
-let $FZF_DEFAULT_OPTS='--reverse --bind ctrl-a:select-all'
+let $FZF_DEFAULT_OPTS='--reverse'
 let g:fzf_preview_window = ['down:50%', 'ctrl-s']
 let g:fzf_layout = { 'window': { 'width': 0.7, 'height': 0.6 } }
 let g:fzf_buffers_jump = 0
 let g:fzf_commands_expect = 'alt-enter,ctrl-x'
+
+" Grepper
+nnoremap <Leader>a :Rg 
+"Start searching the word under the cursor:
+nnoremap <leader>A :Rg <C-R><C-W><cr>
 
 if !exists('g:vscode')
   tnoremap <expr> <Esc> (&filetype == "fzf") ? "<Esc>" : "<c-\><c-n>"
@@ -598,8 +595,6 @@ command! -bang Registers call s:registers('<bang>' ==# '!')
 " CTRL-A CTRL-Q to select all and build quickfix list
 function! s:build_quickfix_list(lines)
   call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
-  copen
-  cc
 endfunction
 
 let g:fzf_action = {
@@ -624,9 +619,9 @@ let g:fzf_colors =
   \ 'header':  ['fg', 'Comment'] }
 
 command! -nargs=* DockerManage T docker-compose -f local.yml run --rm django python manage.py <args>
+command! -nargs=* DockerPytest T docker-compose -f local.yml run --rm django pytest <args>
 command! PullDotfiles T cd ~/dotfiles; git pull;
 command! SyncDotfiles T cd ~/dotfiles; git add .; git commit -m "Quick sync"; git push;
-command! -nargs=1 DirSessionNvim :normal! a nvim -S ~/.local/share/nvim/session/<args>
 
 " easymotion
 let g:EasyMotion_do_mapping = 0
@@ -665,8 +660,8 @@ let g:user_emmet_settings = {
 nnoremap <leader>en :TabooRename 
 
 let taboo_close_tabs_label = "X" 
-let taboo_tab_format = " %d  %f%I%m "
-let taboo_renamed_tab_format = " %d  [%l]%I%m "
+let taboo_tab_format = " %d  %f%m "
+let taboo_renamed_tab_format = " %d  [%l]%m "
 
 " autoclose
 let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.htmldjango'
@@ -677,8 +672,12 @@ let g:coc_fzf_preview = ''
 let g:coc_fzf_opts = []
 
 " indentline
-let g:indentLine_char_list = ['|', '¦', '┆', '┊']
-let g:indent_blankline_char_list = ['|', '¦', '┆', '┊']
+let g:indent_blankline_char = '⎸'
+let g:indent_blankline_show_first_indent_level = v:false
+let g:indent_blankline_filetype_exclude = ['help', 'startify', 'fugitive', 'git']
+let g:indent_blankline_buftype_exclude = ['terminal']
+" let g:indent_blankline_char_highlight_list = ['Error', 'Constant', 'Question', 'Function', 'Structure', 'Special']
+let g:indent_blankline_char_highlight_list = ['NonText', 'LineNr']
 
 " airline
 let g:airline_powerline_fonts = 1
@@ -723,6 +722,3 @@ try
 catch
   " echo 'Airline not installed'
 endtry
-
-" polyglot
-let g:polyglot_disabled = ['vue']

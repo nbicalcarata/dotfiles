@@ -1,0 +1,12 @@
+# /home/adrian/.config/tmuxinator/refractio.yml
+
+name: refractio
+root: ~/Workspace/product
+
+windows:
+  - editor:
+      layout: main-vertical
+      panes:
+        - nvim -S ~/.local/share/nvim/session/refractio
+        - docker-compose -f local.yml up
+        # - cd frontend; npm run serve
