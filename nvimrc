@@ -14,6 +14,10 @@ if LINUX()
     call plug#begin('~/.local/share/nvim/plugged')
 endif
 
+if OSX()
+    call plug#begin('~/.local/share/nvim/plugged')
+endif
+
 if WINDOWS()
     call plug#begin('~\AppData\Local\nvim\plugged')
 endif
