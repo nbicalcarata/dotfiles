@@ -39,6 +39,7 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'vim-airline/vim-airline'
 Plug 'edkolev/tmuxline.vim'
 Plug 'lukas-reineke/indent-blankline.nvim', {'branch': 'lua'}
+Plug 'pseewald/vim-anyfold'
 
 " Colorschemes
 Plug 'sainnhe/gruvbox-material'
@@ -86,6 +87,7 @@ set autoindent
 set noshowcmd
 set nofixendofline
 " set number
+" set foldcolumn="auto:3"
 set mouse=a
 
 set nospell
@@ -234,8 +236,11 @@ augroup DisableThingsFromWindows
     autocmd TermOpen * setlocal foldcolumn=0 signcolumn=no nonumber
 augroup END
 
-" Statusline
+" Fillchars
 set fillchars=vert:│,fold:-,diff:·,stlnc:─,eob:\ 
+if has("folding_fillchars")
+  set fillchars+=foldopen:▾,foldsep:│,foldclose:▸
+endif
 
 function! CWD()
     let l:path = fnamemodify(getcwd(),":t")
@@ -535,11 +540,11 @@ let g:gruvbox_material_background = 'hard'
 " colorscheme gruvbox-material
 
 " default, atlantis, andromeda, shusia, maia
-let g:sonokai_style = 'shusia'
+let g:sonokai_style = 'maia'
 let g:sonokai_cursor = 'blue'
 
 try
-  colorscheme gruvbox-material
+  colorscheme sonokai
 catch
   " echo 'Colorscheme not found'
 endtry
@@ -618,8 +623,8 @@ let g:fzf_colors =
   \ 'spinner': ['fg', 'Label'],
   \ 'header':  ['fg', 'Comment'] }
 
-command! -nargs=* DockerManage T docker-compose -f local.yml run --rm django python manage.py <args>
-command! -nargs=* DockerPytest T docker-compose -f local.yml run --rm django pytest <args>
+command! -nargs=* Manage T docker-compose -f local.yml run --rm django python manage.py <args>
+command! -nargs=* Test T docker-compose -f local.yml run --rm django pytest <args>
 command! PullDotfiles T cd ~/dotfiles; git pull;
 command! SyncDotfiles T cd ~/dotfiles; git add .; git commit -m "Quick sync"; git push;
 
@@ -672,12 +677,12 @@ let g:coc_fzf_preview = ''
 let g:coc_fzf_opts = []
 
 " indentline
-let g:indent_blankline_char = '⎸'
+let g:indent_blankline_char = '│'
 let g:indent_blankline_show_first_indent_level = v:false
 let g:indent_blankline_filetype_exclude = ['help', 'startify', 'fugitive', 'git']
 let g:indent_blankline_buftype_exclude = ['terminal']
-" let g:indent_blankline_char_highlight_list = ['Error', 'Constant', 'Question', 'Function', 'Structure', 'Special']
-let g:indent_blankline_char_highlight_list = ['NonText', 'LineNr']
+let g:indent_blankline_char_highlight_list = ['Error', 'NonText', 'LineNr', 'Structure', 'Directory', 'Question', 'Constant']
+" let g:indent_blankline_char_highlight_list = ['LineNr', 'NonText']
 
 " airline
 let g:airline_powerline_fonts = 1
@@ -722,3 +727,9 @@ try
 catch
   " echo 'Airline not installed'
 endtry
+
+" anyfold
+augroup AnyFold
+  autocmd Filetype javascript AnyFoldActivate
+  autocmd Filetype python AnyFoldActivate
+augroup END
