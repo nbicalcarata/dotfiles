@@ -669,8 +669,8 @@ let g:user_emmet_settings = {
 nnoremap <leader>en :TabooRename 
 
 let taboo_close_tabs_label = "X" 
-let taboo_tab_format = " %d  %f%m "
-let taboo_renamed_tab_format = " %d  [%l]%m "
+let taboo_tab_format = " %f%m "
+let taboo_renamed_tab_format = " [%l]%m "
 
 " autoclose
 let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.htmldjango'
