@@ -134,6 +134,10 @@ export API_URI="http://localhost:8000/graphql/"
 export API_MOUNT_URI="/dashboard/" 
 
 export ANDROID_HOME=$HOME/Android/Sdk
+if [ "$(uname 2> /dev/null)" != "Linux" ]; then
+  export ANDROID_HOME=$HOME/Library/Android/sdk
+fi
+
 export PATH=$PATH:$ANDROID_HOME/emulator
 export PATH=$PATH:$ANDROID_HOME/tools
 export PATH=$PATH:$ANDROID_HOME/tools/bin
