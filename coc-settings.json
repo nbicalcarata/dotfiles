@@ -16,5 +16,9 @@
     "blade": "html",
     "vue-html": "html",
     "javascript": "javascriptreact"
-  }
+  },
+	"prettier.semi": false,
+	"prettier.singleQuote": true,
+	"prettier.arrowParens": "avoid",
+	"prettier.trailingComma": "none"
 }
