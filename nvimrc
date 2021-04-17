@@ -14,6 +14,10 @@ if LINUX()
     call plug#begin('~/.local/share/nvim/plugged')
 endif
 
+if OSX()
+    call plug#begin('~/.local/share/nvim/plugged')
+endif
+
 if WINDOWS()
     call plug#begin('~\AppData\Local\nvim\plugged')
 endif
@@ -54,7 +58,7 @@ Plug 'tpope/vim-rhubarb'
 Plug 'shumphrey/fugitive-gitlab.vim'
 
 " Snippets & AutoComplete
-Plug 'SirVer/ultisnips'
+" Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'jiangmiao/auto-pairs'
 Plug 'alvan/vim-closetag'
@@ -665,8 +669,8 @@ let g:user_emmet_settings = {
 nnoremap <leader>en :TabooRename 
 
 let taboo_close_tabs_label = "X" 
-let taboo_tab_format = " %d  %f%m "
-let taboo_renamed_tab_format = " %d  [%l]%m "
+let taboo_tab_format = " %f%m "
+let taboo_renamed_tab_format = " [%l]%m "
 
 " autoclose
 let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.htmldjango'
@@ -693,6 +697,7 @@ let g:airline#extensions#tabline#tabs_label = 'T'
 let g:airline#extensions#tabline#show_tab_count = 0
 let g:airline#extensions#tabline#tab_min_count = 2
 let g:airline#extensions#tabline#show_tab_nr = 0
+let g:airline#extensions#whitespace#enabled = 0
 
 let g:airline_mode_map = {
     \ '__'     : '-',

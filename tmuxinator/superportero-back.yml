@@ -1,0 +1,26 @@
+# /home/adrian/.config/tmuxinator/superportero.yml
+
+name: superportero
+root: ~/
+
+windows:
+  - editor:
+      layout: main-vertical
+      panes:
+        - nvim -S ~/.local/share/nvim/session/superportero
+        - cd ~/Workspace/superportero-back; docker-compose -f local.yml up
+  # - run-android: cd ~/Workspace/superportero-app; npx react-native run-android
+  # - tunnel: lt --port 8000 --subdomain superportero-backend
+
+# windows:
+#   - editor:
+#       panes:
+#         - nvim -S ~/.local/share/nvim/session/superportero
+#   - stack:
+#       layout: even-vertical
+#       panes:
+#         - cd ~/Workspace/superportero-back; docker-compose -f local.yml up
+#         - cd ~/Workspace/superportero-app; npx react-native start
+#   - run-android:
+#       panes:
+#           - cd ~/Workspace/superportero-app; npx react-native run-android
