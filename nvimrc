@@ -525,7 +525,7 @@ command! -nargs=0 Prettier :CocCommand prettier.formatFile
 " fugitive
 nnoremap <leader>ch :diffget //2<CR>
 nnoremap <leader>cl :diffget //3<CR>
-nnoremap <leader>G :vertical Gstatus<CR>
+nnoremap <leader>G :vertical Git<CR>
 
 augroup init_quickfix
   autocmd!
