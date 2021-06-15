@@ -4,6 +4,11 @@ name: date
 root: ~/
 
 windows:
+  - backend:
+      layout: even-vertical
+      panes:
+        - cd ~/Workspace/proxied/permnet-loanpool
+        - cd ~/Workspace/proxied/permnet-server; ./run.sh
   - editor:
       layout: main-vertical
       panes:
