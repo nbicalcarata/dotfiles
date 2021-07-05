@@ -42,7 +42,7 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'vim-airline/vim-airline'
 Plug 'edkolev/tmuxline.vim'
-Plug 'lukas-reineke/indent-blankline.nvim', {'branch': 'lua'}
+Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'pseewald/vim-anyfold'
 
 " Colorschemes
@@ -544,7 +544,7 @@ let g:gruvbox_material_background = 'hard'
 " colorscheme gruvbox-material
 
 " default, atlantis, andromeda, shusia, maia
-let g:sonokai_style = 'maia'
+let g:sonokai_style = 'shusia'
 let g:sonokai_cursor = 'blue'
 
 try
