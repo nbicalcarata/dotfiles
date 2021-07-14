@@ -33,7 +33,7 @@ Plug 'justinmk/vim-gtfo'
 Plug 'wesQ3/vim-windowswap'
 Plug 'mhinz/vim-startify'
 Plug 'justinmk/vim-dirvish'
-Plug 'easymotion/vim-easymotion'
+Plug 'phaazon/hop.nvim'
 Plug 'voldikss/vim-browser-search'
 Plug 'rhysd/git-messenger.vim'
 Plug 'mattn/emmet-vim'
@@ -285,6 +285,9 @@ augroup OverrideColor
     autocmd ColorScheme * hi! link VertSplit Ignore
     autocmd ColorScheme * hi! link StatusLineNC Ignore
     autocmd ColorScheme * hi! link StatusLine TabLine
+    autocmd ColorScheme * hi! link HopNextKey Search
+    autocmd ColorScheme * hi! link HopNextKey1 Search
+    autocmd ColorScheme * hi! link HopNextKey2 Search
     " autocmd ColorScheme * hi Pmenu gui=none
     " autocmd ColorScheme * hi TabLineSel cterm=none gui=bold
 augroup END
@@ -544,7 +547,7 @@ let g:gruvbox_material_background = 'hard'
 " colorscheme gruvbox-material
 
 " default, atlantis, andromeda, shusia, maia
-let g:sonokai_style = 'shusia'
+let g:sonokai_style = 'default'
 let g:sonokai_cursor = 'blue'
 
 try
@@ -632,14 +635,8 @@ command! -nargs=* Test T docker-compose -f local.yml run --rm django pytest <arg
 command! PullDotfiles T cd ~/dotfiles; git pull;
 command! SyncDotfiles T cd ~/dotfiles; git add .; git commit -m "Quick sync"; git push;
 
-" easymotion
-let g:EasyMotion_do_mapping = 0
-let g:EasyMotion_smartcase = 1
-let g:EasyMotion_keys = 'asdfghjklqwertyuiopzxcvbnm'
-let g:EasyMotion_prompt = '{n}>>'
-let g:EasyMotion_verbose = 0
-
-nmap s <Plug>(easymotion-overwin-f)
+" Hop
+nmap s :HopChar1<enter>
 
 " Web search
 nmap <silent> <Leader>kj <Plug>SearchNormal
